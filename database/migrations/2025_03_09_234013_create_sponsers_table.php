@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscribers', function (Blueprint $table) {
+        Schema::create('sponsers', function (Blueprint $table) {
             $table->id();
-            $table->string("email");
+            $table->string("name");
+            $table->string("descrition")->default("");
+            $table->string("website")->default("");
+            $table->string("logo");
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscribers');
+        Schema::dropIfExists('sponsers');
     }
 };

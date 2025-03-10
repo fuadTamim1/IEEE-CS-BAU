@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string("title");
+            $table->string("slug")->unique();
+            $table->string("description");
+            $table->string("tags")->nullable();
+            $table->enum("status", ['upcoming', 'ongoing', 'completed'])->default("upcoming");
+            $table->longText("content");
+            $table->text("image");
+            $table->string("location");
+            $table->datetime("start_at");
+            $table->datetime("end_at");
             $table->timestamps();
         });
     }
