@@ -30,15 +30,16 @@ class UserResource extends Resource
                     ->maxLength(255),
 
                 TextInput::make('email')
+                
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true),
                 Select::make('title')
                     ->options([
-                        "chairperson",
-                        "MD",
-                        "Treauser",
-                        "Member"
+                        "chairperson" => "chairperson",
+                        "MD" => "MD",
+                        "Treauser" => "Treauser",
+                        "Member" => "Member"
                     ]),
                 TextInput::make('password')
                     ->password()
@@ -56,6 +57,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([

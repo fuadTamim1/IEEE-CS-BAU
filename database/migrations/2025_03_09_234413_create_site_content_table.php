@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('site_content', function (Blueprint $table) {
+        Schema::create('text_widgets', function (Blueprint $table) {
             $table->id();
             $table->string("key");
             $table->string("value");

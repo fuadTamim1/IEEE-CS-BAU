@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
             $table->string("email");
+            $table->enum("options", ["ALL","BLOG_AND_PROJECTS", "WORKSHOP_AND_EVENTS"]);
             $table->timestamps();
         });
     }

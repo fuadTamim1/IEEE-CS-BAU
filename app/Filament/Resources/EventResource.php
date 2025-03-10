@@ -6,6 +6,13 @@ use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,27 +30,41 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required(),
-                Forms\Components\TextInput::make('slug')
-                    ->required(),
-                Forms\Components\TextInput::make('description')
-                    ->required(),
-                Forms\Components\TextInput::make('tags'),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-                Forms\Components\Textarea::make('content')
+                TextInput::make('title')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('image')
+                // Forms\Components\TextInput::make('slug')
+                //     ->required(),
+                TextInput::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('location')
+                TagsInput::make('tags')->separator(','),
+                TextInput::make('location')
                     ->required(),
-                Forms\Components\DateTimePicker::make('start_at')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('end_at')
-                    ->required(),
+                // Select::make('status')
+                //     ->required()
+                //     ->options(['upcoming'=>'upcoming', 'ongoing'=>'ongoing', 'completed'=>'completed'])
+                //     ->default('upcoming'),
+                RichEditor::make('content')
+                    ->required()
+                    ->columnSpanFull(),
+                FileUpload::make('image')
+                    ->image()
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        '16:9',
+                        '4:3',
+                        '1:1',
+                    ])->columnSpan(1)
+                    ->imageEditorEmptyFillColor("#FAA41A")
+                    ->required()
+                    ->columnSpanFull(),
+                Grid::make(2)->schema([
+                    DateTimePicker::make('start_at')
+                        ->required(),
+                    DateTimePicker::make('end_at')
+                        ->required(),
+                ]),
             ]);
     }
 

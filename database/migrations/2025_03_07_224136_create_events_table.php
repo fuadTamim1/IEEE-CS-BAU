@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string("tags")->nullable();
             $table->enum("status", ['upcoming', 'ongoing', 'completed'])->default("upcoming");
             $table->longText("content");
-            $table->text("image");
-            $table->string("location");
+            $table->text("image")->nullable();
+            $table->string("location")->default("online"); //exp. Balqa Applied University - Fauilty Technology & Engineering - Amera Jana Theater
             $table->datetime("start_at");
             $table->datetime("end_at");
             $table->timestamps();

@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('description');
-            $table->string('tags');
+            $table->string('tags')->nullable();
             $table->text('content');
             $table->string('image')->nullable();
             $table->boolean('is_published')->default(true);
-            $table->foreignId("catagory")->constrained()->nullOnDelete();
+            $table->foreignId("category")->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

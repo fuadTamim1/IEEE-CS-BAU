@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sponsers', function (Blueprint $table) {
+        Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
             $table->string("name");
             $table->string("descrition")->default("");
-            $table->string("website")->default("");
+            $table->string("website")->nullable();
             $table->string("logo");
             $table->timestamps();
         });
