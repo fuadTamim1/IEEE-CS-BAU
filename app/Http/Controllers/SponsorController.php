@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sponser;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
-class SponserController extends Controller
+class SponsorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class SponserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Sponser $sponser)
+    public function show(Sponsor $Sponsor)
     {
         //
     }
@@ -42,7 +42,7 @@ class SponserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sponser $sponser)
+    public function edit(Sponsor $Sponsor)
     {
         //
     }
@@ -50,7 +50,7 @@ class SponserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sponser $sponser)
+    public function update(Request $request, Sponsor $Sponsor)
     {
         //
     }
@@ -58,7 +58,7 @@ class SponserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sponser $sponser)
+    public function destroy(Sponsor $Sponsor)
     {
         //
     }

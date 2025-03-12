@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
-        "fakerphp/faker": "^1.23",
+        "fakerphp/faker": "^1.24",
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",
@@ -39,7 +39,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": ["app/Helpers/helper.php"]
     },
     "autoload-dev": {
         "psr-4": {

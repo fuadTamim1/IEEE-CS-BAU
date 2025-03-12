@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 
 class Blog extends Model
 {
-    use Sluggable;
+    use HasFactory, Sluggable;
     protected $fillable = [
         "title",
         "slug",

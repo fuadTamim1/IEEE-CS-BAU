@@ -6,6 +6,7 @@ use App\Models\User;
 use Database\Seeders\RolesAndPermissionsSeeder as SeedersRolesAndPermissionsSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
-        $this->call(RolesSeeder::class);
-        $this->call(SeedersRolesAndPermissionsSeeder::class);
+        // $this->call(RolesSeeder::class);
+        // $this->call(SeedersRolesAndPermissionsSeeder::class);
     }
 }

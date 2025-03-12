@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Events\BlogPostCreated;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
+use App\Mail\newPost;
 use App\Models\Blog;
 use App\Models\Category;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -13,6 +16,7 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\CheckboxColumn;
@@ -21,6 +25,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
 
 class BlogResource extends Resource
 {
@@ -97,7 +102,19 @@ class BlogResource extends Resource
                 ]),
             ]);
     }
+    // After Update Hook
+    protected function afterUpdate(): void
+    {
+       // Send the "Blog Post Updated" email
+       Mail::to('user@example.com')->send(new newPost());
 
+       // Show a notification
+       Notification::make()
+           ->title('Blog Post Updated')
+           ->body('The blog post has been updated and an email has been sent.')
+           ->success()
+           ->send();
+    }
     public static function getRelations(): array
     {
         return [

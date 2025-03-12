@@ -29,7 +29,7 @@ class Event extends Model
         return ['slug' => ['source' => 'title']];
     }
 
-    public function sponsers(): BelongsToMany {
-        return $this->belongsToMany(Sponser::class, 'event_sponsor');
+    public function Sponsors(): BelongsToMany {
+        return $this->belongsToMany(Sponsor::class, 'event_sponsor');
     }
 }

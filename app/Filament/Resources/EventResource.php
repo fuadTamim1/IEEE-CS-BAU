@@ -45,6 +45,12 @@ class EventResource extends Resource
                 //     ->required()
                 //     ->options(['upcoming'=>'upcoming', 'ongoing'=>'ongoing', 'completed'=>'completed'])
                 //     ->default('upcoming'),
+                Grid::make(2)->schema([
+                    DateTimePicker::make('start_at')
+                        ->required(),
+                    DateTimePicker::make('end_at')
+                        ->required(),
+                ]),
                 RichEditor::make('content')
                     ->required()
                     ->columnSpanFull(),
@@ -59,12 +65,6 @@ class EventResource extends Resource
                     ->imageEditorEmptyFillColor("#FAA41A")
                     ->required()
                     ->columnSpanFull(),
-                Grid::make(2)->schema([
-                    DateTimePicker::make('start_at')
-                        ->required(),
-                    DateTimePicker::make('end_at')
-                        ->required(),
-                ]),
             ]);
     }
 
@@ -74,12 +74,10 @@ class EventResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('description')
-                    ->searchable(),
+                    ->searchable()->limit(20),
                 Tables\Columns\TextColumn::make('tags')
-                    ->searchable(),
+                    ->searchable()->badge()->separator(','),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('location')
@@ -88,7 +86,7 @@ class EventResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end_at')
-                    ->dateTime()
+                    ->dateTime("Y-M-D H:m")
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

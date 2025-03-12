@@ -9,7 +9,7 @@
 <body class="bg-gray-100 text-gray-900">
     <div class="container mx-auto p-6">
         <h1 class="text-3xl font-bold text-blue-600">Welcome to IEEE CS Website</h1>
-        <h1 class="text-3xl font-bold underline">
+        <h1 class="text-3xl font-bold underline text-red-600">
             Hello world!
           </h1>
         <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">

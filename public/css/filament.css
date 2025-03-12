@@ -1,0 +1,13 @@
+.filament-widget{min-height: 300px;}
+/* Masonry Grid Layout */
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust column width as needed */
+    gap: 16px; /* Adjust the gap between items */
+    align-items: start; /* Align items to the top */
+}
+
+.masonry-item {
+    break-inside: avoid; /* Prevent items from breaking across columns */
+    margin-bottom: 16px; /* Adjust the margin between items */
+}

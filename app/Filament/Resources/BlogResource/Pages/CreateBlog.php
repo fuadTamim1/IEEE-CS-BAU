@@ -3,9 +3,12 @@
 namespace App\Filament\Resources\BlogResource\Pages;
 
 use App\Filament\Resources\BlogResource;
+use App\Mail\newPost;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CreateBlog extends CreateRecord
 {
@@ -13,10 +16,8 @@ class CreateBlog extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Set the author_id to the currently logged-in user's ID
         $data['author_id'] = Auth::id();
-        // $data['tags'] = "'" . implode(',', $data['tags']) . "'";
-
+   
         return $data;
     }
 }

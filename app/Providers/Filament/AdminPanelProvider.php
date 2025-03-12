@@ -2,59 +2,144 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\AuthenticateSession;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
+use App\Filament\Pages\Settings;
+use App\Filament\Pages\TextWidgets;
+use App\Filament\Resources\BlogResource\Widgets\BlogPostCategoryChart;
+use App\Filament\Resources\BlogResource\Widgets\RecentBlogPostsTable;
+use App\Filament\Resources\SubscriberResource;
+use App\Filament\Resources\TextWidgetResource;
+use App\Filament\Resources\UserResource\Widgets\UserGrowthChart;
+use App\Filament\Widgets\StatsOverview;
+use App\Models\Subscriber;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
+use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\Session\Middleware\StartSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Facades\Blade;
 
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->brandLogo("/images/IEEE-CS_LogoTM-orange.png")
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->brandLogo(asset("images/IEEE-CS_LogoTM-orange.png"))
-            ->brandName("CS BAU Chapter")
+
+            ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
+                return $builder
+                    ->item(
+                        NavigationItem::make('Dashboard')
+                            ->icon('heroicon-o-home')
+                            ->isActiveWhen(fn(): bool => request()->routeIs('filament.admin.pages.dashboard'))
+                            ->url(fn(): string => Dashboard::getUrl()),
+                    )
+                    ->item(
+                        NavigationItem::make('Text Widgets')
+                            ->icon('heroicon-o-document-text')
+                            ->url(fn(): string => TextWidgetResource::getUrl())
+                            ->isActiveWhen(fn(): bool => request()->routeIs('filament.admin.resources.text-widgets.*')),
+                    )
+                    ->group(
+                        NavigationGroup::make('Users')
+                            ->items([
+                                NavigationItem::make('All Users')
+                                    ->icon('heroicon-o-users')
+                                    ->url('/admin/users'),
+                                NavigationItem::make('Add New User')
+                                    ->icon('heroicon-o-user-plus')
+                                    ->url('/admin/users/create'),
+                            ]),
+                    )
+                    ->group(
+                        NavigationGroup::make('Content')
+                            ->items([
+                                NavigationItem::make('blogs')
+                                    ->icon('heroicon-o-document-text')
+                                    ->url('/admin/blogs')
+                                    ->childItems([
+                                        NavigationItem::make('All blogs')
+                                            ->url('/admin/blogs'),
+                                        NavigationItem::make('Add New Post')
+                                            ->url('/admin/blogs/create'),
+                                    ]),
+                                NavigationItem::make('Events')
+                                    ->icon('heroicon-o-calendar')
+                                    ->url('/admin/events')
+                                    ->childItems([
+                                        NavigationItem::make('All Events')
+                                            ->url('/admin/events'),
+                                        NavigationItem::make('Add New Event')
+                                            ->url('/admin/events/create'),
+                                    ]),
+                                NavigationItem::make('Projects')
+                                    ->icon('heroicon-o-briefcase')
+                                    ->url('/admin/projects')
+                                    ->childItems([
+                                        NavigationItem::make('All Projects')
+                                            ->url('/admin/projects'),
+                                        NavigationItem::make('Add New Project')
+                                            ->url('/admin/projects/create'),
+                                    ]),
+                                NavigationItem::make('Members')
+                                    ->icon('heroicon-o-users')
+                                    ->url('/admin/members')
+                                    ->childItems([
+                                        NavigationItem::make('All Members')
+                                            ->url('/admin/members'),
+                                        NavigationItem::make('Add New Members')
+                                            ->url('/admin/members/create'),
+                                    ]),
+                            ]),
+                    )
+                    ->group(
+                        NavigationGroup::make('Mails')
+                            ->items([
+                                NavigationItem::make('Subscribers')
+                                    ->icon('heroicon-o-envelope')
+                                    ->url(fn(): string => SubscriberResource::getUrl())
+                            ])
+                    )
+                    ->group(
+                        NavigationGroup::make('Settings')
+                            ->items([
+                                NavigationItem::make('General Settings')
+                                    ->icon('heroicon-o-cog')
+                                    ->url(fn(): string => Settings::getUrl()),
+                                // NavigationItem::make('Advanced Settings')
+                                //     ->icon('heroicon-o-adjustments')
+                                //     ->url('/admin/settings/advanced'),
+                            ]),
+                    );
+            })
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-            ])
+            // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->middleware([
-                EncryptCookies::class,
-                AddQueuedCookiesToResponse::class,
-                StartSession::class,
-                AuthenticateSession::class,
-                ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
-                SubstituteBindings::class,
-                DisableBladeIconComponents::class,
-                DispatchServingFilamentEvent::class,
+                \Illuminate\Cookie\Middleware\EncryptCookies::class,
+                \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                \Illuminate\Session\Middleware\StartSession::class,
+                \Illuminate\Session\Middleware\AuthenticateSession::class,
+                \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+                \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+                \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            ])->widgets([
+                StatsOverview::class,
+                UserGrowthChart::class,
+                RecentBlogPostsTable::class,
+                BlogPostCategoryChart::class
             ])
             ->authMiddleware([
-                Authenticate::class,
+                \Filament\Http\Middleware\Authenticate::class,
             ]);
     }
 }
