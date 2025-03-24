@@ -1,0 +1,66 @@
+
+
+
+/*
+ ::::::::::::::::::::::::::
+  fonts area css
+ ::::::::::::::::::::::::::
+ */
+
+
+ $font-ws: (
+    'fw':(
+        'normal': 400,
+        'medium': 500,
+        'semibold': 600,
+        'bold': 700,
+        'ex-bold': 800,
+    )
+);
+
+$font-ffs: (
+    'ff': (
+        'font-1': "'Outfit', sans-serif",
+    )
+);
+
+$font-fss: (
+    'fs': (
+        'font-16': 16px,
+        'font-18': 18px,
+        'font-20': 20px,
+        'font-22': 22px,
+        'font-24': 24px,
+        'font-26': 26px,
+        'font-28': 28px,
+        'font-30': 30px,
+        'font-32': 32px,
+        'font-34': 34px,
+        'font-36': 36px,
+        'font-38': 38px,
+        'font-40': 40px,
+        'font-42': 42px,
+        'font-44': 44px,
+        'font-48': 48px,
+        'font-50': 50px,
+        'font-52': 52px,
+        'font-54': 54px,
+        'font-56': 56px,
+        'font-58': 58px,
+        'font-60': 60px,
+        'font-62': 62px,
+        'font-64': 64px,
+        'font-66': 66px,
+        'font-68': 68px,
+        'font-70': 70px,
+        'font-72': 72px,
+        'font-74': 74px,
+        'font-76': 76px,
+        'font-78': 78px,
+        'font-80': 80px,
+        'font-82': 82px,
+        'font-84': 84px,
+        'font-86': 86px,
+        'font-88': 88px,
+    )
+)

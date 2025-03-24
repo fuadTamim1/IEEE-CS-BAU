@@ -1,0 +1,110 @@
+@use '../../utils/' as * ;
+
+/*
+ ::::::::::::::::::::::::::
+  PRICING AREA CSS
+ ::::::::::::::::::::::::::
+ */
+
+//===  pricing page style ===
+
+.pricing-page-box {
+    border-radius: 8px;
+    background: var(--vtc-bg-white);
+    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.09);
+    padding: 32px;
+    transition: all .4s;
+
+    .pricing-list {
+        background-color: var(--vtc-bg-common-3);
+        padding: 32px;
+        border-radius: 8px;
+
+        @media #{$md} {
+            margin-top: 30px;
+        }
+
+        @media #{$xs} {
+            margin-top: 30px;
+        }
+
+        h5 {
+            color: var(--vtc-text-title1);
+            font-size: var(--f-fs-font-24);
+            font-style: normal;
+            font-weight: var(--f-fw-semibold);
+            line-height: var(--f-fs-font-24); /* 100% */
+        }
+        ul {
+            margin-top: 6px;
+            li {
+                color: var(--vtc-text-pera1);
+                font-size: var(--f-fs-font-16);
+                font-style: normal;
+                font-weight: var(--f-fw-normal);
+                line-height: var(--f-fs-font-16); /* 100% */
+                display: flex;
+                align-items: center;
+                padding-top: 19px;
+
+                .check {
+                    display: inline-block;
+                    height: 18px;
+                    width: 18px;
+                    font-size: 12px;
+                    text-align: center;
+                    line-height: 18px;
+                    color: var(--vtc-bg-white);
+                    background-color: var(--vtc-bg-main4);
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    .price-area {
+        h6 {
+            color: var(--vtc-text-title1);
+            font-size: var(--f-fs-font-24);
+            font-style: normal;
+            font-weight: var(--f-fw-medium);
+            line-height: var(--f-fs-font-24); /* 100% */
+        }
+        h3 {
+            color: var(--vtc-text-title1);
+            font-size: var(--f-fs-font-44);
+            font-style: normal;
+            font-weight: var(--f-fw-medium);
+            line-height: var(--f-fs-font-44); /* 100% */
+            padding-top: 20px;
+            padding-bottom: 16px;
+
+            span {
+                display: inline-block;
+                font-size: var(--f-fs-font-16);
+                line-height: var(--f-fs-font-16);
+            }
+        }
+        p {
+            color: var(--vtc-text-pera1);
+            font-size: var(--f-fs-font-18);
+            font-style: normal;
+            font-weight: var(--f-fw-normal);
+            line-height: var(--f-fs-font-26); /* 144.444% */
+        }
+    }
+
+    &:hover {
+        transition: all .4s;
+        transform: translateY(-10px);
+    }
+}
+
+// === pricing page style ===
+
+
+ /*
+ ::::::::::::::::::::::::::
+  PRICING AREA CSS
+ ::::::::::::::::::::::::::
+ */

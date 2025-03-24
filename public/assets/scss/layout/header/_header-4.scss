@@ -1,0 +1,102 @@
+@use '../../utils/' as * ;
+
+/*
+::::::::::::::::::::::::::
+ HEADER AREA 4 CSS
+::::::::::::::::::::::::::
+*/
+
+.vl-header4-btns {
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .search-open-btn {
+        background: none;
+        border: none;
+        font-size: var(--f-fs-font-20);
+        margin-right: 24px;
+        position: relative;
+        color: var(--vtc-text-white);
+    }
+}
+
+
+.vl-header7-btns {
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .search-open-btn {
+        background: none;
+        border: none;
+        font-size: var(--f-fs-font-20);
+        margin-right: 24px;
+        position: relative;
+        color: var(--vtc-text-title1);
+    }
+}
+
+.vl-header8-btns {
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .search-open-btn {
+        background: none;
+        border: none;
+        font-size: var(--f-fs-font-20);
+        margin-right: 40px;
+        position: relative;
+        color: var(--vtc-text-title1);
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: 5px;
+            height: 20px;
+            width: 2px;
+            background-color: var(--vtc-text-title1);
+            opacity: 0.2;
+            border-radius: 50px;
+        }
+    }
+}
+
+.vl-header9-btns {
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .search-open-btn {
+        background: none;
+        border: none;
+        font-size: var(--f-fs-font-20);
+        margin-right: 44px;
+        position: relative;
+        color: var(--vtc-text-title1);
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: 5px;
+            height: 20px;
+            width: 2px;
+            background-color: var(--vtc-text-title1);
+            opacity: 0.2;
+            border-radius: 50px;
+        }
+    }
+}
+
+/*
+::::::::::::::::::::::::::
+ HEADER AREA 4 CSS
+::::::::::::::::::::::::::
+*/

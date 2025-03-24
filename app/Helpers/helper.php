@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\TextWidget;
 
 if (!function_exists('get_setting')) {
     function get_setting($key, $default = null) {
@@ -18,3 +19,10 @@ if (!function_exists('set_setting')) {
         }
     }
 }
+
+if (!function_exists('getWidget')) {
+    function getWidget($key, $default = null) {
+        return TextWidget::where('key', $key)->value('value') ?? $default;
+    }
+}
+

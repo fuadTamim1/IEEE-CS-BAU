@@ -1,0 +1,570 @@
+@use '../../utils/' as * ;
+
+/*
+ ::::::::::::::::::::::::::
+  FAQ AREA CSS
+ ::::::::::::::::::::::::::
+*/
+
+.faq-page-sec {
+  .faq-page-image {
+    position: relative;
+    z-index: 2;
+    .shape {
+      position: absolute;
+      right: 50px;
+      top: 0;
+      transform: scale(1.3);
+      z-index: -1;
+    }
+  }
+
+  .faq-tab-buttons {
+    background-color: var(--vtc-bg-common-22);
+    border-radius: 111px;
+    padding: 16px 24px;
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-bottom: 0 !important;
+      li {
+        button {
+          color: var(--Text-Color, #0B1A33);
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 18px; /* 100% */
+          text-transform: uppercase;
+          padding: 16px 20px;
+          border-radius: 111px;
+          background-color: var(--vtc-bg-white);
+          transition: all .4s;
+
+          &:hover {
+            transition: all .4s;
+            background-color: var(--vtc-bg-main13);
+          }
+          &.active {
+            transition: all .4s;
+            background-color: var(--vtc-bg-main13);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.faq-content {
+  position: relative;
+  .accordion {
+    .accordion-item {
+      border: none;
+      border-radius: 14px;
+      background: none;
+      margin-top: 20px;
+      transition: all .4s;
+      background-color: var(--vtc-bg-white);
+      
+      button {
+        border: none;
+        background: none;
+        padding: 24px;
+        color: var(--vtc-text-title-1);
+        font-size: var(--f-fs-font-18);
+        font-style: normal;
+        font-weight: 600;
+        line-height: var(--f-fs-font-18); /* 100% */
+        text-transform: capitalize;
+        position: relative;
+
+        @media #{$xs} {
+          font-size: 20px;
+          line-height: 26px;
+          padding: 20px;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          right: 18px;
+          top: 15px;
+          height: 28px;
+          width: 28px;
+          border-radius: 50%;
+          z-index: 1;
+          background: var(--vtc-bg-main13);
+
+          @media #{$xs} {
+            display: none;
+          }
+        }
+        &::after {
+          filter: brightness(0) invert(1);
+          z-index: 3;
+          height: 14px;
+          width: 22px;
+          left: 4px;
+          bottom: 6px;
+          position: relative;
+        }
+      }
+
+      .accordion-body {
+          color: #ffffffe8;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 28px; /* 155.556% */
+          padding-left: 28px;
+          margin-top: -20px;
+          padding-bottom: 28px;
+          padding-right: 80px;
+          text-align: start;
+
+          @media #{$xs} {
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+          }
+      }
+
+      &.active {
+        transition: all .4s;
+        border-radius: 14px;
+        background: var(--vtc-bg-main13);
+
+        button {
+          color: #fff;
+          &::before {
+            content: "";
+            position: absolute;
+            right: 18px;
+            top: 19px;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            z-index: 1;
+            background: #fff;
+          }
+
+          &::after {
+            filter: brightness(0);
+            height: 14px;
+            width: 22px;
+            left: 2px;
+            bottom: 0px;
+            position: relative;
+          }
+        }
+      }
+    }
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: var(--bs-accordion-active-color);
+    background-color: var(--bs-accordion-active-bg);
+    box-shadow: none;
+}
+
+}
+
+
+
+// ---- home 6 faq ----
+
+.faq6-area {
+    .accordion-button::after {
+      filter: brightness(0);
+    }
+    .accordion {
+      border: none;
+      .accordion-item {
+        margin-top: 20px;
+        border: none;
+        border-radius: 7px;
+        padding: 0;
+        border: none;
+        border: 1px solid var(--vtc-border-3);
+        background: transparent;
+
+        h2 {
+          font-size: var(--f-fs-font-20);
+          line-height: var(--f-fs-font-20);
+          font-weight: var(--f-fw-semibold);
+          color: var(--vtc-text-title1);
+        }
+    
+        button {
+          font-size: var(--f-fs-font-20);
+          line-height: var(--f-fs-font-20);
+          font-weight: var(--f-fw-semibold);
+          color: var(--vtc-text-title1);
+          background: transparent;
+          padding: 20px;
+          &:focus {
+            box-shadow: none;
+          }
+        }
+    
+        .accordion-body {
+          color: var(--vtc-text-white80per);
+          font-size: var(--f-fs-font-16);
+          font-style: normal;
+          font-weight: var(--f-fw-normal);
+          line-height: var(--f-fs-font-26); /* 162.5% */
+          padding: 0px 16px 16px 22px;
+          background-color: var(--vtc-text-title1);
+        }
+      }
+
+      .accordion-item.active {
+        background-color: var(--vtc-text-title1);
+
+        button {
+          color: var(--vtc-text-white);
+        }
+      }
+    
+      .accordion-button:not(.collapsed)::after {
+        background-image: var(--bs-accordion-btn-active-icon);
+        transform: var(--bs-accordion-btn-icon-transform);
+        filter: brightness(0) invert(1);
+    }
+    }
+    
+    .accordion-button:not(.collapsed) {
+      color: var(--ztc-text-text-1);
+      background-color: var(--vtc-text-title1);
+      border: none;
+      box-shadow: inset 0 calc(var(--bs-accordion-border-width)* -1) 0 var(--bs-accordion-border-color);
+    }
+    
+    .accordion {
+    --bs-accordion-color: #000;
+    --bs-accordion-bg: #fff;
+    --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+    --bs-accordion-border-color: #dee2e600;
+    --bs-accordion-border-width: 1px;
+    --bs-accordion-border-radius: 0.375rem;
+    --bs-accordion-inner-border-radius: calc(0.375rem - 1px);
+    --bs-accordion-btn-padding-x: 1.25rem;
+    --bs-accordion-btn-padding-y: 1rem;
+    --bs-accordion-btn-color: var(--bs-body-color);
+    --bs-accordion-btn-bg: var(--bs-accordion-bg);
+    --bs-accordion-btn-icon: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var%28--bs-body-color%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+    --bs-accordion-btn-icon-width: 1.25rem;
+    --bs-accordion-btn-icon-transform: rotate(-180deg);
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-btn-active-icon: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+    --bs-accordion-btn-focus-border-color: #86b7fe;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-accordion-body-padding-x: 1.25rem;
+    --bs-accordion-body-padding-y: 1rem;
+    --bs-accordion-active-color: #0c63e4;
+    --bs-accordion-active-bg: #e7f1ff;
+    }
+ }
+
+ .faq6-images {
+  position: relative;
+  height: 580px;
+  margin-left: 40px;
+
+  @media #{$xs} {
+    height: 1100px;
+  }
+
+  .image1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .image2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    @media #{$xs} {
+      bottom: 170px;
+    }
+  }
+  .text-count {
+    width: 200px;
+    text-align: start;
+    position: absolute;
+    bottom: 20px;
+    left: 60px;
+
+    h3 {
+      color: var(--vtc-text-title1);
+      font-size: var(--f-fs-font-60);
+      font-style: normal;
+      font-weight: var(--f-fw-semibold);
+      line-height: var(--f-fs-font-60); /* 100% */
+    }
+    p {
+      color: var(--vtc-text-pera1);
+      font-size: var(--f-fs-font-18);
+      font-style: normal;
+      font-weight: var(--f-fw-normal);
+      line-height: var(--f-fs-font-26); /* 144.444% */
+      text-transform: capitalize;
+    }
+
+    img {
+      position: absolute;
+      left: -20px;
+      top: -7px;
+    }
+  }
+ }
+
+
+ // ---- home 6 faq ----
+
+
+
+ .faq5-area {
+  .accordion-button::after {
+    filter: brightness(0);
+  }
+  .accordion {
+    border: none;
+    .accordion-item {
+      margin-top: 20px;
+      border: none;
+      border-radius: 7px;
+      padding: 0;
+      border: none;
+      border: 1px solid var(--vtc-border-3);
+      background: transparent;
+
+      h2 {
+        font-size: var(--f-fs-font-20);
+        line-height: var(--f-fs-font-20);
+        font-weight: var(--f-fw-semibold);
+        color: var(--vtc-text-title1);
+      }
+  
+      button {
+        font-size: var(--f-fs-font-20);
+        line-height: var(--f-fs-font-20);
+        font-weight: var(--f-fw-semibold);
+        color: var(--vtc-text-title1);
+        background: transparent;
+        padding: 20px;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+  
+      .accordion-body {
+        color: var(--vtc-text-white80per);
+        font-size: var(--f-fs-font-16);
+        font-style: normal;
+        font-weight: var(--f-fw-normal);
+        line-height: var(--f-fs-font-26); /* 162.5% */
+        padding: 0px 16px 16px 22px;
+        background-color: var(--vtc-bg-main7);
+      }
+    }
+
+    .accordion-item.active {
+      background-color: var(--vtc-bg-main7);
+
+      button {
+        color: var(--vtc-text-white);
+
+        &::after {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+  
+    .accordion-button:not(.collapsed)::after {
+      background-image: var(--bs-accordion-btn-active-icon);
+      transform: var(--bs-accordion-btn-icon-transform);
+      filter: brightness(0) invert(1);
+  }
+  }
+  
+  .accordion-button:not(.collapsed) {
+    color: var(--ztc-text-text-1);
+    background-color: var(--vtc-bg-main7);
+    border: none;
+    box-shadow: inset 0 calc(var(--bs-accordion-border-width)* -1) 0 var(--bs-accordion-border-color);
+  }
+  
+  .accordion {
+  --bs-accordion-color: #000;
+  --bs-accordion-bg: #fff;
+  --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+  --bs-accordion-border-color: #dee2e600;
+  --bs-accordion-border-width: 1px;
+  --bs-accordion-border-radius: 0.375rem;
+  --bs-accordion-inner-border-radius: calc(0.375rem - 1px);
+  --bs-accordion-btn-padding-x: 1.25rem;
+  --bs-accordion-btn-padding-y: 1rem;
+  --bs-accordion-btn-color: var(--bs-body-color);
+  --bs-accordion-btn-bg: var(--bs-accordion-bg);
+  --bs-accordion-btn-icon: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var%28--bs-body-color%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+  --bs-accordion-btn-icon-width: 1.25rem;
+  --bs-accordion-btn-icon-transform: rotate(-180deg);
+  --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+  --bs-accordion-btn-active-icon: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+  --bs-accordion-btn-focus-border-color: #86b7fe;
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  --bs-accordion-body-padding-x: 1.25rem;
+  --bs-accordion-body-padding-y: 1rem;
+  --bs-accordion-active-color: #0c63e4;
+  --bs-accordion-active-bg: #e7f1ff;
+  }
+}
+
+
+
+.research-faq {
+  h3 {
+    color: var(--vtc-text-title1);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px; /* 100% */
+    text-transform: capitalize;
+    padding-bottom: 24px;
+  }
+  .accordion {
+    border: none;
+    .accordion-button::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+      transition: all 0.5s;
+      transform: scale(1.5);
+    }
+    .accordion-button:not(.collapsed)::after {
+      filter: brightness(0) invert(1);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+    }
+    .accordion-button::after {
+      transition: all 0.5s;
+    }  
+    
+    .accordion-item {
+      margin-top: 20px;
+      border: none;
+      background-color: #F6F8FA;
+      padding: 0px;
+      border-radius: 8px;
+      button {
+        border: none;
+        background: none;
+        box-shadow: none;
+        color: #090B0E;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 100% */
+        padding: 24px;
+      }
+
+      .accordion-body {
+        padding: 0px 20px 20px 24px;
+        color: #FFF;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px; /* 155.556% */
+      }
+
+      &.active {
+        background-color: var(--vtc-bg-main4);
+        transition: all .4s;
+
+        button {
+          color: var(--vtc-text-white);
+          transition: all .4s;
+        }
+      }
+    }
+  }
+}
+
+
+.research-faq2 {
+  h3 {
+    color: var(--vtc-text-title1);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px; /* 100% */
+    text-transform: capitalize;
+    padding-bottom: 24px;
+  }
+  .accordion {
+    border: none;
+    .accordion-button::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+      transition: all 0.5s;
+      transform: scale(1.5);
+    }
+    .accordion-button:not(.collapsed)::after {
+      filter: brightness(0) invert(1);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+    }
+    .accordion-button::after {
+      transition: all 0.5s;
+    }  
+    
+    .accordion-item {
+      margin-top: 20px;
+      border: none;
+      background-color: var(--vtc-bg-white);
+      padding: 0px;
+      border-radius: 8px;
+      button {
+        border: none;
+        background: none;
+        box-shadow: none;
+        color: #090B0E;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 100% */
+        padding: 24px;
+      }
+
+      .accordion-body {
+        padding: 0px 20px 20px 24px;
+        color: #FFF;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px; /* 155.556% */
+      }
+
+      &.active {
+        background-color: var(--vtc-bg-main4);
+        transition: all .4s;
+
+        button {
+          color: var(--vtc-text-white);
+          transition: all .4s;
+        }
+      }
+    }
+  }
+}
+
+
+/*
+ ::::::::::::::::::::::::::
+  FAQ AREA CSS
+ ::::::::::::::::::::::::::
+*/

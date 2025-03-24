@@ -3,25 +3,28 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Event extends Model
 {
-    use Sluggable;
+    use HasFactory, Sluggable;
 
     protected $fillable = [
         "title",
         "slug",
         "tags",
-        "is_published",
         "description",
+        "status",
         "content",
         "image",
         "user_id",
-        "category_id",
-        "start_at","end_at",
-        "location"
+        "start_at",
+        "end_at",
+        "location",
+        "created_at",
+        "updated_at"
     ];
 
     public function sluggable(): array

@@ -1,0 +1,85 @@
+
+.theme-btn8-secondary {
+    font-size: var(--f-fs-font-20);
+    font-style: normal;
+    font-weight: var(--f-fw-semibold);
+    line-height: var(--f-fs-font-20); /* 100% */
+    display: inline-block;
+    vertical-align: middle;
+    border: 2px solid var(--vtc-bg-main6);
+    outline: none !important;
+    background-color: var(--vtc-bg-main6);
+    color: var(--vtc-text-white);
+    letter-spacing: 0px;
+    transition: 500ms;
+    overflow: hidden;
+    border-radius: 111px;
+    padding: 18px 24px;
+    z-index: 2;
+    position: relative;
+    transition-delay: calc((var(--n) - 1) * 0.1s);
+    -webkit-transition-delay: calc((var(--n) - 1) * 0.1s);
+    -moz-transition-delay: calc((var(--n) - 1) * 0.1s);
+    transition: all ease 0.3s;
+    text-align: center;
+    text-decoration: none;
+  }
+  .theme-btn8-secondary:hover {
+    color: var(--vtc-text-white);
+  }
+  
+  .theme-btn8__text {
+    position: relative;
+    z-index: 2;
+  }
+
+  
+.theme-btn7-secondary  {
+    display: inline-block;
+    color: var(--vtc-text-white);
+    font-size: var(--f-fs-font-20);
+    font-style: normal;
+    font-weight: var(--f-fw-semibold);
+    line-height: var(--f-fs-font-20); /* 100% */
+    padding: 17px 22px 17px 22px;
+    border-radius: 52px;
+    background-color: unset;
+    transition: all 0.4s;
+    border: none;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .theme-btn7-secondary::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 0;
+    height: 100%;
+    width: 0%;
+    background-color: var(--vtc-text-title1);
+    border-radius: 25px;
+    z-index: -1;
+    transition: all 0.4s;
+    animation-timing-function: linear;
+  }
+  .theme-btn7:hover {
+    color: var(--vtc-text-white);
+    transition: all 0.4s;
+    transform: translateY(-5px);
+  }
+  .theme-btn7:hover::after {
+    transition: all 0.4s;
+    width: 100%;
+    left: 0;
+    right: auto;
+    animation-timing-function: linear;
+  }
+
+  .lightmode-bg *{
+color: rgb(255, 244, 231) !important;
+  }
+
+
+  

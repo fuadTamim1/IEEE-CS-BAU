@@ -1,0 +1,127 @@
+@use '../utils' as *;
+
+/*
+ ::::::::::::::::::::::::::
+  THEME SETTINGS
+ ::::::::::::::::::::::::::
+ */
+
+//  theme top progress 
+
+  .blok:nth-of-type(odd) {
+    background-color: white;
+  }
+  
+  .blok:nth-of-type(even) {
+    background-color: black;
+  }
+  
+  @-webkit-keyframes border-transform {
+    0%,
+    100% {
+      border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    }
+    14% {
+      border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%;
+    }
+    28% {
+      border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%;
+    }
+    42% {
+      border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%;
+    }
+    56% {
+      border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%;
+    }
+    70% {
+      border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%;
+    }
+    84% {
+      border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%;
+    }
+  }
+  
+  /* #Progress
+  ================================================== */
+  
+  .progress-wrap {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    height: 56px;
+    width: 56px;
+    cursor: pointer;
+    display: block;
+    border-radius: 50px;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+  }
+  .progress-wrap.active-progress {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    z-index: 999;
+  }
+  .progress-wrap::after {
+    position: absolute;
+    font-family: "FontAwesome";
+    content: "\f062";
+    text-align: center;
+    line-height: 56px;
+    font-size: 18px;
+    color: var(--vtc-text-title1);
+    left: 0;
+    top: 0;
+    height: 56px;
+    width: 56px;
+    cursor: pointer;
+    display: block;
+    z-index: 1;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+  }
+  .progress-wrap:hover::after {
+    opacity: 0;
+  }
+  .progress-wrap::before {
+    position: absolute;
+    font-family: "FontAwesome";
+    content: "\f062";
+    text-align: center;
+    line-height: 56px;
+    font-size: 18px;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    height: 56px;
+    width: 56px;
+    cursor: pointer;
+    display: block;
+    z-index: 2;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+  }
+  .progress-wrap:hover::before {
+    opacity: 1;
+  }
+  .progress-wrap svg path {
+    fill: none;
+  }
+  .progress-wrap svg.progress-circle path {
+    stroke: var(--vtc-text-title1); /* --- Lijn progres kleur --- */
+    stroke-width: 4;
+    box-sizing: border-box;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+  }
+
+/*
+ ::::::::::::::::::::::::::
+   THEME SETTINGS
+ ::::::::::::::::::::::::::
+ */

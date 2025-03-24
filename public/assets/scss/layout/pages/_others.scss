@@ -1,0 +1,504 @@
+@use '../../utils/' as * ;
+
+  /*
+ ::::::::::::::::::::::::::
+  others AREA CSS
+ ::::::::::::::::::::::::::
+ */
+
+// ==== istagram feed area start ====
+
+.single-instagram-feed {
+  margin: 0px 10px;
+
+  .image-area {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 2;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #090B0E;
+      z-index: 1;
+      opacity: 0;
+      transition: all .4s;
+      transform: scale(0.7);
+      border-radius: 8px;
+    }
+
+    .insta-icon {
+      display: inline-block;
+      font-size: var(--f-fs-font-26);
+      color: var(--vtc-text-white);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 3;
+      margin-left: -13px;
+      margin-top: -17px;
+      transform: scale(1.5);
+      transition: all .4s;
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    transition: all .4s;
+    .image-area {
+      &::after {
+        transition: all .4s;
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      .insta-icon {
+        transition: all .4s;
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// ==== istagram feed area end ====
+
+// ==== brands area start ====
+
+.brads8-heading {
+  h4 {
+    color: #0C0723;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px; /* 100% */
+    letter-spacing: -0.64px;
+    text-transform: uppercase;
+  }
+}
+
+.brands8-box {
+  border-radius: 8px;
+  background: var(--vtc-text-white);
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.09);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 87px;
+  justify-content: center;
+  margin-top: 30px;
+  transition: all .4s;
+
+  &:hover {
+    transition: all .4s;
+    transform: translateY(-8px);
+  }
+}
+
+// ==== brands area end ====
+
+// ==== brands 9 area start ====
+
+.brands9-area {
+  h3 {
+    color: #0C0723;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px; /* 100% */
+    letter-spacing: -0.64px;
+  }
+}
+
+.brands9-single {
+  width: 213px;
+  height: 90px;
+  background-color: var(--vtc-bg-common-21);
+  border: 1px solid var(--vtc-bg-common-20);
+  border-radius: 111px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .4s;
+
+  &:hover {
+    transition: all .4s;
+    border: 1px solid var(--vtc-bg-main12);
+  }
+}
+
+// ==== brands 9 area end ====
+
+// ==== progress 9 area start ====
+
+.about9-progress-area {
+  .progress-container {
+      position: relative;
+      margin-top: 28px;
+      .num {
+          display: inline-block;
+          position: absolute;
+          right: 0;
+          top: 0;
+      }
+      span strong {
+          display: inline-block;
+          color: #0C0723;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 18px; /* 100% */
+          text-transform: capitalize;
+      }
+
+      .progress {
+          flex: 1;
+          height: 10px;
+          background-color: #eeeeee;
+          border-radius: 5px;
+          position: relative;
+          margin-top: 16px;
+      }
+      .progress-bar {
+          background-color: var(--vtc-bg-main12);
+          height: 10px;
+          border-radius: 5px;
+          position: absolute;
+          top: 0;
+          left: 0;
+      }
+      .progress-thumb {
+          width: 14px;
+          height: 14px;
+          background-color: var(--vtc-bg-main12);
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translate(50%, -50%);
+      }
+  }
+}
+
+// ==== progress 9 area end ====
+
+// ==== growth box area start ====
+
+.growth-box {
+  text-align: center;
+  transition: all .4s;
+  .num {
+    color: var(--vtc-text-title2);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 100% */
+    background-color: #DFE4FF;
+    height: 48px;
+    width: 48px;
+    text-align: center;
+    line-height: 48px;
+    border-radius: 50%;
+    margin: auto;
+  }
+  h4 {
+    color: var(--vtc-text-title2);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 100% */
+    padding-top: 32px;
+  }
+
+  &:hover {
+    transition: all .4s;
+    transform: translateY(-10px);
+  }
+}
+
+.growth-box-perent {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 53px;
+    height: 2px;
+    width: 100%;
+    background-color: var(--vtc-bg-common-22);
+    z-index: -1;
+    transform: rotateY(47deg);
+  }
+}
+
+// ==== growth box area end ====
+
+// ==== portfolio area start ====
+
+.categories-buttons {
+  text-align: center;
+  .nav {
+    li {
+      display: inline-block;
+      margin: 0px 5px;
+      button {
+        color: #3D4C5E;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px; /* 100% */
+        padding: 13px 20px;
+        border-radius: 30px;
+        background: var(--vtc-bg-common-1);
+        border-radius: 30px;
+
+        &.active {
+          background: var(--vtc-bg-main4);
+        }
+      }
+    }
+  }
+}
+
+.portfolio-box {
+  background-color: var(--vtc-bg-common-1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 30px;
+  transition: all .4s;
+
+  .image-area {
+    position: relative;
+    .image {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0;
+        transition: all .4s;
+      }
+    }
+    .arrow {
+      display: inline-block;
+      height: 60px;
+      width: 60px;
+      line-height: 60px;
+      text-align: center;
+      font-size: 18px;
+      background-color: var(--vtc-bg-main4);
+      border-radius: 50%;
+      color: var(--vtc-text-white);
+      transform: rotate(-45deg);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -30px;
+      margin-left: -30px;
+      z-index: 3;
+      transition: all .4s;
+      transform: scale(1.5);
+      opacity: 0;
+
+      &:hover {
+        transition: all .4s;
+        background-color: var(--vtc-text-title1);
+      }
+    }
+  }
+  .content-area {
+    padding: 24px 24px 32px 24px;
+    span {
+      display: inline-block;
+      color: var( --vtc-text-pera1);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 100% */
+      text-transform: capitalize;
+      transition: all .4s;
+    }
+    a {
+      display: block;
+      color: var(--vtc-text-title1);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px; /* 100% */
+      padding-top: 20px;
+      transition: all .4s;
+
+      &:hover {
+        transition: all .4s;
+        color: var(--vtc-bg-main4);
+      }
+    }
+  }
+
+  &:hover {
+    transition: all .4s;
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.08);
+    background-color: var(--vtc-text-white);
+
+    .image-area {
+      .image {
+        &::after {
+          opacity: 0.4;
+          transition: all .4s;
+        }
+      }
+    }
+
+    .arrow {
+      opacity: 1;
+      transform: scale(1) rotate(-45deg);
+      transition: all .4s;
+    }
+
+    .content-area {
+      span {
+        transition: all .4s;
+        color: var(--vtc-bg-main4);
+      }
+    }
+  }
+}
+
+
+.portfolio-box2 {
+  background-color: var(--vtc-text-white);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 30px;
+  transition: all .4s;
+
+  .image-area {
+    position: relative;
+    .image {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0;
+        transition: all .4s;
+      }
+    }
+    .arrow {
+      display: inline-block;
+      height: 60px;
+      width: 60px;
+      line-height: 60px;
+      text-align: center;
+      font-size: 18px;
+      background-color: var(--vtc-bg-main4);
+      border-radius: 50%;
+      color: var(--vtc-text-white);
+      transform: rotate(-45deg);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -30px;
+      margin-left: -30px;
+      z-index: 3;
+      transition: all .4s;
+      transform: scale(1.5);
+      opacity: 0;
+
+      &:hover {
+        transition: all .4s;
+        background-color: var(--vtc-text-title1);
+      }
+    }
+  }
+  .content-area {
+    padding: 24px 24px 32px 24px;
+    span {
+      display: inline-block;
+      color: var( --vtc-text-pera1);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 100% */
+      text-transform: capitalize;
+      transition: all .4s;
+    }
+    a {
+      display: block;
+      color: var(--vtc-text-title1);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px; /* 100% */
+      padding-top: 20px;
+      transition: all .4s;
+
+      &:hover {
+        transition: all .4s;
+        color: var(--vtc-bg-main4);
+      }
+    }
+  }
+
+  &:hover {
+    transition: all .4s;
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.08);
+    background-color: var(--vtc-text-white);
+
+    .image-area {
+      .image {
+        &::after {
+          opacity: 0.4;
+          transition: all .4s;
+        }
+      }
+    }
+
+    .arrow {
+      opacity: 1;
+      transform: scale(1) rotate(-45deg);
+      transition: all .4s;
+    }
+
+    .content-area {
+      span {
+        transition: all .4s;
+        color: var(--vtc-bg-main4);
+      }
+    }
+  }
+}
+
+// ==== portfolio area start ====
+
+
+/*
+ ::::::::::::::::::::::::::
+  others AREA CSS
+ ::::::::::::::::::::::::::
+ */

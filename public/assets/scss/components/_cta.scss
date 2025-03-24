@@ -1,0 +1,554 @@
+@use '../utils' as *;
+
+  /*
+ ::::::::::::::::::::::::::
+  CTA AREA CSS
+ ::::::::::::::::::::::::::
+ */
+
+//=====  cta style 1 ====
+
+.cta1 {
+  .cta1-form {
+    margin: 0px 130px;
+    padding-top: 40px;
+    padding-right: 150px;
+    position: relative;
+    @media #{$xs} {
+      margin: 0px 20px;
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--vtc-bg-white10per);
+      border-radius: 111px;
+      background-color: var(--vtc-bg-white10per);
+      padding: 16px;
+      color: var(--vtc-text-white);
+      margin-right: 100px;
+
+      &::placeholder {
+        color: var(--vtc-text-white80per);
+        font-size: var(--f-fs-font-16);
+        font-style: normal;
+        font-weight: var(--f-fw-normal);
+        line-height:  var(--f-fs-font-16); /* 100% */
+        text-transform: capitalize;
+      }
+      &:focus {
+        outline-color: var(--vtc-bg-main1);
+        outline-width: 1px;
+        outline-style: solid;
+        &::placeholder {
+          opacity: 0;
+        }
+      }
+    }
+    .button {
+      position: absolute;
+      top: 40px;
+      right: 0;
+    }
+  }
+}
+
+//=====  cta style 1 ====
+
+//=====  cta style 2 ====
+
+
+  .cta2-form {
+    margin: 0px 130px;
+    padding-top: 40px;
+    padding-right: 150px;
+    position: relative;
+    @media #{$xs} {
+      margin: 0px 20px;
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--vtc-bg-white10per);
+      border-radius: 111px;
+      background-color: var(--vtc-bg-white10per);
+      padding: 16px;
+      color: var(--vtc-text-white);
+      margin-right: 140px;
+
+      &::placeholder {
+        color: var(--vtc-text-white80per);
+        font-size: var(--f-fs-font-16);
+        font-style: normal;
+        font-weight: var(--f-fw-normal);
+        line-height:  var(--f-fs-font-16); /* 100% */
+        text-transform: capitalize;
+      }
+      &:focus {
+        outline-color: var(--vtc-bg-main4);
+        outline-width: 1px;
+        outline-style: solid;
+        &::placeholder {
+          opacity: 0;
+        }
+      }
+    }
+    .button {
+      position: absolute;
+      top: 40px;
+      right: -20px;
+    }
+  }
+
+  .cta3 {
+    background-color: var(--vtc-bg-main5);
+  }
+
+  .cta3-form {
+    padding-top: 40px;
+    padding-right: 120px;
+    position: relative;
+    margin-right: 80px;
+    @media #{$md} {
+      margin: 0px 20px 0px 0px;
+    }
+    @media #{$xs} {
+      margin: 0px 20px 0px 0px;
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--vtc-bg-white10per);
+      border-radius: 111px;
+      background-color: var(--vtc-bg-white10per);
+      padding: 16px;
+      color: var(--vtc-text-white);
+      margin-right: 140px;
+
+      &::placeholder {
+        color: var(--vtc-text-white80per);
+        font-size: var(--f-fs-font-16);
+        font-style: normal;
+        font-weight: var(--f-fw-normal);
+        line-height:  var(--f-fs-font-16); /* 100% */
+        text-transform: capitalize;
+      }
+      &:focus {
+        outline-color: var(--vtc-bg-main4);
+        outline-width: 1px;
+        outline-style: solid;
+        &::placeholder {
+          opacity: 0;
+        }
+      }
+    }
+    .button {
+      position: absolute;
+      top: 40px;
+      right: -20px;
+    }
+  }
+
+  .cta3-images {
+    height: 380px;
+    position: relative;
+    text-align: end;
+    margin: 20px 0px;
+
+    .shape {
+      position: absolute;
+      right: 0;
+      bottom: 40px;
+    }
+    .image {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+//=====  cta style 2 ====
+
+//=====  cta style 4 ====
+
+.cta4 {
+  position: relative;
+  margin-bottom: -140px;
+  z-index: 2;
+}
+
+.cta4-form-area {
+  background-color: var(--vtc-bg-main6);
+  border-radius: 8px;
+  padding: 32px;
+  padding-right: 180px;
+  @media #{$md} {
+    padding-right: 0;
+  }
+
+  @media #{$xs} {
+    padding-right: 0;
+  }
+
+  .form-area {
+    position: relative;
+    margin-top: 40px;
+    input {
+      padding: 16px;
+      border: none;
+      border-radius: 111px;
+      margin-right: 130px;
+      width: 390px;
+      position: relative;
+      &:focus {
+        outline: none;
+      }
+    }
+    .button {
+      position: absolute;
+      top: 0;
+      right: 80px;
+      @media #{$md} {
+        right: 0;
+      }
+      @media #{$xs} {
+        right: 0;
+      }
+    }
+  }
+}
+
+//=====  cta style 4 ====
+
+//=====  cta style 5 ====
+
+.cta5-form {
+  margin: 0px 130px;
+  padding-top: 40px;
+  padding-right: 150px;
+  position: relative;
+  @media #{$xs} {
+    margin: 0px 20px;
+  }
+  input {
+    width: 100%;
+    border: 1px solid var(--vtc-bg-white10per);
+    border-radius: 111px;
+    background-color: var(--vtc-bg-white10per);
+    padding: 16px;
+    color: var(--vtc-text-white);
+    margin-right: 140px;
+
+    &::placeholder {
+      color: var(--vtc-text-white80per);
+      font-size: var(--f-fs-font-16);
+      font-style: normal;
+      font-weight: var(--f-fw-normal);
+      line-height:  var(--f-fs-font-16); /* 100% */
+      text-transform: capitalize;
+    }
+    &:focus {
+      outline-color: var(--vtc-bg-main1);
+      outline-width: 1px;
+      outline-style: solid;
+      &::placeholder {
+        opacity: 0;
+      }
+    }
+  }
+  .button {
+    position: absolute;
+    top: 40px;
+    right: -20px;
+  }
+}
+
+//=====  cta style 5 ====
+
+//=====  cta style 6 ====
+
+.cta6 {
+  position: relative;
+  margin-bottom: -140px;
+  z-index: 2;
+}
+
+.cta6-form-area {
+  background-color: var(--vtc-bg-main8);
+  border-radius: 8px;
+  padding: 32px;
+  padding-right: 180px;
+  @media #{$md} {
+    padding-right: 0;
+  }
+
+  @media #{$xs} {
+    padding-right: 0;
+  }
+
+  .form-area {
+    position: relative;
+    margin-top: 40px;
+    input {
+      padding: 16px;
+      border: none;
+      border-radius: 111px;
+      margin-right: 130px;
+      width: 370px;
+      position: relative;
+      &:focus {
+        outline: none;
+      }
+    }
+    .button {
+      position: absolute;
+      top: 0;
+      right: 80px;
+      @media #{$md} {
+        right: 0;
+      }
+      @media #{$xs} {
+        right: 0;
+      }
+    }
+  }
+}
+
+//=====  cta style 6 ====
+
+//=====  cta style 7 ====
+
+.cta7-form {
+  margin: 0px 130px;
+  padding-top: 40px;
+  padding-right: 150px;
+  position: relative;
+  @media #{$xs} {
+    margin: 0px 20px;
+  }
+  input {
+    width: 100%;
+    border: 1px solid var(--vtc-bg-common-1);
+    border-radius: 111px;
+    background-color: var(--vtc-text-white);
+    padding: 16px;
+    color: var(--vtc-text-title1);
+    margin-right: 140px;
+
+    &::placeholder {
+      color: var(--vtc-text-pera1);
+      font-size: var(--f-fs-font-16);
+      font-style: normal;
+      font-weight: var(--f-fw-normal);
+      line-height:  var(--f-fs-font-16); /* 100% */
+      text-transform: capitalize;
+    }
+    &:focus {
+      outline-color: var(--vtc-bg-main10);
+      outline-width: 1px;
+      outline-style: solid;
+      &::placeholder {
+        opacity: 0;
+      }
+    }
+  }
+  .button {
+    position: absolute;
+    top: 40px;
+    right: -20px;
+  }
+}
+
+//=====  cta style 7 ====
+
+//=====  cta style 8 ====
+
+.cta8-main {
+  padding: 80px 0px;
+}
+
+.cta8-image {
+  &.left-image {
+    margin-left: -60px;
+
+    @media #{$xs} {
+      margin-left: 0;
+      margin-bottom: 30px;
+      display: none;
+    }
+
+    @media #{$md} {
+      margin-left: 0;
+      margin-bottom: 30px;
+      display: none;
+    }
+  }
+
+  &.right-image {
+    margin-right: -60px;
+
+    @media #{$xs} {
+      margin-right: 0;
+      margin-top: 30px;
+      display: none;
+    }
+
+    @media #{$md} {
+      margin-right: 0;
+      margin-top: 30px;
+      display: none;
+    }
+  }
+}
+
+//=====  cta style 8 ====
+
+//=====  cta style 9 ====
+
+.cta9 {
+  background-position: center bottom;
+  padding: 70px 0px 85px 0px;
+}
+
+//=====  cta style 9 ====
+
+//=====  cta style 10 ====
+
+.cta10 {
+  .cta10-bg {
+    background-color: var(--vtc-bg-main13);
+    padding: 60px 0px;
+    border-radius: 20px;
+  }
+}
+
+.cta9-form {
+  position: relative;
+  margin-top: 30px;
+  margin-right: 40px;
+
+  @media #{$xs} {
+    margin-right: 0;
+  }
+  input {
+    width: 100%;
+    padding: 21px;
+    border-radius: 8px;
+    background-color: var(--vtc-text-white);
+    border: none;
+
+    &:focus {
+      outline-color: var(--vtc-bg-main12);
+      outline-width: 1px;
+      outline-style: solid;
+      &::placeholder {
+        opacity: 0;
+      }
+    }
+  }
+  .button {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+  }
+}
+
+//=====  cta style 10 ====
+
+.cta-section-area.others-cta {
+  background-color: var(--vtc-bg-main4);
+  .form-area {
+      form {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: var(--vtc-text-white);
+          padding: 20px;
+          border-radius: 90px;
+          z-index: 1;
+          @media #{$xs} {
+              width: 100%;
+              left: 0;
+              display: inline-block;
+              position: relative;
+              left: 0;
+              z-index: 1;
+              top: 0;
+              margin-bottom: 50px;
+              border-radius: 4px;
+          }
+          @media #{$md} {
+              left: 0;
+              width: 100%;
+              top: 0;
+              margin-bottom: 50px;
+              position: relative;
+          }
+          .input-area {
+              display: flex;
+              align-items: center;
+              @media #{$xs} {
+                  margin-bottom: 20px;
+              }
+              input {
+                  width: 100%;
+                  margin-left: 6px;
+                  border: none;
+                  padding: 16px;
+                  &::placeholder {
+                      color: var(--ztc-text-text-3);
+                      font-weight: var(--ztc-weight-regular);
+                  }
+                  &:focus {
+                    outline: none;
+                  }
+              }
+          }
+      }
+      .btn-area {
+          margin-top: 0;
+          a {
+              background: var(--ztc-text-text-4);
+              color: var(--ztc-text-text-1);
+              span {
+                  background: var(--ztc-text-text-1);
+                  color: var(--ztc-text-text-4);
+              }
+          }
+      }
+  }
+  ul {
+      text-align: start !important;
+      margin-top: 24px;
+      li {
+          display: inline-block;
+          &:nth-child(1) {
+              color: var(--vtc-text-white);
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 18px; /* 100% */
+              line-height: 18px;            
+          }
+          a {
+            color: var(--vtc-text-title1);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: var(--f-fw-normal);
+            line-height: 18px; /* 100% */
+              transition: all .4s;
+              padding: 8px 12px;
+              border-radius: 40px; 
+              background: var(--vtc-text-white);
+              display: inline-block; 
+              margin: 0 0 0 12px; 
+              &:hover {
+                  background: var(--vtc-text-title1);
+                  color: var(--vtc-text-white);
+                  transition: all .4s;
+              }
+          }
+      }
+  }
+}
+
+/*
+ ::::::::::::::::::::::::::
+  CTA AREA CSS
+ ::::::::::::::::::::::::::
+ */

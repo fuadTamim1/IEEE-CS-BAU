@@ -1,0 +1,138 @@
+@use '../../utils/' as * ;
+
+/*
+ ::::::::::::::::::::::::::
+  SHOP AREA CSS
+ ::::::::::::::::::::::::::
+*/
+
+.shop-tab-btn {
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 30px;
+        @media #{$md} {
+            display: block;
+        }
+        @media #{$xs} {
+            display: block;
+        }
+        li {
+            .nav-link {
+                background: none;
+                padding: 0;
+                margin-top: 20px;
+                color: var(--vtc-text-title1);
+                font-size: var(--f-fs-font-18);
+                font-style: normal;
+                font-weight: var(--f-fw-medium);
+                line-height: var(--f-fs-font-18); /* 100% */
+                text-transform: capitalize;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    height: 2px;
+                    width: 0%;
+                    background-color: var(--vtc-bg-main5);
+                    transition: all .4s;
+                }
+
+                &.active {
+                    color: var(--vtc-bg-main5);
+                    background: none;
+                    &::after {
+                        width: 100%;
+                    }
+                }
+                &:hover {
+                    transition: all .4s;
+                    color: var(--vtc-bg-main5);
+                }
+            }
+        }
+    }
+}
+
+.shop3-item {
+    transition: all .4s;
+    .image-area {
+        position: relative;
+        overflow: hidden;
+        .image {
+            overflow: hidden;
+            border-radius: 8px;
+            img {
+                width: 100%;
+                transition: all .4s;
+            }
+        }
+        .button {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            margin-left: -72px;
+            opacity: 0;
+            transform: translateY(80px) scale(0.4);
+            transition: all .4s;
+        }
+    }
+    .content {
+        text-align: center;
+        padding-top: 22px;
+        h6 {
+            color: var(--vtc-text-title1);
+            font-size: var(--f-fs-font-20);
+            font-style: normal;
+            font-weight: var(--f-fw-medium);
+            line-height: var(--f-fs-font-20); /* 100% */
+            text-transform: capitalize;
+        }
+        h3 {
+            color: var(--vtc-text-title1);
+            font-size: var(--f-fs-font-32);
+            font-style: normal;
+            font-weight: var(--f-fw-semibold);
+            line-height: var(--f-fs-font-32); /* 100% */
+            text-transform: capitalize;
+            padding-top: 16px;
+            transition: all .4s;
+        }
+    }
+
+    &:hover {
+        transition: all .4s;
+        transform: translateY(-10px);
+        .image-area {
+            .image {
+                img {
+                    transition: all .4s;
+                    transform: scale(1.1) rotate(2deg);
+                }
+            }
+            .button {
+                transition: all .4s;
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .content {
+            h3 {
+                transition: all .4s;
+                color: var(--vtc-bg-main5);
+            }
+        }
+        
+    }
+}
+
+/*
+ ::::::::::::::::::::::::::
+  SHOP AREA CSS
+ ::::::::::::::::::::::::::
+*/

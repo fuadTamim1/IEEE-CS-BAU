@@ -1,0 +1,780 @@
+
+@use '../utils' as *;
+
+   /*
+ ::::::::::::::::::::::::::
+  PRELOADER AREA CSS
+ ::::::::::::::::::::::::::
+ */
+
+//---- preloader sytle 1 -----
+
+.preloader1 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main1); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 1 -----
+
+//---- preloader sytle 2 -----
+
+.preloader2 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main10); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 2 -----
+
+//---- preloader sytle 4 -----
+
+.preloader4 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main11); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 4 -----
+
+
+//---- preloader sytle 5 -----
+
+.preloader5 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main6); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 5 -----
+
+//---- preloader sytle 6 -----
+
+.preloader6 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main12); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 6 -----
+
+//---- preloader sytle 7 -----
+
+.preloader7 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main4); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 7 -----
+
+//---- preloader sytle 8 -----
+
+.preloader8 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main12); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 8 -----
+
+//---- preloader sytle 9 -----
+
+.preloader9 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main5); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 9 -----
+
+//---- preloader sytle 10 -----
+
+.preloader10 {
+  /* Preloader Styling */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Progress Bar at Top */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--vtc-bg-main8); /* Blue progress bar */
+  animation: progress 2.5s ease-in-out forwards;
+  border-radius: 8px;
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Title Logo in Center with Rotation */
+.title-logo img {
+  width: 120px; /* Adjust logo size */
+  height: auto;
+  animation: rotate 12s linear infinite;
+}
+
+.preloader-exit .title-logo {
+  transform: scale(0);
+  transition: all .9s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Typing Text Animation */
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.loading-text span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff; /* Cursor effect */
+  animation: typing 2s steps(10, end) infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Preloader Exit Animation */
+.preloader-exit {
+  transform: translateY(-100%);
+}
+
+}
+//---- preloader sytle 10 -----
+
+/*
+ ::::::::::::::::::::::::::
+  PRELOADER AREA CSS
+ ::::::::::::::::::::::::::
+ */

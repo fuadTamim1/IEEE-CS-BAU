@@ -1,0 +1,54 @@
+@use '../../utils/' as * ;
+
+/*
+::::::::::::::::::::::::::
+ HEADER AREA 1 CSS
+::::::::::::::::::::::::::
+*/
+
+.header-tranperent {
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+.header-contact-wedget {
+    text-align: end;
+}
+
+@media screen and (min-width: 769px) {
+    .header1-bg {
+        padding: 10px 0px;
+        border-radius: 0px 0px 8px 8px;
+        position: relative;
+        z-index: 999;
+        margin-top: 16px;
+    }
+}
+
+    .vl-header1-btns {
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        .search-open-btn {
+            background: none;
+            border: none;
+            font-size: var(--f-fs-font-20);
+            margin-right: 36px;
+            position: relative;
+            color: var(--vtc-text-white);
+        }
+    }
+
+
+
+/*
+::::::::::::::::::::::::::
+ HEADER AREA 1 CSS
+::::::::::::::::::::::::::
+*/

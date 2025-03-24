@@ -1,17 +1,26 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [PageController::class, "HomePage"])->name('home');
+Route::get('/about', [PageController::class, "AboutPage"])->name('about');
+Route::get('/blog', [PageController::class, "BlogPage"])->name('blogs');
+Route::get('/projects', [PageController::class, "ProjectsPage"])->name('projects');
+Route::get('/events', [PageController::class, "EventsPage"])->name('events');
+Route::get('/ourteam', [PageController::class, "TeamPage"])->name('ourteam');
+Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
+// Route::get('/soon', [PageController::class, "SoonPage"])->name('soon');
 
-Route::prefix("dashboard", function() {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
-})->middleware(['auth', 'verified']);
+Route::middleware(['auth', 'verified'])->group(function() {
+        Route::prefix("dashboard")->group(function () {
+            Route::get('/', function () {
+                return view('dashboard');
+            })->name('dashboard');
+        });
+    }
+);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,4 +28,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

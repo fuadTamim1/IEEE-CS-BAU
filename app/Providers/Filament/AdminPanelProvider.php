@@ -69,15 +69,6 @@ class AdminPanelProvider extends PanelProvider
                                         NavigationItem::make('Add New Post')
                                             ->url('/admin/blogs/create'),
                                     ]),
-                                NavigationItem::make('Events')
-                                    ->icon('heroicon-o-calendar')
-                                    ->url('/admin/events')
-                                    ->childItems([
-                                        NavigationItem::make('All Events')
-                                            ->url('/admin/events'),
-                                        NavigationItem::make('Add New Event')
-                                            ->url('/admin/events/create'),
-                                    ]),
                                 NavigationItem::make('Projects')
                                     ->icon('heroicon-o-briefcase')
                                     ->url('/admin/projects')
@@ -96,6 +87,28 @@ class AdminPanelProvider extends PanelProvider
                                         NavigationItem::make('Add New Members')
                                             ->url('/admin/members/create'),
                                     ]),
+                                NavigationItem::make('Events')
+                                    ->icon('heroicon-o-calendar')
+                                    ->url('/admin/events')
+                                    ->group('Events & Sponsors')
+                                    ->childItems([
+                                        NavigationItem::make('All Events')
+                                            ->url('/admin/events'),
+                                        NavigationItem::make('Add New Event')
+                                            ->url('/admin/events/create'),
+                                    ]),
+
+                                NavigationItem::make('Sponsors')
+                                    ->icon('heroicon-o-calendar')
+                                    ->url('/admin/sponsors')
+                                    ->group('Events & Sponsors')
+                                    ->childItems([
+                                        NavigationItem::make('All Sponsors')
+                                            ->url('/admin/sponsors'),
+                                        NavigationItem::make('Add New Sponsor')
+                                            ->url('/admin/sponsors/create'),
+                                    ]),
+
                             ]),
                     )
                     ->group(
@@ -123,7 +136,7 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
-            // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->middleware([
                 \Illuminate\Cookie\Middleware\EncryptCookies::class,
                 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -136,7 +149,8 @@ class AdminPanelProvider extends PanelProvider
                 StatsOverview::class,
                 UserGrowthChart::class,
                 RecentBlogPostsTable::class,
-                BlogPostCategoryChart::class
+                BlogPostCategoryChart::class,
+                
             ])
             ->authMiddleware([
                 \Filament\Http\Middleware\Authenticate::class,

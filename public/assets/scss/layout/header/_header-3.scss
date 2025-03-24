@@ -1,0 +1,31 @@
+@use '../../utils/' as * ;
+
+/*
+::::::::::::::::::::::::::
+ HEADER AREA 3 CSS
+::::::::::::::::::::::::::
+*/
+
+.vl-header3-btns {
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .search-open-btn {
+        background: none;
+        border: none;
+        font-size: var(--f-fs-font-20);
+        margin-right: 24px;
+        position: relative;
+        color: var(--vtc-text-title1);
+    }
+}
+
+
+/*
+::::::::::::::::::::::::::
+ HEADER AREA 3 CSS
+::::::::::::::::::::::::::
+*/

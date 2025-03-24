@@ -38,9 +38,11 @@ class Blog extends Model
         });
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id')->withDefault([
+            'name' => 'Unknown Author', // Default value if author is null
+        ]);
     }
 
     public function category(): BelongsTo

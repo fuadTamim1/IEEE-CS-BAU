@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "role": "Cybersecurity Specialist",
+        "profile_picture": "images/members/john_doe.jpg",
+        "story": "Joining IEEE CS was a turning point in my career. The hands-on projects and networking opportunities helped me grow tremendously.",
+        "year": "2024"
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "role": "Linux Administrator",
+        "profile_picture": "images/members/jane_smith.jpg",
+        "story": "IEEE CS introduced me to the world of open-source and Linux. I gained skills that directly impacted my career path.",
+        "year": "2023"
+    },
+    {
+        "id": 3,
+        "name": "Ali Ahmed",
+        "role": "Networking Engineer",
+        "profile_picture": "images/members/ali_ahmed.jpg",
+        "story": "The workshops and mentorship at IEEE CS expanded my understanding of networking and real-world applications.",
+        "year": "2022"
+    }
+]
