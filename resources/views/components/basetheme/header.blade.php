@@ -7,7 +7,7 @@
             <div class="row align-items-center px-4">
                 <div class="col-lg-2 col-md-6 col-6">
                     <div class="vl-logo">
-                        <a href="index.html" class="header1-logo-block"><img
+                        <a href="{{ route('home') }}" class="header1-logo-block"><img
                                 src="{{ asset('images/logo_name_description.svg') }}" alt="ieee cs logo"
                                 width="160"></a>
                     </div>
@@ -80,7 +80,7 @@
     <div class="vl-offcanvas-wrapper">
         <div class="vl-offcanvas-header d-flex justify-content-between align-items-center mb-90">
             <div class="vl-offcanvas-logo">
-                <a href="index.html" class="header1-logo-block"><img src="{{ asset('images/logo.png') }}"
+                <a href="{{ route('home') }}" class="header1-logo-block"><img src="{{ asset('images/logo.png') }}"
                         alt=""></a>
             </div>
             <div class="vl-offcanvas-close">

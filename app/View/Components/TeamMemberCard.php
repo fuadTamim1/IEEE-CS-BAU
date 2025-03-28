@@ -4,16 +4,18 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\View\Component;
 
 class TeamMemberCard extends Component
 {
+    public $contacts;
     /**
      * Create a new component instance.
      */
-    public function __construct(public $name, public $role, public $image = null)
+    public function __construct(public $name, public $role, public $links, public $image = null)
     {
-        
+        $this->contacts = Json::decode($links);
     }
 
     /**

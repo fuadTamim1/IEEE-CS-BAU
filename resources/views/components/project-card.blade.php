@@ -4,11 +4,11 @@
             <div class="image">
                 <img src="{{ $project->image }}" alt="">
             </div>
-            <a href="portfolio-details.html" class="arrow"><i class="fa-solid fa-arrow-right"></i></a>
+            <a href="{{ url('projects/' . $project->slug) }}" class="arrow"><i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="content-area">
             <span>{{ $project->category->title }}</span>
-            <a href="portfolio-details.html">{{ $project->title }}</a>
+            <a href="{{ url('projects/' . $project->slug) }}">{{ $project->title }}</a>
         </div>
     </div>
 </div>

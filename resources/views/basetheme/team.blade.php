@@ -27,9 +27,14 @@
    <div class="team2 sp">
     <div class="container">
         <div class="row">
-            <x-Team-Member-Card name="fuad" role="Tech Leader" />
+            @foreach ($members as $m)
+            <x-Team-Member-Card name="fuad" role="Tech Leader"
+            :links="$m->contacts"
+            />
+            @endforeach
         </div>
-
+        {{-- Pagenation --}}
+{{-- 
         <div class="space60"></div>
         <div class="row">
             <div class="col-12 m-auto">
@@ -44,7 +49,7 @@
                 </ul>
                </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
    </div>

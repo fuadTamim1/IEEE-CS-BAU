@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Event;
+use App\Models\Member;
+use App\Models\Project;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -29,7 +31,8 @@ class PageController extends Controller
 
     public function TeamPage()
     {
-        return view('basetheme.team');
+        $members = Member::all();
+        return view('basetheme.team', ["members" => $members]);
     }
 
     public function BlogPage()
@@ -48,8 +51,23 @@ class PageController extends Controller
         return view('basetheme.blog', ['blogs' => $blogs]);
     }
 
+    public function ShowBlogPage($slug)
+    {
+        $blog = Blog::whereSlug($slug)->with('author')->first();
+        $otherBlogs = Blog::where("slug","!=",$slug)->latest()->with('author:id,name')->take(2)->get(["slug","title","created_at"]);
+
+        $blog->tags = explode(",", $blog->tags);
+    
+        return view('basetheme.blog-details', ['blog' => $blog, 'otherBlogs' => $otherBlogs]);
+    }
+
     public function ProjectsPage() {
         return view('basetheme.portfolio');
+    }
+
+    public function ShowProjectPage(Project $project)
+    {
+        return view('basetheme.portfolio-details', ['project' => $project]);
     }
 
     public function EventsPage() {

@@ -7,7 +7,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                     <div class="vl-footer-widget-white vl-footer1-logo-area mr-50 mb-50">
                         <div class="vl-footer-logo black-logo">
-                            <a href="index.html"><img src="{{ asset('images/white_logo_text.svg') }}" alt=""></a>
+                            <a href="{{ route('home') }}"><img src="{{ asset('images/white_logo_text.svg') }}" alt=""></a>
                         </div>
                         <div class="vl-footer-text white-heading mt-20">
                             <p class="mt-16">Empowering Innovators,

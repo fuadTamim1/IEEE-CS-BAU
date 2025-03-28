@@ -82,4 +82,10 @@ color: rgb(255, 244, 231) !important;
   }
 
 
-  
+  .blog-cover-image{
+    width: 855px !important;
+    height: 415px !important;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 5px;
+  } 
