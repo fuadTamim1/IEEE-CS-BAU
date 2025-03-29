@@ -1,0 +1,37 @@
+<div class="heading2 mt-40">
+                                    <h3>Our Process</h3>
+                                </div>
+                                <div class="row pt-10">
+                                    <div class="col-md-6">
+                                        <div class="details-content-text-box heading2 mt-30">
+                                            <h4><a href="#">SEO Audit & Strategy Development</a></h4>
+                                            <p class="mt-12">We conduct a deep analysis of your website, competition,
+                                                and industry trends to craft a custom SEO roadmap.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="details-content-text-box heading2 mt-30">
+                                            <h4><a href="#">Keyword & Content Optimization</a></h4>
+                                            <p class="mt-12">Using advanced research tools, we optimize your website
+                                                with relevant keywords, compelling content.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="details-content-text-box heading2 mt-30">
+                                            <h4><a href="#">Technical SEO Enhancements</a></h4>
+                                            <p class="mt-12">We fix indexing errors, enhance page speed, and implement
+                                                schema markup to improve site performance craw ability.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="details-content-text-box heading2 mt-30">
+                                            <h4><a href="#">Link Building & Authority Growth</a></h4>
+                                            <p class="mt-12">Our team acquires high-quality, niche-relevant backlinks
+                                                to strengthen domain authority and boost rankings.</p>
+                                        </div>
+                                    </div>
+
+                                </div>

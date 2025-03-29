@@ -2,7 +2,7 @@
     <div class="portfolio-box">
         <div class="image-area">
             <div class="image">
-                <img src="{{ $project->image }}" alt="">
+                <img src="{{ asset('storage/'.$project->image) }}" alt="">
             </div>
             <a href="{{ url('projects/' . $project->slug) }}" class="arrow"><i class="fa-solid fa-arrow-right"></i></a>
         </div>

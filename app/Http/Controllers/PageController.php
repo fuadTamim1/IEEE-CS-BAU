@@ -38,41 +38,52 @@ class PageController extends Controller
     public function BlogPage()
     {
         $blogs = Blog::with('author')->paginate(8);
-    
+
         // Transform the items while preserving pagination
-        $transformed = $blogs->getCollection()->transform(function($model) {
+        $transformed = $blogs->getCollection()->transform(function ($model) {
             $model->content = Str::of($model->content)->stripTags()->trim()->words(35, '...');
             return $model;
         });
-        
+
         // Set the transformed collection back to the paginator
         $blogs->setCollection($transformed);
-        
+
         return view('basetheme.blog', ['blogs' => $blogs]);
     }
 
     public function ShowBlogPage($slug)
     {
         $blog = Blog::whereSlug($slug)->with('author')->first();
-        $otherBlogs = Blog::where("slug","!=",$slug)->latest()->with('author:id,name')->take(2)->get(["slug","title","created_at"]);
+        $otherBlogs = Blog::where("slug", "!=", $slug)->latest()->with('author:id,name')->take(2)->get(["slug", "title", "created_at"]);
 
         $blog->tags = explode(",", $blog->tags);
-    
+
         return view('basetheme.blog-details', ['blog' => $blog, 'otherBlogs' => $otherBlogs]);
     }
 
-    public function ProjectsPage() {
+    public function ProjectsPage()
+    {
         return view('basetheme.portfolio');
     }
 
     public function ShowProjectPage(Project $project)
     {
-        return view('basetheme.portfolio-details', ['project' => $project]);
+        $project->tags = explode(',', $project->tags);
+        $otherProjects = Project::where("slug", "!=", $project->slug)->latest()->take(3)->get(["slug", "title", "image", "category_id", "created_at"])
+            ->load(['category:id,title']);;
+        return view('basetheme.portfolio-details', ['project' => $project, 'otherProjects' => $otherProjects]);
     }
 
-    public function EventsPage() {
+    public function EventsPage()
+    {
         $events = Event::orderBy("created_at")->take(12)->get();
         return view('basetheme.events', ["events" => $events]);
+    }
+
+    public function ShowEventPage(Event $event)
+    {
+        $otherEvents = Event::where("slug", "!=", $event->slug)->latest()->take(4)->get(["id", "title", "slug", "image"]);
+        return view('basetheme.event-details1', ["event" => $event, "otherEvents" => $otherEvents]);
     }
 
     public function ContactPage()

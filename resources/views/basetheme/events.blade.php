@@ -1,24 +1,9 @@
 <x-base-layout>
     <!--===== HERO AREA START =====-->
 
-    <div class="inner-hero" style="background-image: url({{ asset('images/home_bg.png') }});">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 m-auto text-center">
-                    <div class="inner-main-heading lightmode-bg">
-                        <h1>Our Events</h1>
-                        <div class="breadcrumbs-pages">
-                            <ul>
-                                <li><a href="{{ route('home') }}">Home</a></li>
-                                <li class="angle"><i class="fa-solid fa-angle-right"></i></li>
-                                <li>Events</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-hero title="{{ __('Our Events') }}" background="{{ asset('images/home_bg.png') }}" :breadcrumbs="[
+        ['label' => 'events', 'url' => route('events')],
+    ]"/>
 
     <!--===== HERO AREA START =====-->
 
