@@ -552,6 +552,7 @@
                     </div>
                 </div>
             </div>
+            @if (isset($posts[0]))
 
             <div class="row mt-30">
                 <div class="col-lg-12">
@@ -560,7 +561,7 @@
                             <div class="col-lg-6">
                                 <div class=" vl-blog-4-thumb-big image-anime overflow-hidden _relative">
                                     <img class="w-full" src="{{ asset($posts[0]->image) }}"
-                                        alt="{{ $posts[0]->title }}">
+                                    alt="{{ $posts[0]->title }}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -644,6 +645,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
 
         </div>
