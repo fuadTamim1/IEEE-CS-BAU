@@ -21,7 +21,7 @@ Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
 Route::middleware(['auth', 'verified'])->group(function() {
         Route::prefix("dashboard")->group(function () {
             Route::get('/', function () {
-                return view('dashboard');
+                return redirect()->to('admin');
             })->name('dashboard');
         });
     }

@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\MemberResource\Pages;
 
 use App\Filament\Resources\MemberResource;
-use Illuminate\Support\Stringable as str;
+use Illuminate\Support\str;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateMember extends CreateRecord

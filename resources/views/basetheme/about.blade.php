@@ -57,7 +57,7 @@
                             Networking with industry professionals and IEEE global chapters
                             A supportive environment to grow, innovate, and excel</p>
                         <div class="button mt-30" data-aos="fade-left" data-aos-duration="1000">
-                            <a class="theme-btn3" href="contact.html">Contact Us <span class="arrow1"><i
+                            <a class="theme-btn3" href="{{route('contact')}}">Contact Us <span class="arrow1"><i
                                         class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i
                                         class="fa-solid fa-arrow-right"></i></span></a>
                         </div>
@@ -442,7 +442,7 @@
                     <div class="heading2">
                         <div class="contact2-form">
                             <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
-                                    src="assets/img/icons/span3.svg" alt="">CONTACT US </span>
+                                    src="{{asset('images/logo.png')}}" width="25" alt="">CONTACT US </span>
                             <h2 class="text-anime-style-3">Lets Work Together</h2>
                             <p class="mt-16" data-aos="fade-right" data-aos-duration="900">eady to take your social
                                 media presence to the next level? Let’s work together to create impactful strategies
@@ -497,7 +497,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                        <img class="w-full" src="assets/img/others/contact2-image.png" alt="">
+                        <img class="w-full" src="{{ asset('images/contact_us.png') }}" alt="">
                     </div>
                 </div>
             </div>

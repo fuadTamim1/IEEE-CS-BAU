@@ -37,7 +37,7 @@
                                     <h3>$199 <span>/month</span></h3>
                                     <p>Perfect for small businesses or startups looking to kickstart their digital marketing journey.</p>
                                     <div class="button mt-30">
-                                        <a class="theme-btn22" href="contact.html">Get Started <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
+                                        <a class="theme-btn22" href="{{route('contact')}}">Get Started <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                     <h3>$499 <span>/month</span></h3>
                                     <p>Ideal for businesses aiming to expand their online presence and boost visibility.</p>
                                     <div class="button mt-30">
-                                        <a class="theme-btn22" href="contact.html">Get Started <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
+                                        <a class="theme-btn22" href="{{route('contact')}}">Get Started <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                     <h3>$999 <span>/month</span></h3>
                                     <p>A comprehensive package for businesses focused on dominating their industry.</p>
                                     <div class="button mt-30">
-                                        <a class="theme-btn22" href="contact.html">Get Started <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
+                                        <a class="theme-btn22" href="{{route('contact')}}">Get Started <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
                                     </div>
                                 </div>
                             </div>

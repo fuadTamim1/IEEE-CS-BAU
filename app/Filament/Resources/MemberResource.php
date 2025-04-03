@@ -15,6 +15,8 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 
 class MemberResource extends Resource
 {
@@ -66,6 +68,7 @@ class MemberResource extends Resource
                 Select::make('title')
                     ->options([
                         "chairperson" => "chairperson",
+                        "PR" => "PR",
                         "MD" => "MD",
                         "Treauser" => "Treauser",
                         "Member" => "Member"
@@ -76,9 +79,40 @@ class MemberResource extends Resource
                 Select::make('class_of_the_year')
                     ->options($yeaars)
                     ->searchable(),
+                Repeater::make('contacts')
+                    ->schema([
+                        Select::make('key')
+                            ->options([
+                                'facebook' => 'Facebook',
+                                'linkedin' => 'LinkedIn',
+                                'instagram' => 'Instagram',
+                                'twitter' => 'Twitter',
+                                'youtube' => 'YouTube',
+                                'website' => 'Website',
+                                // add more platforms as needed
+                            ])
+                            ->required()
+                            ->columnSpan(1),
+
+                        TextInput::make('value')
+                            ->label('URL')
+                            ->url()
+                            ->required()
+                            ->columnSpan(3),
+                    ])
+                    ->columns(4)
+                    ->columnSpanFull()
+                    ->default([])
+                    ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                        return collect($data)->pluck('value', 'key')->toArray();
+                    })
+                    ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
+                        return collect($data)->pluck('value', 'key')->toArray();
+                    }),
                 Forms\Components\FileUpload::make('image')
                     ->image()
-                    ->label("Personal Photo"),
+                    ->label("Personal Photo")
+                    ->default("pixel.jpg"),
             ]);
     }
 

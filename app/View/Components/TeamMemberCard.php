@@ -15,7 +15,7 @@ class TeamMemberCard extends Component
      */
     public function __construct(public $name, public $role, public $links, public $image = null)
     {
-        $this->contacts = Json::decode($links);
+        $this->contacts = $links;
     }
 
     /**

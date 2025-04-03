@@ -1,4 +1,3 @@
-
 .theme-btn8-secondary {
     font-size: var(--f-fs-font-20);
     font-style: normal;
@@ -145,4 +144,139 @@ color: rgb(255, 244, 231) !important;
   border-radius: 4px;
   font-size: 12px;
   margin-right: 8px;
+}
+
+.body-guest{
+  background-color: #321F00;
+}
+
+.logo-header{
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guest-container *{
+  padding: 0;
+  margin: 0;
+}
+
+
+.guest-container{
+  padding: 0;
+  margin: 0;
+  min-width: 100lvw;
+  overflow: hidden;
+}
+
+.left-guest-widget > main{
+  display: flex;
+  justify-content: center;
+
+}
+
+.img-guest-bg{
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position-x: right;
+}
+
+.img-guest-bg::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, #321f00, transparent);
+}
+
+.inner-guest-content {
+  width: 85%;
+
+}
+
+.inner-guest-content > h4{
+  font-size: 3rem;
+  color: #fff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.inner-guest-content > p{
+  font-size: 1rem;
+  color: #fff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.guest-link{
+  color: #FDBA0F;
+}
+.guest-form > .row{
+gap: 0;
+margin-top: 1rem;
+}
+
+.guest-form > .row > *{
+  padding: 0 0.5rem;
+  }
+.guest-input{
+  background-color: #5D3A00;
+  color: #FFFFFF;
+  border: 2px solid #955D00;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.guest-form-submit-button{
+  background-color: #955D00;
+  border: none;
+  outline: none;
+  color: #FDBA0F;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.guest-input::placeholder{
+  color: #FFFFFF;
+  opacity: 56%;
+  font-weight: lighter;
+}
+.guest-form-note{
+  color: #FFF;
+
+}
+.guest-form-note > a{
+  color: #FDBA0F;
+  
+}
+
+.guest-error {
+
+}
+@media (max-width: 767.98px) { 
+  .left-guest-widget {
+    position: absolute !important;
+    z-index: 100;
+  }
+
+  .img-guest-bg{
+    background-position-x: 100px !important;
+  }
+
+  .img-guest-bg::after{
+    background: #201400b8;
+  }
 }

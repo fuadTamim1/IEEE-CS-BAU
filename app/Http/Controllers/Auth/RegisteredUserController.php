@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -32,8 +33,9 @@ class RegisteredUserController extends Controller
 
     public function store(Request $request)
     {
+
         $user = User::create([
-            'name' => $request->name,
+            'name' => Str::upper($request->fname) . ' ' . Str::upper($request->lname),
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

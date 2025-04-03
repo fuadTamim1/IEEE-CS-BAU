@@ -70,7 +70,7 @@
     <!--===== COUNTER AREA END =====-->
 
     <!--===== TEAM AREA START =====-->
-
+{{-- 
     <div class="team2 sp sec-bg2">
         <div class="container">
             <div class="row">
@@ -214,7 +214,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!--===== TEAM AREA END =====-->
 

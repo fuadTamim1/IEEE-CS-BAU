@@ -1,30 +1,71 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config('app.name', 'IEEE CS BAU Chapter') }} - {{ $title ?? 'Home' }}</title>
+    <!--=====FAB ICON=======-->
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }} " type="image/x-icon">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+    {{-- additional libraries --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
+    @include('components.basetheme.heads')
+
+</head>
+
+<body class="body-guest">
+
+    <div class="container guest-container ">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 left-guest-widget position-absolute-sm">
+                <div class="logo-header">
+                    <a href="/">
+                        <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    </a>
+                </div>
+                <main>
+                    <div class="inner-guest-content">
+                        <h4 class="px-2">
+                            @yield('title')
+                        </h4>
+                        <p class="px-2">
+                            @yield('description')
+                        </p>
+                        <div class="mt-4">
+                            {{ $slot }}
+                        </div>
+                    </div>
+
+                </main>
+
             </div>
+            <div class="col-md-6 col-sm-12 img-guest-bg"
+                style="background-image: url({{ asset('images/IEEE_CS_BAU_FET_NEON_2.png') }})">
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
             </div>
         </div>
-    </body>
+    </div>
+    <main>
+
+
+
+    </main>
+
+    @include('components.basetheme.scripts')
+
+</body>
+
 </html>
+
+{{-- 
+
+Thanks For iconscout
+<a href="https://iconscout.com/3d-illustrations/python" class="text-underline font-size-sm" target="_blank">Python</a> by <a href="https://iconscout.com/contributors/tomsdesign" class="text-underline font-size-sm">Toms Design</a> on <a href="https://iconscout.com" class="text-underline font-size-sm">IconScout</a>
+
+--}}

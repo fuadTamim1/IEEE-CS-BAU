@@ -1,6 +1,6 @@
 <x-base-layout>
     <!--===== HERO AREA START =====-->
-    <x-hero :title="$blog->title" :breadcrumbs="[['label' => 'Blog', 'url' => route('blogs')], ['label' => $blog->title]]" />
+    <x-hero :title="$blog->title" :background="asset('images/home_bg2.png')" :breadcrumbs="[['label' => 'Blog', 'url' => route('blogs')], ['label' => $blog->title]]" />
 
 
     <!--===== HERO AREA START =====-->

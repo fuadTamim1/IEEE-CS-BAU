@@ -28,7 +28,7 @@
     <div class="container">
         <div class="row">
             @foreach ($members as $m)
-            <x-Team-Member-Card name="fuad" role="Tech Leader"
+            <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
             :links="$m->contacts"
             />
             @endforeach
