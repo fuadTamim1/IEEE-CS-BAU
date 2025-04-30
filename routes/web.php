@@ -18,6 +18,9 @@ Route::get('/ourteam', [PageController::class, "TeamPage"])->name('ourteam');
 Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
 // Route::get('/soon', [PageController::class, "SoonPage"])->name('soon');
 
+Route::get('/leaderboard', [PageController::class, "LeaderboardPage"])->name('leaderboard');
+Route::get('/leaderboard/week/{id}', [PageController::class, "LeaderboardPage"])->name('leaderboard.show');
+
 Route::middleware(['auth', 'verified'])->group(function() {
         Route::prefix("dashboard")->group(function () {
             Route::get('/', function () {

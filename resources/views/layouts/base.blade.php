@@ -35,7 +35,7 @@
     <x-Footer/>
 
     @include('components.basetheme.scripts')
-
+    @yield('scripts')
 </body>
 
 </html>

@@ -30,7 +30,7 @@ class UserResource extends Resource
                     ->maxLength(255),
 
                 TextInput::make('email')
-                
+
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true),
@@ -80,5 +80,10 @@ class UserResource extends Resource
             'edit' => EditUser::route('/{record}/edit'),
             // 'view' => ViewUss::route('/{record}'),
         ];
+    }
+
+    public static function authorizeResourceAccess(): bool
+    {
+        return auth()->user()->hasAnyRole(['admin', 'super_admin']);
     }
 }

@@ -56,10 +56,7 @@ class Dashboard extends Page
         return 1; // 2-column layout
     }
 
-    // protected function getViewData(): array
-    // {
-    //     return [
-    //         'widgets' => $this->getFooterWidgets(),
-    //     ];
+    // public static function canAccess() :bool {
+    //     return auth()->user()?->hasAnyRole(['super-admin', 'admin', 'editor', 'writer']) ?? false;
     // }
 }

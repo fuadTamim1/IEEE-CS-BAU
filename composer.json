@@ -7,6 +7,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "bezhansalleh/filament-shield": "^3.3",
+        "chiiya/filament-access-control": "^2.6",
         "cviebrock/eloquent-sluggable": "^12.0",
         "filament/filament": "3.3",
         "graham-campbell/markdown": "^16.0",

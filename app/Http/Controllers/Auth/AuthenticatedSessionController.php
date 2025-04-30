@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
+        // dd('logined');
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 

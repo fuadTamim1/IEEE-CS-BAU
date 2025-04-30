@@ -11,7 +11,7 @@ class Hero extends Component
     public string $title;
     public $background;
     public array $breadcrumbs;
-    public function __construct(string $title, $background = null, array $breadcrumbs = [])
+    public function __construct(string $title = "", $background = null, array $breadcrumbs = [])
     {
         $this->title = $title; 
         $this->background = $background; 

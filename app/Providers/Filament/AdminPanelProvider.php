@@ -6,11 +6,14 @@ use App\Filament\Pages\Settings;
 use App\Filament\Pages\TextWidgets;
 use App\Filament\Resources\BlogResource\Widgets\BlogPostCategoryChart;
 use App\Filament\Resources\BlogResource\Widgets\RecentBlogPostsTable;
+use App\Filament\Resources\LeaderboardResource;
 use App\Filament\Resources\SubscriberResource;
 use App\Filament\Resources\TextWidgetResource;
 use App\Filament\Resources\UserResource\Widgets\UserGrowthChart;
 use App\Filament\Widgets\StatsOverview;
+use App\Http\Middleware\EnsureUserHasAdminAccess;
 use App\Models\Subscriber;
+use Chiiya\FilamentAccessControl\FilamentAccessControlPlugin;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
@@ -19,6 +22,9 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\Blade;
+use Filament\Facades\Filament;
+use Filament\Http\Middleware\Authenticate;
+use Illuminate\Support\Facades\Hash;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -27,13 +33,19 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->path('admin')
+            // ->domain('admin.example.test')
             ->brandLogo("/images/IEEE-CS_LogoTM-orange.png")
             ->colors([
                 'primary' => Color::Amber,
             ])
-
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder
+                    ->item(
+                        NavigationItem::make('Visit Site')
+                            ->url('/')
+                            ->icon('heroicon-o-arrow-top-right-on-square')
+                            ->openUrlInNewTab(),
+                    )
                     ->item(
                         NavigationItem::make('Dashboard')
                             ->icon('heroicon-o-home')
@@ -60,6 +72,9 @@ class AdminPanelProvider extends PanelProvider
                     ->group(
                         NavigationGroup::make('Content')
                             ->items([
+                                NavigationItem::make('leaderboards')
+                                    ->icon('heroicon-o-document-text')
+                                    ->url(fn(): string => route('filament.admin.resources.leaderboards.index')),
                                 NavigationItem::make('blogs')
                                     ->icon('heroicon-o-document-text')
                                     ->url('/admin/blogs')
@@ -150,10 +165,14 @@ class AdminPanelProvider extends PanelProvider
                 UserGrowthChart::class,
                 RecentBlogPostsTable::class,
                 BlogPostCategoryChart::class,
-                
+
             ])
             ->authMiddleware([
-                \Filament\Http\Middleware\Authenticate::class,
+                Authenticate::class,
+                EnsureUserHasAdminAccess::class
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ]);
     }
 }

@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.0.12",
+        "flipdown": "^0.3.2",
         "tailwindcss": "^4.0.12"
     }
 }

@@ -4,8 +4,9 @@ namespace App\Providers;
 
 use App\Models\Blog;
 use App\Observers\BlogObserver;
+use Filament\Facades\Filament;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Support\ServiceProvider;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**

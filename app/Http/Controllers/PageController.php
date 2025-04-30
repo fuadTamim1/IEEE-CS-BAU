@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Event;
+use App\Models\Leaderboard;
 use App\Models\Member;
 use App\Models\Project;
 use Illuminate\Support\Facades\File;
@@ -84,6 +85,22 @@ class PageController extends Controller
     {
         $otherEvents = Event::where("slug", "!=", $event->slug)->latest()->take(4)->get(["id", "title", "slug", "image"]);
         return view('basetheme.event-details1', ["event" => $event, "otherEvents" => $otherEvents]);
+    }
+
+    public function LeaderBoardPage($id = -1)
+    {
+        $currentLeaderboard = Leaderboard::with(['member1', 'member2', 'member3', 'member4', 'member5', 'member6', 'member7', 'member8', 'member9', 'member10']);
+        if (Leaderboard::where('id', $id)->exists()) {
+            $currentLeaderboard = $currentLeaderboard->find($id);
+        } else {
+            $currentLeaderboard = $currentLeaderboard->latestWeek();
+        }
+        $leaderboards = Leaderboard::with(['member1', 'member2', 'member3']) // Load relationships
+            ->limit(15)
+            ->where("id", "!=", $currentLeaderboard->id)
+            ->select(['id', 'week_start_date', 'publish_at', 'member_1_id', 'member_2_id', 'member_3_id'])
+            ->get();
+        return view('basetheme.leaderboard', ["currentLeaderboard" => $currentLeaderboard, "leaderboards" => $leaderboards]);
     }
 
     public function ContactPage()

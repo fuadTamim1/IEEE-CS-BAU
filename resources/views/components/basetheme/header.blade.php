@@ -12,11 +12,11 @@
                                 width="160"></a>
                     </div>
                 </div>
-                <div class="col-lg-7 d-none d-lg-block text-end">
+                <div class="col-lg-8 d-none d-lg-block text-end">
                     <div class="vl-main-menu">
                         <!-- content -->
                         <nav class="vl-mobile-menu-active">
-                            <ul>
+                            <ul class="vl-mobile-menu-stack">
                                 <li>
                                     <a href="{{ route('home') }}">Home</a>
                                 </li>
@@ -25,6 +25,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('ourteam') }}">Our Team</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('leaderboard') }}">Leaderboard</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('projects') }}">Projects</a>
@@ -40,19 +43,33 @@
                         </nav>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-6">
+                <div class="col-lg-2 col-md-6 col-6">
                     <div class="vl-header4-btns text-end d-none d-lg-flex gap-2">
                         <div class="buttons">
                             {{-- <div class="vl-search1">
                                 <button class="search-open-btn"><i class="fa-regular fa-magnifying-glass"></i></button>
                             </div> --}}
-                            <a href="{{ route('login') }}" class="theme-btn8">
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__text">Sign In</span>
-                            </a>
+                            @if (auth()->check())
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="theme-btn8">
+                                        <span class="theme-btn8__shape"></span>
+                                        <span class="theme-btn8__shape"></span>
+                                        <span class="theme-btn8__shape"></span>
+                                        <span class="theme-btn8__shape"></span>
+                                        <span class="theme-btn8__text">Logout</span>
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ route('login') }}" class="theme-btn8" hidden>
+                                    <span class="theme-btn8__shape"></span>
+                                    <span class="theme-btn8__shape"></span>
+                                    <span class="theme-btn8__shape"></span>
+                                    <span class="theme-btn8__shape"></span>
+                                    <span class="theme-btn8__text">Sign In</span>
+                                </a>
+                            @endif
+
                         </div>
                         <div class="buttons">
                             {{-- <div class="vl-search1">

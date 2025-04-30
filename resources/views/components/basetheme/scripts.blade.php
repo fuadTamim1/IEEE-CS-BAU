@@ -18,4 +18,5 @@
 <script src="{{ asset('assets/js/jaquery-ripples.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.lineProgressbar.js') }}"></script>
 <script src="{{ asset('assets/js/animation.js') }}"></script>
+<script src="{{ asset('assets/js/') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>

@@ -20,6 +20,7 @@ class FilamentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         Filament::serving(function () {
             // Add a custom link to the header
             Filament::registerRenderHook(
