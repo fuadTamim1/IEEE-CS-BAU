@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: laravel-sail-app
+    env: docker
+    repo: https://github.com/fuadTamim1/IEEE-CS-BAU
+    dockerfilePath: docker/8.2/Dockerfile
+    plan: free
+    region: frankfurt
+    buildCommand: ""
+    startCommand: ./vendor/bin/sail up
