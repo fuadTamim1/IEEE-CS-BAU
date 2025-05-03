@@ -15,7 +15,8 @@ class TeamMemberCard extends Component
      */
     public function __construct(public $name, public $role, public $links, public $image = null)
     {
-        $this->contacts = $links;
+        if ($links)
+            $this->contacts = $links->getArrayCopy();
     }
 
     /**

@@ -16,7 +16,7 @@ class BlogObserver
     public function created(Blog $blog): void
     {
         if (get_setting("enable_sending_emails"))
-            Mail::to('user@example.com')->send(new newPost());
+            Mail::to('fuad89573@gmail.com')->send(new newPost());
         // Notification::make()->title("sending email success!")->success()->send();
         Log::info('Blog Post Created:', ['id' => $blog->id]);
     }

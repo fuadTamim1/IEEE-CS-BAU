@@ -9,7 +9,7 @@
                     <h1>Frequently Asked Question</h1>
                     <div class="breadcrumbs-pages">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li class="angle"><i class="fa-solid fa-angle-right"></i></li>
                             <li>Frequently Asked Question</li>
                         </ul>

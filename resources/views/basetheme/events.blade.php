@@ -220,75 +220,7 @@
 
     <!--===== CONTACT AREA START =====-->
 
-    <div class="contact2 sp">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="heading2">
-                        <div class="contact2-form">
-                            <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
-                                    src="{{ asset('images/logo.png') }}" width="25" alt="">CONTACT US
-                            </span>
-                            <h2 class="text-anime-style-3">Lets Work Together</h2>
-                            <p class="mt-16" data-aos="fade-right" data-aos-duration="900">eady to take your social
-                                media presence to the next level? Let’s work together to create impactful strategies
-                                drive engagement, growth, and success for your brand.</p>
-                            <form action="#" data-aos="fade-right" data-aos-duration="1000">
-                                <div class="row mt-16">
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="text" placeholder="First Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="text" placeholder="Last Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="email" placeholder="Email Address">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="number" placeholder="Phone Number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="single-input">
-                                            <select class="wide">
-                                                <option value="1">Service Type</option>
-                                                <option value="2">Option 1</option>
-                                                <option value="3">Option 2</option>
-                                                <option value="4">Option 3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="single-input">
-                                            <textarea rows="5" placeholder="How can we help you?"></textarea>
-                                        </div>
-                                        <div class="button mt-30">
-                                            <button class="theme-btn3" type="submit">Send <span class="arrow1"><i
-                                                        class="fa-solid fa-arrow-right"></i></span><span
-                                                    class="arrow2"><i
-                                                        class="fa-solid fa-arrow-right"></i></span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                        <img class="w-full" src="assets/img/others/contact2-image.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('components.contactSection')
 
     <!--===== CONTACT AREA END =====-->
 </x-base-layout>

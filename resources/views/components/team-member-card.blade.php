@@ -9,52 +9,43 @@
             <div class="shape round-circle">
                 {{-- <img src="{{asset('images/guy.png')}}" alt=""> --}}
             </div>
-            <div class="social-icons">
-                @if (!empty($contacts))
+            @if (!empty($contacts))
+                <div class="social-icons">
                     <ul>
-                        @foreach ($contacts as $platform => $url)
-                            <a href="{{ $url }}" target="_blank">
-                                @switch(strtolower($platform))
-                                    @case('facebook')
-                                        <i class="fa-brands fa-facebook-f fa-lg"></i>
-                                    @break
+                        @foreach ($contacts as $contact)
+                            <li>
+                                <a href="{{ $contact['value'] ?? '#' }}" target="_blank">
+                                    @switch(strtolower($contact['key']))
+                                        @case('facebook')
+                                            <i class="fa-brands fa-facebook-f fa-lg"></i>
+                                        @break
 
-                                    @case('twitter')
-                                        <i class="fa-brands fa-twitter fa-lg"></i>
-                                    @break
+                                        @case('twitter')
+                                            <i class="fa-brands fa-twitter fa-lg"></i>
+                                        @break
 
-                                    @case('instagram')
-                                        <i class="fa-brands fa-instagram fa-lg"></i>
-                                    @break
+                                        @case('instagram')
+                                            <i class="fa-brands fa-instagram fa-lg"></i>
+                                        @break
 
-                                    @case('linkedin')
-                                        <i class="fa-brands fa-linkedin-in fa-lg"></i>
-                                    @break
+                                        @case('linkedin')
+                                            <i class="fa-brands fa-linkedin-in fa-lg"></i>
+                                        @break
 
-                                    @case('youtube')
-                                        <i class="fa-brands fa-youtube fa-lg"></i>
-                                    @break
+                                        @case('youtube')
+                                            <i class="fa-brands fa-youtube fa-lg"></i>
+                                        @break
 
-                                    @default
-                                        <i class="fas fa-link fa-lg"></i>
-                                        {{ ucfirst($platform) }}
-                                @endswitch
-                            </a>
+                                        @default
+                                            <i class="fas fa-link fa-lg"></i>
+                                            {{ ucfirst($platform) }}
+                                    @endswitch
+                                </a>
+                            </li>
                         @endforeach
-                        {{--                     
-                        @if (isset($contacts['Instagram']))
-                        <li><a href="{{ $contacts['Instagram'] }}"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        @endif --}}
-                        {{-- @if (isset($contacts['facebook']))
-                        <li><a href="{{ $contacts["facebook"] }}"><i class="fa-brands fa-facebook"></i></a></li>
-                        @endif
-                        @if (isset($contacts['linkedin']))
-                        <li><a href="{{ $contacts["linkedin"] }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                        @endif --}}
                     </ul>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
         <div class="team-content-area">
             <div class="heading2">

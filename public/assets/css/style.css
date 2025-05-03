@@ -88,7 +88,9 @@ color: rgb(255, 244, 231) !important;
     margin: 0 auto;
     border-radius: 5px;
   } 
-
+.about4-images img{
+  object-fit: cover;
+}
   /* Schedule Timeline Styles */
 .schedule-timeline {
   background: #fff;

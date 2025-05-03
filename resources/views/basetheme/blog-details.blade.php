@@ -210,7 +210,7 @@
             <div class="row">
                 <div class="col-lg-6 m-auto text-center">
                     <div class="heading2">
-                        <h2>More Services</h2>
+                        <h2>More Posts</h2>
                     </div>
                 </div>
             </div>

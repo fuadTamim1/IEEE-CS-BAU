@@ -11,7 +11,7 @@
                         <h1>About Us</h1>
                         <div class="breadcrumbs-pages">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
                                 <li class="angle"><i class="fa-solid fa-angle-right"></i></li>
                                 <li>About Us</li>
                             </ul>
@@ -32,10 +32,10 @@
                 <div class="col-lg-6">
                     <div class="about2-images">
                         <div class="image1 image-anime reveal">
-                            <img src="assets/img/about/about-page-sec1-image1.png" alt="">
+                            <img src="{{ asset('images/work.jpg') }}" width="500px" alt="">
                         </div>
                         <div class="image2 image-anime reveal">
-                            <img src="assets/img/about/about-page-sec1-image2.png" alt="">
+                            <img src="{{ asset('images/work2.jpg') }}" width="500px" alt="">
                         </div>
                     </div>
                 </div>
@@ -163,17 +163,21 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="assets/img/about/about-choose-sec-image1.png"
+                                    <img class="w-full" src="{{ asset('images/about1.png') }}"
                                         alt="">
                                 </div>
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="assets/img/about/about-choose-sec-image2.png"
+                                    <img class="w-full" src="{{ asset('images/about2.png') }}"
                                         alt="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="image image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="assets/img/about/about-choose-sec-image3.png"
+                                    <img class="w-full" src="{{ asset('images/about3.png') }}"
+                                        alt="">
+                                </div>
+                                <div class="image image-anime reveal md:mt-30 sm:mt-30">
+                                    <img class="w-full" src="{{ asset('images/about4.png') }}"
                                         alt="">
                                 </div>
                             </div>
@@ -208,7 +212,7 @@
                 <div class="col-lg-6">
                     <div class="overflow-hidden">
                         <div class="service1-image image-anime reveal md:mt-30 sm:mt-30">
-                            <img src="{{ asset('images/ieee-focus.png') }}" alt="">
+                            <img src="{{ asset('images/about5.png') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -294,15 +298,7 @@
                         <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
                                 src="{{ asset('images/logo.png') }}" width="25" alt="">OUR TEAM MEMBER
                         </span>
-                        <h2 class="text-anime-style-3">Meet Our Expert Team Member</h2>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="button text-end sm:text-start md:text-start md:mt-30 sm:mt-30" data-aos="fade-left"
-                        data-aos-duration="1000">
-                        <a class="theme-btn3" href="about.html">View All Services <span class="arrow1"><i
-                                    class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i
-                                    class="fa-solid fa-arrow-right"></i></span></a>
+                        <h2 class="text-anime-style-3">Meet Our Team Member</h2>
                     </div>
                 </div>
             </div>
@@ -434,75 +430,7 @@
     <!--===== TEAM AREA END =====-->
 
     <!--===== CONTACT AREA START =====-->
-
-    <div class="contact2 sp">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="heading2">
-                        <div class="contact2-form">
-                            <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
-                                    src="{{asset('images/logo.png')}}" width="25" alt="">CONTACT US </span>
-                            <h2 class="text-anime-style-3">Lets Work Together</h2>
-                            <p class="mt-16" data-aos="fade-right" data-aos-duration="900">eady to take your social
-                                media presence to the next level? Let’s work together to create impactful strategies
-                                drive engagement, growth, and success for your brand.</p>
-                            <form action="#" data-aos="fade-right" data-aos-duration="1000">
-                                <div class="row mt-16">
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="text" placeholder="First Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="text" placeholder="Last Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="email" placeholder="Email Address">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="single-input">
-                                            <input type="number" placeholder="Phone Number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="single-input">
-                                            <select class="wide">
-                                                <option value="1">Service Type</option>
-                                                <option value="2">Option 1</option>
-                                                <option value="3">Option 2</option>
-                                                <option value="4">Option 3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="single-input">
-                                            <textarea rows="5" placeholder="How can we help you?"></textarea>
-                                        </div>
-                                        <div class="button mt-30">
-                                            <button class="theme-btn3" type="submit">Send <span class="arrow1"><i
-                                                        class="fa-solid fa-arrow-right"></i></span><span
-                                                    class="arrow2"><i
-                                                        class="fa-solid fa-arrow-right"></i></span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                        <img class="w-full" src="{{ asset('images/contact_us.png') }}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('components.contactSection')
 
     <!--===== CONTACT AREA END =====-->
 

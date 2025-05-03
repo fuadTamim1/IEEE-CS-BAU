@@ -14,8 +14,8 @@
                 <div class="col-lg-12">
                     <article>
                         <div class="details-content">
-                            <div class="image">
-                                <img class="w-full" src="assets/img/service/service-details1-image1.png" alt="">
+                            <div class="image d-flex">
+                                <img class="mx-auto" src="{{ asset('images/event.png') }}" style="width: 60%" alt="">
                             </div>
                         </div>
                     </article>
@@ -267,7 +267,7 @@
                                                 <div class="col-lg-3 col-3">
                                                     <div class="schedule-detail-item schedule-speaker">
                                                         <div class="speaker-info">
-                                                            <img src="{{ asset('images/speakers/speaker1.jpg') }}"
+                                                            <img src="{{ asset('images/profile.png') }}"
                                                                 alt="Speaker" class="speaker-img">
                                                             <span>Dr. Sarah Johnson</span>
                                                         </div>
@@ -305,7 +305,7 @@
                                                 <div class="col-lg-3 col-3">
                                                     <div class="schedule-detail-item schedule-speaker">
                                                         <div class="speaker-info">
-                                                            <img src="{{ asset('images/speakers/speaker2.jpg') }}"
+                                                            <img src="{{ asset('images/profile.png') }}"
                                                                 alt="Speaker" class="speaker-img">
                                                             <span>Mark Williams</span>
                                                         </div>
@@ -375,7 +375,7 @@
                                                 <div class="col-lg-3 col-3">
                                                     <div class="schedule-detail-item schedule-speaker">
                                                         <div class="speaker-info">
-                                                            <img src="{{ asset('images/speakers/speaker3.jpg') }}"
+                                                            <img src="{{ asset('images/profile.png') }}"
                                                                 alt="Speaker" class="speaker-img">
                                                             <span>Lisa Chen</span>
                                                         </div>

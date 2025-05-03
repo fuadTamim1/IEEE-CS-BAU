@@ -14,7 +14,10 @@ class PageController extends Controller
 {
     public function HomePage()
     {
-        $recentPosts = Blog::with(['author', 'category'])->orderBy('created_at')->take(3)->get();
+        $recentPosts = Blog::with(['author', 'category'])->orderBy('created_at')->take(4)->get(["id","title","slug","image","created_at","author_id"]);
+        $recentEvents = Event::orderBy('created_at')->take(5)->get(['id','title','image','slug','description']);
+        
+        
         // Path to your JSON file
         $filePath = resource_path('json/member_stories.json');
 
@@ -22,7 +25,7 @@ class PageController extends Controller
         $jsonContent = File::get($filePath);
 
         $memberStories = json_decode($jsonContent);
-        return view('basetheme.home', ["posts" => $recentPosts, "memberStories" => $memberStories]);
+        return view('basetheme.home', ["posts" => $recentPosts, "memberStories" => $memberStories, "events" => $recentEvents]);
     }
 
     public function AboutPage()
@@ -55,7 +58,7 @@ class PageController extends Controller
     public function ShowBlogPage($slug)
     {
         $blog = Blog::whereSlug($slug)->with('author')->first();
-        $otherBlogs = Blog::where("slug", "!=", $slug)->latest()->with('author:id,name')->take(2)->get(["slug", "title", "created_at"]);
+        $otherBlogs = Blog::where("slug", "!=", $slug)->latest()->with('author:id,name')->take(2)->get(["slug", "title","image", "created_at"]);
 
         $blog->tags = explode(",", $blog->tags);
 

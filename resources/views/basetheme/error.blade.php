@@ -9,7 +9,7 @@
                     <h1>Pricing Plan</h1>
                     <div class="breadcrumbs-pages">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{ route('home') }}html">Home</a></li>
                             <li class="angle"><i class="fa-solid fa-angle-right"></i></li>
                             <li>Pricing Plan</li>
                         </ul>
@@ -35,7 +35,7 @@
                     <h2> Sorry! Page Not Found!</h2>
                     <p class="mt-16">Sorry, the page you are looking for doesn’t exist or <br> has been moved. Here are some helpful links.</p>
                     <div class="button mt-30">
-                        <a class="theme-btn3" href="index.html">Back To Home <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
+                        <a class="theme-btn3" href="{{ route('home') }}">Back To Home <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
                     </div>
                 </div>
             </div>

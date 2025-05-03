@@ -1,7 +1,7 @@
 <div class="col-lg-3 col-md-6">
     <div class="service-page-box mt-30">
         <div class="image">
-            <img src="{{ asset('images/sunflower-8152089_640.jpg') }}" alt="">
+            <img src="{{ asset('images/event.png') }}" alt="">
         </div>
         <div class="content-area">
             <div class="num">01</div>
