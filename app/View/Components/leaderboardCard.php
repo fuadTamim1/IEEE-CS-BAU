@@ -18,7 +18,7 @@ class leaderboardCard extends Component
     public function __construct($leaderboard)
     {
         $this->id = $leaderboard->id;
-        $this->week = $leaderboard->week_start_date->format('W');
+        $this->week = $leaderboard->week_start_date->format('W') ?? "1";
         $this->publish_at = $leaderboard->publish_at;
         $this->first = $leaderboard->member1->name ?? "-";
         $this->image = $leaderboard->member1->image ?? "-";
