@@ -302,7 +302,7 @@
                                             <div class="col-lg-7">
                                                 <div class="author_text">
                                                     <div class="qoute">
-                                                        <img src="{{ asset('img/icons/qoute4.png') }}" alt="Quote Icon">
+                                                        <img src="{{ asset('assets/img/icons/qoute4.png') }}" alt="Quote Icon">
                                                     </div>
                                                     <h5>"{{ $m->story }}"</h5>
                                                     <div class="info">

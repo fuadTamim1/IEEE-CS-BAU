@@ -3,7 +3,7 @@
 
     <div class="card-body text-center">
         <h5 class="card-title fw-bold mb-2">#1 {{ $first ?? '-' }}</h5>
-        <p class="text-muted small mb-0">Top Member - Week {{ $week }}</p>
+        <p class="text-muted small mb-0">Top Member - Week {{ $week ?? "-"}}</p>
     </div>
     <ul class="list-group list-group-flush text-center">
         <li class="list-group-item">#2 {{ $second ?? '-' }}</li>
