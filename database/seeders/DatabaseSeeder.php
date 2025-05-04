@@ -7,6 +7,7 @@ use Database\Seeders\RolesAndPermissionsSeeder as SeedersRolesAndPermissionsSeed
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
         ], [
             'name' => 'Admin',
-            'password' => bcrypt('password'), // Change this later!
+            'password' => Hash::make('password'), // Change this later!
         ]);
 
         // Assign admin role
