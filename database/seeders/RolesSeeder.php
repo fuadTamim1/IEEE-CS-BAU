@@ -12,11 +12,11 @@ class RolesSeeder extends Seeder
     {
         try{
 
-            Role::create(['name' => 'super-admin']);
-            Role::create(['name' => 'admin']);
-            Role::create(['name' => 'editor']);
-            Role::create(['name' => 'writer']);
-            Role::create(['name' => 'user']);
+            Role::findOrCreate('super-admin');
+            Role::findOrCreate('admin');
+            Role::findOrCreate('editor');
+            Role::findOrCreate('writer');
+            Role::findOrCreate('user');
         }catch(Exception $e){
             throw $e;
         }
