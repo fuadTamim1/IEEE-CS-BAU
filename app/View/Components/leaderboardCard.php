@@ -20,10 +20,10 @@ class leaderboardCard extends Component
         $this->id = $leaderboard->id;
         $this->week = $leaderboard->week_start_date->format('W');
         $this->publish_at = $leaderboard->publish_at;
-        $this->first = $leaderboard->member1->name;
-        $this->image = $leaderboard->member1->image;
-        $this->second = $leaderboard->member2->name;
-        $this->thierd = $leaderboard->member3->name;
+        $this->first = $leaderboard->member1->name ?? "-";
+        $this->image = $leaderboard->member1->image ?? "-";
+        $this->second = $leaderboard->member2->name ?? "-";
+        $this->thierd = $leaderboard->member3->name ?? "-";
     }
 
     /**
