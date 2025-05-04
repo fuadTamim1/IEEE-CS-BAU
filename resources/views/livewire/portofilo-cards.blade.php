@@ -11,6 +11,7 @@
                             <button wire:click="selectCategory({{ $c['id'] }})" @class(["nav-link", "active" => $selected_category == $c['id']])>{{ $c['title'] }}</button>
                         </li>
                     @endforeach
+                </ul>
             </div>
         </div>
     </div>

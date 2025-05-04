@@ -19,7 +19,6 @@ class PortofiloCards extends Component
         ->select('id', 'title')
         ->get()
         ->toArray();
-
     }
 
     public function selectCategory($category_id) {

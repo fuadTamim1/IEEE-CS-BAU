@@ -9,84 +9,86 @@
                 <div class="leaderboard-container">
 
                     <div class="glow"></div>
-                    @if (strtotime($currentLeaderboard->publish_at) > time())
-                        <div id="countdown" class="countdown-container">
-                            <h1 class="title">LEADERBOARD REVEAL</h1>
-                            <div class="countdown-timer">
-                                <div class="countdown-box">
-                                    <div id="days" class="countdown-number">00</div>
-                                    <div class="countdown-label">Days</div>
+                    @if ($currentLeaderboard)
+                        @if (strtotime($currentLeaderboard->publish_at) > time())
+                            <div id="countdown" class="countdown-container">
+                                <h1 class="title">LEADERBOARD REVEAL</h1>
+                                <div class="countdown-timer">
+                                    <div class="countdown-box">
+                                        <div id="days" class="countdown-number">00</div>
+                                        <div class="countdown-label">Days</div>
+                                    </div>
+                                    <div class="countdown-box">
+                                        <div id="hours" class="countdown-number">00</div>
+                                        <div class="countdown-label">Hours</div>
+                                    </div>
+                                    <div class="countdown-box">
+                                        <div id="minutes" class="countdown-number">00</div>
+                                        <div class="countdown-label">Minutes</div>
+                                    </div>
+                                    <div class="countdown-box">
+                                        <div id="seconds" class="countdown-number">00</div>
+                                        <div class="countdown-label">Seconds</div>
+                                    </div>
                                 </div>
-                                <div class="countdown-box">
-                                    <div id="hours" class="countdown-number">00</div>
-                                    <div class="countdown-label">Hours</div>
-                                </div>
-                                <div class="countdown-box">
-                                    <div id="minutes" class="countdown-number">00</div>
-                                    <div class="countdown-label">Minutes</div>
-                                </div>
-                                <div class="countdown-box">
-                                    <div id="seconds" class="countdown-number">00</div>
-                                    <div class="countdown-label">Seconds</div>
-                                </div>
+                                <div class="countdown-text">Until Leaderboard Reveal!</div>
                             </div>
-                            <div class="countdown-text">Until Leaderboard Reveal!</div>
-                        </div>
-                    @else
-                        <div id="leaderboard">
-                            <h1 class="leaderboard-title">Members Of The Month
-                                {{ $currentLeaderboard->week_start_date->format('F j, Y') }}</h1>
-                            <table class="leaderboard-table">
-                                <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>🥇 1</td>
-                                        <td>{{ $currentLeaderboard->member1->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>🥈 2</td>
-                                        <td>{{ $currentLeaderboard->member2?->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>🥉 3</td>
-                                        <td>{{ $currentLeaderboard->member3?->name ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td># 4</td>
-                                        <td>{{ $currentLeaderboard->member4?->name ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td># 5</td>
-                                        <td>{{ $currentLeaderboard->member5?->name ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td># 6</td>
-                                        <td>{{ $currentLeaderboard->member6?->name ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td># 7</td>
-                                        <td>{{ $currentLeaderboard->member7?->name ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td># 8</td>
-                                        <td>{{ $currentLeaderboard->member8?->name ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td># 9</td>
-                                        <td>{{ $currentLeaderboard->member9?->name ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td># 10</td>
-                                        <td>{{ $currentLeaderboard->member10?->name ?? '-' }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @else
+                            <div id="leaderboard">
+                                <h1 class="leaderboard-title">Members Of The Month
+                                    {{ $currentLeaderboard->week_start_date->format('F j, Y') }}</h1>
+                                <table class="leaderboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>🥇 1</td>
+                                            <td>{{ $currentLeaderboard->member1->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>🥈 2</td>
+                                            <td>{{ $currentLeaderboard->member2?->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>🥉 3</td>
+                                            <td>{{ $currentLeaderboard->member3?->name ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td># 4</td>
+                                            <td>{{ $currentLeaderboard->member4?->name ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td># 5</td>
+                                            <td>{{ $currentLeaderboard->member5?->name ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td># 6</td>
+                                            <td>{{ $currentLeaderboard->member6?->name ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td># 7</td>
+                                            <td>{{ $currentLeaderboard->member7?->name ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td># 8</td>
+                                            <td>{{ $currentLeaderboard->member8?->name ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td># 9</td>
+                                            <td>{{ $currentLeaderboard->member9?->name ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td># 10</td>
+                                            <td>{{ $currentLeaderboard->member10?->name ?? '-' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     @endif
 
 
