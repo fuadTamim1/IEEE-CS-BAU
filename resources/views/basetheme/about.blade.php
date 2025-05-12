@@ -3,7 +3,7 @@
 
     <!--===== HERO AREA START =====-->
 
-    <div class="inner-hero" style="background-image: url({{asset('images/home_bg.png')}});">
+    <div class="inner-hero" style="background-image: url({{ asset('images/home_bg.png') }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 m-auto text-center">
@@ -57,7 +57,7 @@
                             Networking with industry professionals and IEEE global chapters
                             A supportive environment to grow, innovate, and excel</p>
                         <div class="button mt-30" data-aos="fade-left" data-aos-duration="1000">
-                            <a class="theme-btn3" href="{{route('contact')}}">Contact Us <span class="arrow1"><i
+                            <a class="theme-btn3" href="{{ route('contact') }}">Contact Us <span class="arrow1"><i
                                         class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i
                                         class="fa-solid fa-arrow-right"></i></span></a>
                         </div>
@@ -71,7 +71,8 @@
 
     <!--===== COUNTER AREA START =====-->
 
-    <div class="inner-page-counter-sec bg-cover" style="background-image: url({{asset('images/network_diagrams.png')}});">
+    <div class="inner-page-counter-sec bg-cover"
+        style="background-image: url({{ asset('images/network_diagrams.png') }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -163,22 +164,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('images/about1.png') }}"
-                                        alt="">
+                                    <img class="w-full" src="{{ asset('images/about1.png') }}" alt="">
                                 </div>
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('images/about2.png') }}"
-                                        alt="">
+                                    <img class="w-full" src="{{ asset('images/about2.png') }}" alt="">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="image image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="{{ asset('images/about3.png') }}"
-                                        alt="">
+                                    <img class="w-full" src="{{ asset('images/about3.png') }}" alt="">
                                 </div>
                                 <div class="image image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="{{ asset('images/about4.png') }}"
-                                        alt="">
+                                    <img class="w-full" src="{{ asset('images/about4.png') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -302,126 +299,30 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-30">
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
-                    <div class="team2-item mt-30">
-                        <div class="team-image-area">
-                            <div class="image">
-                                <img src="assets/img/team/team2-image1.png" alt="">
-                            </div>
-                            <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
-                            </div>
-                            <div class="social-icons">
+            <div class="team2 sp">
+                <div class="row">
+                    @foreach ($members as $m)
+                        <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
+                            :links="$m->contacts" />
+                    @endforeach
+                </div>
+                                {{-- Pagenation --}}
+                                {{-- 
+                        <div class="space60"></div>
+                        <div class="row">
+                            <div class="col-12 m-auto">
+                            <div class="theme-pagination text-center">
                                 <ul>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa-solid fa-angle-left"></i></a></li>
+                                    <li><a class="active" href="#">01</a></li>
+                                    <li><a href="#">02</a></li>
+                                    <li>...</li>
+                                    <li><a href="#">12</a></li>
+                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i></a></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="team-content-area">
-                            <div class="heading2">
-                                <h4><a href="#">Rodger Struck</a></h4>
-                                <p class="mt-2">Social Media Specialist</p>
                             </div>
-                            <div class="plue-icon">
-                                <a href="#"><i class="fa-solid fa-plus"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900" data-aos-delay="300">
-                    <div class="team2-item mt-30">
-                        <div class="team-image-area">
-                            <div class="image">
-                                <img src="assets/img/team/team2-image2.png" alt="">
-                            </div>
-                            <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
-                            </div>
-                            <div class="social-icons">
-                                <ul>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content-area">
-                            <div class="heading2">
-                                <h4><a href="#">Alex Buckmaster</a></h4>
-                                <p class="mt-2">Marketing Officer</p>
-                            </div>
-                            <div class="plue-icon">
-                                <a href="#"><i class="fa-solid fa-plus"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900" data-aos-delay="400">
-                    <div class="team2-item mt-30">
-                        <div class="team-image-area">
-                            <div class="image">
-                                <img src="assets/img/team/team2-image3.png" alt="">
-                            </div>
-                            <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
-                            </div>
-                            <div class="social-icons">
-                                <ul>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content-area">
-                            <div class="heading2">
-                                <h4><a href="#">Sarah Joe</a></h4>
-                                <p class="mt-2">Marketer</p>
-                            </div>
-                            <div class="plue-icon">
-                                <a href="#"><i class="fa-solid fa-plus"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900" data-aos-delay="500">
-                    <div class="team2-item mt-30">
-                        <div class="team-image-area">
-                            <div class="image">
-                                <img src="assets/img/team/team2-image4.png" alt="">
-                            </div>
-                            <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
-                            </div>
-                            <div class="social-icons">
-                                <ul>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content-area">
-                            <div class="heading2">
-                                <h4><a href="#">Chris Glasser</a></h4>
-                                <p class="mt-2">Marketer</p>
-                            </div>
-                            <div class="plue-icon">
-                                <a href="#"><i class="fa-solid fa-plus"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </div> --}}
 
             </div>
         </div>

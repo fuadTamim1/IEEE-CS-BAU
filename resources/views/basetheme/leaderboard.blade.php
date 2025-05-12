@@ -101,21 +101,11 @@
         <div class="leaderboards-cards">
             <div class="container">
                 <div class="row  mt-5">
-                    <div id="topMembers" class="swiper-container">
-                        <div class="swiper-wrapper">
-                            @foreach ($leaderboards as $leaderboard)
-                                <div class="swiper-slide">
-                                    <x-leaderboard-card :leaderboard="$leaderboard" />
-                                </div>
-                            @endforeach
+                    @foreach ($leaderboards as $leaderboard)
+                        <div class="col-sm-12 col-lg-4 ">
+                            <x-leaderboard-card :leaderboard="$leaderboard" />
                         </div>
-
-                        <!-- Navigation only on small devices -->
-                        <div class="swiper-pagination d-lg-none"></div>
-                        <div class="swiper-button-prev d-lg-none"></div>
-                        <div class="swiper-button-next d-lg-none"></div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>

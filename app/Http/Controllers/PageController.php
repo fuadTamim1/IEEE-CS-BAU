@@ -30,7 +30,8 @@ class PageController extends Controller
 
     public function AboutPage()
     {
-        return view('basetheme.about');
+        $members = Member::all();
+        return view('basetheme.about', ["members" => $members]);
     }
 
     public function TeamPage()
