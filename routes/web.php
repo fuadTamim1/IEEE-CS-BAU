@@ -22,14 +22,14 @@ Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
 Route::get('/leaderboard', [PageController::class, "LeaderboardPage"])->name('leaderboard');
 Route::get('/leaderboard/week/{id}', [PageController::class, "LeaderboardPage"])->name('leaderboard.show');
 
-Route::middleware(['auth', 'verified'])->group(function() {
-        Route::prefix("dashboard")->group(function () {
-            Route::get('/', function () {
-                return redirect()->to('admin');
-            })->name('dashboard');
-        });
-    }
-);
+// Route::middleware(['auth', 'verified'])->group(function() {
+//         Route::prefix("dashboard")->group(function () {
+//             // Route::get('/', function () {
+//             //     return redirect()->to('admin');
+//             // })->name('dashboard');
+//         });
+//     }
+// );
 Route::post('/contact/send', [MailController::class, 'send'])->name('contact.send');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -7,6 +7,7 @@ use App\Observers\BlogObserver;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationGroup;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blog::observe(BlogObserver::class);
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
