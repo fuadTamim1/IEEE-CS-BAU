@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->id('admin')
-            ->path('dashboard')
+            ->path('admin')
             // ->domain('admin.example.test')
             ->brandLogo("/images/IEEE-CS_LogoTM-orange.png")
             ->colors([
