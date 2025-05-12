@@ -36,5 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+// In routes/web.php
+
+Route::get('/test-filament', function () {
+    return \App\Models\User::first()?->canAccessPanel(app(\Filament\Panel::class))
+        ? 'Has access'
+        : 'Access denied';
+});
 
 require __DIR__ . '/auth.php';

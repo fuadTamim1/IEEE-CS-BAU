@@ -360,8 +360,8 @@
                                         <div class="col-lg-6">
                                             <div class="vl-blog-4-content heading4">
                                                 <div class="vl-blog4-meta pb-16">
-                                                    <a href="#" class="date"><img src="{{ asset('img/icons/date1.svg') }}" alt="Date Icon"> {{ $post->created_at->format('d/m/Y') }}</a>
-                                                    <a href="#" class="author"><img src="{{ asset('img/icons/author1.svg') }}" alt="Author Icon"> {{ $post->author->name }}</a>
+                                                    <a href="#" class="date"><img src="{{ asset('assets/img/icons/date1.svg') }}" alt="Date Icon"> {{ $post->created_at->format('d/m/Y') }}</a>
+                                                    <a href="#" class="author"><img src="{{ asset('assets/img/icons/author1.svg') }}" alt="Author Icon"> {{ $post->author->name }}</a>
                                                 </div>
                                                 <h3><a href="blog-details.html">{{ $post->title }}</a></h3>
                                                 <p class="mt-16"></p>
@@ -382,8 +382,8 @@
                                     </div>
                                     <div class="vl-blog-4-content heading4 mt-30">
                                         <div class="vl-blog4-meta pb-16">
-                                            <a href="#" class="date"><img src="{{ asset('img/icons/date1.svg') }}" alt="Date Icon"> {{ $post->created_at->format('d/m/Y') }}</a>
-                                            <a href="#" class="author"><img src="{{ asset('img/icons/author1.svg') }}" alt="Author Icon"> {{ $post->author->name }}</a>
+                                            <a href="#" class="date"><img src="{{ asset('assets/img/icons/date1.svg') }}" alt="Date Icon"> {{ $post->created_at->format('d/m/Y') }}</a>
+                                            <a href="#" class="author"><img src="{{ asset('assets/img/icons/author1.svg') }}" alt="Author Icon"> {{ $post->author->name }}</a>
                                         </div>
                                         <h5><a href="blog-details.html">{{ $post->title }}</a></h5>
                                         <a href="blog-details.html" class="learn1">Read More
