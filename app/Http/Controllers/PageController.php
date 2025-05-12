@@ -81,7 +81,7 @@ class PageController extends Controller
 
     public function EventsPage()
     {
-        $events = Event::orderBy("created_at")->take(12)->get();
+        $events = Event::orderBy("created_at","DESC")->take(12)->get();
         return view('basetheme.events', ["events" => $events]);
     }
 

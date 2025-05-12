@@ -1,12 +1,12 @@
 <div class="col-lg-3 col-md-6">
     <div class="service-page-box mt-30">
         <div class="image">
-            <img src="{{ asset('images/event.png') }}" alt="">
+            <img src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/event.png') }}" alt="">
         </div>
         <div class="content-area">
-            <div class="num">01</div>
-            <a href="{{ url('events/'.$event->slug) }}" class="arrow"><i class="fa-regular fa-arrow-right"></i></a>
-            <h4><a href="{{ url('events/'.$event->slug) }}">{{Str::limit($event->title, 20, '...') }}</a></h4>
+            {{-- <div class="num">01</div> --}}
+            <a href="{{ url('events/' . $event->slug) }}" class="arrow"><i class="fa-regular fa-arrow-right"></i></a>
+            <h4><a href="{{ url('events/' . $event->slug) }}">{{ Str::limit($event->title, 20, '...') }}</a></h4>
         </div>
     </div>
 </div>

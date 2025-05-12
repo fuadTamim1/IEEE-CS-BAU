@@ -26,7 +26,7 @@
                                 <li>
                                     <a href="{{ route('ourteam') }}">Our Team</a>
                                 </li>
-                                <li>
+                                <li hidden>
                                     <a href="{{ route('leaderboard') }}">Leaderboard</a>
                                 </li>
                                 <li>
