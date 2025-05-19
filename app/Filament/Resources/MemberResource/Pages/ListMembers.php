@@ -14,6 +14,18 @@ class ListMembers extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Actions\ImportAction::make()
+                ->importer(\App\Filament\Imports\MemberImporter::class)
+                // ->sampleExcel([
+                //     'data' => [
+                //         ['name' => 'John Doe', 'major' => 'Computer Science', 'title' => 'Developer', 'class_of_the_year' => 2023],
+                //     ],
+                //     'name' => 'sample-members.xlsx',
+                // ])
+                ->fileRules([
+                    'mimes:xlsx,csv', // Restrict to Excel and CSV files
+                    'max:1024', // Max file size of 1MB
+                ]),
         ];
     }
 }

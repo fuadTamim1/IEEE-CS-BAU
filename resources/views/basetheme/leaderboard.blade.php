@@ -102,7 +102,7 @@
             <div class="container">
                 <div class="row  mt-5">
                     @foreach ($leaderboards as $leaderboard)
-                        <div class="col-sm-12 col-lg-4 ">
+                        <div class="col-sm-12 col-lg-4 mb-3">
                             <x-leaderboard-card :leaderboard="$leaderboard" />
                         </div>
                     @endforeach

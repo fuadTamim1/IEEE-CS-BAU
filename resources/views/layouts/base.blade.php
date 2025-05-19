@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'IEEE CS BAU Chapter') }} - {{$title ?? "Home"}}</title>
+    <title>{{ config('app.name', 'IEEE CS BAU Chapter') }} - {{ $title ?? 'Home' }}</title>
     <!--=====FAB ICON=======-->
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }} " type="image/x-icon">
     @include('components.basetheme.heads')
+    <wireui:scripts />
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body class="body1">
@@ -30,9 +32,10 @@
     @include('components.basetheme.header')
     <main>
         {{ $slot }}
+           <x-notifications />
     </main>
     {{-- @include('components.basetheme.footer') --}}
-    <x-Footer/>
+    <x-Footer />
 
     @include('components.basetheme.scripts')
     @yield('scripts')

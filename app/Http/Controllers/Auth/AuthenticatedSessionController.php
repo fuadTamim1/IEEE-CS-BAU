@@ -29,12 +29,15 @@ class AuthenticatedSessionController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        $remember = $request->has("remember");
+
         // dd('logined');
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('email', 'password'), $remember)) {
             $user = Auth::user();
 
             if ($user->hasRole(['super-admin', 'admin', 'editor', 'writer'])) {
-                return redirect()->route('dashboard'); // Redirect admins to dashboard
+                return redirect()->route('filament.admin.pages.dashboard'); // Redirect admins to dashboard
             }
 
             return redirect()->route('home'); // Redirect regular users to home

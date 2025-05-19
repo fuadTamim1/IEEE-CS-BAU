@@ -21,7 +21,8 @@ Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
 
 Route::get('/leaderboard', [PageController::class, "LeaderboardPage"])->name('leaderboard');
 Route::get('/leaderboard/week/{id}', [PageController::class, "LeaderboardPage"])->name('leaderboard.show');
-
+Route::get('/workshops', [PageController::class, "WorkshopsPage"])->name("workshops");
+Route::get('/resources', [PageController::class, "ResourcesPage"])->name("resources");
 // Route::middleware(['auth', 'verified'])->group(function() {
 //         Route::prefix("dashboard")->group(function () {
 //             // Route::get('/', function () {

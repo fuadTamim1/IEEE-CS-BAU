@@ -1008,6 +1008,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+document.querySelectorAll('.nav-item.dropdown > a').forEach((el) => {
+    el.addEventListener('click', function (e) {
+        // Prevent navigation if it has a submenu
+        if (window.innerWidth < 992) {
+            e.preventDefault();
+            let parent = this.parentElement;
+            parent.classList.toggle('show');
+            parent.querySelector('.dropdown-menu').classList.toggle('show');
+        }
+    });
+});
+
 
 
 const slider = document.getElementById('balance-slider');

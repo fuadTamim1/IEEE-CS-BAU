@@ -11,7 +11,7 @@
                         <p class="mt-16" data-aos="fade-right" data-aos-duration="900">eady to take your social
                             media presence to the next level? Let’s work together to create impactful strategies
                             drive engagement, growth, and success for your brand.</p>
-                        <form action="{{ route('contact.send') }}" method="POST" data-aos="fade-right"
+                        {{-- <form action="{{ route('contact.send') }}" method="POST" data-aos="fade-right"
                             data-aos-duration="1000">
                             @csrf
                             <div class="row mt-16">
@@ -47,8 +47,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-
+                        </form> --}}
+                        @livewire("contact-form")
                     </div>
                 </div>
             </div>

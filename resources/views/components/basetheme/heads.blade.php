@@ -12,6 +12,5 @@
 <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
-
 <!--=====JQUERY=======-->
 <script src="{{ asset('assets/js/jquery-3-7-1.min.js') }}"></script>

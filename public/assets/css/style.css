@@ -179,6 +179,17 @@ color: rgb(255, 244, 231) !important;
 
 }
 
+.left-guest-widget::after{
+      content: '';
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+    right: 0;
+    background: linear-gradient(270deg, #321f00, #321f00ba);
+}
+
 .img-guest-bg{
   position: relative;
   height: 100vh;
@@ -242,6 +253,80 @@ margin-top: 1rem;
   border-radius: 15px;
 }
 
+/* Hide the default checkbox */
+.guest-checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.guest-checkbox-label {
+  display: flex;
+  gap: 10px;
+  color: #FFF;
+}
+
+
+/* Create a custom checkbox */
+.checkmark {
+  position: relative;
+  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+  background-color: rgba(16, 16, 16, 0.5);
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: -1px;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+  transform-origin: 0px 10px;
+  border-radius: 4px;
+  margin: -1px 10px 0px 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.guest-checkbox-label input:checked ~ .checkmark {
+  box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+  background-color: rgba(245, 24, 24, 0.5);
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  margin-top: -1px;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+  transform-origin: 0px 10px;
+  border-radius: 4px;
+  margin: -1px 10px 0px 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.guest-checkbox-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.guest-checkbox-label .checkmark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+  transition: all 500ms ease-in-out;
+}
+
 .guest-form-submit-button{
   background-color: #955D00;
   border: none;
@@ -274,11 +359,15 @@ margin-top: 1rem;
     position: absolute !important;
     z-index: 100;
   }
-
+.left-guest-widget::after{
+  display: none;
+}
   .img-guest-bg{
     background-position-x: 100px !important;
   }
-
+#particlesGuest-js{
+  position: fixed;
+}
   .img-guest-bg::after{
     background: #201400b8;
   }
@@ -491,6 +580,17 @@ margin-top: 1rem;
 }
 .main-heading4{
   padding-right: 0;
+}
+
+#particlesGuest-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+  
 }
 @keyframes rotate {
   0% {

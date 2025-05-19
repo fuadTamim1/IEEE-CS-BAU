@@ -14,10 +14,10 @@ class PageController extends Controller
 {
     public function HomePage()
     {
-        $recentPosts = Blog::with(['author', 'category'])->orderBy('created_at')->take(4)->get(["id","title","slug","image","created_at","author_id"]);
-        $recentEvents = Event::orderBy('created_at')->take(5)->get(['id','title','image','slug','description']);
-        
-        
+        $recentPosts = Blog::with(['author', 'category'])->orderBy('created_at')->take(4)->get(["id", "title", "slug", "image", "created_at", "author_id"]);
+        $recentEvents = Event::orderBy('created_at')->take(5)->get(['id', 'title', 'image', 'slug', 'description']);
+
+
         // Path to your JSON file
         $filePath = resource_path('json/member_stories.json');
 
@@ -59,7 +59,7 @@ class PageController extends Controller
     public function ShowBlogPage($slug)
     {
         $blog = Blog::whereSlug($slug)->with('author')->first();
-        $otherBlogs = Blog::where("slug", "!=", $slug)->latest()->with('author:id,name')->take(2)->get(["slug", "title","image", "created_at"]);
+        $otherBlogs = Blog::where("slug", "!=", $slug)->latest()->with('author:id,name')->take(2)->get(["slug", "title", "image", "created_at"]);
 
         $blog->tags = explode(",", $blog->tags);
 
@@ -81,7 +81,7 @@ class PageController extends Controller
 
     public function EventsPage()
     {
-        $events = Event::orderBy("created_at","DESC")->take(12)->get();
+        $events = Event::orderBy("created_at", "DESC")->take(12)->get();
         return view('basetheme.events', ["events" => $events]);
     }
 
@@ -106,6 +106,15 @@ class PageController extends Controller
             ->get();
         return view('basetheme.leaderboard', ["currentLeaderboard" => $currentLeaderboard, "leaderboards" => $leaderboards]);
     }
+
+    public function WorkshopsPage() {
+        return view('basetheme.workshops');
+    }
+
+    public function ResourcesPage() {
+        return view('basetheme.workshops');
+    }
+
 
     public function ContactPage()
     {

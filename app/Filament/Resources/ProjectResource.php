@@ -20,81 +20,86 @@ class ProjectResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
-{
-    return $form
-        ->schema([
-            Forms\Components\Section::make('Project Information')
-                ->description('Basic details about the project.')
-                ->schema([
-                    Forms\Components\TextInput::make('title')
-                        ->required()
-                        ->maxLength(255)
-                        ->columnSpanFull(),
+    {
+        return $form
+            ->schema([
+                Forms\Components\Section::make('Project Information')
+                    ->description('Basic details about the project.')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
 
-                    Forms\Components\TextInput::make('description')
-                        ->required()
-                        ->maxLength(255)
-                        ->columnSpanFull(),
+                        Forms\Components\TextInput::make('description')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
 
-                    Forms\Components\TagsInput::make('tags')->separator(','),
+                        Forms\Components\TagsInput::make('tags')->separator(','),
 
-                    Forms\Components\Select::make('category_id')
-                        ->relationship('category', 'title'),
-                ]),
+                        Forms\Components\Select::make('category_id')
+                            ->relationship('category', 'title'),
+                    ]),
 
-            Forms\Components\Section::make('Project Details') // 🆕 New Sub-header
-                ->description('Information about the project creator, location, cost, and timeframe.')
-                ->collapsible() // Makes it collapsible for better UI
-                ->schema([
-                    Forms\Components\TagsInput::make('created_by')
-                        ->label('Created By')
-                        ->placeholder('Enter members name')
-                        ->separator()
-                        ->nullable(),
+                Forms\Components\Section::make('Project Details') // 🆕 New Sub-header
+                    ->description('Information about the project creator, location, cost, and timeframe.')
+                    ->collapsible() // Makes it collapsible for better UI
+                    ->schema([
+                        Forms\Components\TagsInput::make('created_by')
+                            ->label('Created By')
+                            ->placeholder('Enter members name')
+                            ->separator()
+                            ->nullable(),
 
-                    Forms\Components\TextInput::make('cost')
-                        ->label('Project Cost')
-                        ->numeric()
-                        ->prefix('$')
-                        ->nullable()
-                        ->step(0.01)
-                        ->placeholder('Enter cost in USD'),
+                        Forms\Components\TextInput::make('cost')
+                            ->label('Project Cost')
+                            ->numeric()
+                            ->prefix('$')
+                            ->nullable()
+                            ->step(0.01)
+                            ->placeholder('Enter cost in USD'),
 
-                    Forms\Components\TextInput::make('location')
-                        ->label('Project Location')
-                        ->nullable()
-                        ->placeholder('Enter location'),
+                        Forms\Components\TextInput::make('location')
+                            ->label('Project Location')
+                            ->nullable()
+                            ->placeholder('Enter location'),
 
-                    Forms\Components\DatePicker::make('timeframe')
-                        ->label('Timeframe')
-                        ->nullable()
-                        ->native(false)
-                        ->placeholder('Select project timeframe'),
-                ]),
+                        Forms\Components\DatePicker::make('timeframe')
+                            ->label('Timeframe')
+                            ->nullable()
+                            ->native(false)
+                            ->placeholder('Select project timeframe'),
 
-            Forms\Components\Section::make('Content & Media')
-                ->description('Project description, images, and attachments.')
-                ->schema([
-                    Forms\Components\RichEditor::make('content')
-                        ->required()
-                        ->columnSpanFull(),
+                        Forms\Components\TextInput::make('link')
+                            ->label('Project Link')
+                            ->nullable()
+                            ->placeholder('Enter Link: https://github.com/r/something'),
+                    ]),
 
-                    Forms\Components\FileUpload::make('image')
-                        ->image()
-                        ->directory('projects')
-                        ->visibility('public')
-                        ->imageEditor()
-                        ->columnSpanFull()
-                        ->preserveFilenames()
-                        ->disk('public')
-                        ->hiddenOn(['edit']),
-                ]),
+                Forms\Components\Section::make('Content & Media')
+                    ->description('Project description, images, and attachments.')
+                    ->schema([
+                        Forms\Components\RichEditor::make('content')
+                            ->required()
+                            ->columnSpanFull(),
 
-            Forms\Components\Toggle::make('is_published')
-                ->label('Publish Project')
-                ->required(),
-        ]);
-}
+                        Forms\Components\FileUpload::make('image')
+                            ->image()
+                            ->directory('projects')
+                            ->visibility('public')
+                            ->imageEditor()
+                            ->columnSpanFull()
+                            ->preserveFilenames()
+                            ->disk('public')
+                            ->hiddenOn(['edit']),
+                    ]),
+
+                Forms\Components\Toggle::make('is_published')
+                    ->label('Publish Project')
+                    ->required(),
+            ]);
+    }
 
 
     public static function table(Table $table): Table

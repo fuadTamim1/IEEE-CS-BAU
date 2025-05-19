@@ -299,7 +299,7 @@
                     </div>
                 </div>
             </div>
-            <div class="team2 sp">
+            <div class="team2 sp" id="ourteam">
                 <div class="row">
                     @foreach ($members as $m)
                         <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"

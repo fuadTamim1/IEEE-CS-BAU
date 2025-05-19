@@ -15,9 +15,17 @@
 
         <div class="row">
             <div class="col-12">
-                <input type="password" name="password" placeholder="Password" class="guest-input w-100" :value="old('email')" required autofocus autocomplete="username" >
+                <input type="password" name="password" placeholder="Password" class="guest-input w-100"
+                    :value="old('email')" required autofocus autocomplete="username">
                 <x-input-error :messages="$errors->get('password')" class="mt-2 guest-error" />
             </div>
+        </div>
+        <div class="row col-12">
+            <label class="guest-checkbox-label">
+                <input checked="checked" class="guest-checkbox" name="remember" type="checkbox">
+                <div class="checkmark"></div>
+                Remember Me
+            </label>
         </div>
         <div class="row">
             <div class="col-12">

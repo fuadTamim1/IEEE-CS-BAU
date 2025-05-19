@@ -15,7 +15,8 @@
                     <article>
                         <div class="details-content">
                             <div class="image d-flex">
-                                <img class="mx-auto" src="{{ asset('images/event.png') }}" style="width: 60%" alt="">
+                                <img class="mx-auto" src="{{ asset('images/event.png') }}" style="width: 60%"
+                                    alt="">
                             </div>
                         </div>
                     </article>
@@ -55,7 +56,7 @@
                             </div>
                         </div> --}}
 
-                        <div class="_sidebar-widget _buttons mt-40">
+                        {{-- <div class="_sidebar-widget _buttons mt-40">
                             <h3>You Still Have A Question</h3>
                             <p class="mt-16">If you cannot find answer to your question our FAQ, you can always contact
                                 us. Web will answer you shortly!</p>
@@ -66,7 +67,7 @@
                                 <a href="tel:123-456-7890" class="sidebar-btn2"><img
                                         src="assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="_sidebar-widget _contact mt-40">
                             <h3>Get A Free Quote</h3>
@@ -89,13 +90,14 @@
                 <div class="col-lg-8">
                     <div class="blog-details-content ml-30 md:ml-0 sm:ml-0 mt-50">
                         <article>
-                            <div class="details-content">
+                            <div class="details-content"
+                                style="line-height: 37px;display: flex;flex-direction: column;gap: 25px;">
                                 <div class="heading2 mt-24">
                                     <h3>{{ $event->title }}</h3>
                                     <p class=" mt-16">{{ $event->description }}</p>
                                 </div>
 
-                                {{ $event->content }}
+                                {!! $event->content !!}
 
                             </div>
                         </article>
@@ -103,37 +105,27 @@
                         <div class="details-border"></div>
 
                         <div class="row">
+                            <h2 class="mb-5">Sponser</h2>
                             <div class="col-lg-4 col-md-6">
                                 <div class="service-details-box1 text-center">
                                     <div class="icon">
-                                        <img src="assets/img/icons/service-details-icon1.svg" alt="">
+                                        <img src="https://imgs.search.brave.com/NysYgIXU-ivLF6pENutcD3NsKHSPAUDeQjCbgKczQkE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/a2licmlzcGRyLm9y/Zy9kYXRhLzc1NS9s/b2dvLWtvcGktZ29v/ZC1kYXktMC5qcGc"
+                                            alt="">
                                     </div>
                                     <div class="heading2 mt-16">
-                                        <h4><a href="#">SEO Optimization </a></h4>
-                                        <p class="mt-10">Drive organic traffic and improve your online visibility </p>
+                                        <h4><a href="#">Goodday </a></h4>
+                                        <p class="mt-10">Coffe & nescafe </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <div class="service-details-box1 text-center sm:mt-30">
                                     <div class="icon">
-                                        <img src="assets/img/icons/service-details-icon2.svg" alt="">
+                                        <img src="https://imgs.search.brave.com/d8pOr4qP8R_attAC5OJzhzwdi7KTeuzIE0ft7F67oGI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9hbC1o/dWRheWRhaC5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjMv/MDUvS0lUQ08ucG5n"
+                                            alt="">
                                     </div>
                                     <div class="heading2 mt-16">
-                                        <h4><a href="#">PPC Advertising </a></h4>
-                                        <p class="mt-10">Maximize ROI with targeted PPC campaigns designed </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="service-details-box1 text-center md:mt-30 sm:mt-30">
-                                    <div class="icon">
-                                        <img src="assets/img/icons/service-details-icon3.svg" alt="">
-                                    </div>
-                                    <div class="heading2 mt-16">
-                                        <h4><a href="#">Content Marketing </a></h4>
-                                        <p class="mt-10">content marketing services encompass everything </p>
+                                        <h4><a href="#">Kitco </a></h4>
                                     </div>
                                 </div>
                             </div>
@@ -246,8 +238,8 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-3 col-lg-4 col-4">
                                         <div class="schedule-time">
-                                            <span class="time-range">09:00 - 10:30</span>
-                                            <span class="time-zone">GMT+8</span>
+                                            <span class="time-range">04:00 - 05:00</span>
+                                            <span class="time-zone">GMT+3</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-9 col-lg-8 col-8">
@@ -255,22 +247,18 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-4">
                                                     <div class="schedule-detail-item schedule-session">
-                                                        <span>Opening Keynote</span>
+                                                        <span>Registration</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-5 col-5">
                                                     <div class="schedule-detail-item schedule-description">
-                                                        <p>Welcome address and conference opening with industry trends
-                                                            overview</p>
+                                                        <p>Welcome address, conference opening, and registration
+                                                            process.</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-3">
                                                     <div class="schedule-detail-item schedule-speaker">
-                                                        <div class="speaker-info">
-                                                            <img src="{{ asset('images/profile.png') }}"
-                                                                alt="Speaker" class="speaker-img">
-                                                            <span>Dr. Sarah Johnson</span>
-                                                        </div>
+                                                        <span>-</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,12 +268,12 @@
                             </div>
 
                             <!-- Schedule Item 2 -->
-                            <div class="schedule-item highlight-item">
+                            <div class="schedule-item">
                                 <div class="row align-items-center">
                                     <div class="col-xl-3 col-lg-4 col-4">
                                         <div class="schedule-time">
-                                            <span class="time-range">10:45 - 12:15</span>
-                                            <span class="time-zone">GMT+8</span>
+                                            <span class="time-range">05:00 - 06:00</span>
+                                            <span class="time-zone">GMT+3</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-9 col-lg-8 col-8">
@@ -293,22 +281,19 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-4">
                                                     <div class="schedule-detail-item schedule-session">
-                                                        <span class="session-tag">Featured</span>
-                                                        <span>Tech Innovations Panel</span>
+                                                        <span>Beginning of Competition</span>
+                                                        <span>Tasks 1 & 2 Reveal</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-5 col-5">
                                                     <div class="schedule-detail-item schedule-description">
-                                                        <p>Discussion on emerging technologies with industry leaders</p>
+                                                        <p>Introduction to the competition with the reveal of Tasks 1
+                                                            and 2 for participants.</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-3">
                                                     <div class="schedule-detail-item schedule-speaker">
-                                                        <div class="speaker-info">
-                                                            <img src="{{ asset('images/profile.png') }}"
-                                                                alt="Speaker" class="speaker-img">
-                                                            <span>Mark Williams</span>
-                                                        </div>
+                                                        <span>-</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,8 +307,8 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-3 col-lg-4 col-4">
                                         <div class="schedule-time">
-                                            <span class="time-range">12:15 - 13:30</span>
-                                            <span class="time-zone">GMT+8</span>
+                                            <span class="time-range">06:00 - 07:00</span>
+                                            <span class="time-zone">GMT+3</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-9 col-lg-8 col-8">
@@ -331,17 +316,18 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-4">
                                                     <div class="schedule-detail-item schedule-session">
-                                                        <span>Lunch Break</span>
+                                                        <span>Tasks 3 & 4 Reveal</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-5 col-5">
                                                     <div class="schedule-detail-item schedule-description">
-                                                        <p>Networking lunch with fellow attendees</p>
+                                                        <p>Reveal of Tasks 3 and 4 for participants to continue the
+                                                            competition.</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-3">
                                                     <div class="schedule-detail-item schedule-speaker">
-                                                        <span class="no-speaker">-</span>
+                                                        <span>-</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -355,8 +341,8 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-3 col-lg-4 col-4">
                                         <div class="schedule-time">
-                                            <span class="time-range">13:30 - 15:00</span>
-                                            <span class="time-zone">GMT+8</span>
+                                            <span class="time-range">07:00 - 07:20</span>
+                                            <span class="time-zone">GMT+3</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-9 col-lg-8 col-8">
@@ -364,21 +350,118 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-4">
                                                     <div class="schedule-detail-item schedule-session">
-                                                        <span>Workshop A</span>
+                                                        <span>Lunch Break</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-5 col-5">
                                                     <div class="schedule-detail-item schedule-description">
-                                                        <p>Hands-on session with practical demonstrations</p>
+                                                        <p>Networking lunch with fellow attendees.</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-3">
                                                     <div class="schedule-detail-item schedule-speaker">
-                                                        <div class="speaker-info">
-                                                            <img src="{{ asset('images/profile.png') }}"
-                                                                alt="Speaker" class="speaker-img">
-                                                            <span>Lisa Chen</span>
-                                                        </div>
+                                                        <span>-</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Schedule Item 5 -->
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-3 col-lg-4 col-4">
+                                        <div class="schedule-time">
+                                            <span class="time-range">07:20 - 08:00</span>
+                                            <span class="time-zone">GMT+3</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-9 col-lg-8 col-8">
+                                        <div class="schedule-details">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-4">
+                                                    <div class="schedule-detail-item schedule-session">
+                                                        <span>Tasks 5 & 6 Reveal</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-5">
+                                                    <div class="schedule-detail-item schedule-description">
+                                                        <p>Reveal of the final Tasks 5 and 6 for the competition.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-3">
+                                                    <div class="schedule-detail-item schedule-speaker">
+                                                        <span>-</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Schedule Item 6 -->
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-3 col-lg-4 col-4">
+                                        <div class="schedule-time">
+                                            <span class="time-range">08:00 - 09:00</span>
+                                            <span class="time-zone">GMT+3</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-9 col-lg-8 col-8">
+                                        <div class="schedule-details">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-4">
+                                                    <div class="schedule-detail-item schedule-session">
+                                                        <span>Last Hour Countdown</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-5">
+                                                    <div class="schedule-detail-item schedule-description">
+                                                        <p>Final hour for participants to complete all tasks before the
+                                                            competition ends.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-3">
+                                                    <div class="schedule-detail-item schedule-speaker">
+                                                        <span>-</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Schedule Item 7 -->
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-3 col-lg-4 col-4">
+                                        <div class="schedule-time">
+                                            <span class="time-range">09:00 - 09:30</span>
+                                            <span class="time-zone">GMT+3</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-9 col-lg-8 col-8">
+                                        <div class="schedule-details">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-4">
+                                                    <div class="schedule-detail-item schedule-session">
+                                                        <span>Crowning the Winners</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-5">
+                                                    <div class="schedule-detail-item schedule-description">
+                                                        <p>Announcement and crowning of the competition winners,
+                                                            followed by closing remarks.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-3">
+                                                    <div class="schedule-detail-item schedule-speaker">
+                                                        <span>-</span>
                                                     </div>
                                                 </div>
                                             </div>

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Event;
-use Dom\Element;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

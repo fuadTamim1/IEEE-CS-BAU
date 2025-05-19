@@ -12,7 +12,7 @@
                                 width="160"></a>
                     </div>
                 </div>
-                <div class="col-lg-8 d-none d-lg-block text-end">
+                <div class="col-lg-6 d-none d-lg-block text-center">
                     <div class="vl-main-menu">
                         <!-- content -->
                         <nav class="vl-mobile-menu-active">
@@ -20,30 +20,42 @@
                                 <li>
                                     <a href="{{ route('home') }}">Home</a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('about') }}">About Us</a>
+                                <li class="has-dropdown">
+                                    <a href="{{ route('about') }}">About Us<span><i
+                                                class="fa-regular fa-angle-down ms-2"></i></span></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ route('about') }}#ourteam"> Out Team</a></li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="{{ route('ourteam') }}">Our Team</a>
-                                </li>
-                                <li hidden>
-                                    <a href="{{ route('leaderboard') }}">Leaderboard</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('projects') }}">Projects</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('events') }}">Events</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('blogs') }}">Blogs</a>
+                                <li class="has-dropdown">
+                                    <a href="#">Explore<span><i class="fa-regular fa-angle-down ms-2"></i></span></a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="{{ route('projects') }}">Projects</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('events') }}">Events</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('blogs') }}">Blogs</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('workshops') }}">Workshops - COMING SOON!</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('resources') }}">Resources</a>
+                                        </li>
+                                    </ul>
                                 </li>
 
+                                <li>
+                                    <a href="{{ route('leaderboard') }}">Leaderboard</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-6">
+                <div class="col-lg-4 col-md-6 col-6">
                     <div class="vl-header4-btns text-end d-none d-lg-flex gap-2">
                         <div class="buttons">
                             {{-- <div class="vl-search1">

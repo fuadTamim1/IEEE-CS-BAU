@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -34,7 +34,7 @@ class MemberController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Team $team)
+    public function show(Member $team)
     {
         //
     }
@@ -42,7 +42,7 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Team $team)
+    public function edit(Member $team)
     {
         //
     }
@@ -50,7 +50,7 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, Member $team)
     {
         //
     }
@@ -58,7 +58,7 @@ class MemberController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Team $team)
+    public function destroy(Member $team)
     {
         //
     }

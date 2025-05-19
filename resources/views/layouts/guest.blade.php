@@ -20,10 +20,11 @@
 </head>
 
 <body class="body-guest">
-
     <div class="container guest-container ">
+
         <div class="row">
             <div class="col-md-6 col-sm-12 left-guest-widget position-absolute-sm">
+                <div id="particlesGuest-js"></div>
                 <div class="logo-header">
                     <a href="/">
                         <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -51,14 +52,15 @@
             </div>
         </div>
     </div>
-    <main>
-
-
-
-    </main>
 
     @include('components.basetheme.scripts')
 
+    <script>
+        /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+        particlesJS.load('particlesGuest-js', "{{ asset('assets/particles.json') }}", function() {
+            console.log('callback - particles.js config loaded');
+        });
+    </script>
 </body>
 
 </html>

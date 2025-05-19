@@ -1,13 +1,18 @@
-@props(['class' => '', 'style' => '', 'background' => '', 'title' => '', 'breadcrumbs' => []])
+@props(['class' => '', 'style' => '', 'background' => '', 'title' => '', 'desc' => '', 'breadcrumbs' => []])
 
-<div class="inner-hero {{ $class }}" {{ $attributes->merge(['style' => "background-image: url('$background'); $style"]) }}>
+<div class="inner-hero {{ $class }}"
+    {{ $attributes->merge(['style' => "background-image: url('$background'); $style"]) }}>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 m-auto text-center lightmode-bg">
                 <div class="inner-main-heading">
                     @if ($title != '')
                         <h1>{{ $title }} </h1>
-
+                        @if ($desc != '')
+                            <h4>
+                                {{ $desc }}
+                            </h4>
+                        @endif
                         @if (!empty($breadcrumbs))
                             <div class="breadcrumbs-pages">
                                 <ul>
