@@ -110,7 +110,7 @@ class ProjectResource extends Resource
                     ->disk('public')
                     ->size(40)
                     ->circular()
-                    ->defaultImageUrl(url('/images/default-project.png'))
+                    ->defaultImageUrl(asset('images/profile.png'))
                     ->visibility('public'),
 
                 Tables\Columns\TextColumn::make('title')
