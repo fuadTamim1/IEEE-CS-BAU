@@ -1,76 +1,89 @@
-﻿## IEEE CS Website
-#### **Summery**
+﻿# IEEE CS Platform – BAU Chapter
 
-The IEEE CS platform for our college chapter is a website that collects information, activities, projects, events, and workshops of the chapter, helping members organize their work and facilitating communication and follow-up.
+![Cover Image](https://github.com/fuadTamim1/IEEE-CS-BAU/tree/main/public/assets/img/screenshot.jpg)
 
-----
+## Summary
 
-#### Tools Used
+The IEEE CS platform for our college chapter is a website designed to centralize and showcase the chapter’s information, activities, projects, events, and workshops. It helps members organize their work, collaborate more efficiently, and stay informed about ongoing efforts within the community.
 
-###### Planning
+---
 
+## Tools Used
 
-- **Trello** Management Tasks
+### Planning
 
-- **Miro** For Brain Storming
+* Trello – Task and project management
+* Miro – Brainstorming and visual collaboration
 
-  
+### Backend
 
-###### Backend
+* Laravel (PHP) – Framework for handling routing, logic, and APIs
+* MySQL – Relational database for data storage and queries
 
-- **Laravel** For Backend Development With PHP
+### Frontend
 
-- **MySQL** For Database Management
+* HTML, CSS, JavaScript – Structure, design, and basic interactivity
+* Blade Template Engine – Used with Laravel to create dynamic content
 
-  
+---
 
-###### Frontend
+## How to Run the Project
 
-- **HTML, CSS, JS** Plain HTML CODE FOR PAGES DESIGN
+You can set up and run this project locally by following these steps:
 
-- **Blade Template Engine** For Merging With Laravel As Dynamic Code
+### 1. Clone the Repository
 
-----
-
-  
-
-#### Team
-
-- Fuad Al-Tamimi | Backend Development & Planning & Frontend Development & Design
-
-  
-
-----
-
-  
-
-## How To Run?
-
-  
-
-###### Clone Repository
-run: 
 ```bash
 git clone https://github.com/fuadTamim1/IEEE-CS-BAU.git
-```
-
-go to you project directory
-```bash
 cd IEEE-CS-BAU
 ```
 
-###### setup your .env file
-run:
+### 2. Install Dependencies
+
+Make sure PHP, Composer, and MySQL are installed on your machine.
+
+```bash
+composer install
+```
+
+### 3. Set Up Environment Configuration
+
+Copy the example environment file:
+
 ```bash
 cp .env.example .env
 ```
 
-modify the .env file with your information's
+Then edit the `.env` file to match your local database settings:
 
-###### migrate database
-run:
+```
+DB_DATABASE=your_db_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
+```
+
+### 4. Generate the Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Run Migrations and Seed Data
+
 ```bash
 php artisan migrate --seed
 ```
 
-*****still under develop*****
+### 6. Serve the Application
+
+```bash
+php artisan serve
+```
+
+The application should now be running at: `http://127.0.0.1:8000`
+
+---
+
+## Project Status
+
+This project is still under active development. Feedback and suggestions are always welcome.
