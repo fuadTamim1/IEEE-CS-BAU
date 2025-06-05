@@ -33,8 +33,6 @@ class EventResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->columnSpanFull(),
-                // Forms\Components\TextInput::make('slug')
-                //     ->required(),
                 TextInput::make('description')
                     ->required()
                     ->columnSpanFull(),

@@ -8,8 +8,19 @@
     <!--=====FAB ICON=======-->
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }} " type="image/x-icon">
     @include('components.basetheme.heads')
+    @vite('resources/js/app.js')
     <wireui:scripts />
     <script src="//unpkg.com/alpinejs" defer></script>
+    <style>
+        canvas{
+            position: absolute;
+            top: 0;
+            left: 0;
+            display:block;
+            z-index: 1000
+
+        }
+    </style>
 </head>
 
 <body class="body1">
