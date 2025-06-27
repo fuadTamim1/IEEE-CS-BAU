@@ -3,7 +3,7 @@
 
         <div class="team-image-area">
             <div class="image">
-                <img src="{{ isset($image) ? asset('storage/' . $image) : asset('images/pixel_male.jpg') }}"
+                <img src="{{ isset($image) ? asset('storage/' . $image) : asset('images/profile.png') }}"
                     style="width:88%" alt="">
             </div>
             <div class="shape round-circle">
