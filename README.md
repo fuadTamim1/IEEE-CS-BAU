@@ -1,6 +1,6 @@
 ﻿# IEEE CS Platform – BAU Chapter
 
-![Cover Image](https://github.com/fuadTamim1/IEEE-CS-BAU/tree/main/public/assets/img/screenshot.jpg)
+![Cover Image](https://raw.githubusercontent.com/fuadTamim1/IEEE-CS-BAU/refs/heads/main/public/assets/img/screenshot.jpg)
 
 ## Summary
 
