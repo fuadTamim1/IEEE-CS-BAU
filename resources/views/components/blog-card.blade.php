@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class=" vl-blog-12-thumb image-anime overflow-hidden _relative">
-                <img class="w-full h-full" src="{{ asset('storage/' . $blog->image) ?? 'assets/img/blog/blog-page1-image1.png' }}"
-                    alt="">
+                <x-img :img="$blog->image ?? null" />
             </div>
         </div>
         <div class="col-lg-6">

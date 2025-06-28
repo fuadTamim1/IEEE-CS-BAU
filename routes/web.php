@@ -4,6 +4,14 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Route as RouteObject;
+
+Route::macro('underDevelopment', function (bool $enabled = false) {
+    if ($enabled && $this instanceof RouteObject) {
+        $this->middleware('under.development');
+    }
+    return $this;
+});
 
 Route::get('/', [PageController::class, "HomePage"])->name('home');
 Route::get('/about', [PageController::class, "AboutPage"])->name('about');
@@ -21,8 +29,13 @@ Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
 
 Route::get('/leaderboard', [PageController::class, "LeaderboardPage"])->name('leaderboard');
 Route::get('/leaderboard/week/{id}', [PageController::class, "LeaderboardPage"])->name('leaderboard.show');
-Route::get('/workshops', [PageController::class, "WorkshopsPage"])->name("workshops");
-Route::get('/resources', [PageController::class, "ResourcesPage"])->name("resources");
+
+Route::middleware(['under.development'])->group(function() {
+    Route::get('/workshops', [PageController::class, "WorkshopsPage"])->name("workshops");
+    Route::get('/resources', [PageController::class, "ResourcesPage"])->name("resources");
+});
+
+
 // Route::middleware(['auth', 'verified'])->group(function() {
 //         Route::prefix("dashboard")->group(function () {
 //             // Route::get('/', function () {
@@ -44,5 +57,7 @@ Route::get('/test-filament', function () {
         ? 'Has access'
         : 'Access denied';
 });
+
+Route::view('/coming-soon', 'basetheme.coming-soon')->name('coming-soon');
 
 require __DIR__ . '/auth.php';

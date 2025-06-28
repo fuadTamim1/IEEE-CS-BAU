@@ -3196,7 +3196,7 @@ a:focus {
   font-weight: var(--f-fw-semibold);
   line-height: var(--f-fs-font-20); /* 100% */
   padding: 17px 10px 17px 22px;
-  border-radius: 52px;
+  border-radius: 8px;
   background-color: var(--vtc-bg-main4);
   transition: all 0.4s;
   border: none;
@@ -3235,7 +3235,7 @@ a:focus {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: #4983ff;
+  background-color: rgb(20, 15, 0);
   border-radius: 25px;
   z-index: -1;
   transform: rotateY(90deg);
@@ -3496,7 +3496,7 @@ a:focus {
   transition: 500ms;
   overflow: hidden;
   border-radius: 111px;
-  padding: 18px 24px;
+  padding: 18px 18px;
   z-index: 2;
   position: relative;
   transition-delay: calc((var(--n) - 1) * 0.1s);
@@ -3550,6 +3550,33 @@ a:focus {
   transform: translateY(0) scale(2);
   -moz-transform: translateY(0) scale(2);
   -moz-transform: translateY(0) scale(2);
+  color: var(--vtc-text-white);
+}
+
+.theme-btn8-outline {
+  font-size: var(--f-fs-font-20);
+  font-style: normal;
+  font-weight: var(--f-fw-semibold);
+  line-height: var(--f-fs-font-20); /* 100% */
+  display: inline-block;
+  vertical-align: middle;
+  border: 2px solid var(--vtc-bg-main6);
+  outline: none !important;
+  background-color: transparent;
+  color: var(--vtc-bg-main6);
+  letter-spacing: 0px;
+  transition: 500ms;
+  overflow: hidden;
+  border-radius: 111px;
+  padding: 18px 18px;
+  z-index: 2;
+  position: relative;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  -webkit-transition-delay: calc((var(--n) - 1) * 0.1s);
+  -moz-transition-delay: calc((var(--n) - 1) * 0.1s);
+}
+
+.theme-btn8-outline:hover {
   color: var(--vtc-text-white);
 }
 
@@ -13224,6 +13251,7 @@ a:focus {
   border-radius: 111px;
   padding: 12px 16px;
   border: 1px solid var(--vtc-bg-white10per);
+  max-width: 1400px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .vl-header-area4 .header2-bg {
@@ -22705,8 +22733,524 @@ a:focus {
   transform: rotateY(180deg);
 }
 
-/*
-::::::::::::::::::::::::::
- FEATURES AREA CSS
-::::::::::::::::::::::::::
-*//*# sourceMappingURL=main.css.map */
+<div class="hero4" style="background-image: url({{ asset('images/home_bg.png') }}); filter: brightness(0.85);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 m-auto text-center">
+                <div class="main-heading4">
+                    <h1 class="text-anime-style-3">Empowering Innovation & <span style="color: #FAA41A">Technology</span></h1>
+                    <p class="mt-16" data-aos="fade-left" data-aos-duration="800">
+                        Join IEEE Computer Society to explore the world of computing, collaborate with experts, and shape the future of technology.
+                    </p>
+
+                    <!-- Statistics Section -->
+                    <div class="hero-stats mt-32" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row justify-content-center">
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" data-count="500">0</div>
+                                    <div class="stat-label">Active Members</div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" data-count="50">0</div>
+                                    <div class="stat-label">Events Hosted</div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" data-count="25">0</div>
+                                    <div class="stat-label">Workshops</div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" data-count="10">0</div>
+                                    <div class="stat-label">Projects</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What We Offer Section -->
+                    <div class="hero-features mt-40" data-aos="fade-up" data-aos-duration="1200">
+                        <h3 class="features-title mb-24">What We Offer</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 col-sm-6 mb-20">
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <h4>Coding Workshops</h4>
+                                    <p>Hands-on programming sessions in Python, Flutter, and more</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 mb-20">
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <h4>Networking Events</h4>
+                                    <p>Connect with industry professionals and like-minded peers</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 mb-20">
+                                <div class="feature-card">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <h4>Innovation Projects</h4>
+                                    <p>Collaborate on cutting-edge technology solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action Section -->
+                    <div class="hero-cta mt-40" data-aos="fade-up" data-aos-duration="1400">
+                        <div class="cta-box">
+                            <h3>Ready to Start Your Tech Journey?</h3>
+                            <p class="mb-24">Discover upcoming events, workshops, and opportunities to grow your skills</p>
+                            
+                            <div class="cta-buttons d-flex gap-15 justify-center flex-wrap">
+                                <div class="button">
+                                    <a href="#events" class="theme-btn8">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>View Events</span>
+                                    </a>
+                                </div>
+                                <div class="button">
+                                    <a href="#projects" class="theme-btn8-secondary">
+                                        <i class="fas fa-folder-open"></i>
+                                        <span>Browse Projects</span>
+                                    </a>
+                                </div>
+                                <div class="button">
+                                    <a href="#contact" class="theme-btn8-outline">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Get in Touch</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Next Event Highlight -->
+                    <div class="next-event mt-32" data-aos="fade-up" data-aos-duration="1600">
+                        <div class="event-highlight">
+                            <div class="event-badge">
+                                <i class="fas fa-star"></i>
+                                <span>Next Event</span>
+                            </div>
+                            <h4>Web Development Workshop</h4>
+                            <div class="event-details">
+                                <span class="event-date">
+                                    <i class="fas fa-calendar"></i>
+                                    July 15, 2025
+                                </span>
+                                <span class="event-time">
+                                    <i class="fas fa-clock"></i>
+                                    2:00 PM - 5:00 PM
+                                </span>
+                                <span class="event-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Tech Lab, Room 201
+                                </span>
+                            </div>
+                            <a href="#register" class="event-register-btn">
+                                Register Now <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    {{-- Commented out original buttons
+                    <div class="d-flex gap-15 justify-center mt-10">
+                        <div class="button">
+                            <a href="#" class="theme-btn8">
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__text">Join Us</span>
+                            </a>
+                        </div>
+                        <div class="button">
+                            <a href="#" class="theme-btn8-secondary">
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__shape"></span>
+                                <span class="theme-btn8__text">Explore More</span>
+                            </a>
+                        </div>
+                    </div>
+                    --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if(config('app.show_hero_images', false))
+        <div class="hero4-images">
+            <div class="row mx-auto">
+                <div class="col-lg-3 col-md-6">
+                    <div class="hero5-image image1 animate4">
+                        <img src="{{ asset('images/python.png') }}" alt="Python 3D logo" width="160">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="hero5-image image2 animate2">
+                        <img src="{{ asset('images/flutter.png') }}" alt="Flutter 3D logo" width="160">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="hero5-image image3 animate3">
+                        <img src="{{ asset('images/linux.png') }}" alt="Linux 3D logo" width="160">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 animate1">
+                    <div class="hero5-image image4">
+                        <img src="{{ asset('images/node-tree.png') }}" alt="Network 3D logo" width="160">
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+</div>
+
+<style>
+/* Hero Statistics */
+.hero-stats {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px 20px;
+    border: 1px solid rgba(250, 164, 26, 0.3);
+}
+
+.stat-item {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FAA41A;
+    display: block;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hero Features */
+.hero-features {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 40px 30px;
+    border: 1px solid rgba(250, 164, 26, 0.2);
+}
+
+.features-title {
+    color: #FAA41A;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(250, 164, 26, 0.1);
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(250, 164, 26, 0.1);
+    border-color: rgba(250, 164, 26, 0.3);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #FAA41A, #FF8C00);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+.feature-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.feature-card h4 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Call to Action */
+.hero-cta {
+    background: rgba(250, 164, 26, 0.1);
+    border-radius: 20px;
+    padding: 40px 30px;
+    border: 2px solid rgba(250, 164, 26, 0.3);
+}
+
+.cta-box h3 {
+    color: #FAA41A;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.cta-box p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.cta-buttons {
+    gap: 15px;
+}
+
+/* Modern Button Styles */
+.theme-btn8 {
+    background: linear-gradient(135deg, #FAA41A, #FF8C00);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(250, 164, 26, 0.3);
+}
+
+.theme-btn8:hover {
+    background: linear-gradient(135deg, #FF8C00, #FAA41A);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(250, 164, 26, 0.4);
+    text-decoration: none;
+}
+
+.theme-btn8-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.theme-btn8-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.theme-btn8-outline {
+    background: transparent;
+    border: 2px solid #FAA41A;
+    color: #FAA41A;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.theme-btn8-outline:hover {
+    background: #FAA41A;
+    color: white;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Next Event Highlight */
+.next-event {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.event-highlight {
+    background: linear-gradient(135deg, rgba(250, 164, 26, 0.15), rgba(255, 140, 0, 0.1));
+    border-radius: 20px;
+    padding: 30px;
+    border: 2px solid rgba(250, 164, 26, 0.3);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(250, 164, 26, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.event-badge {
+    background: #FAA41A;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.event-badge i {
+    animation: pulse 2s infinite;
+}
+
+.event-highlight h4 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.event-details {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.event-details span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.event-details i {
+    color: #FAA41A;
+}
+
+.event-register-btn {
+    background: linear-gradient(135deg, #FAA41A, #FF8C00);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.event-register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(250, 164, 26, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-stats {
+        padding: 20px 15px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .hero-features {
+        padding: 30px 20px;
+    }
+    
+    .features-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-cta {
+        padding: 30px 20px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .event-details {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .event-highlight {
+        padding: 20px;
+    }
+}
+
+/* Counter Animation */
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-number {
+    animation: countUp 0.8s ease-out;
+}

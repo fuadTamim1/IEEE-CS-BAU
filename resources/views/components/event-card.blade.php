@@ -1,7 +1,7 @@
 <div class="col-lg-3 col-md-6">
     <div class="service-page-box mt-30">
         <div class="image">
-            <img src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/event.png') }}" alt="">
+            <x-img :img="$event->image ?? null" />
         </div>
         <div class="content-area">
             {{-- <div class="num">01</div> --}}

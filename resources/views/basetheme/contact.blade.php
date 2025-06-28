@@ -120,6 +120,6 @@
     <!--===== CONTACT AREA END =====-->
 
         <div class="contact-map-page">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.8200012989314!2d36.01560430957608!3d31.99289462353913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151b66df729926c7%3A0x80a62dc05cbc89e0!2sAl-Balqa&#39;a%20Applied%20University%20-%20Faculty%20of%20Engineering%20Technology%20-%20Polytechnic!5e0!3m2!1sen!2sjo!4v1743412865226!5m2!1sen!2sjo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://maps.app.goo.gl/V5Lx9KGiZb12265F7" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 </x-base-layout>

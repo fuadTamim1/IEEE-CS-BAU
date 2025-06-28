@@ -1,0 +1,33 @@
+name: Build and Deploy Assets
+
+on:
+  push:
+    branches: [main] # Change to your branch if needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Commit and push built assets
+        run: |
+          git config --global user.email "your@email.com"
+          git config --global user.name "Your Name"
+          git checkout -B deploy
+          git add public/css public/js public/build -f
+          git commit -m "🚀 Auto-build assets for deployment"
+          git push -f origin deploy

@@ -15,7 +15,7 @@ class PageController extends Controller
     public function HomePage()
     {
         $recentPosts = Blog::with(['author', 'category'])->orderBy('created_at')->take(4)->get(["id", "title", "slug", "image", "created_at", "author_id"]);
-        $recentEvents = Event::orderBy('created_at')->take(5)->get(['id', 'title', 'image', 'slug', 'description']);
+        $recentEvents = Event::orderBy('created_at')->take(5)->get(['id', 'title', 'image', 'slug', 'description', 'created_at']);
 
 
         // Path to your JSON file

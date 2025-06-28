@@ -4,10 +4,9 @@ namespace App\Providers;
 
 use App\Models\Blog;
 use App\Observers\BlogObserver;
-use Filament\Facades\Filament;
-use Filament\Navigation\NavigationGroup;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment('production')) {
             URL::forceScheme('https');
         }
+
+        
     }
 }

@@ -66,7 +66,7 @@
                                 <img src="assets/img/icons/footer-contact-icon2.svg" alt="">
                             </div>
                             <div class="text">
-                                <a href="#">
+                                <a href="{{url(getWidget('location')) }}" target="_blank" rel="noopener noreferrer">
                                     {!! wordwrap(getWidget('location'), 30, '<br>') !!}</a>
                             </div>
                         </div>
@@ -96,10 +96,11 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                {{-- <div class="copyright-text right-side text-end sm:text-start md:text-start">
-                    <a href="#">Terms & Conditions</a>
-                    <a href="#" class="add-before"> Privacy Policy </a>
-                </div> --}}
+                <div class="copyright-text right-side text-end sm:text-start md:text-start">
+                    {{-- <a href="#">Terms & Conditions</a>
+                    <a href="#" class="add-before"> Privacy Policy </a> --}}
+                    <p>Made with <i class="fa-solid fa-heart"></i> by <a href="https://github.com/fuadTamim1">Fuad Al-Tamimi</a></p>
+                </div>
             </div>
         </div>
     </div>

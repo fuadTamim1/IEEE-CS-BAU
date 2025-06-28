@@ -28,7 +28,8 @@
                                     </ul>
                                 </li>
                                 <li class="has-dropdown">
-                                    <a href="#">Explore<span><i class="fa-regular fa-angle-down ms-2"></i></span></a>
+                                    <a href="#">Explore<span><i
+                                                class="fa-regular fa-angle-down ms-2"></i></span></a>
                                     <ul class="sub-menu">
                                         <li>
                                             <a href="{{ route('projects') }}">Projects</a>
@@ -73,23 +74,31 @@
                                     </button>
                                 </form>
                             @else
-                                <a href="{{ route('login') }}" class="theme-btn8" hidden>
-                                    <span class="theme-btn8__shape"></span>
-                                    <span class="theme-btn8__shape"></span>
-                                    <span class="theme-btn8__shape"></span>
-                                    <span class="theme-btn8__shape"></span>
+                                <a href="{{ route('login') }}" class="theme-btn8-outline">
                                     <span class="theme-btn8__text">Sign In</span>
                                 </a>
                             @endif
 
                         </div>
+                        @if (get_setting('enable_registration') != 0)
+                            <div class="buttons">
+                                <a href="{{ route('register') }}" class="theme-btn8">
+                                    <span class="theme-btn8__text">Sign Up</span>
+                                </a>
+                            </div>
+                        @endif
                         <div class="buttons">
                             {{-- <div class="vl-search1">
                                 <button class="search-open-btn"><i class="fa-regular fa-magnifying-glass"></i></button>
                             </div> --}}
-                            <a class="theme-btn3" href="{{ route('contact') }}">Contact Us <span class="arrow1"><i
-                                        class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i
-                                        class="fa-solid fa-arrow-right"></i></span></a>
+                           
+                            <div class="button">
+                                <a href="{{ route('contact') }}" class="theme-btn8-outline">
+                                    <span class="theme-btn8__text">
+                                        <i class="fas fa-envelope me-2"></i>Get in Touch
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="vl-header-action-item d-block d-lg-none">
