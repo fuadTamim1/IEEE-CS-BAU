@@ -18,12 +18,17 @@ jobs:
           php-version: '8.2'
           extensions: mbstring, bcmath, xml, ctype, fileinfo, json, tokenizer, curl, openssl, pdo, pdo_mysql
           coverage: none
+          
+      - name: Trust Git directory
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory /app
 
       - name: Set up Composer
         uses: php-actions/composer@v6
 
       - name: Install PHP dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-req=ext-intl --ignore-platform-req=ext-zip --ignore-platform-req=ext-exif
+        run: composer install
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -33,8 +38,6 @@ jobs:
       - name: Print working directory
         run: pwd
 
-      - name: Trust Git directory
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Check package-lock.json
         run: |
