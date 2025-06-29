@@ -2,7 +2,7 @@ name: Build and Deploy Assets
 
 on:
   push:
-    branches: [main] # Change to your branch if needed
+    branches: [main]
 
 jobs:
   build:
@@ -11,6 +11,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, xml, ctype, fileinfo, json, tokenizer, curl, openssl, pdo, pdo_mysql
+          coverage: none
+
+      - name: Set up Composer
+        uses: php-actions/composer@v6
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -21,13 +34,35 @@ jobs:
         run: |
           git diff --exit-code package-lock.json || (echo "package-lock.json is out of sync. Please update it locally and commit the changes."; exit 1)
 
+      - name: Install JS dependencies
+        run: npm install
+
       - name: Build frontend assets
         run: npm run build
 
+      - name: Prepare Laravel Environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # - name: Run Laravel Migrations (Optional)
+      #   env:
+      #     DB_CONNECTION: sqlite
+      #     DB_DATABASE: database/database.sqlite
+      #   run: |
+      #     touch database/database.sqlite
+      #     php artisan migrate --force
+
+      - name: Clear Laravel caches
+        run: |
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
       - name: Commit and push built assets
         run: |
-          git config --global user.email "your@email.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "fuad89573@email.com"
+          git config --global user.name "Fuad"
           git checkout -B deploy
           git add public/css public/js public/build -f
           git commit -m "🚀 Auto-build assets for deployment"
