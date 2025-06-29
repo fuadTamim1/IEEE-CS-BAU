@@ -27,13 +27,13 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory /app
 
-      - name: Set up Composer
-        uses: php-actions/composer@v6
-        with:
-          composer_version: '2'
+      # - name: Set up Composer
+      #   uses: php-actions/composer@v6
+      #   with:
+      #     composer_version: '2'
 
-      - name: Install PHP dependencies
-        run: composer install
+      # - name: Install PHP dependencies
+      #   run: composer install
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
