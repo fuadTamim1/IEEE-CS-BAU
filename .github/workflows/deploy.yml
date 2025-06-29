@@ -23,16 +23,19 @@ jobs:
         uses: php-actions/composer@v6
 
       - name: Install PHP dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-req=ext-intl --ignore-platform-req=ext-zip --ignore-platform-req=ext-exif
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
       
+      - name: Print working directory
+        run: pwd
+
       - name: Trust Git directory
-        run: git config --global --add safe.directory /app
-        
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Check package-lock.json
         run: |
           git diff --exit-code package-lock.json || (echo "package-lock.json is out of sync. Please update it locally and commit the changes."; exit 1)
