@@ -22,8 +22,8 @@ jobs:
       - name: Set up Composer
         uses: php-actions/composer@v6
 
-      - name: Install PHP dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-interaction --ignore-platform-req=ext-intl --ignore-platform-req=ext-zip --ignore-platform-req=ext-exif --prefer-dist --optimize-autoloader
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
