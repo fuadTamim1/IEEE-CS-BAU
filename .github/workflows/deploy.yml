@@ -17,8 +17,9 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install frontend dependencies
-        run: npm install
+      - name: Check package-lock.json
+        run: |
+          git diff --exit-code package-lock.json || (echo "package-lock.json is out of sync. Please update it locally and commit the changes."; exit 1)
 
       - name: Build frontend assets
         run: npm run build
