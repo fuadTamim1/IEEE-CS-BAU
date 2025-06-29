@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('image')->nullable();
             $table->boolean('is_published')->default(true);
-            $table->foreignId("category")->nullable()->constrained()->nullOnDelete();
+            // $table->foreignId("category")->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
