@@ -12,13 +12,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install PHP extensions
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y php8.2-intl php8.2-zip php8.2-exif
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           extensions: mbstring, bcmath, xml, ctype, fileinfo, json, tokenizer, curl, openssl, pdo, pdo_mysql, intl, zip, exif
           coverage: none
-          
+
+      - name: Verify PHP extensions
+        run: php -m | grep -E 'intl|zip|exif'
+
       - name: Trust Git directory
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -26,6 +34,8 @@ jobs:
 
       - name: Set up Composer
         uses: php-actions/composer@v6
+        with:
+          composer_version: '2'
 
       - name: Install PHP dependencies
         run: composer install
@@ -34,7 +44,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      
+
       - name: Print working directory
         run: pwd
 
