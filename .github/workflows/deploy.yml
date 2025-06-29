@@ -16,7 +16,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mbstring, bcmath, xml, ctype, fileinfo, json, tokenizer, curl, openssl, pdo, pdo_mysql
+          extensions: mbstring, bcmath, xml, ctype, fileinfo, json, tokenizer, curl, openssl, pdo, pdo_mysql, intl, zip, exif
           coverage: none
           
       - name: Trust Git directory
@@ -37,7 +37,6 @@ jobs:
       
       - name: Print working directory
         run: pwd
-
 
       - name: Check package-lock.json
         run: |
