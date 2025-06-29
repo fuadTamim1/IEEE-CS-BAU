@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::table("blogs", function(Blueprint $table) {
             $table->foreignId('category_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
         });
+        Schema::table("projects", function(Blueprint $table) {
+            $table->foreignId('category_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+        });
     }
 
     /**
@@ -22,7 +25,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('blogs', function (Blueprint $table) {
-            // Revert the author_id column to not nullable
+            $table->foreignId('category_id')->nullable(false)->change();
+        });
+        Schema::table('projects', function (Blueprint $table) {
             $table->foreignId('category_id')->nullable(false)->change();
         });
     }
