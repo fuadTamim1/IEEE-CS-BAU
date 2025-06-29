@@ -29,7 +29,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-
+      
+      - name: Trust Git directory
+        run: git config --global --add safe.directory /app
+        
       - name: Check package-lock.json
         run: |
           git diff --exit-code package-lock.json || (echo "package-lock.json is out of sync. Please update it locally and commit the changes."; exit 1)
