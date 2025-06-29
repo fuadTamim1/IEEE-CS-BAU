@@ -40,25 +40,6 @@ jobs:
       - name: Build frontend assets
         run: npm run build
 
-      - name: Prepare Laravel Environment
-        run: |
-          cp .env.example .env
-          php artisan key:generate
-
-      # - name: Run Laravel Migrations (Optional)
-      #   env:
-      #     DB_CONNECTION: sqlite
-      #     DB_DATABASE: database/database.sqlite
-      #   run: |
-      #     touch database/database.sqlite
-      #     php artisan migrate --force
-      # 
-      - name: Clear Laravel caches
-        run: |
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
-
       - name: Commit and push built assets
         run: |
           git config --global user.email "fuad89573@email.com"
