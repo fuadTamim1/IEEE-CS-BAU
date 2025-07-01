@@ -11,7 +11,10 @@
     </ul>
 
     <div class="card-body d-flex justify-content-center gap-2 p-3">
-        <a href="{{ route('leaderboard.show', ['id' => $id]) }}" class="btn btn-outline-primary w-100">
+        {{-- <a href="{{ route('leaderboard.show', ['id' => $id]) }}" class="btn btn-outline-primary w-100">
+            <i class="bi bi-eye-fill me-1"></i> View
+        </a> --}}
+        <a href="{{ route('leaderboard.show', ['id' => $id ?? $leaderboard->id ?? '' ]) }}" class="btn btn-outline-primary w-100">
             <i class="bi bi-eye-fill me-1"></i> View
         </a>
         {{-- <a href="#" class="btn btn-primary w-100 text-white">
