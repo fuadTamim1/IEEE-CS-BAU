@@ -93,22 +93,28 @@ class PageController extends Controller
 
     public function LeaderBoardPage($id = -1)
     {
-        $currentLeaderboard = Leaderboard::with(['member1', 'member2', 'member3', 'member4', 'member5', 'member6', 'member7', 'member8', 'member9', 'member10']);
-        if (Leaderboard::count() > 0) {
-            if (Leaderboard::where('id', $id)->exists()) {
-                $currentLeaderboard = $currentLeaderboard->find($id);
-            } else {
-                $currentLeaderboard = $currentLeaderboard->latestWeek();
-            }
+        // Only eager load the member relationships that are needed in the view
+        $currentLeaderboardQuery = Leaderboard::with(['member1', 'member2', 'member3']);
+        if (Leaderboard::where('id', $id)->exists()) {
+            $currentLeaderboard = $currentLeaderboardQuery->find($id);
+        } else {
+            $currentLeaderboard = $currentLeaderboardQuery->latestWeek();
+        }
+
+        if ($currentLeaderboard) {
             $leaderboards = Leaderboard::with(['member1', 'member2', 'member3']) // Load relationships
                 ->limit(15)
                 ->where("id", "!=", $currentLeaderboard->id)
                 ->select(['id', 'week_start_date', 'publish_at', 'member_1_id', 'member_2_id', 'member_3_id'])
                 ->get();
-            return view('basetheme.leaderboard', ["currentLeaderboard" => $currentLeaderboard, "leaderboards" => $leaderboards ?? []]);
-        }else{
-            return view('basetheme.leaderboard', ["currentLeaderboard" => null]);
+        } else {
+            $leaderboards = collect();
         }
+
+        return view('basetheme.leaderboard', [
+            "currentLeaderboard" => $currentLeaderboard,
+            "leaderboards" => $leaderboards
+        ]);
     }
 
     public function WorkshopsPage()
