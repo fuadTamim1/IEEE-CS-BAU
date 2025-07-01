@@ -9,34 +9,30 @@
                 <div class="leaderboard-container">
 
                     <div class="glow"></div>
-                    @if ($currentLeaderboard)
-                        @if (strtotime($currentLeaderboard->publish_at) > time())
+                    @if (!empty($currentLeaderboard))
+                        @php
+                            $publishAt = $currentLeaderboard->publish_at ?? null;
+                            $weekStart = $currentLeaderboard->week_start_date ?? null;
+                        @endphp
+                        @if ($publishAt && strtotime($publishAt) > time())
                             <div id="countdown" class="countdown-container">
                                 <h1 class="title">LEADERBOARD REVEAL</h1>
                                 <div class="countdown-timer">
-                                    <div class="countdown-box">
-                                        <div id="days" class="countdown-number">00</div>
-                                        <div class="countdown-label">Days</div>
-                                    </div>
-                                    <div class="countdown-box">
-                                        <div id="hours" class="countdown-number">00</div>
-                                        <div class="countdown-label">Hours</div>
-                                    </div>
-                                    <div class="countdown-box">
-                                        <div id="minutes" class="countdown-number">00</div>
-                                        <div class="countdown-label">Minutes</div>
-                                    </div>
-                                    <div class="countdown-box">
-                                        <div id="seconds" class="countdown-number">00</div>
-                                        <div class="countdown-label">Seconds</div>
-                                    </div>
+                                    @foreach (['days' => 'Days', 'hours' => 'Hours', 'minutes' => 'Minutes', 'seconds' => 'Seconds'] as $id => $label)
+                                        <div class="countdown-box">
+                                            <div id="{{ $id }}" class="countdown-number">00</div>
+                                            <div class="countdown-label">{{ $label }}</div>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="countdown-text">Until Leaderboard Reveal!</div>
                             </div>
                         @else
                             <div id="leaderboard">
-                                <h1 class="leaderboard-title">Members Of The Month
-                                    {{ $currentLeaderboard->week_start_date->format('F j, Y') }}</h1>
+                                <h1 class="leaderboard-title">
+                                    Members Of The Month
+                                    {{ $weekStart ? (is_object($weekStart) ? $weekStart->format('F j, Y') : \Carbon\Carbon::parse($weekStart)->format('F j, Y')) : '' }}
+                                </h1>
                                 <table class="leaderboard-table">
                                     <thead>
                                         <tr>
@@ -45,50 +41,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>🥇 1</td>
-                                            <td>{{ $currentLeaderboard->member1->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>🥈 2</td>
-                                            <td>{{ $currentLeaderboard->member2?->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>🥉 3</td>
-                                            <td>{{ $currentLeaderboard->member3?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 4</td>
-                                            <td>{{ $currentLeaderboard->member4?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 5</td>
-                                            <td>{{ $currentLeaderboard->member5?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 6</td>
-                                            <td>{{ $currentLeaderboard->member6?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 7</td>
-                                            <td>{{ $currentLeaderboard->member7?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 8</td>
-                                            <td>{{ $currentLeaderboard->member8?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 9</td>
-                                            <td>{{ $currentLeaderboard->member9?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 10</td>
-                                            <td>{{ $currentLeaderboard->member10?->name ?? '-' }}</td>
-                                        </tr>
+                                        @foreach (range(1, 10) as $i)
+                                            @php
+                                                $member = $currentLeaderboard->{'member'.$i} ?? null;
+                                                $rankIcons = [1 => '🥇', 2 => '🥈', 3 => '🥉'];
+                                                $rank = $rankIcons[$i] ?? "#";
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $rank }} {{ $i }}</td>
+                                                <td>{{ $member?->name ?? '-' }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         @endif
+                    @else
+                        <div class="no-leaderboard">
+                            <h1 class="title">No Leaderboard Available</h1>
+                            <p class="message">Please check back later for updates.</p>
+                        </div>
                     @endif
 
 
@@ -97,18 +69,19 @@
         </div>
         <div id="particles-js"></div>
         <hr>
-
-        <div class="leaderboards-cards">
-            <div class="container">
-                <div class="row  mt-5">
-                    @foreach ($leaderboards as $leaderboard)
-                        <div class="col-sm-12 col-lg-4 mb-3">
-                            <x-leaderboard-card :leaderboard="$leaderboard" />
-                        </div>
-                    @endforeach
+        @if(isset($leaderboards))
+            <div class="leaderboards-cards">
+                <div class="container">
+                    <div class="row  mt-5">
+                        @foreach ($leaderboards as $leaderboard)
+                            <div class="col-sm-12 col-lg-4 mb-3">
+                                <x-leaderboard-card :leaderboard="$leaderboard" />
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         @section('scripts')
             <script>
@@ -139,22 +112,29 @@
 
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
-                    // Get publish timestamp from Laravel
-                    const publishTimestamp = {{ strtotime($currentLeaderboard->publish_at) * 1000 }};
-                    const currentTimestamp = Date.now();
-                    const hasShownBefore = localStorage.getItem('leaderboardShown_{{ $currentLeaderboard->id }}');
-
-                    // Check if already published
-                    if (currentTimestamp >= publishTimestamp) {
-                        // If first time viewing for this user, show celebration
-                        if (!hasShownBefore) {
+                    @if (!empty($currentLeaderboard) && !empty($currentLeaderboard->id))
+                        if(localStorage.getItem('leaderboardShown_{{ $currentLeaderboard->id }}')) {
+                            // If already shown, skip countdown
                             startCelebration();
-                            localStorage.setItem('leaderboardShown_{{ $currentLeaderboard->id }}', 'true');
+                            return;
                         }
-                    } else {
-                        // If not published yet, start countdown
-                        startCountdown(publishTimestamp);
-                    }
+                        // Get publish timestamp from Laravel
+                        const publishTimestamp = {{ strtotime($currentLeaderboard->publish_at ?? '') * 1000 }};
+                        const currentTimestamp = Date.now();
+                        const hasShownBefore = localStorage.getItem('leaderboardShown_{{ $currentLeaderboard->id }}');
+
+                        // Check if already published
+                        if (currentTimestamp >= publishTimestamp) {
+                            // If first time viewing for this user, show celebration
+                            if (!hasShownBefore) {
+                                startCelebration();
+                                localStorage.setItem('leaderboardShown_{{ $currentLeaderboard->id }}', 'true');
+                            }
+                        } else {
+                            // If not published yet, start countdown
+                            startCountdown(publishTimestamp);
+                        }
+                    @endif
                 });
 
                 function startCountdown(endTime) {
