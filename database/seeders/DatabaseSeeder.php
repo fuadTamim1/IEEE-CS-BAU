@@ -30,5 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // Assign admin role
         $admin->assignRole('admin');
+
+        $this->call(SettingsSeeder::class);
     }
 }
