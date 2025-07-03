@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $admin->assignRole('admin');
 
         $this->call(SettingsSeeder::class);
+        $this->call(TextConfigSeeder::class);
     }
 }
