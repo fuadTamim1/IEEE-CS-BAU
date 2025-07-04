@@ -1,8 +1,8 @@
 #!/bin/bash
-# Make sure this file has executable permissions, run `chmod +x build-app.sh`
+# Make sure this file has executable permissions, run ` `
 
 # Exit the script if any command fails
-set -e
+# set -e
 
 # Build assets using NPM
 npm run build
