@@ -34,13 +34,16 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true),
-                Select::make('title')
+                Select::make('role')
+                    ->label('Role')
                     ->options([
-                        "chairperson" => "chairperson",
-                        "MD" => "MD",
-                        "Treauser" => "Treauser",
-                        "Member" => "Member"
-                    ]),
+                        'super-admin' => 'Super Admin',
+                        'admin' => 'Admin',
+                        'editor' => 'Editor',
+                        'writer' => 'Writer',
+                        'user' => 'User',
+                    ])
+                    ->required(),
                 TextInput::make('password')
                     ->password()
                     ->required()
@@ -57,7 +60,10 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('roles.0.name')
+                    ->label('Role')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([

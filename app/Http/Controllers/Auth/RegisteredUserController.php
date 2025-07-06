@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         if ($user->hasRole(['super-admin', 'admin', 'editor', 'writer'])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('filament.admin.pages.dashboard');
         }
 
         return redirect()->route('home');
