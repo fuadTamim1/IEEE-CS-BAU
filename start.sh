@@ -1,7 +1,7 @@
 
 
 php artisan migrate --force
-php artisan db:seed
+php artisan db:seed --force
 php artisan storage:link
 php artisan filament:optimize
 

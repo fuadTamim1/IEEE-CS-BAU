@@ -9,7 +9,7 @@ npm run build
 
 # Clear cache
 php artisan optimize:clear
-
+chmod -R 775 storage bootstrap/cache
 # Cache the various components of the Laravel application
 php artisan config:cache
 php artisan event:cache
