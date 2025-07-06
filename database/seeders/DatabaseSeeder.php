@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
 use Database\Seeders\RolesAndPermissionsSeeder as SeedersRolesAndPermissionsSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -30,8 +31,12 @@ class DatabaseSeeder extends Seeder
 
         // Assign admin role
         $admin->assignRole('admin');
-
+        
         $this->call(SettingsSeeder::class);
         $this->call(TextConfigSeeder::class);
+        if(Category::count() === 0) {
+            // Only call CategorySeeder if there are no categories
+            $this->call(CategorySeeder::class);
+        }
     }
 }

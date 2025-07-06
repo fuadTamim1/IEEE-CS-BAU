@@ -13,6 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'under.development' => \App\Http\Middleware\UnderDevelopment::class,
+            'trusted.proxy' => \App\Http\Middleware\TrustedProxy::class,
+        ]);
+        $middleware->append([
+            \App\Http\Middleware\TrustedProxy::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
