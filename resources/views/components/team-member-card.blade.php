@@ -14,7 +14,12 @@
                     <ul>
                         @foreach ($contacts as $contact)
                             <li>
-                                <a href="{{ $contact['value'] ?? '#' }}" target="_blank">
+                                <a href="{{ $contact['value'] ?? '#' }}" target="_blank" style="display: flex;align-items: center; justify-content: center;">
+                                    {{-- <i class="fa-brands fa-facebook-f fa-lg"></i> --}}
+                                    {{-- <i class="fa-brands fa-twitter fa-lg"></i> --}}
+                                    {{-- <i class="fa-brands fa-instagram fa-lg"></i> --}}
+                                    {{-- <i class="fa-brands fa-linkedin-in fa-lg"></i> --}}
+                                    {{-- <i class="fa-brands fa-youtube fa-lg"></i> --}}
                                     @switch(strtolower($contact['key']))
                                         @case('facebook')
                                             <i class="fa-brands fa-facebook-f fa-lg"></i>

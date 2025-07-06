@@ -31,6 +31,7 @@ class PageController extends Controller
     public function AboutPage()
     {
         $members = Member::all();
+        dump($members[0]->image);
         return view('basetheme.about', ["members" => $members]);
     }
 

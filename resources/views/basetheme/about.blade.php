@@ -303,7 +303,7 @@
                 <div class="row">
                     @foreach ($members as $m)
                         <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
-                            :links="$m->contacts" />
+                            :links="$m->contacts" :image="$m->image" />
                     @endforeach
                 </div>
                                 {{-- Pagenation --}}
