@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Setting;
+use App\Models\TextWidget;
 
 class TextConfigSeeder extends Seeder
 {
@@ -27,7 +28,7 @@ class TextConfigSeeder extends Seeder
         ];
 
         foreach ($textConfigs as $config) {
-            Setting::updateOrCreate(['key' => $config['key']], ['value' => $config['value']]);
+            TextWidget::updateOrCreate(['key' => $config['key']], ['value' => $config['value']]);
         }
     }
 }
