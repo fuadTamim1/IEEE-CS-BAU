@@ -26,7 +26,7 @@ class SponsorResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\TextInput::make('descrition')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('website')
@@ -44,7 +44,7 @@ class SponsorResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('description')
+                Tables\Columns\TextColumn::make('descrition')
                     ->limit(20),
                 Tables\Columns\TextColumn::make('website')
                     ->searchable(),
