@@ -17,6 +17,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\Enums\TiptapOutput;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -49,9 +51,11 @@ class EventResource extends Resource
                     DateTimePicker::make('end_at')
                         ->required(),
                 ]),
-                RichEditor::make('content')
+                TiptapEditor::make('content')
+                    ->profile('default')
                     ->required()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->output(TiptapOutput::Html),
                 FileUpload::make('image')
                     ->image()
                     ->imageEditor()

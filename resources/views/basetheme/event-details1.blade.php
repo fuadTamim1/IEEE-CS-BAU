@@ -15,13 +15,15 @@
                     <article>
                         <div class="details-content">
                             <div class="image d-flex">
-                                <img class="mx-auto" src="{{ asset('images/event.png') }}" style="width: 60%"
+                                <img class="mx-auto" src="{{ asset('storage/'.$event->image) }}" style="width: 60%"
                                     alt="">
                             </div>
                         </div>
                     </article>
                 </div>
-                <div class="col-lg-4">
+                @if (false)
+                    
+                <div class="col-lg-4" >
                     <div class="sidebar-area mt-50">
                         {{-- <div class="_sidebar-widget _search">
                             <h3>Search</h3>
@@ -68,7 +70,7 @@
                                         src="assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
                             </div>
                         </div> --}}
-
+                        {{-- 
                         <div class="_sidebar-widget _contact mt-40">
                             <h3>Get A Free Quote</h3>
                             <div class="_contact-form mt-10">
@@ -83,11 +85,13 @@
                                                 class="fa-solid fa-arrow-right"></i></span></button>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
-                <div class="col-lg-8">
+                @endif
+
+                <div class="col-lg-12">
                     <div class="blog-details-content ml-30 md:ml-0 sm:ml-0 mt-50">
                         <article>
                             <div class="details-content"
@@ -184,6 +188,8 @@
     <!--===== CTA AREA ENDS =======-->
 
     <!-- schedule-area-start -->
+    @if (false) <!-- should be if there is a schould -->
+        
     <section class="schedule-area sp">
         <div class="container">
             <div class="row">
@@ -475,6 +481,8 @@
             </div>
         </div>
     </section>
+    @endif
+    
     <!-- analysis-area-end -->
 
     <!--===== SERVICE SECTION AREA START =====-->

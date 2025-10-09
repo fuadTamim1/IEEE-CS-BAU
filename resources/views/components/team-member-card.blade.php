@@ -41,6 +41,10 @@
                                             <i class="fa-brands fa-youtube fa-lg"></i>
                                         @break
 
+                                        @case('email')
+                                            <i class="fa-brands fa-email fa-lg"></i>
+                                        @break
+
                                         @default
                                             <i class="fas fa-link fa-lg"></i>
                                             {{ ucfirst($platform) }}

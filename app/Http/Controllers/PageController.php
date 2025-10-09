@@ -23,21 +23,31 @@ class PageController extends Controller
 
         // Read the content of the file
         $jsonContent = File::get($filePath);
+        $members = $this->getMembers();
 
-        $memberStories = json_decode($jsonContent);
-        return view('basetheme.home', ["posts" => $recentPosts, "memberStories" => $memberStories, "events" => $recentEvents]);
+        // $memberStories = json_decode($jsonContent);
+        // $memberStories = json_decode($jsonContent);
+        return view('basetheme.home', ["posts" => $recentPosts, "members" => $members, "events" => $recentEvents]);
+    }
+
+    private function getMembers()
+    {
+        if (get_setting("show_only_team_admins")) {
+            return Member::where("title", "!=", "Member")->orderBy("order", "DESC")->get();
+        } else {
+            return Member::all();
+        }
     }
 
     public function AboutPage()
     {
-        $members = Member::all();
-        dump($members[0]->image);
+        $members = $this->getMembers();
         return view('basetheme.about', ["members" => $members]);
     }
 
     public function TeamPage()
     {
-        $members = Member::all();
+        $members = $this->getMembers();
         return view('basetheme.team', ["members" => $members]);
     }
 
@@ -120,6 +130,8 @@ class PageController extends Controller
 
     public function WorkshopsPage()
     {
+        // Workshop        
+
         return view('basetheme.workshops');
     }
 

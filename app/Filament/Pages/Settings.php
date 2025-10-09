@@ -53,6 +53,7 @@ class Settings extends Page
                         TextInput::make('events_to_display')->label('Events to Display'),
                         TextInput::make('custom_footer_text')->label('Custom Footer Text'),
                         Toggle::make('show_team_section')->label('Show Team Section'),
+                        Toggle::make('show_only_team_admins')->label('Show Only Team Admins'),
                     ]),
                 Section::make('Contact & Social')
                     ->schema([

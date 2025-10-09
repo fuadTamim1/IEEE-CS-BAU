@@ -32,10 +32,10 @@
                 <div class="col-lg-6">
                     <div class="about2-images">
                         <div class="image1 image-anime reveal">
-                            <img src="{{ asset('images/work.jpg') }}" width="500px" alt="">
+                            <img src="{{ asset('IEEE/Managment-20250805T060425Z-1-001/Managment_2024/team_1_2.JPG') }}" width="500px" alt="">
                         </div>
                         <div class="image2 image-anime reveal">
-                            <img src="{{ asset('images/work2.jpg') }}" width="500px" alt="">
+                            <img src="{{ asset('IEEE/Managment-20250805T060425Z-1-001/Managment_2024/team_1.jpg') }}" width="500px" alt="">
                         </div>
                     </div>
                 </div>

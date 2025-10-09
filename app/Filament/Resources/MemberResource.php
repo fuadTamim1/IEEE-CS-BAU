@@ -67,11 +67,12 @@ class MemberResource extends Resource
                     ->maxLength(255),
                 Select::make('title')
                     ->options([
-                        "chairperson" => "chairperson",
-                        "PR" => "PR",
-                        "MD" => "MD",
-                        "Treauser" => "Treauser",
-                        "Member" => "Member"
+                        "Chairperson",
+                        "Vice-Chair",
+                        "PR",
+                        "MD",
+                        "Treauser",
+                        "Member"
                     ]),
                 Forms\Components\TextInput::make('major')
                     ->required()
@@ -79,6 +80,12 @@ class MemberResource extends Resource
                 Select::make('class_of_the_year')
                     ->options($yeaars)
                     ->searchable(),
+                TextInput::make('order')
+                    ->label('Order')
+                    ->numeric()      // ensures numeric input
+                    ->default(0)
+                    ->minValue(0)    // optional: prevents negative numbers
+                    ->step(1),
                 Repeater::make('contacts')
                     ->schema([
                         Select::make('key')
@@ -89,6 +96,7 @@ class MemberResource extends Resource
                                 'twitter' => 'Twitter',
                                 'youtube' => 'YouTube',
                                 'website' => 'Website',
+                                'email' => 'Email',
                                 // add more platforms as needed
                             ])
                             ->required()
@@ -109,9 +117,15 @@ class MemberResource extends Resource
                     ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
                         return collect($data)->pluck('value', 'key')->toArray();
                     }),
-                Forms\Components\FileUpload::make('image')
+                    TextInput::make("story")
+                    ->label("Story With IEEE CS")
+                    ->minLength(20)
+                    ->maxLength(100)
+                    ->columnSpanFull(),
+                    Forms\Components\FileUpload::make('image')
                     ->image()
                     ->label("Personal Photo")
+                    ->imageEditor()
                     ->default("pixel.jpg"),
             ]);
     }
@@ -128,7 +142,7 @@ class MemberResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('class_of_the_year')
                     ->sortable(),
-                IconColumn::make('hasImage')
+                IconColumn::make('image')
                     ->label('Has Image')
                     ->boolean()
                     ->getStateUsing(function ($record) {
