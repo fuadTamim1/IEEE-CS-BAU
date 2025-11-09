@@ -225,20 +225,28 @@
         subtitle="{{ __('Member Stories') }}" icon="{{ asset('images/logo.png') }}" :slidesToShow="1"
         :autoplay="false" :autoplaySpeed="2000" :arrows="false" :dots="true">
         @foreach ($membersWithStoy as $m)
-            <x-slider-item class="horizontal-slider-item" style="width: 800px;">
-                <div class="row align-items-center min-h-80">
-                    <div class="col-md-5" style="overflow: hidden;
-    height: 300px;">
-                        <img src="{{ asset('storage/' . $m->image) }}" alt="{{ $m->name }} profile"
-                            loading="lazy">
+            <x-slider-item class="horizontal-slider-item">
+                <div class="row align-items-center">
+                    <div class="col-md-5 col-sm-12 mb-3 mb-md-0">
+                        <div style="height: 300px; overflow: hidden; border-radius: 8px;">
+                            <img src="{{ asset('storage/' . $m->image) }}" 
+                                alt="{{ $m->name }} profile"
+                                class="w-100 h-100 object-fit-cover"
+                                loading="lazy">
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <div class="author_text">
-                            <img src="{{ asset('assets/img/icons/qoute4.png') }}" alt="Quote icon">
-                            <h5>"{{ $m->story }}"</h5>
+                    <div class="col-md-7 col-sm-12">
+                        <div class="author_text p-3">
+                            <img src="{{ asset('assets/img/icons/qoute4.png') }}" 
+                                alt="Quote icon" 
+                                class="mb-3"
+                                style="max-width: 40px;">
+                            <h5 class="fs-5 mb-4" style="line-height: 1.6;">
+                                "{{ $m->story }}"
+                            </h5>
                             <div class="info">
-                                <a href="#">{{ $m->name }}</a>
-                                <p>{{ $m->title }}</p>
+                                <a href="#" class="d-block mb-2 fw-bold">{{ $m->name }}</a>
+                                <p class="m-0 text-muted">{{ $m->title }}</p>
                             </div>
                         </div>
                     </div>

@@ -1178,9 +1178,25 @@ margin-top: 1rem;
             .mega-menu-content {
                 padding: 15px;
             }
+            .about4-images .image2{
+              display: none;
+            }
+
+            .tes4-single-slider {
+              min-width: 100vw;
+            }
         }
-        
+        .about4-images {
+          margin-bottom: 1rem;
+        }
         /* Ensure proper spacing */
         .container.header2-bg {
             position: relative;
+        }
+        .slick-track{
+          display: flex !important;
+        
+        }
+        .slick-slider img{
+          object-fit: cover;
         }

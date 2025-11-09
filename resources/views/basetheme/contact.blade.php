@@ -79,16 +79,16 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="single-input">
-                                            <input type="number" placeholder="Phone Number">
+                                            <input type="tel" placeholder="Phone Number">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="single-input">
                                             <select class="wide">
-                                                <option value="1">Service Type</option>
-                                                <option value="2">Option 1</option>
-                                                <option value="3">Option 2</option>
-                                                <option value="4">Option 3</option>
+                                                <option value="1">Contact Type</option>
+                                                <option value="2">Inquery about CS</option>
+                                                <option value="3">Disccuss for future opperunity</option>
+                                                <option value="4">Other...</option>
                                             </select>
                                         </div>
                                     </div>
