@@ -3,7 +3,7 @@ name: Deploy Laravel to Hostinger
 on:
   push:
     branches:
-      - deploy        # Push to this branch to deploy
+      - deploy        # Push to this branch to deploy in deploy branch
 
 jobs:
   deploy:
