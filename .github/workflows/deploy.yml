@@ -1,63 +1,47 @@
-name: Build and Deploy Assets
+name: Deploy Laravel to Hostinger
 
 on:
   push:
-    branches: [main]
+    branches:
+      - deploy        # Push to this branch to deploy
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 🧪 Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: mbstring, bcmath, xml, ctype, fileinfo, json, tokenizer, curl, openssl, pdo, pdo_mysql, intl, zip, exif
-          coverage: none
-
-      - name: Verify PHP extensions
-        run: php -m | grep -E 'intl|zip|exif'
-
-      - name: Trust Git directory
+      - name: 🔐 Setup SSH
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory /app
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      # - name: Set up Composer
-      #   uses: php-actions/composer@v6
-      #   with:
-      #     composer_version: '2'
-
-      # - name: Install PHP dependencies
-      #   run: composer install
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Print working directory
-        run: pwd
-
-      - name: Check package-lock.json
+      - name: 📦 Install Dependencies Locally
         run: |
-          git diff --exit-code package-lock.json || (echo "package-lock.json is out of sync. Please update it locally and commit the changes."; exit 1)
+          composer install --no-dev --prefer-dist --optimize-autoloader
+          npm install
+          npm run build
 
-      - name: Install JS dependencies
-        run: npm install
-
-      - name: Build frontend assets
-        run: npm run build
-
-      - name: Commit and push built assets
+      - name: 🚀 Deploy With rsync (Safe & Fast)
         run: |
-          git config --global user.email "fuad89573@email.com"
-          git config --global user.name "Fuad"
-          git checkout -B deploy
-          git add public/css public/js public/build -f
-          git commit -m "🚀 Auto-build assets for deployment"
-          git push -f origin deploy
+          rsync -avz --delete \
+          --exclude=".env" \
+          --exclude="storage" \
+          --exclude="node_modules" \
+          --exclude=".git" \
+          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/IEEE-CS-BAU/
+
+      - name: 🛠 Run Commands on Hostinger
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            cd /var/www/html/IEEE-CS-BAU &&
+            composer install --no-dev --prefer-dist --optimize-autoloader &&
+            php artisan migrate --force &&
+            php artisan config:cache &&
+            php artisan route:cache &&
+            php artisan view:cache
+          "
