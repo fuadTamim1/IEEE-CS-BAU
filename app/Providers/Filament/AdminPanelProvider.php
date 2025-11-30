@@ -6,12 +6,15 @@ use App\Filament\Pages\Settings;
 use App\Filament\Pages\TextWidgets;
 use App\Filament\Resources\BlogResource\Widgets\BlogPostCategoryChart;
 use App\Filament\Resources\BlogResource\Widgets\RecentBlogPostsTable;
+use App\Filament\Resources\ExamResource;
+use App\Filament\Resources\ExamSessionResource;
 use App\Filament\Resources\LeaderboardResource;
 use App\Filament\Resources\SubscriberResource;
 use App\Filament\Resources\TextWidgetResource;
 use App\Filament\Resources\UserResource\Widgets\UserGrowthChart;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\EnsureUserHasAdminAccess;
+use App\Models\ExamSession;
 use App\Models\Subscriber;
 use Chiiya\FilamentAccessControl\FilamentAccessControlPlugin;
 use Filament\Navigation\NavigationBuilder;
@@ -125,6 +128,18 @@ class AdminPanelProvider extends PanelProvider
                                     ]),
 
                             ]),
+                    )
+                    ->group(
+                        NavigationGroup::make('Exams')
+                            ->items([
+                                NavigationItem::make('Exam')
+                                    ->icon('heroicon-o-envelope')
+                                    ->url(fn(): string => ExamResource::getUrl()),
+                                    
+                                NavigationItem::make('Exam Session')
+                                    ->icon('heroicon-o-envelope')
+                                    ->url(fn(): string => ExamSessionResource::getUrl())
+                            ])
                     )
                     ->group(
                         NavigationGroup::make('Mails')
