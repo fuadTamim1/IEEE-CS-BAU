@@ -13,8 +13,17 @@ return new class extends Migration
     {
         Schema::create('exam_sessions', function (Blueprint $table) {
             $table->id();
-            $table->dateTime("open_at");
-            $table->string("token");
+            $table->foreignId("exam_id")
+            ->constrained("exams")
+            ->cascadeOnDelete();
+            $table->text("token");
+            $table->string("full_name");
+            $table->string("email");
+            $table->string("phone");
+            $table->dateTime("started_at");
+            $table->dateTime("ended_at");
+            $table->integer("score");
+            $table->enum('status',["pending","active","submitted","expired"]);
             $table->timestamps();
         });
     }

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exams', function (Blueprint $table) {
+        Schema::create('exam_task_media', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->text("cover_image")->nullable();
-            $table->integer("duration_minutes")->default(45);
-            $table->boolean("is_published")->default(1);
+            $table->foreignId("exam_task_id")->constrained("exam_tasks");
+
+            $table->enum('type', ["image", "file"]);
             $table->json("meta")->nullable();
             $table->timestamps();
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exams');
+        Schema::dropIfExists('exam_task_media');
     }
 };

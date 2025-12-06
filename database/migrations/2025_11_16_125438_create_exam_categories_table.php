@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('exam_categories', function (Blueprint $table) {
             $table->id();
             $table->string("title");
+            $table->text("slug");
+            $table->text("description");
+            $table->integer("order")->default(0);
             $table->timestamps();
         });
     }
