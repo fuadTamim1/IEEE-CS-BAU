@@ -5,21 +5,23 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apk add --no-cache \
+    build-base \
+    autoconf \
     libpng-dev \
     libjpeg-turbo-dev \
     libxml2-dev \
     libzip-dev \
+    zlib-dev \
     icu-dev \
     oniguruma-dev \
     curl \
     git \
     nodejs \
     npm \
-    build-base \
-    autoconf
+    freetype-dev
 
 # Install PHP extensions
-RUN docker-php-ext-configure gd --with-jpeg && \
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype && \
     docker-php-ext-install \
     pdo \
     pdo_mysql \
@@ -54,12 +56,14 @@ RUN apk add --no-cache \
     libjpeg-turbo \
     libxml2 \
     libzip \
+    zlib \
     icu \
     oniguruma \
+    freetype \
     mysql-client
 
 # Install PHP extensions
-RUN docker-php-ext-configure gd --with-jpeg && \
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype && \
     docker-php-ext-install \
     pdo \
     pdo_mysql \
