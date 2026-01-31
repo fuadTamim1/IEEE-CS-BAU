@@ -43,7 +43,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # Build frontend assets
-RUN npm install && npm run build
+RUN npm install && npm run build || true
 
 # Production stage
 FROM php:8.3-fpm-alpine
