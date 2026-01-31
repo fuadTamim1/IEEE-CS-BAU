@@ -11,6 +11,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
@@ -32,8 +33,12 @@ class ExamResource extends Resource
         return $form
             ->schema([
                 TextInput::make("title")->label("Title"),
+                Textarea::make('description')->label('Description')->default("Exam Details"),
+                Forms\Components\FileUpload::make('cover_image')
+                    ->image()
+                    ->required(),
                 Checkbox::make("is_published")->label("Published")->default(1),
-
+                
                 // The Action Button
                 Actions::make([
                     Action::make('generateCategories')
@@ -155,6 +160,7 @@ class ExamResource extends Resource
     public static function getPages(): array
     {
         return [
+            'dashboard' => Pages\ExamCategoriesDashboard::route('/dashboard'),
             'index' => Pages\ListExams::route('/'),
             'create' => Pages\CreateExam::route('/create'),
             'edit' => Pages\EditExam::route('/{record}/edit'),

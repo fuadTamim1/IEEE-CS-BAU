@@ -1,44 +1,83 @@
-# Use the official PHP image with FPM
-FROM php:8.2-fpm
+# Multi-stage build for production
+FROM php:8.2-fpm-alpine AS builder
 
-# Set working directory
-WORKDIR /var/www/html
+WORKDIR /app
 
-# Install system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y \
-    build-essential \
+# Install system dependencies
+RUN apk add --no-cache \
     libpng-dev \
     libjpeg-dev \
-    libonig-dev \
     libxml2-dev \
     libzip-dev \
-    libicu-dev \
-    zip \
-    unzip \
+    icu-dev \
+    oniguruma-dev \
     curl \
     git \
-    default-mysql-client \
     nodejs \
-    npm \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif intl pcntl bcmath gd zip
+    npm
+
+# Install PHP extensions
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    intl \
+    zip \
+    gd
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy application code
+# Copy application files
 COPY . .
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
-# Install Laravel dependencies and build frontend
-RUN composer install --no-dev --optimize-autoloader \
-    && npm install \
-    && npm run build
+# Build frontend assets
+RUN npm install && npm run build
 
-# Expose port
-EXPOSE 80
+# Production stage
+FROM php:8.2-fpm-alpine
 
-# Start PHP-FPM
+WORKDIR /var/www/html
+
+# Install runtime dependencies only
+RUN apk add --no-cache \
+    libpng \
+    libjpeg \
+    libxml2 \
+    libzip \
+    icu \
+    oniguruma \
+    mysql-client
+
+# Install PHP extensions
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    intl \
+    zip \
+    gd
+
+# Copy built application from builder
+COPY --from=builder /app /var/www/html
+
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Copy PHP configuration
+COPY docker/php/php.ini /usr/local/etc/php/php.ini
+COPY docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
+
+EXPOSE 9000
+
 CMD ["php-fpm"]
