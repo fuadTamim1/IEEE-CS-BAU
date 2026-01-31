@@ -50,16 +50,18 @@ FROM php:8.2-fpm-alpine
 
 WORKDIR /var/www/html
 
-# Install runtime dependencies only
+# Install build tools AND runtime dependencies
 RUN apk add --no-cache \
-    libpng \
-    libjpeg-turbo \
-    libxml2 \
-    libzip \
-    zlib \
-    icu \
-    oniguruma \
-    freetype \
+    build-base \
+    autoconf \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    libxml2-dev \
+    libzip-dev \
+    zlib-dev \
+    icu-dev \
+    oniguruma-dev \
+    freetype-dev \
     mysql-client
 
 # Install PHP extensions
