@@ -77,6 +77,9 @@ RUN docker-php-ext-configure gd --with-jpeg --with-freetype && \
     zip \
     gd
 
+# Install Composer for fallback dependency installation
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Copy built application from builder (includes vendor directory)
 COPY --from=builder /app /var/www/html
 
