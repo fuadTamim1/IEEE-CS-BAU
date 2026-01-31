@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b61a02f204297015afc964283e64c0d",
+    "content-hash": "a530d12a1273f68785404f3c3a1bb06b",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -522,28 +522,27 @@
         },
         {
             "name": "chiiya/filament-access-control",
-            "version": "2.7.2",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chiiya/filament-access-control.git",
-                "reference": "7ebf5e4b62b9352b1b2ffdf21477f26c5682d6bf"
+                "reference": "c852441f5a8fe0289d2000b8f87ece3ff8a2fabb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chiiya/filament-access-control/zipball/7ebf5e4b62b9352b1b2ffdf21477f26c5682d6bf",
-                "reference": "7ebf5e4b62b9352b1b2ffdf21477f26c5682d6bf",
+                "url": "https://api.github.com/repos/chiiya/filament-access-control/zipball/c852441f5a8fe0289d2000b8f87ece3ff8a2fabb",
+                "reference": "c852441f5a8fe0289d2000b8f87ece3ff8a2fabb",
                 "shasum": ""
             },
             "require": {
-                "filament/filament": "^3.0|^4.0",
+                "filament/filament": "^3.0",
                 "illuminate/contracts": "^11.0|^12.0",
-                "php": "^8.2|^8.3|^8.4",
+                "php": "^8.2|^8.3",
                 "spatie/laravel-package-tools": "^1.11",
                 "spatie/laravel-permission": "^6.4"
             },
             "require-dev": {
                 "chiiya/laravel-code-style": "^3.0",
-                "filament/upgrade": "^4.0",
                 "orchestra/testbench": "^9.0|^10.0"
             },
             "type": "library",
@@ -584,7 +583,7 @@
             ],
             "support": {
                 "issues": "https://github.com/chiiya/filament-access-control/issues",
-                "source": "https://github.com/chiiya/filament-access-control/tree/2.7.2"
+                "source": "https://github.com/chiiya/filament-access-control/tree/2.6.0"
             },
             "funding": [
                 {
@@ -592,7 +591,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-09T15:57:52+00:00"
+            "time": "2025-02-20T17:36:27+00:00"
         },
         {
             "name": "cocur/slugify",
@@ -7056,16 +7055,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "9.3.7",
+            "version": "9.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "6aa2d0ef42218ba6c1f627a17ade3e1ffd0e18af"
+                "reference": "3ab3f29f0054655ebfdd5b2f6479de0f8f62f5c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/6aa2d0ef42218ba6c1f627a17ade3e1ffd0e18af",
-                "reference": "6aa2d0ef42218ba6c1f627a17ade3e1ffd0e18af",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/3ab3f29f0054655ebfdd5b2f6479de0f8f62f5c2",
+                "reference": "3ab3f29f0054655ebfdd5b2f6479de0f8f62f5c2",
                 "shasum": ""
             },
             "require": {
@@ -7140,7 +7139,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/9.3.7"
+                "source": "https://github.com/spatie/laravel-backup/tree/9.4.0"
             },
             "funding": [
                 {
@@ -7152,7 +7151,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-11-26T15:43:43+00:00"
+            "time": "2026-01-31T13:16:56+00:00"
         },
         {
             "name": "spatie/laravel-medialibrary",
