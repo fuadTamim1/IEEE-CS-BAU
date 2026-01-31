@@ -77,8 +77,14 @@ RUN docker-php-ext-configure gd --with-jpeg --with-freetype && \
     zip \
     gd
 
-# Copy built application from builder
+# Copy built application from builder (includes vendor directory)
 COPY --from=builder /app /var/www/html
+
+# Verify vendor exists, if not run composer install as fallback
+RUN if [ ! -d /var/www/html/vendor ]; then \
+      echo "⚠️  Vendor directory missing, installing composer dependencies..."; \
+      cd /var/www/html && composer install --no-dev --optimize-autoloader --no-interaction --no-progress; \
+    fi
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html && \
