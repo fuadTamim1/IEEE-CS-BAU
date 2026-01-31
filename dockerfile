@@ -6,7 +6,7 @@ WORKDIR /app
 # Install system dependencies
 RUN apk add --no-cache \
     libpng-dev \
-    libjpeg-dev \
+    libjpeg-turbo-dev \
     libxml2-dev \
     libzip-dev \
     icu-dev \
@@ -48,7 +48,7 @@ WORKDIR /var/www/html
 # Install runtime dependencies only
 RUN apk add --no-cache \
     libpng \
-    libjpeg \
+    libjpeg-turbo \
     libxml2 \
     libzip \
     icu \
