@@ -1,5 +1,5 @@
 # Multi-stage build for production
-FROM php:8.2-fpm-alpine AS builder
+FROM php:8.3-fpm-alpine AS builder
 
 WORKDIR /app
 
@@ -46,7 +46,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progre
 RUN npm install && npm run build
 
 # Production stage
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 WORKDIR /var/www/html
 
