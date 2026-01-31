@@ -14,10 +14,13 @@ RUN apk add --no-cache \
     curl \
     git \
     nodejs \
-    npm
+    npm \
+    build-base \
+    autoconf
 
 # Install PHP extensions
-RUN docker-php-ext-install \
+RUN docker-php-ext-configure gd --with-jpeg && \
+    docker-php-ext-install \
     pdo \
     pdo_mysql \
     mbstring \
@@ -56,7 +59,8 @@ RUN apk add --no-cache \
     mysql-client
 
 # Install PHP extensions
-RUN docker-php-ext-install \
+RUN docker-php-ext-configure gd --with-jpeg && \
+    docker-php-ext-install \
     pdo \
     pdo_mysql \
     mbstring \
