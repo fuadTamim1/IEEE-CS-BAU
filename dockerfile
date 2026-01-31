@@ -77,18 +77,20 @@ RUN docker-php-ext-configure gd --with-jpeg --with-freetype && \
     zip \
     gd
 
-# Install Composer for fallback dependency installation
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install Composer and copy app
+RUN apk add --no-cache curl && \
+        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+        chmod +x /usr/local/bin/composer
 
 # Copy built application from builder (includes vendor directory)
 COPY --from=builder /app /var/www/html
 
 # Verify vendor exists, if not run composer install as fallback
 RUN if [ ! -d /var/www/html/vendor ]; then \
-      echo "⚠️  Vendor directory missing, installing composer dependencies..."; \
-      cd /var/www/html && composer install --no-dev --optimize-autoloader --no-interaction --no-progress; \
-    fi
-
+            echo "⚠️  Vendor directory missing, installing composer dependencies..."; \
+            cd /var/www/html && composer install --no-dev --optimize-autoloader --no-interaction --no-progress; \
+        fi
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
