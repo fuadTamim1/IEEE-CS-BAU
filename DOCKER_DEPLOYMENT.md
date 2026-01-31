@@ -85,7 +85,7 @@ QUEUE_CONNECTION=redis
 ### Step 4: Build and Start Containers
 
 ```bash
-# Build the Docker image
+# Build the Docker image (this takes ~5-10 minutes)
 docker-compose build
 
 # Start containers in detached mode
@@ -94,8 +94,13 @@ docker-compose up -d
 # Check if all containers are running
 docker-compose ps
 
-# Check logs
+# Check logs to verify everything started
 docker-compose logs -f
+
+# If you see any errors, check individual service logs:
+docker-compose logs app    # PHP-FPM logs
+docker-compose logs web    # Nginx logs
+docker-compose logs mysql  # MySQL logs
 ```
 
 ### Step 5: Initialize Database and Application
