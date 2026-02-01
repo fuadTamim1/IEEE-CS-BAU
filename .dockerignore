@@ -26,3 +26,4 @@ tests/
 phpunit.xml
 vite.config.js
 package-lock.json
+public/storage
