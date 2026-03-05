@@ -67,12 +67,16 @@ class MemberResource extends Resource
                     ->maxLength(255),
                 Select::make('title')
                     ->options([
-                        "Chairperson",
-                        "Vice-Chair",
-                        "PR",
-                        "MD",
-                        "Treauser",
-                        "Member"
+                        "Chairperson" => "Chairperson",
+                        "Vice-Chair" => "Vice-Chair",
+                        "PR Leader" => "PR Leader",
+                        "Membership Development" => "Membership Development",
+                        "Social Media Leader" => "Social Media Leader",
+                        "Technical Leader" => "Technical Leader",
+                        "Event Manager" => "Event Manager",
+                        "Treasurer" => "Treasurer",
+                        "Secertery" => "Secertery",
+                        "Member" => "Member"
                     ]),
                 Forms\Components\TextInput::make('major')
                     ->required()
@@ -97,6 +101,7 @@ class MemberResource extends Resource
                                 'youtube' => 'YouTube',
                                 'website' => 'Website',
                                 'email' => 'Email',
+                                'github' => 'GitHub',
                                 // add more platforms as needed
                             ])
                             ->required()
@@ -125,6 +130,7 @@ class MemberResource extends Resource
                     Forms\Components\FileUpload::make('image')
                     ->image()
                     ->label("Personal Photo")
+                    ->disk("public")
                     ->imageEditor()
                     ->default("pixel.jpg"),
             ]);

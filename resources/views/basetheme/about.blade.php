@@ -164,18 +164,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('images/about1.png') }}" alt="">
+                                    <img class="w-full" src="{{ asset('IEEE/Events-20250805T060448Z-1-001/Events/IEEE Day/1d70ddec-c1fa-44f3-ae5b-e6898d09ba51.jpg') }}" alt="">
                                 </div>
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('images/about2.png') }}" alt="">
+                                    <img class="w-full" src="{{ asset('IEEE/Events-20250805T060448Z-1-001/Events/IEEEXtreme/IMG_0470.JPG') }}" alt="">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 d-none d-lg-block">
                                 <div class="image image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="{{ asset('images/about3.png') }}" alt="">
+                                    <img class="w-full" src="{{ asset('IEEE/Visits-20250805T060418Z-1-001/Visits/Tamatem/487377573_1240146528150480_4597872574937663976_n.jpg') }}" alt="">
                                 </div>
-                                <div class="image image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="{{ asset('images/about4.png') }}" alt="">
+                                <div class="image mt-30 image-anime reveal md:mt-30 sm:mt-30">
+                                    <img class="w-full" src="{{ asset('IEEE/Ramadan competition-20250805T060420Z-1-001/Ramadan competition/old Ramadan competition/Pypass Team .jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                 <div class="col-lg-6">
                     <div class="overflow-hidden">
                         <div class="service1-image image-anime reveal md:mt-30 sm:mt-30">
-                            <img src="{{ asset('images/about5.png') }}" alt="">
+                            <img src="{{ asset('IEEE/Activities-20250805T060452Z-1-001/Activities/PodcasTech/481179645_9778143308884182_3778756239115729132_n.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>

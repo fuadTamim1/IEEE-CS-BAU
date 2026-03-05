@@ -39,9 +39,16 @@ return [
             'report' => false,
         ],
 
+        // 'public' => [
+        //     'driver' => 'local',
+        //     'root' => '/var/www/storage-files/app/public',   // <--- important
+        //     'url' => env('APP_URL') . '/storage',
+        //     'visibility' => 'public',
+        // ],
+
         'public' => [
             'driver' => 'local',
-            'root' => '/var/www/storage-files/app/public',   // <--- important
+            'root' => storage_path('app/public'),
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],

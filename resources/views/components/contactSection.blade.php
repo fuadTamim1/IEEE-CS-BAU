@@ -1,7 +1,7 @@
 <div class="contact2 sp">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="heading2">
                     <div class="contact2-form">
                         <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
@@ -50,11 +50,6 @@
                         </form> --}}
                         @livewire("contact-form")
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                    <img class="w-full" src="{{ asset('images/contact.png') }}" alt="">
                 </div>
             </div>
         </div>

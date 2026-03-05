@@ -358,7 +358,21 @@ margin-top: 1rem;
 .guest-error {
 
 }
-
+.team-page-item .team-image-area{
+  overflow: hidden;
+  border-radius: 100%;
+  width: 250px;
+  height: 250px;
+  border: 2px solid orange;
+}
+.team-page-item .team-image-area .image{
+    position: absolute;
+    bottom: 0;
+    width: 375px;
+    left: 85px;
+    margin-left: -150px;
+    text-align: center;
+}
 @media (max-width: 767.98px) { 
   .left-guest-widget {
     position: absolute !important;
@@ -587,6 +601,32 @@ margin-top: 1rem;
   padding-right: 0;
 }
 
+.tes4-single-slider{
+  max-height: 500px;
+  margin: 0px 20px !important;
+}
+
+.newletter-btn{
+  width:200px;
+  padding: 8px;
+  border-radius: 10px;
+  color: #f0f0f0;
+  background-color: #1f1f1f;
+  text-align: center;
+  margin-left: auto;
+}
+.cta4-form-area{
+      display: grid;
+    place-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 26px;
+}
+.newletter-btn:hover{
+  color: #fff;
+  background-color: #484848;
+
+}
 #particlesGuest-js {
   position: absolute;
   top: 0;

@@ -28,10 +28,11 @@ class MemberImporter extends Importer
                 ->requiredMapping()
                 ->numeric()
                 ->rules(['required', 'integer']),
-            ImportColumn::make('image'),
+            ImportColumn::make('image')
+                ->rules(['nullable', 'image']),
             ImportColumn::make('user_id')
                 ->numeric()
-                ->rules(['integer']),
+                ->rules(['nullable', 'integer']),
             ImportColumn::make('contacts'),
         ];
     }

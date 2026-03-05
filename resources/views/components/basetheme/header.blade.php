@@ -56,7 +56,7 @@
                                         <div class="mega-menu-content">
                                             <div class="row">
                                                 <!-- Column 1: Development & Projects -->
-                                                <div class="col-md-4">
+                                                <div class="col-lg-4">
                                                     <div class="mega-section">
                                                         <h5 class="mega-section-title">
                                                             <i class="fas fa-code"></i>
@@ -110,7 +110,7 @@
                                                 </div>
 
                                                 <!-- Column 2: Community & Learning -->
-                                                <div class="col-md-4">
+                                                <div class="col-lg-4">
                                                     <div class="mega-section">
                                                         <h5 class="mega-section-title">
                                                             <i class="fas fa-users"></i>
@@ -159,7 +159,7 @@
                                                 </div>
 
                                                 <!-- Column 3: Pixel Character -->
-                                                <div class="col-md-4">
+                                                {{-- <div class="col-md-4">
                                                     <div class="mega-section pixel-section">
                                                         <div class="pixel-character-showcase">
                                                             <div class="pixel-avatar">
@@ -183,7 +183,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -569,7 +569,7 @@
                                         }
                                     }
 
-                                    @media (max-width: 768px) {
+                                    @media (max-width: 1068px) {
                                         .mega-menu-widget {
                                             min-width: 100%;
                                             position: static;
@@ -679,21 +679,24 @@
                             {{-- <div class="vl-search1">
                                 <button class="search-open-btn"><i class="fa-regular fa-magnifying-glass"></i></button>
                             </div> --}}
-                            @if (auth()->check())
-                                <form action="{{ route('logout') }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="theme-btn8">
-                                        <span class="theme-btn8__shape"></span>
-                                        <span class="theme-btn8__shape"></span>
-                                        <span class="theme-btn8__shape"></span>
-                                        <span class="theme-btn8__shape"></span>
-                                        <span class="theme-btn8__text">Logout</span>
-                                    </button>
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}" class="theme-btn8-outline">
-                                    <span class="theme-btn8__text">Sign In</span>
-                                </a>
+                            @if (get_setting('enable_login') != 0)
+
+                                @if (auth()->check())
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="theme-btn8">
+                                            <span class="theme-btn8__shape"></span>
+                                            <span class="theme-btn8__shape"></span>
+                                            <span class="theme-btn8__shape"></span>
+                                            <span class="theme-btn8__shape"></span>
+                                            <span class="theme-btn8__text">Logout</span>
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="{{ route('login') }}" class="theme-btn8-outline">
+                                        <span class="theme-btn8__text">Sign In</span>
+                                    </a>
+                                @endif
                             @endif
 
                         </div>

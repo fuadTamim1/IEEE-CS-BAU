@@ -27,8 +27,8 @@
                             </div>
                         </article>
 
-                        <article>
-                            <div class="details-content mt-40 lh-lg fs-5">
+                        <article class="blog-post-content mt-40">
+                            <div class="details-content lh-lg fs-5">
                                 {!! $blog->content !!}
                             </div>
                         </article>
@@ -225,4 +225,72 @@
     </div>
 
     <!--===== BLOG AREA END =====-->
+
+@section('styles')
+    <style>
+        /* styles for blog detail content readability */
+        .blog-post-content {
+            margin-top: 2rem;
+        }
+
+        .blog-details-area .details-content {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: #333;
+        }
+
+        .blog-details-area .details-content h1,
+        .blog-details-area .details-content h2,
+        .blog-details-area .details-content h3,
+        .blog-details-area .details-content h4,
+        .blog-details-area .details-content h5,
+        .blog-details-area .details-content h6 {
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .blog-details-area .details-content p {
+            margin-bottom: 1rem;
+        }
+
+        .blog-details-area .details-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.25rem 0;
+        }
+
+        .blog-details-area .details-content blockquote {
+            border-left: 4px solid #FAA41A;
+            padding-left: 1rem;
+            color: #555;
+            font-style: italic;
+            margin: 1.5rem 0;
+        }
+
+        .blog-details-area .details-content ul,
+        .blog-details-area .details-content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .blog-details-area .details-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        .blog-details-area .details-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .blog-details-area .details-content table th,
+        .blog-details-area .details-content table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+        }
+    </style>
+@endsection
+
 </x-base-layout>

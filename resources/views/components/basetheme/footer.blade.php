@@ -14,9 +14,9 @@
                                 Shaping the Future. </p>
                         </div>
                         <div class="vl-footer-social4 text-start mt-20">
-                            <a href="{{ getWidget('facebook-link') }}"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="{{ getWidget('instagram-link') }}"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="{{ getWidget('linkedin-link') }}"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="{{ getWidget('youtube-link') }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="{{ getWidget('instagram-link') }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="{{ getWidget('linkedin-link') }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                                 <img src="assets/img/icons/footer-contact-icon1.svg" alt="">
                             </div>
                             <div class="text">
-                                <a href="mail:{{getWidget('email')}}">{{getWidget('email')}}</a>
+                                <a href="mail:{{getWidget('email')}}" target="_blank">{{getWidget('email')}}</a>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                                 <img src="assets/img/icons/footer-contact-icon2.svg" alt="">
                             </div>
                             <div class="text">
-                                <a href="{{url(getWidget('location')) }}" target="_blank" rel="noopener noreferrer">
+                                <a href="{{(getWidget('google_map_locaction')) }}" target="_blank" rel="noopener noreferrer">
                                     {!! wordwrap(getWidget('location'), 30, '<br>') !!}</a>
                             </div>
                         </div>

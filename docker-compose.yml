@@ -5,19 +5,28 @@ services:
     restart: always
     ports:
       - "80:80"
-      - "443:443"
+      # - "443:443"
     volumes:
       - app_data:/var/www/html:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/nginx/ssl:/etc/nginx/ssl
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - /var/www/certbot:/var/www/certbot:ro
+      # - ./docker/nginx/ssl:/etc/nginx/ssl
+      # - /etc/letsencrypt:/etc/letsencrypt:ro
+      # - /var/www/certbot:/var/www/certbot:ro
     depends_on:
       - app
     networks:
       - ieee_cs_network
     environment:
       - TZ=UTC
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
 
   app:
     build:

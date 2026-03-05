@@ -94,7 +94,7 @@
             </div>
 
             <!-- Column 3: Pixel Character -->
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="mega-section pixel-section">
                     <div class="pixel-character-showcase">
                         <div class="pixel-avatar">
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -461,7 +461,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
     .mega-menu-widget {
         min-width: 100%;
         position: static;

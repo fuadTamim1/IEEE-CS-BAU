@@ -105,14 +105,16 @@ class PageController extends Controller
     public function LeaderBoardPage($id = -1)
     {
         // Only eager load the member relationships that are needed in the view
-        $currentLeaderboardQuery = Leaderboard::with(['member1', 'member2', 'member3']);
-        if (Leaderboard::where('id', $id)->exists()) {
-            $currentLeaderboard = $currentLeaderboardQuery->find($id);
-        } else {
-            $currentLeaderboard = $currentLeaderboardQuery->latestWeek();
-        }
 
-        if ($currentLeaderboard) {
+
+        if (Leaderboard::count() > 0) {
+            $currentLeaderboardQuery = Leaderboard::with(['member1', 'member2', 'member3']);
+            if (Leaderboard::where('id', $id)->exists()) {
+                $currentLeaderboard = $currentLeaderboardQuery->find($id);
+            } else {
+                $currentLeaderboard = $currentLeaderboardQuery->latestWeek();
+            }
+
             $leaderboards = Leaderboard::with(['member1', 'member2', 'member3']) // Load relationships
                 ->limit(15)
                 ->where("id", "!=", $currentLeaderboard->id)
@@ -120,6 +122,7 @@ class PageController extends Controller
                 ->get();
         } else {
             $leaderboards = collect();
+            $currentLeaderboard = null;
         }
 
         return view('basetheme.leaderboard', [

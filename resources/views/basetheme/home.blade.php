@@ -3,7 +3,8 @@
     <section class="hero4" style="background-image: url({{ asset('images/home_bg.png') }}); filter: brightness(0.85);">
         <div class="container text-center">
             <div class="main-heading4">
-                <h1 class="text-anime-style-3">Empowering Innovation & <span style="color: #FAA41A">Technology</span></h1>
+                <h1 class="text-anime-style-3">Empowerinsssg Innovation & <span style="color: #FAA41A">Technology</span>
+                </h1>
                 <p class="mt-4" data-aos="fade-left" data-aos-duration="800">
                     Join IEEE Computer Society to explore computing, collaborate with experts, and shape technology's
                     future.
@@ -143,7 +144,6 @@
     </section>
 
     <!-- Events Section -->
-    <!-- Events Section -->
     <x-slider sectionClass="case4 sp sec-bg3" title="Engaging Activities to Learn, Innovate, and Connect"
         subtitle="Explore Our Latest Events" icon="{{ asset('images/logo.png') }}" :slidesToShow="3" :autoplay="true"
         :autoplaySpeed="4000" :arrows="false" :dots="false">
@@ -154,18 +154,7 @@
 
         @foreach ($events as $event)
             <x-slider-item>
-                <div class="event-card">
-                    <img src="{{ asset('storage/' . $event->image) }}" style="
-    height: 300px;" class="w-100"
-                        alt="{{ $event->slug }}">
-                    <div class="event-info p-3">
-                        <h5>{{ $event->title }}</h5>
-                        <p>{{ Str::limit($event->description, 100) }}</p>
-                        <a href="{{ route('events.show', $event->slug) }}" class="btn btn-primary">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
+                <x-event-card :event="$event" />
             </x-slider-item>
         @endforeach
     </x-slider>
@@ -223,23 +212,19 @@
 
     <x-slider sectionClass="tes4 sp" title="{{ __('Voices of Our Community') }}"
         subtitle="{{ __('Member Stories') }}" icon="{{ asset('images/logo.png') }}" :slidesToShow="1"
-        :autoplay="false" :autoplaySpeed="2000" :arrows="false" :dots="true">
+        :autoplay="true" :autoplaySpeed="2000" :arrows="false" :dots="true">
         @foreach ($membersWithStoy as $m)
             <x-slider-item class="horizontal-slider-item">
                 <div class="row align-items-center">
                     <div class="col-md-5 col-sm-12 mb-3 mb-md-0">
                         <div style="height: 300px; overflow: hidden; border-radius: 8px;">
-                            <img src="{{ asset('storage/' . $m->image) }}" 
-                                alt="{{ $m->name }} profile"
-                                class="w-100 h-100 object-fit-cover"
-                                loading="lazy">
+                            <img src="{{ asset('storage/' . $m->image) }}" alt="{{ $m->name }} profile"
+                                class="w-100 h-100 object-fit-cover" loading="lazy">
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-12">
                         <div class="author_text p-3">
-                            <img src="{{ asset('assets/img/icons/qoute4.png') }}" 
-                                alt="Quote icon" 
-                                class="mb-3"
+                            <img src="{{ asset('assets/img/icons/qoute4.png') }}" alt="Quote icon" class="mb-3"
                                 style="max-width: 40px;">
                             <h5 class="fs-5 mb-4" style="line-height: 1.6;">
                                 "{{ $m->story }}"
@@ -306,7 +291,7 @@
                         <h2>Join Our Newsletter</h2>
                         <form action="#" class="d-flex gap-3 mt-4">
                             <input type="email" placeholder="Enter Your Email" class="form-control">
-                            <x-theme-button type="submit" text="Subscribe" />
+                            <x-theme-button type="submit" text="Subscribe" class="newletter-btn"/>
                         </form>
                     </div>
                 </div>
@@ -362,6 +347,28 @@
         .disabled-opacity-50:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+
+        .tes4-slider .slick-slide {
+            display: block;
+            box-sizing: border-box;
+            /* remove external margins that break centering; use internal padding instead */
+            padding: 0 10px;
+        }
+
+        .tes4-slider .slick-slide > * {
+            width: 100%;
+        }
+
+        .tes4-slider img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .horizontal-slider-item .row {
+            margin: 0;
         }
     </style>
 @endsection

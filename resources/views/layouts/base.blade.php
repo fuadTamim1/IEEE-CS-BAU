@@ -21,6 +21,9 @@
 
         }
     </style>
+
+    {{-- allow pages/components to push additional styles --}}
+    @stack('styles')
 </head>
 
 <body class="body1">
