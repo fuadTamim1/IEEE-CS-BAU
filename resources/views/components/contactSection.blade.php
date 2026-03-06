@@ -7,7 +7,7 @@
                         <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
                                 src="{{ asset('images/logo.png') }}" width="25" alt="">CONTACT US
                         </span>
-                        <h2 class="text-anime-style-3">Lets Work Together</h2>
+                        <h2 class="text-anime-style-3">Let us Work Together</h2>
                         <p class="mt-16" data-aos="fade-right" data-aos-duration="900">eady to take your social
                             media presence to the next level? Let’s work together to create impactful strategies
                             drive engagement, growth, and success for your brand.</p>
