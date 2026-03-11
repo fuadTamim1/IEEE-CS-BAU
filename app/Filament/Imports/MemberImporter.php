@@ -63,4 +63,9 @@ class MemberImporter extends Importer
 
         return $body;
     }
+
+    public static function getCsvDelimiter(): string
+    {
+        return ',';
+    }
 }

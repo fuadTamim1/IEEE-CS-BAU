@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\MemberExporter;
 use App\Filament\Resources\MemberResource\Pages;
 use App\Filament\Resources\MemberResource\RelationManagers;
 use App\Models\Member;
@@ -169,16 +170,14 @@ class MemberResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                \Filament\Tables\Actions\ExportAction::make()
-                    ->label('Export Members')
-                    ->exportFormat('csv'),
+          
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     \Filament\Tables\Actions\ExportBulkAction::make()
                         ->label('Export Selected')
-                        ->exportFormat('csv'),
+                        ->exporter(MemberExporter::class),
                 ]),
             ]);
     }
