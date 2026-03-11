@@ -7,6 +7,7 @@ use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Illuminate\Support\Facades\Validator;
+use Filament\Notifications\Notification;
 
 class MemberImporter extends Importer
 {
@@ -53,6 +54,8 @@ class MemberImporter extends Importer
             'class_of_the_year' => ['required', 'integer', 'max:' . date('Y')],
         ])->validate();
     }
+
+
     public static function getCompletedNotificationBody(Import $import): string
     {
         $body = 'Your member import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
@@ -61,11 +64,31 @@ class MemberImporter extends Importer
             $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to import.';
         }
 
+        // Try to safely send a notification ONLY if the user exists
+        if ($import->user) {
+            Notification::make()
+                ->title('Import Complete')
+                ->body($body)
+                ->success()
+                ->sendToDatabase($import->user);
+        }
+
         return $body;
     }
 
-    public static function getCsvDelimiter(): string
-    {
-        return ',';
-    }
+    // public static function getCompletedNotificationBody(Import $import): string
+    // {
+    //     $body = 'Your member import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
+
+    //     if ($failedRowsCount = $import->getFailedRowsCount()) {
+    //         $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to import.';
+    //     }
+
+    //     return $body;
+    // }
+
+    // public static function getCsvDelimiter(): string
+    // {
+    //     return ',';
+    // }
 }
