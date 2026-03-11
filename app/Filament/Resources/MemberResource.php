@@ -169,10 +169,16 @@ class MemberResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\ExportAction::make()
+                    ->label('Export Members')
+                    ->exportFormat('csv'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    \Filament\Tables\Actions\ExportBulkAction::make()
+                        ->label('Export Selected')
+                        ->exportFormat('csv'),
                 ]),
             ]);
     }

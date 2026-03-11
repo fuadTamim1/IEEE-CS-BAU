@@ -23,7 +23,7 @@
         "laravel/telescope": "^5.5",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
-        "maatwebsite/excel": "3.1.63",
+        "maatwebsite/excel": "*",
         "predis/predis": "^3.0",
         "spatie/laravel-backup": "^9.2",
         "spatie/laravel-medialibrary": "^11.12",
