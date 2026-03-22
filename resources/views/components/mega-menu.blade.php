@@ -39,7 +39,6 @@
                                     <div class="mega-link-text">
                                         <span class="mega-link-title">Workshops</span>
                                         <small class="mega-link-desc">Hands-on learning sessions</small>
-                                        <span class="coming-soon-badge">Coming Soon</span>
                                     </div>
                                 </div>
                             </a>

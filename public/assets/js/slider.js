@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.tes4-slider-all').forEach(function (sliderWrapper) {
-        const $slider = $(sliderWrapper).find('.tes4-slider');
+    document.querySelectorAll('.ieee-slider-all, .tes4-slider-all').forEach(function (sliderWrapper) {
+        const $slider = $(sliderWrapper).find('.ieee-slider, .tes4-slider');
+
+        if (!$slider.length) {
+            return;
+        }
 
         // Read settings from data attributes
         const slidesToShow = parseInt(sliderWrapper.dataset.slidesToShow || 1);

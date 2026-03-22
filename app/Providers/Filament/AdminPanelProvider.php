@@ -11,6 +11,7 @@ use App\Filament\Resources\ExamSessionResource;
 use App\Filament\Resources\LeaderboardResource;
 use App\Filament\Resources\SubscriberResource;
 use App\Filament\Resources\TextWidgetResource;
+use App\Filament\Resources\WorkshopResource;
 use App\Filament\Resources\UserResource\Widgets\UserGrowthChart;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\EnsureUserHasAdminAccess;
@@ -95,6 +96,15 @@ class AdminPanelProvider extends PanelProvider
                                             ->url('/admin/projects'),
                                         NavigationItem::make('Add New Project')
                                             ->url('/admin/projects/create'),
+                                    ]),
+                                NavigationItem::make('Workshops')
+                                    ->icon('heroicon-o-wrench-screwdriver')
+                                    ->url(fn(): string => WorkshopResource::getUrl())
+                                    ->childItems([
+                                        NavigationItem::make('All Workshops')
+                                            ->url(fn(): string => WorkshopResource::getUrl()),
+                                        NavigationItem::make('Add New Workshop')
+                                            ->url(fn(): string => WorkshopResource::getUrl('create')),
                                     ]),
                                 NavigationItem::make('Members')
                                     ->icon('heroicon-o-users')

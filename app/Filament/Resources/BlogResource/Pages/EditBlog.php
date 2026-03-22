@@ -2,12 +2,11 @@
 
 namespace App\Filament\Resources\BlogResource\Pages;
 
+use App\Enums\BlogStatus;
 use App\Filament\Resources\BlogResource;
-use App\Mail\newPost;
 use Filament\Actions;
-use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class EditBlog extends EditRecord
 {
@@ -20,9 +19,22 @@ class EditBlog extends EditRecord
         ];
     }
 
-    protected function mutateFormDataBeforeCreate(array $data): array
+    protected function mutateFormDataBeforeSave(array $data): array
     {
-        Mail::to('user@example.com')->send(new newPost());
+        $isModerator = Auth::user()?->hasAnyRole(['super-admin', 'admin', 'editor']) ?? false;
+
+        if (!$isModerator) {
+            unset($data['status']);
+            unset($data['rejection_note']);
+
+            if ($this->record->status === BlogStatus::REJECTED->value) {
+                $data['status'] = BlogStatus::PENDING_REVIEW->value;
+                $data['submitted_at'] = now();
+                $data['reviewed_by'] = null;
+                $data['reviewed_at'] = null;
+            }
+        }
+
         return $data;
     }
 }

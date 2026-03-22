@@ -1,61 +1,36 @@
 <x-base-layout>
     <!-- Hero Section -->
-    <section class="hero4" style="background-image: url({{ asset('images/home_bg.png') }}); filter: brightness(0.85);">
-        <div class="container text-center">
-            <div class="main-heading4">
-                <h1 class="text-anime-style-3">Empowerinsssg Innovation & <span style="color: #FAA41A">Technology</span>
+    <section class="hero4">
+        <div class="hero4__backdrop" aria-hidden="true"></div>
+        <div class="container text-center hero4__content-wrap">
+            <div class="main-heading4 hero4__content">
+                <span class="hero4__badge" data-aos="fade-down" data-aos-duration="700">
+                    <img src="{{ asset('images/logo.png') }}" width="18" alt="IEEE CS icon">
+                    IEEE Computer Society
+                </span>
+
+                <h1 class="text-anime-style-3 hero4__title" data-aos="fade-up" data-aos-duration="900">
+                    Empowering Innovation in <span>Computing</span>
                 </h1>
-                <p class="mt-4" data-aos="fade-left" data-aos-duration="800">
-                    Join IEEE Computer Society to explore computing, collaborate with experts, and shape technology's
-                    future.
+
+                <p class="hero4__lead mt-4" data-aos="fade-up" data-aos-duration="1000">
+                    Engage with computer engineers, scientists, academia, and industry professionals from all areas
+                    of computing and fuel global technological advancements.
                 </p>
 
-                <!-- Call to Action -->
-                <div class="hero-cta mt-5" data-aos="fade-up" data-aos-duration="1400">
-                    <div class="cta-box">
-                        <h3>Ready to Start Your Tech Journey?</h3>
-                        <p class="mb-4">Discover events, workshops, and opportunities to grow your skills with our
-                            IEEE CS community</p>
-                        <div class="d-flex gap-3 justify-center flex-wrap">
-                            <x-theme-button href="#events" icon="fa-calendar-alt" text="JOIN US" />
-                            {{-- <x-theme-button href="#projects" icon="fa-folder-open" text="Browse Projects" secondary /> --}}
-                        </div>
-                    </div>
+                <div class="hero4__cta mt-5" data-aos="fade-up" data-aos-duration="1200">
+                    <x-theme-button href="{{ route('events') }}" icon="fa-calendar-days" text="Explore Events" />
+                    <x-theme-button href="{{ route('workshops') }}" icon="fa-laptop-code" text="Browse Workshops" secondary />
                 </div>
 
-                <!-- Next Event -->
-                {{-- <div class="next-event mt-5" data-aos="fade-up" data-aos-duration="1600">
-                    <div class="event-highlight">
-                        <div class="event-badge">
-                            <i class="fas fa-star"></i> Next Event
-                        </div>
-                        <h4>Web Development Workshop</h4>
-                        <div class="event-details">
-                            <span><i class="fas fa-calendar"></i> July 15, 2025</span>
-                            <span><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</span>
-                            <span><i class="fas fa-map-marker-alt"></i> Tech Lab, Room 201</span>
-                        </div>
-                        <a href="#register" class="event-register-btn">Register Now <i
-                                class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div> --}}
+                <p class="hero4__note mt-3" data-aos="fade-up" data-aos-duration="1300">
+                    Membership requests are currently paused.
+                </p>
             </div>
 
-            @if (config('app.show_hero_images', false))
-                <div class="hero4-images mt-5">
-                    <div class="row mx-auto">
-                        @foreach (['python.png', 'flutter.png', 'linux.png', 'node-tree.png'] as $img)
-                            <div class="col-lg-3 col-md-6">
-                                <div class="hero5-image animate4">
-                                    <img src="{{ asset('images/' . $img) }}"
-                                        alt="{{ Str::title(str_replace('.png', '', $img)) }} logo" width="160"
-                                        loading="lazy">
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
+            <div class="hero4__ascii" aria-hidden="true">
+                <canvas id="heroAsciiCanvas" width="900" height="260" data-logo-src="{{ asset('images/logo.png') }}"></canvas>
+            </div>
         </div>
     </section>
     <!-- About Section -->
@@ -144,23 +119,507 @@
     </section>
 
     <!-- Events Section -->
-    <x-slider sectionClass="case4 sp sec-bg3" title="Engaging Activities to Learn, Innovate, and Connect"
-        subtitle="Explore Our Latest Events" icon="{{ asset('images/logo.png') }}" :slidesToShow="3" :autoplay="true"
-        :autoplaySpeed="4000" :arrows="false" :dots="false">
-        <x-slot name="heading">
-            <x-theme-button href="{{ route('events') }}" text="View All Events"
-                class="text-end md:text-start mt-5 mb-5" />
-        </x-slot>
+    <section class="events-showcase sp">
+        <div class="container">
+            <div class="events-showcase__top">
+                <div>
+                    <span class="events-showcase__eyebrow">
+                        <img src="{{ asset('images/logo.png') }}" alt="IEEE CS" width="22">
+                        Explore Our Events
+                    </span>
+                    <h2 class="events-showcase__title">Discover Workshops, Meetups, Competitions, and Talks</h2>
+                </div>
 
-        @foreach ($events as $event)
-            <x-slider-item>
-                <x-event-card :event="$event" />
-            </x-slider-item>
-        @endforeach
-    </x-slider>
+                <div class="events-showcase__controls" aria-label="Event slider controls">
+                    <button type="button" class="events-showcase__arrow events-showcase__arrow--prev" aria-label="Previous events">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button type="button" class="events-showcase__arrow events-showcase__arrow--next" aria-label="Next events">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
 
+            @if ($events->count())
+                <div class="swiper events-showcase__slider" id="eventsShowcaseSlider">
+                    <div class="swiper-wrapper">
+                        @foreach ($events as $e)
+                            <div class="swiper-slide events-showcase__slide">
+                                <x-event-card :event="$e" />
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="events-showcase__footer">
+                    <div class="events-showcase__pagination"></div>
+                    <a href="{{ route('events') }}" class="events-showcase__view-all">
+                        Browse All Events
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            @else
+                <div class="events-showcase__empty">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <p>No events yet. Check back soon for upcoming activities.</p>
+                </div>
+            @endif
+        </div>
+    </section>
+@push('styles')
+        <style>
+            .events-showcase {
+                --events-bg-1: #f8f3e6;
+                --events-bg-2: #f2ebcd;
+                position: relative;
+                overflow: hidden;
+                background:
+                    radial-gradient(circle at 8% 10%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 40%),
+                    radial-gradient(circle at 85% 25%, rgba(209, 184, 72, 0.45) 0%, rgba(209, 184, 72, 0) 45%),
+                    linear-gradient(145deg, var(--events-bg-1) 0%, var(--events-bg-2) 100%);
+            }
+
+            .events-showcase__top {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 1.35rem;
+            }
+
+            .events-showcase__eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.4rem 0.72rem;
+                border-radius: 999px;
+                background: rgba(42, 33, 15, 0.08);
+                color: #37351f;
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+            }
+
+            .events-showcase__title {
+                margin: 0.85rem 0 0;
+                max-width: 780px;
+                font-size: clamp(1.5rem, 2.8vw, 2.45rem);
+                line-height: 1.15;
+                color: #2a280f;
+            }
+
+            .events-showcase__controls {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55rem;
+            }
+
+            .events-showcase__arrow {
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                border: 1px solid rgba(42, 41, 15, 0.16);
+                background: rgba(255, 255, 255, 0.76);
+                color: #2a260f;
+                display: grid;
+                place-items: center;
+                transition: transform 0.28s ease, background 0.28s ease, color 0.28s ease;
+            }
+
+            .events-showcase__arrow:hover {
+                background: #282a0f;
+                color: #fff;
+                transform: translateY(-2px);
+            }
+
+            .events-showcase__slider {
+                padding: 0.35rem 0.3rem 0.8rem;
+            }
+
+            .events-showcase__slide {
+                height: auto;
+            }
+
+            .events-showcase__slide .ieee-event-card {
+                height: 100%;
+            }
+
+            .events-showcase__footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 0.9rem;
+                gap: 1rem;
+            }
+
+            .events-showcase__pagination {
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .events-showcase__pagination .swiper-pagination-bullet {
+                width: 10px;
+                height: 10px;
+                background: #6b7280;
+                opacity: 0.35;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+
+            .events-showcase__pagination .swiper-pagination-bullet-active {
+                transform: scale(1.2);
+                opacity: 1;
+                background: #ff5b37;
+            }
+
+            .events-showcase__view-all {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                text-decoration: none;
+                font-weight: 700;
+                color: #0f172a;
+                border-bottom: 2px solid rgba(42, 37, 15, 0.22);
+                transition: color 0.3s ease, border-color 0.3s ease;
+            }
+
+            .events-showcase__view-all:hover {
+                color: #ff5b37;
+                border-color: #ff5b37;
+            }
+
+            .events-showcase__empty {
+                border-radius: 16px;
+                border: 1px dashed rgba(42, 39, 15, 0.22);
+                padding: 2.2rem 1rem;
+                text-align: center;
+                color: #334155;
+                background: rgba(255, 255, 255, 0.55);
+            }
+
+            .events-showcase__empty i {
+                font-size: 2rem;
+                margin-bottom: 0.65rem;
+                color: #ff5b37;
+            }
+
+            @media (max-width: 991px) {
+                .events-showcase__top {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.9rem;
+                }
+
+                .events-showcase__title {
+                    max-width: 100%;
+                }
+            }
+
+            @media (max-width: 575px) {
+                .events-showcase__footer {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .events-showcase__controls {
+                    width: 100%;
+                    justify-content: flex-end;
+                }
+            }
+        </style>
+    @endpush
+
+    @section('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var sliderEl = document.getElementById('eventsShowcaseSlider');
+                if (sliderEl && typeof Swiper !== 'undefined') {
+                    new Swiper(sliderEl, {
+                        slidesPerView: 1.1,
+                        spaceBetween: 16,
+                        speed: 700,
+                        grabCursor: true,
+                        loop: {{ $events->count() > 3 ? 'true' : 'false' }},
+                        autoplay: {
+                            delay: 3200,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true
+                        },
+                        navigation: {
+                            nextEl: '.events-showcase__arrow--next',
+                            prevEl: '.events-showcase__arrow--prev'
+                        },
+                        pagination: {
+                            el: '.events-showcase__pagination',
+                            clickable: true
+                        },
+                        breakpoints: {
+                            575: {
+                                slidesPerView: 1.35,
+                                spaceBetween: 18
+                            },
+                            768: {
+                                slidesPerView: 2,
+                                spaceBetween: 20
+                            },
+                            992: {
+                                slidesPerView: 2.45,
+                                spaceBetween: 22
+                            },
+                            1200: {
+                                slidesPerView: 3,
+                                spaceBetween: 24
+                            }
+                        }
+                    });
+                }
+
+                var heroCanvas = document.getElementById('heroAsciiCanvas');
+                if (!heroCanvas) {
+                    return;
+                }
+
+                var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var ctx = heroCanvas.getContext('2d');
+                var wrapper = heroCanvas.closest('.hero4');
+                var particles = [];
+                var mouse = {
+                    x: -999,
+                    y: -999,
+                    active: false
+                };
+                var phrase = 'IEEE CS';
+                var density = 4;
+                var rafId = null;
+                var isHeroVisible = true;
+                var logoImg = new Image();
+                var logoReady = false;
+                var logoSource = heroCanvas.getAttribute('data-logo-src') || '';
+
+                function resizeCanvas() {
+                    var aspect = logoReady ? ((logoImg.naturalWidth || 1) / (logoImg.naturalHeight || 1)) : 1;
+                    var maxCanvasWidth = Math.min((wrapper.clientWidth || 900) * 0.72, 980);
+                    var maxCanvasHeight = Math.max((wrapper.clientHeight || 420) * 0.82, 220);
+                    var canvasWidth = maxCanvasWidth;
+                    var canvasHeight = canvasWidth / aspect;
+
+                    if (canvasHeight > maxCanvasHeight) {
+                        canvasHeight = maxCanvasHeight;
+                        canvasWidth = canvasHeight * aspect;
+                    }
+
+                    heroCanvas.width = Math.max(Math.floor(canvasWidth), 220);
+                    heroCanvas.height = Math.max(Math.floor(canvasHeight), 140);
+                    buildParticles();
+                }
+
+                function buildParticles() {
+                    particles = [];
+                    var mapCanvas = document.createElement('canvas');
+                    var mapCtx = mapCanvas.getContext('2d');
+
+                    mapCanvas.width = heroCanvas.width;
+                    mapCanvas.height = heroCanvas.height;
+                    mapCtx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
+
+                    if (logoReady) {
+                        var maxLogoWidth = mapCanvas.width * 0.96;
+                        var maxLogoHeight = mapCanvas.height * 0.96;
+                        var logoAspect = (logoImg.naturalWidth || 1) / (logoImg.naturalHeight || 1);
+                        var drawWidth = maxLogoWidth;
+                        var drawHeight = drawWidth / logoAspect;
+
+                        if (drawHeight > maxLogoHeight) {
+                            drawHeight = maxLogoHeight;
+                            drawWidth = drawHeight * logoAspect;
+                        }
+
+                        var logoX = (mapCanvas.width - drawWidth) / 2;
+                        var logoY = (mapCanvas.height - drawHeight) / 2;
+                        mapCtx.drawImage(logoImg, logoX, logoY, drawWidth, drawHeight);
+                    } else {
+                        mapCtx.fillStyle = '#ffffff';
+                        var fontSize = Math.floor(Math.min(mapCanvas.width * 0.18, 130));
+                        mapCtx.font = '700 ' + fontSize + 'px "Consolas", "Courier New", monospace';
+                        mapCtx.textAlign = 'center';
+                        mapCtx.textBaseline = 'middle';
+                        mapCtx.fillText(phrase, mapCanvas.width / 2, mapCanvas.height / 2 + 6);
+                    }
+
+                    var imageData = mapCtx.getImageData(0, 0, mapCanvas.width, mapCanvas.height).data;
+                    for (var y = 0; y < mapCanvas.height; y += density) {
+                        for (var x = 0; x < mapCanvas.width; x += density) {
+                            var idx = (y * mapCanvas.width + x) * 4 + 3;
+                            if (imageData[idx] > 120) {
+                                particles.push({
+                                    x: x + (Math.random() - 0.5) * 26,
+                                    y: y + (Math.random() - 0.5) * 26,
+                                    tx: x,
+                                    ty: y,
+                                    vx: 0,
+                                    vy: 0,
+                                    c: Math.random() > 0.72 ? 'rgba(255, 210, 122, 0.95)' : 'rgba(250, 164, 26, 0.78)'
+                                });
+                            }
+                        }
+                    }
+                }
+
+                function draw() {
+                    rafId = null;
+                    if (!isHeroVisible) {
+                        return;
+                    }
+
+                    ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+
+                    for (var i = 0; i < particles.length; i++) {
+                        var p = particles[i];
+                        var dx = p.tx - p.x;
+                        var dy = p.ty - p.y;
+
+                        p.vx += dx * 0.012;
+                        p.vy += dy * 0.012;
+
+                        if (mouse.active) {
+                            var mx = p.x - mouse.x;
+                            var my = p.y - mouse.y;
+                            var d2 = mx * mx + my * my;
+                            if (d2 < 6400) {
+                                var repel = (6400 - d2) / 6400;
+                                p.vx += (mx / 30) * repel;
+                                p.vy += (my / 30) * repel;
+                            }
+                        }
+
+                        p.vx *= 0.88;
+                        p.vy *= 0.88;
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        ctx.fillStyle = p.c;
+                        ctx.fillText('.', p.x, p.y);
+                    }
+
+                    if (!prefersReducedMotion) {
+                        rafId = window.requestAnimationFrame(draw);
+                    }
+                }
+
+                wrapper.addEventListener('mousemove', function (event) {
+                    var rect = heroCanvas.getBoundingClientRect();
+                    mouse.x = event.clientX - rect.left;
+                    mouse.y = event.clientY - rect.top;
+                    mouse.active = true;
+                });
+
+                wrapper.addEventListener('mouseleave', function () {
+                    mouse.active = false;
+                    mouse.x = -999;
+                    mouse.y = -999;
+                });
+
+                function startAnimation() {
+                    if (!isHeroVisible) {
+                        return;
+                    }
+
+                    if (prefersReducedMotion) {
+                        draw();
+                        return;
+                    }
+
+                    if (rafId === null) {
+                        rafId = window.requestAnimationFrame(draw);
+                    }
+                }
+
+                if ('IntersectionObserver' in window) {
+                    var asciiLayer = heroCanvas.parentElement;
+                    var observer = new IntersectionObserver(function (entries) {
+                        var entry = entries[0];
+                        isHeroVisible = !!(entry && entry.isIntersecting);
+
+                        if (asciiLayer) {
+                            asciiLayer.style.display = isHeroVisible ? '' : 'none';
+                        }
+
+                        if (!isHeroVisible && rafId !== null) {
+                            window.cancelAnimationFrame(rafId);
+                            rafId = null;
+                        }
+
+                        if (isHeroVisible) {
+                            startAnimation();
+                        }
+                    }, {
+                        threshold: 0.05
+                    });
+
+                    observer.observe(wrapper);
+                }
+
+                ctx.font = '700 15px "Consolas", "Courier New", monospace';
+                ctx.textAlign = 'center';
+
+                if (logoSource) {
+                    logoImg.onload = function () {
+                        logoReady = true;
+                        resizeCanvas();
+                        startAnimation();
+                    };
+
+                    logoImg.onerror = function () {
+                        logoReady = false;
+                        resizeCanvas();
+                        startAnimation();
+                    };
+
+                    logoImg.src = logoSource;
+                } else {
+                    resizeCanvas();
+                    startAnimation();
+                }
+
+                window.addEventListener('resize', resizeCanvas);
+
+                document.querySelectorAll('[data-team-switcher]').forEach(function(switcher) {
+                    var tabs = switcher.querySelectorAll('[data-team-tab]');
+                    var panels = switcher.querySelectorAll('[data-team-panel]');
+
+                    tabs.forEach(function(tab) {
+                        tab.addEventListener('click', function() {
+                            var target = tab.getAttribute('data-team-tab');
+
+                            tabs.forEach(function(otherTab) {
+                                var isActive = otherTab === tab;
+                                otherTab.classList.toggle('is-active', isActive);
+                                otherTab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                            });
+
+                            panels.forEach(function(panel) {
+                                var isActive = panel.getAttribute('data-team-panel') === target;
+                                panel.classList.toggle('is-active', isActive);
+                                panel.hidden = !isActive;
+                            });
+                        });
+                    });
+                });
+            });
+        </script>
+    @endsection
 
     <!--===== TEAM AREA START =====-->
+
+    @php
+        $committeeMembers = $members->filter(function ($m) {
+            return strcasecmp((string) $m->title, 'Member') !== 0;
+        });
+
+        $regularMembers = $members->filter(function ($m) {
+            return strcasecmp((string) $m->title, 'Member') === 0;
+        });
+    @endphp
 
     <div class="team2 sp sec-bg2">
         <div class="container">
@@ -174,12 +633,33 @@
                     </div>
                 </div>
             </div>
+
             <div class="team2 sp" id="ourteam">
-                <div class="row">
-                    @foreach ($members as $m)
-                        <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}" :links="$m->contacts"
-                            :image="$m->image" />
-                    @endforeach
+                <div class="team-switcher" data-team-switcher>
+                    <div class="team-switcher__tabs" role="tablist" aria-label="Team categories">
+                        <button type="button" class="team-switcher__tab is-active" role="tab" aria-selected="true"
+                            data-team-tab="committee">Committee</button>
+                        <button type="button" class="team-switcher__tab" role="tab" aria-selected="false"
+                            data-team-tab="members">Members</button>
+                    </div>
+
+                    <div class="team-switcher__panel is-active" role="tabpanel" data-team-panel="committee">
+                        <div class="row team-members-grid mt-20">
+                            @foreach ($committeeMembers as $m)
+                                <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}" :links="$m->contacts"
+                                    :image="$m->image" />
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="team-switcher__panel" role="tabpanel" data-team-panel="members" hidden>
+                        <div class="row team-members-grid mt-20">
+                            @foreach ($regularMembers as $m)
+                                <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}" :links="$m->contacts"
+                                    :image="$m->image" />
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
                 {{-- Pagenation --}}
                 {{-- 
@@ -205,15 +685,16 @@
 
     <!--===== TEAM AREA END =====-->
     @php
-        $membersWithStoy = $members->filter(function ($m) {
+        $membersWithStory = $members->filter(function ($m) {
             return $m->hasStory();
         });
+            $membersWithStory = $membersWithStory->take(2);
     @endphp
-
-    <x-slider sectionClass="tes4 sp" title="{{ __('Voices of Our Community') }}"
-        subtitle="{{ __('Member Stories') }}" icon="{{ asset('images/logo.png') }}" :slidesToShow="1"
-        :autoplay="true" :autoplaySpeed="2000" :arrows="false" :dots="true">
-        @foreach ($membersWithStoy as $m)
+{{-- 
+    <x-slider sectionClass="sp member-stories-slider" title="{{ __('Voices of Our Community') }}"
+        subtitle="{{ __('Member Stories') }}" icon="{{ asset('images/logo.png') }}" :slidesToShow="2"
+        :autoplay="true" :autoplaySpeed="2000" :arrows="false" :dots="false">
+        @foreach ($membersWithStory as $m)
             <x-slider-item class="horizontal-slider-item">
                 <div class="row align-items-center">
                     <div class="col-md-5 col-sm-12 mb-3 mb-md-0">
@@ -230,7 +711,7 @@
                                 "{{ $m->story }}"
                             </h5>
                             <div class="info">
-                                <a href="#" class="d-block mb-2 fw-bold">{{ $m->name }}</a>
+                                <a href="#" class="d-block mb-2 fw-bold" style="color: orange">{{ $m->name }}</a>
                                 <p class="m-0 text-muted">{{ $m->title }}</p>
                             </div>
                         </div>
@@ -238,7 +719,7 @@
                 </div>
             </x-slider-item>
         @endforeach
-    </x-slider>
+    </x-slider> --}}
 
 
     <!-- Blog Section -->
@@ -249,32 +730,9 @@
                 <x-theme-button href="{{ route('blogs') }}" text="View All Blogs" class="text-end md:text-start" />
             </x-section-heading>
             @if ($posts->count())
-                <div class="row mt-4">
-                    @foreach ($posts as $index => $post)
-                        <div class="{{ $index === 0 ? 'col-lg-12' : 'col-lg-4 col-md-6' }}" data-aos="fade-up"
-                            data-aos-duration="{{ 800 + $index * 100 }}">
-                            <div class="vl-blog-4-item {{ $index === 0 ? 'big_post' : 'add-bg' }} mt-4">
-                                <div
-                                    class="vl-blog-4-thumb {{ $index === 0 ? 'vl-blog-4-thumb-big' : '' }} image-anime overflow-hidden">
-                                    <x-img :img="$post->image" alt="{{ $post->title }} blog image" />
-                                </div>
-                                <div class="vl-blog-4-content heading4 mt-3">
-                                    <div class="vl-blog4-meta pb-3">
-                                        <a href="#" class="date"><img
-                                                src="{{ asset('assets/img/icons/date1.svg') }}" alt="Date icon">
-                                            {{ $post->created_at->format('d/m/Y') }}</a>
-                                        <a href="#" class="author"><img
-                                                src="{{ asset('assets/img/icons/author1.svg') }}" alt="Author icon">
-                                            {{ $post->author->name }}</a>
-                                    </div>
-                                    <h5><a href="{{ route('blogs.show', $post->slug) }}">{{ $post->title }}</a></h5>
-                                    <a href="{{ route('blogs.show', $post->slug) }}" class="learn1">Read More <i
-                                            class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                @foreach ($posts as $post)
+                    <x-blog-card :blog="$post" />
+                @endforeach
             @endif
         </div>
     </section>
@@ -298,16 +756,124 @@
             </div>
         </div>
     </section>
-</x-base-layout>
-
-@section('styles')
+@push('styles')
     <style>
-        .hero4 {
-            padding: 60px 0;
+
+        .newletter-btn{
+            background: #1d1300 !important;
         }
 
-        .event-slide:not(.active) {
-            opacity: 0;
+        .hero4 {
+            --hero-bg-0: #090d12;
+            --hero-bg-1: #101823;
+            --hero-gold: #faa41a;
+            --hero-gold-soft: #ffd27a;
+            --hero-text: #f7f8fa;
+            --hero-muted: #b8c0cc;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 78px 0 64px;
+            background:
+                radial-gradient(circle at 20% 18%, rgba(250, 164, 26, 0.24) 0%, rgba(250, 164, 26, 0) 40%),
+                radial-gradient(circle at 82% 12%, rgba(255, 210, 122, 0.18) 0%, rgba(255, 210, 122, 0) 42%),
+                linear-gradient(130deg, var(--hero-bg-0) 0%, var(--hero-bg-1) 100%);
+        }
+
+        .hero4__backdrop {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.95) 45%, transparent 100%);
+        }
+
+        .hero4__content-wrap {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero4__content {
+            max-width: 860px;
+            margin: 3rem auto auto auto;
+            padding-top: 0;
+            padding-right: 0;
+        }
+
+        .hero4__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.42rem 0.78rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #e5e7eb;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .hero4__title {
+            margin-top: 1rem;
+            color: var(--hero-text);
+            font-size: clamp(1.9rem, 4.4vw, 3.3rem);
+            line-height: 1.07;
+            text-wrap: balance;
+        }
+
+        .hero4__title span {
+            color: var(--hero-gold);
+        }
+
+        .hero4__lead {
+            color: var(--hero-muted);
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: clamp(1rem, 2.1vw, 1.15rem);
+            line-height: 1.65;
+        }
+
+        .hero4__cta {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .hero4__note {
+            color: rgba(247, 248, 250, 0.78);
+            font-size: 0.92rem;
+            letter-spacing: 0.01em;
+        }
+
+        .hero4__ascii {
+            position: absolute;
+            top: 204px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .hero4__ascii canvas {
+            position: absolute;
+            left: 50%;
+            top: 56%;
+            transform: translate(-50%, -50%);
+            width: min(72vw, 980px);
+            max-width: 95%;
+            height: auto;
+            display: block;
+            opacity: 1;
+            filter: none;
         }
 
         .event-card:hover .hover-scale-105 {
@@ -349,129 +915,168 @@
             cursor: not-allowed;
         }
 
-        .tes4-slider .slick-slide {
+        .home-events-slider .ieee-slider .slick-slide {
             display: block;
             box-sizing: border-box;
             /* remove external margins that break centering; use internal padding instead */
-            padding: 0 10px;
+            padding: 0 8px;
         }
 
-        .tes4-slider .slick-slide > * {
+        .home-events-slider .ieee-slider .slick-slide > * {
             width: 100%;
         }
 
-        .tes4-slider img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            display: block;
+        .home-events-slider .ieee-slider-item__inner {
+            padding: 0.7rem;
         }
 
         .horizontal-slider-item .row {
             margin: 0;
         }
+
+        #ourteam .team-members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        #ourteam .team-members-grid > [class*='col-'] {
+            width: auto;
+            max-width: none;
+            flex: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .team-switcher {
+            margin-top: 1.2rem;
+        }
+
+        .team-switcher__tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .team-switcher__tab {
+            border: 0;
+            border-radius: 999px;
+            padding: 0.75rem 1.35rem;
+            font-weight: 700;
+            color: #475569;
+            background: #e2e8f0;
+            transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .team-switcher__tab.is-active {
+            color: #1f2937;
+            background: #fbbf24;
+            box-shadow: 0 8px 22px rgba(251, 191, 36, 0.4);
+        }
+
+        .team-switcher__panel {
+            animation: fadeInTeamPanel 0.24s ease;
+        }
+
+        @keyframes fadeInTeamPanel {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 575px) {
+            #ourteam .team-members-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.75rem;
+            }
+        }
+
+        .member-stories-slider {
+            --ieee-theme-primary: #faa41a;
+            --ieee-theme-ink: #0f172a;
+            --ieee-theme-muted: #94a3b8;
+        }
+
+        .member-stories-slider .author_text {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 14px;
+            background: linear-gradient(145deg, #ffffff 0%, #fff9ee 100%);
+        }
+
+        .member-stories-slider .author_text .info a {
+            color: var(--ieee-theme-ink);
+        }
+
+        .member-stories-slider .author_text .info p {
+            color: #4b5563 !important;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots {
+            bottom: -34px;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li {
+            width: auto;
+            height: auto;
+            margin: 0;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li button {
+            width: 10px;
+            height: 10px;
+            padding: 0;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li button:before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            opacity: 1;
+            background: var(--ieee-theme-muted);
+            transition: all 0.25s ease;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li.slick-active button:before {
+            width: 26px;
+            border-radius: 999px;
+            background: var(--ieee-theme-primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero4 {
+                padding: 64px 0 52px;
+            }
+
+            .hero4__cta {
+                gap: 0.55rem;
+            }
+
+            .home-events-slider .ieee-slider .slick-slide {
+                padding: 0 4px;
+            }
+
+            .home-events-slider .ieee-slider-item__inner {
+                padding: 0.4rem;
+            }
+
+            .member-stories-slider .ieee-slider .slick-dots {
+                bottom: -28px;
+            }
+        }
     </style>
-@endsection
-
-@section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slider = document.getElementById('eventsSlider');
-            if (!slider) return;
-
-            const slides = slider.querySelectorAll('.event-slide');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.querySelector('.prev-btn');
-            const nextBtn = document.querySelector('.next-btn');
-            let currentIndex = 0;
-            let touchStartX = 0;
-            let autoSlideInterval;
-
-            function updateSlide(index) {
-                if (index < 0 || index >= slides.length) return;
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                    slide.setAttribute('aria-hidden', i !== index);
-                });
-                dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-                prevBtn.disabled = index === 0;
-                nextBtn.disabled = index === slides.length - 1;
-                currentIndex = index;
-            }
-
-            function changeSlide(direction) {
-                updateSlide(currentIndex + direction);
-            }
-
-            window.currentSlide = (index) => {
-                updateSlide(index);
-            };
-
-            function startAutoSlide() {
-                autoSlideInterval = setInterval(() => changeSlide(1), 5000);
-            }
-
-            function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
-            }
-
-            prevBtn?.addEventListener('click', () => {
-                stopAutoSlide();
-                changeSlide(-1);
-                startAutoSlide();
-            });
-
-            nextBtn?.addEventListener('click', () => {
-                stopAutoSlide();
-                changeSlide(1);
-                startAutoSlide();
-            });
-
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    stopAutoSlide();
-                    currentSlide(index);
-                    startAutoSlide();
-                });
-            });
-
-            slider.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') {
-                    stopAutoSlide();
-                    changeSlide(-1);
-                    startAutoSlide();
-                } else if (e.key === 'ArrowRight') {
-                    stopAutoSlide();
-                    changeSlide(1);
-                    startAutoSlide();
-                }
-            });
-
-            slider.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-                stopAutoSlide();
-            }, {
-                passive: true
-            });
-
-            slider.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].clientX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    changeSlide(diff > 0 ? 1 : -1);
-                }
-                startAutoSlide();
-            }, {
-                passive: true
-            });
-
-            if (slides.length > 0) {
-                updateSlide(0);
-                slider.tabIndex = 0;
-                startAutoSlide();
-                slider.addEventListener('mouseenter', stopAutoSlide);
-                slider.addEventListener('mouseleave', startAutoSlide);
-            }
-        });
-    </script>
-@endsection
+@endpush
+</x-base-layout>

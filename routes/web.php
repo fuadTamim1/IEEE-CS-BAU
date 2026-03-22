@@ -30,6 +30,10 @@ Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
 Route::get('/leaderboard', [PageController::class, "LeaderboardPage"])->name('leaderboard');
 Route::get('/leaderboard/week/{id}', [PageController::class, "LeaderboardPage"])->name('leaderboard.show');
 Route::get('/workshops', [PageController::class, "WorkshopsPage"])->name("workshops");
+Route::get('/workshops/{workshop:slug}', [PageController::class, "ShowWorkshopPage"])->name('workshops.show');
+Route::post('/workshops/{workshop:slug}/feedback', [PageController::class, "SubmitWorkshopFeedback"])
+    ->middleware('throttle:8,1')
+    ->name('workshops.feedback.store');
 
 Route::middleware(['under.development'])->group(function() {
     Route::get('/resources', [PageController::class, "ResourcesPage"])->name("resources");

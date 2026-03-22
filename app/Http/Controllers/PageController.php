@@ -7,6 +7,11 @@ use App\Models\Event;
 use App\Models\Leaderboard;
 use App\Models\Member;
 use App\Models\Project;
+use App\Models\Workshop;
+use App\Models\WorkshopFeedback;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -14,7 +19,11 @@ class PageController extends Controller
 {
     public function HomePage()
     {
-        $recentPosts = Blog::with(['author', 'category'])->orderBy('created_at')->take(4)->get(["id", "title", "slug", "image", "created_at", "author_id"]);
+        $recentPosts = Blog::published()
+            ->with(['author', 'authorMember', 'category'])
+            ->latest('created_at')
+            ->take(4)
+            ->get(["id", "title", "slug", "image", "created_at", "author_id", "author_member_id", "status"]);
         $recentEvents = Event::orderBy('created_at')->take(5)->get(['id', 'title', 'image', 'slug', 'description', 'created_at']);
 
 
@@ -32,11 +41,10 @@ class PageController extends Controller
 
     private function getMembers()
     {
-        if (get_setting("show_only_team_admins")) {
-            return Member::where("title", "!=", "Member")->orderBy("order", "DESC")->get();
-        } else {
-            return Member::all();
-        }
+        return Member::query()
+            ->orderByDesc('order')
+            ->orderBy('name')
+            ->get();
     }
 
     public function AboutPage()
@@ -47,13 +55,25 @@ class PageController extends Controller
 
     public function TeamPage()
     {
-        $members = $this->getMembers();
-        return view('basetheme.team', ["members" => $members]);
+        $allMembers = $this->getMembers();
+
+        $committeeMembers = $allMembers->filter(function (Member $member) {
+            return strcasecmp((string) $member->title, 'Member') !== 0;
+        })->values();
+
+        $regularMembers = $allMembers->filter(function (Member $member) {
+            return strcasecmp((string) $member->title, 'Member') === 0;
+        })->values();
+
+        return view('basetheme.team', [
+            'committeeMembers' => $committeeMembers,
+            'regularMembers' => $regularMembers,
+        ]);
     }
 
     public function BlogPage()
     {
-        $blogs = Blog::with('author')->paginate(8);
+        $blogs = Blog::published()->with(['author', 'authorMember'])->paginate(8);
 
         // Transform the items while preserving pagination
         $transformed = $blogs->getCollection()->transform(function ($model) {
@@ -69,8 +89,14 @@ class PageController extends Controller
 
     public function ShowBlogPage($slug)
     {
-        $blog = Blog::whereSlug($slug)->with('author')->first();
-        $otherBlogs = Blog::where("slug", "!=", $slug)->latest()->with('author:id,name')->take(2)->get(["slug", "title", "image", "created_at"]);
+        $blog = Blog::published()->whereSlug($slug)->with(['author', 'authorMember'])->firstOrFail();
+
+        $otherBlogs = Blog::published()
+            ->where("slug", "!=", $slug)
+            ->latest()
+            ->with(['author:id,name', 'authorMember:id,name'])
+            ->take(2)
+            ->get(["slug", "title", "image", "created_at", "author_id", "author_member_id"]);
 
         $blog->tags = explode(",", $blog->tags);
 
@@ -133,9 +159,99 @@ class PageController extends Controller
 
     public function WorkshopsPage()
     {
-        // Workshop        
+        $status = request('status', 'all');
+        $now = Carbon::now();
 
-        return view('basetheme.workshops');
+        $baseQuery = Workshop::published();
+        $workshopsQuery = (clone $baseQuery);
+
+        if ($status === 'upcoming') {
+            $workshopsQuery->whereNotNull('start_at')->where('start_at', '>', $now);
+        } elseif ($status === 'ongoing') {
+            $workshopsQuery->whereNotNull('start_at')->where('start_at', '<=', $now)
+                ->where(function ($query) use ($now) {
+                    $query->whereNull('end_at')->orWhere('end_at', '>=', $now);
+                });
+        } elseif ($status === 'past') {
+            $workshopsQuery->where(function ($query) use ($now) {
+                $query->where('end_at', '<', $now)
+                    ->orWhere(function ($q) use ($now) {
+                        $q->whereNull('end_at')->whereNotNull('start_at')->where('start_at', '<', $now);
+                    });
+            });
+        }
+
+        $workshops = $workshopsQuery->latest('start_at')->latest('created_at')->paginate(9)->withQueryString();
+
+        $totalPublishedCount = (clone $baseQuery)->count();
+        $upcomingCount = (clone $baseQuery)->whereNotNull('start_at')->where('start_at', '>', $now)->count();
+        $ongoingCount = (clone $baseQuery)->whereNotNull('start_at')->where('start_at', '<=', $now)
+            ->where(function ($query) use ($now) {
+                $query->whereNull('end_at')->orWhere('end_at', '>=', $now);
+            })->count();
+        $pastCount = (clone $baseQuery)->where(function ($query) use ($now) {
+            $query->where('end_at', '<', $now)
+                ->orWhere(function ($q) use ($now) {
+                    $q->whereNull('end_at')->whereNotNull('start_at')->where('start_at', '<', $now);
+                });
+        })->count();
+
+        return view('basetheme.workshops', [
+            'workshops' => $workshops,
+            'activeStatus' => $status,
+            'totalPublishedCount' => $totalPublishedCount,
+            'upcomingCount' => $upcomingCount,
+            'ongoingCount' => $ongoingCount,
+            'pastCount' => $pastCount,
+        ]);
+    }
+
+    public function ShowWorkshopPage(Workshop $workshop)
+    {
+        abort_if(!$workshop->is_published, 404);
+
+        $relatedWorkshops = Workshop::published()
+            ->where('id', '!=', $workshop->id)
+            ->latest('start_at')
+            ->take(3)
+            ->get();
+
+        $feedback = $workshop->feedback()->with('user:id,name')->paginate(8);
+
+        return view('basetheme.workshop-details', [
+            'workshop' => $workshop,
+            'relatedWorkshops' => $relatedWorkshops,
+            'feedback' => $feedback,
+        ]);
+    }
+
+    public function SubmitWorkshopFeedback(Request $request, Workshop $workshop)
+    {
+        $validated = $request->validate([
+            'author_name' => ['nullable', 'string', 'max:90'],
+            'author_email' => ['nullable', 'email', 'max:190'],
+            'rating' => ['nullable', 'integer', 'between:1,5'],
+            'comment' => ['required', 'string', 'min:6', 'max:2000'],
+        ]);
+
+        if (!Auth::check() && empty($validated['author_name'])) {
+            return back()->withErrors([
+                'author_name' => 'Please provide your name to submit feedback.',
+            ])->withInput();
+        }
+
+        $authUser = Auth::user();
+
+        WorkshopFeedback::create([
+            'workshop_id' => $workshop->id,
+            'user_id' => $authUser?->id,
+            'author_name' => $authUser?->name ?? $validated['author_name'] ?? null,
+            'author_email' => $authUser?->email ?? $validated['author_email'] ?? null,
+            'rating' => $validated['rating'] ?? null,
+            'comment' => $validated['comment'],
+        ]);
+
+        return back()->with('success', 'Thanks for your feedback.');
     }
 
     public function ResourcesPage()

@@ -40,7 +40,7 @@
                                             <a href="{{ route('blogs') }}">Blogs</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('workshops') }}">Workshops - COMING SOON!</a>
+                                            <a href="{{ route('workshops') }}">Workshops</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('resources') }}">Resources</a>
@@ -56,7 +56,7 @@
                                         <div class="mega-menu-content">
                                             <div class="row">
                                                 <!-- Column 1: Development & Projects -->
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-6">
                                                     <div class="mega-section">
                                                         <h5 class="mega-section-title">
                                                             <i class="fas fa-code"></i>
@@ -76,7 +76,7 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
-                                                            <li>
+                                                            {{-- <li>
                                                                 <a href="#">
                                                                     <div class="mega-link-content">
                                                                         <i class="fas fa-code-branch"></i>
@@ -89,7 +89,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </a>
-                                                            </li>
+                                                            </li> --}}
                                                             <li>
                                                                 <a href="{{ route('workshops') }}">
                                                                     <div class="mega-link-content">
@@ -99,8 +99,7 @@
                                                                                 class="mega-link-title">Workshops</span>
                                                                             <small class="mega-link-desc">Hands-on
                                                                                 learning sessions</small>
-                                                                            <span class="coming-soon-badge">Coming
-                                                                                Soon</span>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -110,7 +109,7 @@
                                                 </div>
 
                                                 <!-- Column 2: Community & Learning -->
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-6">
                                                     <div class="mega-section">
                                                         <h5 class="mega-section-title">
                                                             <i class="fas fa-users"></i>
@@ -136,12 +135,13 @@
                                                                         <div class="mega-link-text">
                                                                             <span class="mega-link-title">Blogs</span>
                                                                             <small class="mega-link-desc">Tech insights
+                                                                                and tutorials Tech insights
                                                                                 and tutorials</small>
                                                                         </div>
                                                                     </div>
                                                                 </a>
                                                             </li>
-                                                            <li>
+                                                            {{-- <li>
                                                                 <a href="{{ route('resources') }}">
                                                                     <div class="mega-link-content">
                                                                         <i class="fas fa-book"></i>
@@ -153,7 +153,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </a>
-                                                            </li>
+                                                            </li> --}}
                                                         </ul>
                                                     </div>
                                                 </div>

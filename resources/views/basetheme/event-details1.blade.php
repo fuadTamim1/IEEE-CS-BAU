@@ -196,7 +196,7 @@
                 <div class="col-lg-7 m-auto text-center">
                     <div class="heading2">
                         <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900">
-                            <img src="{{ asset('images/calendar-icon.png') }}" width="25" alt=""> EVENT
+                            <img src="{{ asset('images/logo.png') }}" width="25" alt=""> EVENT
                             SCHEDULE
                         </span>
                         <h2 class="text-anime-style-3">Conference Agenda & Timeline</h2>
@@ -487,23 +487,17 @@
 
     <!--===== SERVICE SECTION AREA START =====-->
 
-    <div class="service sp sec-bg1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 m-auto text-center">
-                    <div class="heading2">
-                        <h2>More Events</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-30">
-                @foreach ($otherEvents as $event)
+    @if ($otherEvents->count())
+        <x-slider sectionClass="service sp sec-bg1 event-details-related-slider" title="More Events" subtitle="Discover Similar Activities"
+            icon="{{ asset('images/logo.png') }}" :slidesToShow="3" :autoplay="true" :autoplaySpeed="4000"
+            :arrows="false" :dots="false">
+            @foreach ($otherEvents as $event)
+                <x-slider-item class="related-event-item">
                     <x-event-card :event="$event" />
-                @endforeach
-            </div>
-        </div>
-    </div>
+                </x-slider-item>
+            @endforeach
+        </x-slider>
+    @endif
 
     <!--===== SERVICE SECTION AREA END =====-->
 
@@ -581,3 +575,36 @@
 
     <!--===== CONTACT AREA END =====-->
 </x-base-layout>
+
+@push('styles')
+    <style>
+        .blog-details-area .details-content .image img {
+            width: min(60%, 780px);
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .event-details-related-slider .ieee-slider .slick-slide {
+            padding: 0 8px;
+            box-sizing: border-box;
+        }
+
+        .event-details-related-slider .related-event-item .ieee-slider-item__inner {
+            padding: 0.65rem;
+        }
+
+        @media (max-width: 768px) {
+            .event-details-related-slider .ieee-slider .slick-slide {
+                padding: 0 4px;
+            }
+
+            .event-details-related-slider .related-event-item .ieee-slider-item__inner {
+                padding: 0.35rem;
+            }
+
+            .blog-details-area .details-content .image img {
+                width: 100%;
+            }
+        }
+    </style>
+@endpush

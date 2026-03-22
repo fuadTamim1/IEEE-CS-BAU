@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-6">
+                {{-- <div class="col-lg-3 col-md-4 col-6">
                     <div class="vl-footer-widget-white4 mb-50 ml-70 md:ml-0 sm:ml-0">
                         <h4>Category List</h4>
                         <div class="vl-footer-list">
@@ -47,7 +47,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-lg-3 col-md-8 col-sm-6">
                     <div class="vl-footer-contact4 vl-footer-widget-white mb-50 sm:ml-0 md:ml-0">

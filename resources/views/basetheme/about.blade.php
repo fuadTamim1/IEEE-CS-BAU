@@ -32,7 +32,7 @@
                 <div class="col-lg-6">
                     <div class="about2-images">
                         <div class="image1 image-anime reveal">
-                            <img src="{{ asset('IEEE/Managment-20250805T060425Z-1-001/Managment_2024/team_1_2.JPG') }}" width="500px" alt="">
+                            <img src="{{ asset('IEEE/l.JPG') }}" width="500px" alt="">
                         </div>
                         <div class="image2 image-anime reveal">
                             <img src="{{ asset('IEEE/Managment-20250805T060425Z-1-001/Managment_2024/team_1.jpg') }}" width="500px" alt="">
@@ -93,22 +93,15 @@
 
                 <div class="col-lg col-md-4">
                     <div class="inner-counter-box mt-30">
-                        <h3>10K+</h3>
-                        <p>Number of Attendees</p>
+                        <h3>100+</h3>
+                        <p>Number of Volunter</p>
                     </div>
                 </div>
 
                 <div class="col-lg col-md-4">
                     <div class="inner-counter-box mt-30">
-                        <h3>300+</h3>
-                        <p>Number of Volunteers</p>
-                    </div>
-                </div>
-
-                <div class="col-lg col-md-4">
-                    <div class="inner-counter-box mt-30">
-                        <h3>150+</h3>
-                        <p>Number of Speakers</p>
+                        <h3>50+</h3>
+                        <p>Number of Workshops</p>
                     </div>
                 </div>
             </div>
@@ -163,19 +156,26 @@
                     <div class="about-choose-images ml-50 md:ml-0 sm:ml-0">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('IEEE/Events-20250805T060448Z-1-001/Events/IEEE Day/1d70ddec-c1fa-44f3-ae5b-e6898d09ba51.jpg') }}" alt="">
+                                
+                                <div class="image image-anime reveal">
+                                    <img class="w-full" src="{{ asset('IEEE/p.jpg') }}" alt="">
                                 </div>
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('IEEE/Events-20250805T060448Z-1-001/Events/IEEEXtreme/IMG_0470.JPG') }}" alt="">
+                                    <img class="w-full" src="{{ asset('IEEE/q.jpg') }}" alt="">
                                 </div>
+                                
                             </div>
                             <div class="col-lg-6 d-none d-lg-block">
                                 <div class="image image-anime reveal md:mt-30 sm:mt-30">
                                     <img class="w-full" src="{{ asset('IEEE/Visits-20250805T060418Z-1-001/Visits/Tamatem/487377573_1240146528150480_4597872574937663976_n.jpg') }}" alt="">
                                 </div>
-                                <div class="image mt-30 image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="{{ asset('IEEE/Ramadan competition-20250805T060420Z-1-001/Ramadan competition/old Ramadan competition/Pypass Team .jpg') }}" alt="">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="image mt-30 image-anime reveal">
+                                    <img class="w-full" src="{{ asset('IEEE/gathering.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -287,6 +287,16 @@
 
     <!--===== TEAM AREA START =====-->
 
+    @php
+        $committeeMembers = $members->filter(function ($m) {
+            return strcasecmp((string) $m->title, 'Member') !== 0;
+        });
+
+        $regularMembers = $members->filter(function ($m) {
+            return strcasecmp((string) $m->title, 'Member') === 0;
+        });
+    @endphp
+
     <div class="team2 sp sec-bg2">
         <div class="container">
             <div class="row">
@@ -299,12 +309,33 @@
                     </div>
                 </div>
             </div>
+
             <div class="team2 sp" id="ourteam">
-                <div class="row">
-                    @foreach ($members as $m)
-                        <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
-                            :links="$m->contacts" :image="$m->image" />
-                    @endforeach
+                <div class="team-switcher" data-team-switcher>
+                    <div class="team-switcher__tabs" role="tablist" aria-label="Team categories">
+                        <button type="button" class="team-switcher__tab is-active" role="tab" aria-selected="true"
+                            data-team-tab="committee">Committee</button>
+                        <button type="button" class="team-switcher__tab" role="tab" aria-selected="false"
+                            data-team-tab="members">Members</button>
+                    </div>
+
+                    <div class="team-switcher__panel is-active" role="tabpanel" data-team-panel="committee">
+                        <div class="row mt-20">
+                            @foreach ($committeeMembers as $m)
+                                <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
+                                    :links="$m->contacts" :image="$m->image" />
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="team-switcher__panel" role="tabpanel" data-team-panel="members" hidden>
+                        <div class="row mt-20">
+                            @foreach ($regularMembers as $m)
+                                <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
+                                    :links="$m->contacts" :image="$m->image" />
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
                                 {{-- Pagenation --}}
                                 {{-- 
@@ -334,6 +365,82 @@
     @include('components.contactSection')
 
     <!--===== CONTACT AREA END =====-->
+
+    @push('styles')
+        <style>
+            .team-switcher {
+                margin-top: 1.2rem;
+            }
+
+            .team-switcher__tabs {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                margin-bottom: 1.1rem;
+            }
+
+            .team-switcher__tab {
+                border: 0;
+                border-radius: 999px;
+                padding: 0.75rem 1.35rem;
+                font-weight: 700;
+                color: #475569;
+                background: #e2e8f0;
+                transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .team-switcher__tab.is-active {
+                color: #1f2937;
+                background: #fbbf24;
+                box-shadow: 0 8px 22px rgba(251, 191, 36, 0.4);
+            }
+
+            .team-switcher__panel {
+                animation: fadeInTeamPanel 0.24s ease;
+            }
+
+            @keyframes fadeInTeamPanel {
+                from {
+                    opacity: 0;
+                    transform: translateY(4px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    @endpush
+
+    @section('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('[data-team-switcher]').forEach(function(switcher) {
+                    var tabs = switcher.querySelectorAll('[data-team-tab]');
+                    var panels = switcher.querySelectorAll('[data-team-panel]');
+
+                    tabs.forEach(function(tab) {
+                        tab.addEventListener('click', function() {
+                            var target = tab.getAttribute('data-team-tab');
+
+                            tabs.forEach(function(otherTab) {
+                                var isActive = otherTab === tab;
+                                otherTab.classList.toggle('is-active', isActive);
+                                otherTab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                            });
+
+                            panels.forEach(function(panel) {
+                                var isActive = panel.getAttribute('data-team-panel') === target;
+                                panel.classList.toggle('is-active', isActive);
+                                panel.hidden = !isActive;
+                            });
+                        });
+                    });
+                });
+            });
+        </script>
+    @endsection
 
 
 </x-base-layout>

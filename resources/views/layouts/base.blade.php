@@ -11,19 +11,10 @@
     @vite('resources/js/app.js')
     <wireui:scripts />
     <script src="//unpkg.com/alpinejs" defer></script>
-    <style>
-        canvas{
-            position: absolute;
-            top: 0;
-            left: 0;
-            display:block;
-            z-index: 1000
-
-        }
-    </style>
-
     {{-- allow pages/components to push additional styles --}}
     @stack('styles')
+
+    
 </head>
 
 <body class="body1">

@@ -22,7 +22,7 @@
                                     <a href="#" class="date"><img src="assets/img/icons/date1.svg"
                                             alt=""> {{ $blog->created_at->format('m/d/y') }} </a>
                                     <a href="#" class="author"><img src="assets/img/icons/author1.svg"
-                                            alt=""> {{ $blog->author->name }}</a>
+                                            alt=""> {{ $blog->display_author_name }}</a>
                                 </div>
                             </div>
                         </article>
