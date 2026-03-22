@@ -134,10 +134,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image1.png" alt="">
+                                <img src="/assets/img/team/team2-image1.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>
@@ -164,10 +164,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image2.png" alt="">
+                                <img src="/assets/img/team/team2-image2.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>
@@ -194,10 +194,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image3.png" alt="">
+                                <img src="/assets/img/team/team2-image3.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>
@@ -224,10 +224,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image4.png" alt="">
+                                <img src="/assets/img/team/team2-image4.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>

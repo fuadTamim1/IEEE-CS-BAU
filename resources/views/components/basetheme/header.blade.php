@@ -755,7 +755,7 @@
             <h4>Contact Information</h4>
             <div class="single-contact-item">
                 <div class="icon">
-                    <img src="assets/img/icons/footer-contact-icon1.svg" alt="">
+                    <img src="{{ asset('assets/img/icons/footer-contact-icon1.svg') }}" alt="">
                 </div>
                 <div class="text">
                     <a href="mail:support@seoxagency.com">{{ getWidget('email') }}</a>
@@ -764,7 +764,7 @@
 
             <div class="single-contact-item">
                 <div class="icon">
-                    <img src="assets/img/icons/footer-contact-icon2.svg" alt="">
+                    <img src="{{ asset('assets/img/icons/footer-contact-icon2.svg') }}" alt="">
                 </div>
                 <div class="text">
                     <a href="#">{!! wordwrap(getWidget('location'), 30, '</br>') !!}</a>
@@ -773,7 +773,7 @@
             {{-- 
             <div class="single-contact-item">
                 <div class="icon">
-                    <img src="assets/img/icons/footer-contact-icon3.svg" alt="">
+                    <img src="/assets/img/icons/footer-contact-icon3.svg" alt="">
                 </div>
                 <div class="text">
                     <a href="tel:123-456-7890">123-456-7890</a>

@@ -54,7 +54,7 @@
                         <h4>Contact Information</h4>
                         <div class="single-contact-item">
                             <div class="icon">
-                                <img src="assets/img/icons/footer-contact-icon1.svg" alt="">
+                                <img src="{{ asset('assets/img/icons/footer-contact-icon1.svg') }}" alt="">
                             </div>
                             <div class="text">
                                 <a href="mail:{{getWidget('email')}}" target="_blank">{{getWidget('email')}}</a>
@@ -64,7 +64,7 @@
 
                         <div class="single-contact-item">
                             <div class="icon">
-                                <img src="assets/img/icons/footer-contact-icon2.svg" alt="">
+                                <img src="{{ asset('assets/img/icons/footer-contact-icon2.svg') }}" alt="">
                             </div>
                             <div class="text">
                                 <a href="{{(getWidget('google_map_locaction')) }}" target="_blank" rel="noopener noreferrer">
@@ -74,7 +74,7 @@
                         {{-- 
                         <div class="single-contact-item">
                             <div class="icon">
-                                <img src="assets/img/icons/footer-contact-icon1.svg" alt="">
+                                <img src="/assets/img/icons/footer-contact-icon1.svg" alt="">
                             </div>
                             <div class="text">
                                 <a href="tel:123-456-7890">123-456-7890</a>

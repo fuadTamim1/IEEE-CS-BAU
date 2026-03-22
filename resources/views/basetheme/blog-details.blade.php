@@ -19,9 +19,9 @@
                                         alt="blog image">
                                 </div>
                                 <div class="vl-blog12-meta mt-24">
-                                    <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                    <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                             alt=""> {{ $blog->created_at->format('m/d/y') }} </a>
-                                    <a href="#" class="author"><img src="assets/img/icons/author1.svg"
+                                    <a href="#" class="author"><img src="/assets/img/icons/author1.svg"
                                             alt=""> {{ $blog->display_author_name }}</a>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 solutions that inspire progress."</p>
                             <div class="author-info">
                                 <div class="thumb">
-                                    <img src="assets/img/blog/details-author.png" alt="">
+                                    <img src="/assets/img/blog/details-author.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="#">Alex Carey</a>
@@ -102,10 +102,10 @@
                                 <div class="top-area">
                                     <div class="author-area">
                                         <div class="author-image">
-                                            <img src="assets/img/blog/comment-box-image1.png" alt="">
+                                            <img src="/assets/img/blog/comment-box-image1.png" alt="">
                                         </div>
                                         <div class="text">
-                                            <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                            <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                     alt=""> 8 December 2024</a>
                                             <h4><a href="#">Alex Robertson</a></h4>
                                         </div>
@@ -123,10 +123,10 @@
                                 <div class="top-area">
                                     <div class="author-area">
                                         <div class="author-image">
-                                            <img src="assets/img/blog/comment-box-image2.png" alt="">
+                                            <img src="/assets/img/blog/comment-box-image2.png" alt="">
                                         </div>
                                         <div class="text">
-                                            <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                            <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                     alt=""> 8 December 2024</a>
                                             <h4><a href="#">Theo Hernandez</a></h4>
                                         </div>

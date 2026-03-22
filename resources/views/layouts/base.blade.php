@@ -10,7 +10,6 @@
     @include('components.basetheme.heads')
     @vite('resources/js/app.js')
     <wireui:scripts />
-    <script src="//unpkg.com/alpinejs" defer></script>
     {{-- allow pages/components to push additional styles --}}
     @stack('styles')
 

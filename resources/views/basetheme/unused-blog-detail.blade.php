@@ -2,7 +2,7 @@
 
     <!--===== HERO AREA START =====-->
 
-    <div class="inner-hero" style="background-image: url(assets/img/bg/inner-hero-bg.jpg);">
+    <div class="inner-hero" style="background-image: url(/assets/img/bg/inner-hero-bg.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 m-auto text-center">
@@ -36,12 +36,12 @@
                         <article>
                             <div class="details-content">
                                 <div class="image">
-                                    <img class="w-full" src="assets/img/blog/blog-details-image.png" alt="">
+                                    <img class="w-full" src="/assets/img/blog/blog-details-image.png" alt="">
                                 </div>
                                 <div class="vl-blog12-meta mt-24">
-                                    <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                    <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                             alt=""> 12/12/2024</a>
-                                    <a href="#" class="author"><img src="assets/img/icons/author1.svg"
+                                    <a href="#" class="author"><img src="/assets/img/icons/author1.svg"
                                             alt=""> John Doe</a>
                                 </div>
                                 <div class="heading2 mt-24">
@@ -89,13 +89,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="image mt-30">
-                                            <img class="w-full" src="assets/img/blog/blog-details-image2.png"
+                                            <img class="w-full" src="/assets/img/blog/blog-details-image2.png"
                                                 alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="image mt-30">
-                                            <img class="w-full" src="assets/img/blog/blog-details-image3.png"
+                                            <img class="w-full" src="/assets/img/blog/blog-details-image3.png"
                                                 alt="">
                                         </div>
                                     </div>
@@ -138,7 +138,7 @@
                                         also new market opportunities.</p>
                                 </div>
                                 <div class="image mt-30">
-                                    <img class="w-full" src="assets/img/blog/blog-details-image4.png" alt="">
+                                    <img class="w-full" src="/assets/img/blog/blog-details-image4.png" alt="">
                                 </div>
                                 <div class="heading2 mt-24">
                                     <h3>The Future is Bright for Startups</h3>
@@ -159,7 +159,7 @@
                                 solutions that inspire progress."</p>
                             <div class="author-info">
                                 <div class="thumb">
-                                    <img src="assets/img/blog/details-author.png" alt="">
+                                    <img src="/assets/img/blog/details-author.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="#">Alex Carey</a>
@@ -202,10 +202,10 @@
                                 <div class="top-area">
                                     <div class="author-area">
                                         <div class="author-image">
-                                            <img src="assets/img/blog/comment-box-image1.png" alt="">
+                                            <img src="/assets/img/blog/comment-box-image1.png" alt="">
                                         </div>
                                         <div class="text">
-                                            <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                            <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                     alt=""> 8 December 2024</a>
                                             <h4><a href="#">Alex Robertson</a></h4>
                                         </div>
@@ -223,10 +223,10 @@
                                 <div class="top-area">
                                     <div class="author-area">
                                         <div class="author-image">
-                                            <img src="assets/img/blog/comment-box-image2.png" alt="">
+                                            <img src="/assets/img/blog/comment-box-image2.png" alt="">
                                         </div>
                                         <div class="text">
-                                            <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                            <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                     alt=""> 8 December 2024</a>
                                             <h4><a href="#">Theo Hernandez</a></h4>
                                         </div>
@@ -331,11 +331,11 @@
                                 <div class="recent-blog-post">
                                     <div class="">
                                         <div class="image">
-                                            <img src="assets/img/blog/recent-post1.png" alt="">
+                                            <img src="/assets/img/blog/recent-post1.png" alt="">
                                         </div>
                                     </div>
                                     <div class="content">
-                                        <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                        <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                 alt=""> 4 August 2024</a>
                                         <h4><a href="blog-details.html">Maximize Your Business Success with Tailored
                                                 SEO..</a></h4>
@@ -345,11 +345,11 @@
                                 <div class="recent-blog-post">
                                     <div class="">
                                         <div class="image">
-                                            <img src="assets/img/blog/recent-post2.png" alt="">
+                                            <img src="/assets/img/blog/recent-post2.png" alt="">
                                         </div>
                                     </div>
                                     <div class="content">
-                                        <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                        <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                 alt=""> 4 August 2024</a>
                                         <h4><a href="blog-details.html">Mastering the Art of Search Engine Optimization
                                                 A..</a></h4>
@@ -359,11 +359,11 @@
                                 <div class="recent-blog-post">
                                     <div class="">
                                         <div class="image">
-                                            <img src="assets/img/blog/recent-post3.png" alt="">
+                                            <img src="/assets/img/blog/recent-post3.png" alt="">
                                         </div>
                                     </div>
                                     <div class="content">
-                                        <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                        <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                 alt=""> 4 August 2024</a>
                                         <h4><a href="blog-details.html">Creating Impactful Content Marketing Strategies
                                                 How...</a></h4>
@@ -373,11 +373,11 @@
                                 <div class="recent-blog-post">
                                     <div class="">
                                         <div class="image">
-                                            <img src="assets/img/blog/recent-post4.png" alt="">
+                                            <img src="/assets/img/blog/recent-post4.png" alt="">
                                         </div>
                                     </div>
                                     <div class="content">
-                                        <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                                        <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                                 alt=""> 4 August 2024</a>
                                         <h4><a href="blog-details.html">Unleashing the Full Potential of Social Media
                                                 Marketing...</a></h4>
@@ -410,10 +410,10 @@
                                 us. Web will answer you shortly!</p>
                             <div class="buttons mt-16">
                                 <a href="mailto:Infoseoxagency@gmail.com" class="sidebar-btn1"><img
-                                        src="assets/img/icons/sidebar-email.png" alt="">
+                                        src="/assets/img/icons/sidebar-email.png" alt="">
                                     Infoseoxagency@gmail.com</a>
                                 <a href="tel:123-456-7890" class="sidebar-btn2"><img
-                                        src="assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
+                                        src="/assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
                             </div>
                         </div>
 
@@ -462,13 +462,13 @@
                 {{-- <div class="col-lg-6">
                    <div class="vl-blog-11-item mt-30" data-aos="fade-up" data-aos-duration="900">
                        <div class=" vl-blog-11-thumb image-anime overflow-hidden _relative">
-                           <img class="w-full" src="assets/img/blog/blog-page1-image2.png" alt="">
+                           <img class="w-full" src="/assets/img/blog/blog-page1-image2.png" alt="">
                        </div>
                        <div class="vl-blog-11-content heading2">
                            <div class="vl-blog11-meta pb-20">
-                               <a href="#" class="date"><img src="assets/img/icons/date1.svg"
+                               <a href="#" class="date"><img src="/assets/img/icons/date1.svg"
                                        alt=""> 12/12/2024</a>
-                               <a href="#" class="author"><img src="assets/img/icons/author1.svg"
+                               <a href="#" class="author"><img src="/assets/img/icons/author1.svg"
                                        alt=""> Alex Carey</a>
                            </div>
                            <h4><a href="blog-details.html">Learn the secrets to creating a brand that resonates with

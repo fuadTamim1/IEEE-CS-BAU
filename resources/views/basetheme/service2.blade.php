@@ -1,7 +1,7 @@
 <x-base-layout>
    <!--===== HERO AREA START =====-->
 
-   <div class="inner-hero" style="background-image: url(assets/img/bg/inner-hero-bg.jpg);">
+   <div class="inner-hero" style="background-image: url(/assets/img/bg/inner-hero-bg.jpg);">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 m-auto text-center">
@@ -30,7 +30,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service2-box mt-30">
                     <div class="image image-anime reveal">
-                        <img src="assets/img/service/service2-image1.png" alt="">
+                        <img src="/assets/img/service/service2-image1.png" alt="">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service2-box mt-30">
                     <div class="image image-anime reveal">
-                        <img src="assets/img/service/service2-image2.png" alt="">
+                        <img src="/assets/img/service/service2-image2.png" alt="">
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service2-box mt-30">
                     <div class="image image-anime reveal">
-                        <img src="assets/img/service/service2-image3.png" alt="">
+                        <img src="/assets/img/service/service2-image3.png" alt="">
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service2-box mt-30">
                     <div class="image image-anime reveal">
-                        <img src="assets/img/service/service2-image4.png" alt="">
+                        <img src="/assets/img/service/service2-image4.png" alt="">
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="service2-box mt-30">
                     <div class="image image-anime reveal">
-                        <img src="assets/img/service/service2-image5.png" alt="">
+                        <img src="/assets/img/service/service2-image5.png" alt="">
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
 
    <!--===== COUNTER AREA START =====-->
 
-   <div class="inner-page-counter-sec bg-cover" style="background-image: url(assets/img/bg/about-page-count-bg.jpg);">
+   <div class="inner-page-counter-sec bg-cover" style="background-image: url(/assets/img/bg/about-page-count-bg.jpg);">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -194,10 +194,10 @@
                 <div class="team2-item mt-30">
                     <div class="team-image-area">
                         <div class="image">
-                            <img src="assets/img/team/team2-image1.png" alt="">
+                            <img src="/assets/img/team/team2-image1.png" alt="">
                         </div>
                         <div class="shape round-circle">
-                            <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                            <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                         </div>
                         <div class="social-icons">
                             <ul>
@@ -224,10 +224,10 @@
                 <div class="team2-item mt-30">
                     <div class="team-image-area">
                         <div class="image">
-                            <img src="assets/img/team/team2-image2.png" alt="">
+                            <img src="/assets/img/team/team2-image2.png" alt="">
                         </div>
                         <div class="shape round-circle">
-                            <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                            <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                         </div>
                         <div class="social-icons">
                             <ul>
@@ -254,10 +254,10 @@
                 <div class="team2-item mt-30">
                     <div class="team-image-area">
                         <div class="image">
-                            <img src="assets/img/team/team2-image3.png" alt="">
+                            <img src="/assets/img/team/team2-image3.png" alt="">
                         </div>
                         <div class="shape round-circle">
-                            <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                            <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                         </div>
                         <div class="social-icons">
                             <ul>
@@ -284,10 +284,10 @@
                 <div class="team2-item mt-30">
                     <div class="team-image-area">
                         <div class="image">
-                            <img src="assets/img/team/team2-image4.png" alt="">
+                            <img src="/assets/img/team/team2-image4.png" alt="">
                         </div>
                         <div class="shape round-circle">
-                            <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                            <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                         </div>
                         <div class="social-icons">
                             <ul>
@@ -374,7 +374,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                    <img class="w-full" src="assets/img/others/contact2-image.png" alt="">
+                    <img class="w-full" src="/assets/img/others/contact2-image.png" alt="">
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <x-base-layout>
    <!--===== HERO AREA START =====-->
 
-   <div class="inner-hero" style="background-image: url(assets/img/bg/inner-hero-bg.jpg);">
+   <div class="inner-hero" style="background-image: url(/assets/img/bg/inner-hero-bg.jpg);">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 m-auto text-center">
@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-lg-7 m-auto text-center">
                 <div class="error-image">
-                    <img src="assets/img/others/error.png" alt="">
+                    <img src="/assets/img/others/error.png" alt="">
                 </div>
                 <div class="error-content-area mt-50 heading2">
                     <h2> Sorry! Page Not Found!</h2>

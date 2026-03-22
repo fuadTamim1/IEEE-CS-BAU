@@ -64,10 +64,10 @@
                                 us. Web will answer you shortly!</p>
                             <div class="buttons mt-16">
                                 <a href="mailto:Infoseoxagency@gmail.com" class="sidebar-btn1"><img
-                                        src="assets/img/icons/sidebar-email.png" alt="">
+                                        src="/assets/img/icons/sidebar-email.png" alt="">
                                     Infoseoxagency@gmail.com</a>
                                 <a href="tel:123-456-7890" class="sidebar-btn2"><img
-                                        src="assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
+                                        src="/assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
                             </div>
                         </div> --}}
                         {{-- 
@@ -566,7 +566,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                        <img class="w-full" src="assets/img/others/contact2-image.png" alt="">
+                        <img class="w-full" src="/assets/img/others/contact2-image.png" alt="">
                     </div>
                 </div>
             </div>

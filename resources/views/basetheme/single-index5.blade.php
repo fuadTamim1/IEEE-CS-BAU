@@ -1,6 +1,6 @@
 <x-base-layout>
     <!--=== HEOR AREA START === -->
-    <div class="hero4" style="background-image: url(assets/img/bg/hero4-bg.jpg);">
+    <div class="hero4" style="background-image: url(/assets/img/bg/hero4-bg.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 m-auto text-center">
@@ -30,27 +30,27 @@
                 <div class="row">
                     <div class="col-lg col-md-6">
                         <div class="hero5-image image1 animate4">
-                            <img src="assets/img/hero/hero4-image1.png" alt="">
+                            <img src="/assets/img/hero/hero4-image1.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg col-md-6">
                         <div class="hero5-image image2 animate2">
-                            <img src="assets/img/hero/hero4-image2.png" alt="">
+                            <img src="/assets/img/hero/hero4-image2.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg col-md-6">
                         <div class="hero5-image image3 animate3">
-                            <img src="assets/img/hero/hero4-image3.png" alt="">
+                            <img src="/assets/img/hero/hero4-image3.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg col-md-6 animate1">
                         <div class="hero5-image image4">
-                            <img src="assets/img/hero/hero4-image4.png" alt="">
+                            <img src="/assets/img/hero/hero4-image4.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg col-md-6">
                         <div class="hero5-image image5 animate3">
-                            <img src="assets/img/hero/hero4-image5.png" alt="">
+                            <img src="/assets/img/hero/hero4-image5.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -70,13 +70,13 @@
                 <div class="col-lg-6">
                     <div class="about4-images">
                         <div class="image1 image-anime reveal">
-                            <img src="assets/img/about/about4-image1.png" alt="">
+                            <img src="/assets/img/about/about4-image1.png" alt="">
                         </div>
                         <div class="image2 image-anime reveal">
-                            <img src="assets/img/about/about4-image3.png" alt="">
+                            <img src="/assets/img/about/about4-image3.png" alt="">
                         </div>
                         <div class="shape">
-                            <img src="assets/img/shapes/about4-images-shape.png" alt="">
+                            <img src="/assets/img/shapes/about4-images-shape.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="service4-box mt-30">
                         <div class="icon">
-                            <img src="assets/img/icons/service4-icon1.svg" alt="">
+                            <img src="/assets/img/icons/service4-icon1.svg" alt="">
                         </div>
                         <div class="heading4 mt-20">
                             <h4><a href="service-details.html">Search Engine Optimization (SEO)</a></h4>
@@ -163,7 +163,7 @@
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="300">
                     <div class="service4-box mt-30">
                         <div class="icon">
-                            <img src="assets/img/icons/service4-icon2.svg" alt="">
+                            <img src="/assets/img/icons/service4-icon2.svg" alt="">
                         </div>
                         <div class="heading4 mt-20">
                             <h4><a href="service-details.html">Pay-Per-Click Advertising (PPC)</a></h4>
@@ -176,7 +176,7 @@
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="400">
                     <div class="service4-box mt-30">
                         <div class="icon">
-                            <img src="assets/img/icons/service4-icon3.svg" alt="">
+                            <img src="/assets/img/icons/service4-icon3.svg" alt="">
                         </div>
                         <div class="heading4 mt-20">
                             <h4><a href="service-details.html">Content Marketing</a></h4>
@@ -189,7 +189,7 @@
                 <div class="col-lg-6 col-md-6" data-aos="zoom-in-up" data-aos-duration="800" data-aos-delay="200">
                     <div class="service4-box mt-30">
                         <div class="icon">
-                            <img src="assets/img/icons/service4-icon1.svg" alt="">
+                            <img src="/assets/img/icons/service4-icon1.svg" alt="">
                         </div>
                         <div class="heading4 mt-20">
                             <h4><a href="service-details.html">Social Media Marketing (SMM)</a></h4>
@@ -202,7 +202,7 @@
                 <div class="col-lg-6 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="300">
                     <div class="service4-box mt-30">
                         <div class="icon">
-                            <img src="assets/img/icons/service4-icon1.svg" alt="">
+                            <img src="/assets/img/icons/service4-icon1.svg" alt="">
                         </div>
                         <div class="heading4 mt-20">
                             <h4><a href="service-details.html">Web Design & Development</a></h4>
@@ -268,10 +268,10 @@
                 <div class="col-lg-6">
                     <div class="choose4-images mt-30 ml-30 md:ml-0 sm:ml-0">
                         <div class="image image-anime reveal">
-                            <img src="assets/img/others/choose4-image.png" alt="">
+                            <img src="/assets/img/others/choose4-image.png" alt="">
                         </div>
                         <div class="shape animate2">
-                            <img src="assets/img/shapes/hero4-sec-shape2.png" alt="">
+                            <img src="/assets/img/shapes/hero4-sec-shape2.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -312,7 +312,7 @@
                             <div class="rev_slider">
                               <div class="rev_slide">
                                 <div class="test">
-                                  <img src="assets/img/others/case4-slider1.png" alt="">
+                                  <img src="/assets/img/others/case4-slider1.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="service.html" class="theme-btn8">
@@ -326,7 +326,7 @@
                               </div>
                               <div class="rev_slide">
                                 <div class="test"> 
-                                    <img src="assets/img/others/case4-slider2.png" alt="">
+                                    <img src="/assets/img/others/case4-slider2.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="service.html" class="theme-btn8">
@@ -340,7 +340,7 @@
                               </div>
                               <div class="rev_slide">
                                 <div class="test"> 
-                                    <img src="assets/img/others/case4-slider3.png" alt="">
+                                    <img src="/assets/img/others/case4-slider3.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="service.html" class="theme-btn8">
@@ -354,7 +354,7 @@
                               </div>
                               <div class="rev_slide">
                                 <div class="test">
-                                    <img src="assets/img/others/case4-slider1.png" alt="">
+                                    <img src="/assets/img/others/case4-slider1.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="service.html" class="theme-btn8">
@@ -368,7 +368,7 @@
                               </div>
                               <div class="rev_slide">
                                 <div class="test"> 
-                                    <img src="assets/img/others/case4-slider2.png" alt="">
+                                    <img src="/assets/img/others/case4-slider2.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="service.html" class="theme-btn8">
@@ -382,7 +382,7 @@
                               </div>
                               <div class="rev_slide">
                                 <div class="test"> 
-                                    <img src="assets/img/others/case4-slider3.png" alt="">
+                                    <img src="/assets/img/others/case4-slider3.png" alt="">
                                 </div>
                                 <div class="text">
                                     <a href="service.html" class="theme-btn8" >
@@ -436,13 +436,13 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-5">
                                         <div class="auhtor_thumb">
-                                            <img src="assets/img/testimonial/tes4-author1.png" alt="">
+                                            <img src="/assets/img/testimonial/tes4-author1.png" alt="">
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
                                         <div class="author_text">
                                             <div class="qoute">
-                                                <img src="assets/img/icons/qoute4.png" alt="">
+                                                <img src="/assets/img/icons/qoute4.png" alt="">
                                             </div>
                                             <h5>SEOX helped us boost our organic traffic by 250% just three months!</h5>
                                             <p class="content">Their insights into SEO and content marketing helped us secure top rankings for competitive keywords. </p>
@@ -458,13 +458,13 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-5">
                                         <div class="auhtor_thumb">
-                                            <img src="assets/img/testimonial/tes4-author2.png" alt="">
+                                            <img src="/assets/img/testimonial/tes4-author2.png" alt="">
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
                                         <div class="author_text">
                                             <div class="qoute">
-                                                <img src="assets/img/icons/qoute4.png" alt="">
+                                                <img src="/assets/img/icons/qoute4.png" alt="">
                                             </div>
                                             <h5>“Working with SEOX was the best decision for our brand!"</h5>
                                             <p class="content">Their insights into SEO and content marketing helped us secure top rankings for competitive keywords. </p>
@@ -480,13 +480,13 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-5">
                                         <div class="auhtor_thumb">
-                                            <img src="assets/img/testimonial/tes4-author3.png" alt="">
+                                            <img src="/assets/img/testimonial/tes4-author3.png" alt="">
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
                                         <div class="author_text">
                                             <div class="qoute">
-                                                <img src="assets/img/icons/qoute4.png" alt="">
+                                                <img src="/assets/img/icons/qoute4.png" alt="">
                                             </div>
                                             <h5>"Thanks to SEOX, our social media engagement grew by 400%!"</h5>
                                             <p class="content">Their insights into SEO and content marketing helped us secure top rankings for competitive keywords. </p>
@@ -538,14 +538,14 @@
                         <div class="row align-items-center">
                            <div class="col-lg-6">
                               <div class=" vl-blog-4-thumb-big image-anime overflow-hidden _relative">
-                                 <img class="w-full" src="assets/img/blog/blog4-big-post.png" alt="">
+                                 <img class="w-full" src="/assets/img/blog/blog4-big-post.png" alt="">
                               </div>
                            </div>
                            <div class="col-lg-6">
                               <div class="vl-blog-4-content heading4">
                                  <div class="vl-blog4-meta pb-16">
-                                    <a href="#" class="date"><img src="assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
-                                    <a href="#" class="author"><img src="assets/img/icons/author1.svg" alt=""> John Doe</a>
+                                    <a href="#" class="date"><img src="/assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
+                                    <a href="#" class="author"><img src="/assets/img/icons/author1.svg" alt=""> John Doe</a>
                                  </div>
                                  <h3><a href="blog-details.html">The Ultimate Guide to Scaling Your Business with Affiliate Marketing</a></h3>
                                  <p class="mt-16">Affiliate marketing is more than just a trend; it's a powerful tool for scaling businesses. In this blog we delve into how businesses.</p>
@@ -558,12 +558,12 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1100">
                     <div class="vl-blog-4-item add-bg mt-30">
                         <div class=" vl-blog-4-thumb">
-                            <img src="assets/img/blog/blog4-smoll-post1.png" alt="">
+                            <img src="/assets/img/blog/blog4-smoll-post1.png" alt="">
                          </div>
                         <div class="vl-blog-4-content heading4 mt-30">
                             <div class="vl-blog4-meta pb-16">
-                               <a href="#" class="date"><img src="assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
-                               <a href="#" class="author"><img src="assets/img/icons/author1.svg" alt=""> John Doe</a>
+                               <a href="#" class="date"><img src="/assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
+                               <a href="#" class="author"><img src="/assets/img/icons/author1.svg" alt=""> John Doe</a>
                             </div>
                             <h5><a href="blog-details.html">Mastering Digital Marketing: Actionable Insights to Drive Real Results for Your Business</a></h5>
                             <a href="blog-details.html" class="learn1">Read More <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
@@ -574,12 +574,12 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="800">
                     <div class="vl-blog-4-item  add-bg mt-30">
                         <div class=" vl-blog-4-thumb">
-                            <img src="assets/img/blog/blog4-smoll-post2.png" alt="">
+                            <img src="/assets/img/blog/blog4-smoll-post2.png" alt="">
                          </div>
                         <div class="vl-blog-4-content heading4 mt-30">
                             <div class="vl-blog4-meta pb-16">
-                               <a href="#" class="date"><img src="assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
-                               <a href="#" class="author"><img src="assets/img/icons/author1.svg" alt=""> John Doe</a>
+                               <a href="#" class="date"><img src="/assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
+                               <a href="#" class="author"><img src="/assets/img/icons/author1.svg" alt=""> John Doe</a>
                             </div>
                             <h5><a href="blog-details.html">The Future of Digital Marketing Trends Technologies Shaping Tomorrow’s Strategies</a></h5>
                             <a href="blog-details.html" class="learn1">Read More <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
@@ -590,12 +590,12 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000">
                     <div class="vl-blog-4-item add-bg mt-30">
                         <div class=" vl-blog-4-thumb">
-                            <img src="assets/img/blog/blog4-smoll-post3.png" alt="">
+                            <img src="/assets/img/blog/blog4-smoll-post3.png" alt="">
                          </div>
                         <div class="vl-blog-4-content heading4 mt-30">
                             <div class="vl-blog4-meta pb-16">
-                               <a href="#" class="date"><img src="assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
-                               <a href="#" class="author"><img src="assets/img/icons/author1.svg" alt=""> John Doe</a>
+                               <a href="#" class="date"><img src="/assets/img/icons/date1.svg" alt=""> 12/12/2024</a>
+                               <a href="#" class="author"><img src="/assets/img/icons/author1.svg" alt=""> John Doe</a>
                             </div>
                             <h5><a href="blog-details.html">From SEO to Social Media: Proven Techniques to Build Your Brand Online</a></h5>
                             <a href="blog-details.html" class="learn1">Read More <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span><span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span></a>
@@ -675,10 +675,10 @@
                 <div class="col-lg-6">
                     <div class="contact4-images ml-40 md:ml-40 sm:ml-0">
                         <div class="image image-anime reveal">
-                            <img src="assets/img/others/contact4-image.png" alt="">
+                            <img src="/assets/img/others/contact4-image.png" alt="">
                         </div>
                         <div class="shape animate1">
-                            <img src="assets/img/shapes/tes1-shape.png" alt="">
+                            <img src="/assets/img/shapes/tes1-shape.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -697,7 +697,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-4">
                     <div class="cta4-image image-anime reveal">
-                        <img class="w-full" src="assets/img/others/cta4-image.png" alt="">
+                        <img class="w-full" src="/assets/img/others/cta4-image.png" alt="">
                     </div>
                 </div>
                 <div class="col-lg-8">

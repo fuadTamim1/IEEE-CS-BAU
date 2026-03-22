@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/slick-slider.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/aos.css') }}">
-<link rel="stylesheet" href="{{ asset('https://unpkg.com/swiper/swiper-bundle.min.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <link rel="stylesheet" href="{{ asset('assets/css/mobile-menu.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/utility.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
