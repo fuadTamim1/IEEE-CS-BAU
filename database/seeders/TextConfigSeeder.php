@@ -23,7 +23,7 @@ class TextConfigSeeder extends Seeder
             ['key' => 'instagram-link', 'value' => 'https://www.instagram.com/ieee_bau_cs/'],
             ['key' => 'linkedin-link', 'value' => 'https://www.linkedin.com/company/ieee-bau-cs-computer-society/'],
             ['key' => 'location', 'value' => 'Al Balqa Applied University Engineering Technology College, Al Hizam Al Daeri St 527, Amman'],
-            ['key' => 'email', 'value' => 'ieeecsbau@ieee.org'],
+            ['key' => 'email', 'value' => 'ieeecs33@gmail.com'],
             ['key' => 'google_map_locaction', 'value' => 'https://maps.app.goo.gl/V5Lx9KGiZb12265F7'],
         ];
 
