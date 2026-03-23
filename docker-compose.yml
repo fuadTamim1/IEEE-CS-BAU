@@ -39,6 +39,27 @@ services:
       - TZ=UTC
     command: sh -c "chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && php-fpm"
 
+  queue_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ieee_cs_queue_worker
+    restart: always
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - ieee_cs_network
+    depends_on:
+      - app
+      - mysql
+      - redis
+    environment:
+      - TZ=UTC
+    command: sh -c "php artisan queue:work --queue=default --sleep=1 --tries=3 --timeout=1200 --max-time=3600"
+
   mysql:
     image: mysql:8.4
     container_name: ieee_cs_mysql

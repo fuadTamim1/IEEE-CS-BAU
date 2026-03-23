@@ -218,6 +218,38 @@ sudo systemctl start ieee-cs.service
 
 ---
 
+## Post Deploy Command
+
+``` Bash
+docker-compose up -d --build
+docker-compose exec -T app php artisan migrate --force
+docker-compose exec -T app php artisan optimize:clear
+docker-compose up -d queue_worker
+docker-compose logs --tail=80 queue_worker
+docker-compose exec -T app php artisan queue:failed
+curl -I https://ieeecsbau.site
+
+```
+
+## Queue Worker (Background Jobs)
+
+Use a dedicated worker container so imports / exports run in the background continuously.
+
+```bash
+# Start or recreate worker
+docker-compose up -d --build queue_worker
+
+# Verify worker is running
+docker-compose ps
+docker-compose logs -f queue_worker
+
+# Check failed jobs
+docker-compose exec -T app php artisan queue:failed
+
+# Retry failed jobs (if any)
+docker-compose exec -T app php artisan queue:retry all
+```
+
 ## Directory Structure After Setup
 
 ```
