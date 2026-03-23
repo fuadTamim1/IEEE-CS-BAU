@@ -40,7 +40,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . .
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+RUN mkdir -p \
+    bootstrap/cache \
+    storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs && \
+    composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # Build frontend assets
 RUN npm install && npm run build || true
@@ -89,6 +95,11 @@ COPY --from=builder /app /var/www/html
 # Verify vendor exists, if not run composer install as fallback
 RUN if [ ! -d /var/www/html/vendor ]; then \
             echo "⚠️  Vendor directory missing, installing composer dependencies..."; \
+            mkdir -p /var/www/html/bootstrap/cache \
+                /var/www/html/storage/framework/cache/data \
+                /var/www/html/storage/framework/sessions \
+                /var/www/html/storage/framework/views \
+                /var/www/html/storage/logs; \
             cd /var/www/html && composer install --no-dev --optimize-autoloader --no-interaction --no-progress; \
         fi
 # Set proper permissions
