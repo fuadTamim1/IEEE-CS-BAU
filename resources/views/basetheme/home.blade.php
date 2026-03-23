@@ -644,7 +644,7 @@
                     </div>
 
                     <div class="team-switcher__panel is-active" role="tabpanel" data-team-panel="committee">
-                        <div class="row team-members-grid mt-20">
+                        <div class="row mt-20">
                             @foreach ($committeeMembers as $m)
                                 <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}" :links="$m->contacts"
                                     :image="$m->image" />
@@ -653,7 +653,7 @@
                     </div>
 
                     <div class="team-switcher__panel" role="tabpanel" data-team-panel="members" hidden>
-                        <div class="row team-members-grid mt-20">
+                        <div class="row mt-20">
                             @foreach ($regularMembers as $m)
                                 <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}" :links="$m->contacts"
                                     :image="$m->image" />
@@ -934,22 +934,6 @@
             margin: 0;
         }
 
-        #ourteam .team-members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        #ourteam .team-members-grid > [class*='col-'] {
-            width: auto;
-            max-width: none;
-            flex: none;
-            padding-left: 0;
-            padding-right: 0;
-        }
-
         .team-switcher {
             margin-top: 1.2rem;
         }
@@ -990,13 +974,6 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 575px) {
-            #ourteam .team-members-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 0.75rem;
             }
         }
 

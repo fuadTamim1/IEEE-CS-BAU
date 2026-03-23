@@ -1,3 +1,2 @@
-/* @import "tailwindcss"; */
+@import "tailwindcss";
 @source "../views";
-@import '/vendor/awcodes/filament-tiptap-editor/resources/css/plugin.css';
