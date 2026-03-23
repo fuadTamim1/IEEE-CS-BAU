@@ -58,7 +58,7 @@ services:
       - redis
     environment:
       - TZ=UTC
-    command: sh -c "php artisan queue:work --queue=default --sleep=1 --tries=3 --timeout=1200 --max-time=3600"
+    command: sh -c "php artisan queue:work --sleep=1 --tries=3 --timeout=1200 --max-time=3600"
 
   mysql:
     image: mysql:8.4
