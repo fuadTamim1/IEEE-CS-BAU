@@ -1,5 +1,6 @@
 <x-base-layout>
     <!-- Hero Section -->
+    <!-- Hero Section -->
     <section class="hero4">
         <div class="hero4__backdrop" aria-hidden="true"></div>
         <div class="container text-center hero4__content-wrap">
