@@ -23,7 +23,7 @@
                         </div>
                         <div class="content">
                             <h3>Email Address</h3>
-                            <a href="mailto:support@seox.com">support@ieeecsbau.com</a>
+                            <a href="mailto:{{getWidget('email')}}">{{getWidget('email')}}</a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="content">
                             <h3>Phone Number</h3>
-                            <a href="tel:+123456-7890">+1 (123) 456-7890</a>
+                            <a href="tel:+962788822535">+962 7888 22 535</a>
                         </div>
                     </div>
                 </div>
