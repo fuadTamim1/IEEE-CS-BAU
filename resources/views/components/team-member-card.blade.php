@@ -5,12 +5,13 @@
             <div class="card-image-container">
                 <img class="card-image" 
                      src="{{ isset($image) ? asset('storage/' . $image) : asset('images/profile.png') }}"
-                     alt="{{ $name }}" />
+                     alt="{{ $name }}"
+                     loading="lazy" />
                 <div class="image-overlay">
-                    @if(!empty($contacts))
+                    @if(!empty($contacts) && is_iterable($contacts))
                         <div class="social-icons-overlay">
                             @foreach($contacts as $contact)
-                                <a href="{{ $contact['value'] ?? '#' }}" target="_blank"
+                                <a href="{{ $contact['value'] ?? '#' }}" target="_blank" rel="noopener noreferrer"
                                    title="{{ ucfirst($contact['key']) }}" class="social-link">
                                     @switch(strtolower($contact['key']))
                                         @case('facebook')<i class="fa-brands fa-facebook-f"></i>@break

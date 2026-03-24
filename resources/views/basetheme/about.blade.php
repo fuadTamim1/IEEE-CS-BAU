@@ -287,16 +287,6 @@
 
     <!--===== TEAM AREA START =====-->
 
-    @php
-        $committeeMembers = $members->filter(function ($m) {
-            return strcasecmp((string) $m->title, 'Member') !== 0;
-        });
-
-        $regularMembers = $members->filter(function ($m) {
-            return strcasecmp((string) $m->title, 'Member') === 0;
-        });
-    @endphp
-
     <div class="team2 sp sec-bg2">
         <div class="container">
             <div class="row">
@@ -311,32 +301,13 @@
             </div>
 
             <div class="team2 sp" id="ourteam">
-                <div class="team-switcher" data-team-switcher>
-                    <div class="team-switcher__tabs" role="tablist" aria-label="Team categories">
-                        <button type="button" class="team-switcher__tab is-active" role="tab" aria-selected="true"
-                            data-team-tab="committee">Committee</button>
-                        <button type="button" class="team-switcher__tab" role="tab" aria-selected="false"
-                            data-team-tab="members">Members</button>
-                    </div>
-
-                    <div class="team-switcher__panel is-active" role="tabpanel" data-team-panel="committee">
-                        <div class="row mt-20">
-                            @foreach ($committeeMembers as $m)
-                                <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
-                                    :links="$m->contacts" :image="$m->image" />
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="team-switcher__panel" role="tabpanel" data-team-panel="members" hidden>
-                        <div class="row mt-20">
-                            @foreach ($regularMembers as $m)
-                                <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
-                                    :links="$m->contacts" :image="$m->image" />
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+                <x-team-members-section
+                    mode="load-more"
+                    :members="$teamMembers"
+                    :active-tab="$activeTeamTab"
+                    :load-more-url="route('about.team-members.chunk')"
+                    anchor-id="ourteam"
+                />
                                 {{-- Pagenation --}}
                                 {{-- 
                         <div class="space60"></div>
@@ -365,82 +336,5 @@
     @include('components.contactSection')
 
     <!--===== CONTACT AREA END =====-->
-
-    @push('styles')
-        <style>
-            .team-switcher {
-                margin-top: 1.2rem;
-            }
-
-            .team-switcher__tabs {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.8rem;
-                margin-bottom: 1.1rem;
-            }
-
-            .team-switcher__tab {
-                border: 0;
-                border-radius: 999px;
-                padding: 0.75rem 1.35rem;
-                font-weight: 700;
-                color: #475569;
-                background: #e2e8f0;
-                transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-            }
-
-            .team-switcher__tab.is-active {
-                color: #1f2937;
-                background: #fbbf24;
-                box-shadow: 0 8px 22px rgba(251, 191, 36, 0.4);
-            }
-
-            .team-switcher__panel {
-                animation: fadeInTeamPanel 0.24s ease;
-            }
-
-            @keyframes fadeInTeamPanel {
-                from {
-                    opacity: 0;
-                    transform: translateY(4px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        </style>
-    @endpush
-
-    @section('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('[data-team-switcher]').forEach(function(switcher) {
-                    var tabs = switcher.querySelectorAll('[data-team-tab]');
-                    var panels = switcher.querySelectorAll('[data-team-panel]');
-
-                    tabs.forEach(function(tab) {
-                        tab.addEventListener('click', function() {
-                            var target = tab.getAttribute('data-team-tab');
-
-                            tabs.forEach(function(otherTab) {
-                                var isActive = otherTab === tab;
-                                otherTab.classList.toggle('is-active', isActive);
-                                otherTab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-                            });
-
-                            panels.forEach(function(panel) {
-                                var isActive = panel.getAttribute('data-team-panel') === target;
-                                panel.classList.toggle('is-active', isActive);
-                                panel.hidden = !isActive;
-                            });
-                        });
-                    });
-                });
-            });
-        </script>
-    @endsection
-
 
 </x-base-layout>

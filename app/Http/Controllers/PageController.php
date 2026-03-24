@@ -7,16 +7,20 @@ use App\Models\Event;
 use App\Models\Leaderboard;
 use App\Models\Member;
 use App\Models\Project;
+use App\Services\MemberListingService;
 use App\Models\Workshop;
 use App\Models\WorkshopFeedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
+    public function __construct(private readonly MemberListingService $memberListingService)
+    {
+    }
+
     public function HomePage()
     {
         $recentPosts = Blog::published()
@@ -26,44 +30,55 @@ class PageController extends Controller
             ->get(["id", "title", "slug", "image", "created_at", "author_id", "author_member_id", "status"]);
         $recentEvents = Event::orderBy('created_at')->take(5)->get(['id', 'title', 'image', 'slug', 'description', 'created_at']);
 
-
-        // Path to your JSON file
-        $filePath = resource_path('json/member_stories.json');
-
-        // Read the content of the file
-        $jsonContent = File::get($filePath);
-        $members = $this->getMembers();
-
-        // $memberStories = json_decode($jsonContent);
-        // $memberStories = json_decode($jsonContent);
-        return view('basetheme.home', ["posts" => $recentPosts, "members" => $members, "events" => $recentEvents]);
-    }
-
-    private function getMembers()
-    {
-        return Member::query()
+        $activeTeamTab = $this->memberListingService->normalizeTab((string) request('team_tab', MemberListingService::TAB_COMMITTEE));
+        $teamPage = max((int) request('team_page', 1), 1);
+        $teamMembers = $this->memberListingService->paginateByTab($activeTeamTab, 12, $teamPage);
+        $membersWithStory = Member::query()
+            ->whereNotNull('story')
+            ->whereRaw('CHAR_LENGTH(story) > 15')
             ->orderByDesc('order')
             ->orderBy('name')
-            ->get();
+            ->take(2)
+            ->get(['id', 'name', 'title', 'story', 'image']);
+
+        return view('basetheme.home', [
+            'posts' => $recentPosts,
+            'events' => $recentEvents,
+            'activeTeamTab' => $activeTeamTab,
+            'teamMembers' => $teamMembers,
+            'membersWithStory' => $membersWithStory,
+        ]);
     }
 
     public function AboutPage()
     {
-        $members = $this->getMembers();
-        return view('basetheme.about', ["members" => $members]);
+        $activeTeamTab = $this->memberListingService->normalizeTab((string) request('team_tab', MemberListingService::TAB_COMMITTEE));
+        $teamMembers = $this->memberListingService->paginateByTab($activeTeamTab, 12, 1);
+
+        return view('basetheme.about', [
+            'activeTeamTab' => $activeTeamTab,
+            'teamMembers' => $teamMembers,
+        ]);
+    }
+
+    public function AboutMembersChunk(Request $request)
+    {
+        $activeTeamTab = $this->memberListingService->normalizeTab((string) $request->query('team_tab', MemberListingService::TAB_COMMITTEE));
+        $page = max((int) $request->query('page', 1), 1);
+        $members = $this->memberListingService->paginateByTab($activeTeamTab, 12, $page, 'page');
+
+        return response()->json([
+            'html' => view('components.team-members-grid', ['members' => $members])->render(),
+            'hasMore' => $members->hasMorePages(),
+            'nextPage' => $members->currentPage() + 1,
+            'currentPage' => $members->currentPage(),
+        ]);
     }
 
     public function TeamPage()
     {
-        $allMembers = $this->getMembers();
-
-        $committeeMembers = $allMembers->filter(function (Member $member) {
-            return strcasecmp((string) $member->title, 'Member') !== 0;
-        })->values();
-
-        $regularMembers = $allMembers->filter(function (Member $member) {
-            return strcasecmp((string) $member->title, 'Member') === 0;
-        })->values();
+        $committeeMembers = $this->memberListingService->paginateByTab(MemberListingService::TAB_COMMITTEE, 24, 1)->getCollection();
+        $regularMembers = $this->memberListingService->paginateByTab(MemberListingService::TAB_MEMBERS, 24, 1)->getCollection();
 
         return view('basetheme.team', [
             'committeeMembers' => $committeeMembers,

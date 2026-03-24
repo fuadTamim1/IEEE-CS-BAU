@@ -15,6 +15,7 @@ Route::macro('underDevelopment', function (bool $enabled = false) {
 
 Route::get('/', [PageController::class, "HomePage"])->name('home');
 Route::get('/about', [PageController::class, "AboutPage"])->name('about');
+Route::get('/about/team-members', [PageController::class, 'AboutMembersChunk'])->name('about.team-members.chunk');
 Route::get('/blog', [PageController::class, "BlogPage"])->name('blogs');
 Route::get('/blog/{slug}', [PageController::class, "ShowBlogPage"])->name("blogs.show");
 
