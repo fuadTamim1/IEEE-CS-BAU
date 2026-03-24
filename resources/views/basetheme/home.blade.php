@@ -390,13 +390,16 @@
                     active: false
                 };
                 var phrase = 'IEEE CS';
-                var density = 4;
+                var density = 6;
                 var rafId = null;
                 var isHeroVisible = true;
                 var logoImg = new Image();
                 var logoReady = false;
                 var logoSource = heroCanvas.getAttribute('data-logo-src') || '';
-
+                var offsetX = 0;
+                var offsetY = 0;
+                var canvasScale = 1;
+                
                 function resizeCanvas() {
                     var aspect = logoReady ? ((logoImg.naturalWidth || 1) / (logoImg.naturalHeight || 1)) : 1;
                     var maxCanvasWidth = Math.min((wrapper.clientWidth || 900) * 0.72, 980);
@@ -411,6 +414,10 @@
 
                     heroCanvas.width = Math.max(Math.floor(canvasWidth), 220);
                     heroCanvas.height = Math.max(Math.floor(canvasHeight), 140);
+                    
+                    var rect = heroCanvas.getBoundingClientRect();
+                    canvasScale = heroCanvas.width / rect.width;
+                    
                     buildParticles();
                 }
 
@@ -509,8 +516,8 @@
 
                 wrapper.addEventListener('mousemove', function (event) {
                     var rect = heroCanvas.getBoundingClientRect();
-                    mouse.x = event.clientX - rect.left;
-                    mouse.y = event.clientY - rect.top;
+                    mouse.x = (event.clientX - rect.left) * canvasScale;
+                    mouse.y = (event.clientY - rect.top) * canvasScale;
                     mouse.active = true;
                 });
 
