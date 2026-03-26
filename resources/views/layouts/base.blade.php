@@ -10,6 +10,11 @@
     @include('components.basetheme.heads')
     @vite('resources/js/app.js')
     <wireui:scripts />
+    <style>
+        [x-data="wireui_notifications"] {
+            z-index: 2147483647 !important;
+        }
+    </style>
     {{-- allow pages/components to push additional styles --}}
     @stack('styles')
 
@@ -36,7 +41,7 @@
     @include('components.basetheme.header')
     <main>
         {{ $slot }}
-           <x-notifications />
+            <x-notifications position="top-end" z-index="z-[2147483647]" />
     </main>
     {{-- @include('components.basetheme.footer') --}}
     <x-Footer />

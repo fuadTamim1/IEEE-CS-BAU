@@ -694,13 +694,7 @@
         <div class="container">
             <div class="row justify-center">
                 <div class="col-lg-8">
-                    <div class="cta4-form-area text-center">
-                        <h2>Join Our Newsletter</h2>
-                        <form action="#" class="d-flex gap-3 mt-4">
-                            <input type="email" placeholder="Enter Your Email" class="form-control">
-                            <x-theme-button type="submit" text="Subscribe" class="newletter-btn"/>
-                        </form>
-                    </div>
+                    @livewire('newsletter-form')
                 </div>
             </div>
         </div>

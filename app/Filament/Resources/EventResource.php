@@ -47,9 +47,15 @@ class EventResource extends Resource
                 //     ->default('upcoming'),
                 Grid::make(2)->schema([
                     DateTimePicker::make('start_at')
-                        ->required(),
+                        ->required()
+                        ->native(false)
+                        ->format('Y-m-d H:i')
+                        ->minutesStep(15),
                     DateTimePicker::make('end_at')
-                        ->required(),
+                        ->required()
+                        ->native(false)
+                        ->format('Y-m-d H:i')
+                        ->minutesStep(15),
                 ]),
                 TiptapEditor::make('content')
                     ->profile('default')
