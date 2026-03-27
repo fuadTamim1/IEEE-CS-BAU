@@ -6,6 +6,7 @@ use App\Filament\Pages\Settings;
 use App\Filament\Pages\TextWidgets;
 use App\Filament\Resources\BlogResource\Widgets\BlogPostCategoryChart;
 use App\Filament\Resources\BlogResource\Widgets\RecentBlogPostsTable;
+use App\Filament\Resources\ContactTicketResource;
 use App\Filament\Resources\ExamResource;
 use App\Filament\Resources\ExamSessionResource;
 use App\Filament\Resources\LeaderboardResource;
@@ -154,6 +155,9 @@ class AdminPanelProvider extends PanelProvider
                     ->group(
                         NavigationGroup::make('Mails')
                             ->items([
+                                NavigationItem::make('Contact Tickets')
+                                    ->icon('heroicon-o-inbox-stack')
+                                    ->url(fn(): string => ContactTicketResource::getUrl()),
                                 NavigationItem::make('Subscribers')
                                     ->icon('heroicon-o-envelope')
                                     ->url(fn(): string => SubscriberResource::getUrl())

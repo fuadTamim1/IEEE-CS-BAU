@@ -21,6 +21,7 @@
                                         @case('youtube')<i class="fa-brands fa-youtube"></i>@break
                                         @case('email')<i class="fa-solid fa-envelope"></i>@break
                                         @case('github')<i class="fa-brands fa-github"></i>@break
+                                        @case('behance')<i class="fa-brands fa-behance"></i>@break
                                         @default <i class="fa-solid fa-link"></i>
                                     @endswitch
                                 </a>

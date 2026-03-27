@@ -426,14 +426,30 @@ margin-top: 1rem;
 
 .leaderboard-title {
   text-align: center;
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  margin-bottom: 8px;
   font-weight: bold;
   background: linear-gradient(45deg, #ffcc00, #ff8800, #ffd700, #ff4500);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.leaderboard-period {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  font-weight: 500;
+  color: #ffd78a;
+  vertical-align: middle;
+}
+
+.leaderboard-subtitle {
+  margin: 0 0 18px;
+  text-align: center;
+  color: #f1d79a;
+  font-size: 0.98rem;
 }
 .btn-primary {
   --bs-btn-color: #fff;
@@ -500,6 +516,10 @@ margin-top: 1rem;
 
 .leaderboard-table tbody tr:hover {
   background-color: rgba(255, 165, 0, 0.1);
+}
+
+.leaderboard-table tbody tr.top-rank {
+  background: linear-gradient(90deg, rgba(255, 196, 0, 0.15), rgba(0, 0, 0, 0));
 }
 
 .leaderboard-table tbody tr:nth-child(1) td {
@@ -587,6 +607,69 @@ margin-top: 1rem;
   font-weight: bold;
   font-size: 18px;
 }
+
+.countdown-meta {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #f6d6a0;
+}
+
+.leaderboard-history-card {
+  border: 1px solid rgba(255, 190, 80, 0.25);
+  background: linear-gradient(180deg, rgba(255, 177, 53, 0.06), rgba(255, 255, 255, 0));
+}
+
+.leaderboard-history-card .list-group-item {
+  background: rgba(0, 0, 0, 0.03);
+  font-weight: 500;
+}
+
+.leaderboard-history-card .card-title {
+  color: #704300;
+}
+
+@media (max-width: 768px) {
+  .leaderboard-container {
+    padding: 8px;
+  }
+
+  .countdown-timer {
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .countdown-box {
+    width: 62px;
+    height: 74px;
+  }
+
+  .countdown-number {
+    font-size: 1.55rem;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 10px 9px;
+    font-size: 0.92rem;
+  }
+
+  .leaderboard-period {
+    display: block;
+    margin: 6px 0 0;
+  }
+
+  .leaderboard-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow {
+    animation: none;
+  }
+}
+
 #particles-js {
   position: fixed;
   width: 100%;
@@ -665,21 +748,6 @@ margin-top: 1rem;
 
 /* Desktop: Grid layout */
 @media (min-width: 992px) {
-  #topMembers .swiper-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-  }
-
-  #topMembers .swiper-slide {
-      flex: 0 0 auto;
-      width: 33.3333%; /* 3 cards per row */
-  }
- 
-  .swiper-pagination,
-  .swiper-button-next,
-  .swiper-button-prev {
-      display: none !important;
-  }
 }/* Enhanced Explore Mega Menu - keeping your existing style */
         .sub-menu.mega-explore {
             background: #fff;

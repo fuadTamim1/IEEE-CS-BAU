@@ -13,31 +13,43 @@
                         @php
                             $publishAt = $currentLeaderboard->publish_at ?? null;
                             $weekStart = $currentLeaderboard->week_start_date ?? null;
+                            $leaderboardTitle = trim((string) ($currentLeaderboard->title ?? ''));
+                            $publishLabel = $publishAt
+                                ? (is_object($publishAt)
+                                    ? $publishAt->format('M j, Y g:i A')
+                                    : \Carbon\Carbon::parse($publishAt)->format('M j, Y g:i A'))
+                                : null;
                         @endphp
                         @if ($publishAt && strtotime($publishAt) > time())
-                            <div id="countdown" class="countdown-container">
+                            <div id="countdown" class="countdown-container" role="timer" aria-live="polite">
                                 <h1 class="title">LEADERBOARD REVEAL</h1>
                                 <div class="countdown-timer">
                                     @foreach (['days' => 'Days', 'hours' => 'Hours', 'minutes' => 'Minutes', 'seconds' => 'Seconds'] as $id => $label)
                                         <div class="countdown-box">
-                                            <div id="{{ $id }}" class="countdown-number">00</div>
+                                            <div id="{{ $id }}" class="countdown-number" aria-label="{{ $label }}">00</div>
                                             <div class="countdown-label">{{ $label }}</div>
                                         </div>
                                     @endforeach
                                 </div>
                                 <div class="countdown-text">Until Leaderboard Reveal!</div>
+                                @if ($publishLabel)
+                                    <div class="countdown-meta">Reveal Time: {{ $publishLabel }}</div>
+                                @endif
                             </div>
                         @else
                             <div id="leaderboard">
                                 <h1 class="leaderboard-title">
-                                    Members Of The Month
-                                    {{ $weekStart ? (is_object($weekStart) ? $weekStart->format('F j, Y') : \Carbon\Carbon::parse($weekStart)->format('F j, Y')) : '' }}
+                                    {{ $leaderboardTitle !== '' ? $leaderboardTitle : 'Members Of The Month' }}
+                                    <span class="leaderboard-period">
+                                        {{ $weekStart ? (is_object($weekStart) ? $weekStart->format('F j, Y') : \Carbon\Carbon::parse($weekStart)->format('F j, Y')) : '' }}
+                                    </span>
                                 </h1>
-                                <table class="leaderboard-table">
+                                <p class="leaderboard-subtitle">This month\'s top contributors. Keep pushing to climb the next reveal.</p>
+                                <table class="leaderboard-table" aria-label="Current leaderboard rankings">
                                     <thead>
                                         <tr>
-                                            <th>Rank</th>
-                                            <th>Name</th>
+                                            <th scope="col">Rank</th>
+                                            <th scope="col">Name</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,7 +59,7 @@
                                                 $rankIcons = [1 => '🥇', 2 => '🥈', 3 => '🥉'];
                                                 $rank = $rankIcons[$i] ?? "#";
                                             @endphp
-                                            <tr>
+                                            <tr class="{{ $i <= 3 ? 'top-rank' : '' }}">
                                                 <td>{{ $rank }} {{ $i }}</td>
                                                 <td>{{ $member?->name ?? '-' }}</td>
                                             </tr>
@@ -84,29 +96,6 @@
         @endif
 
         @section('scripts')
-            <script>
-                const swiper = new Swiper('#topMembers', {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    breakpoints: {
-                        768: {
-                            slidesPerView: 2,
-                        },
-                        992: {
-                            slidesPerView: 3,
-                            allowTouchMove: false, // Desktop should not swipe
-                        }
-                    }
-                });
-            </script>
             <!-- Include particles.js from CDN -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 
@@ -114,8 +103,7 @@
                 document.addEventListener('DOMContentLoaded', function() {
                     @if (!empty($currentLeaderboard) && !empty($currentLeaderboard->id))
                         if(localStorage.getItem('leaderboardShown_{{ $currentLeaderboard->id }}')) {
-                            // If already shown, skip countdown
-                            startCelebration();
+                            // If already shown, skip celebration and keep normal page view.
                             return;
                         }
                         // Get publish timestamp from Laravel
@@ -164,10 +152,12 @@
                         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                         // Update the display
-                        timerElement.days.textContent = days.toString().padStart(2, '0');
-                        timerElement.hours.textContent = hours.toString().padStart(2, '0');
-                        timerElement.minutes.textContent = minutes.toString().padStart(2, '0');
-                        timerElement.seconds.textContent = seconds.toString().padStart(2, '0');
+                        if (timerElement.days && timerElement.hours && timerElement.minutes && timerElement.seconds) {
+                            timerElement.days.textContent = days.toString().padStart(2, '0');
+                            timerElement.hours.textContent = hours.toString().padStart(2, '0');
+                            timerElement.minutes.textContent = minutes.toString().padStart(2, '0');
+                            timerElement.seconds.textContent = seconds.toString().padStart(2, '0');
+                        }
                     }
 
                     // Update immediately then set interval
@@ -176,11 +166,15 @@
                 }
 
                 function startCelebration() {
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || typeof particlesJS !== 'function') {
+                        return;
+                    }
+
                     // Initialize particles.js
                     particlesJS('particles-js', {
                         "particles": {
                             "number": {
-                                "value": 150,
+                                "value": 90,
                                 "density": {
                                     "enable": true,
                                     "value_area": 800
@@ -221,7 +215,7 @@
                             },
                             "move": {
                                 "enable": true,
-                                "speed": 6,
+                                "speed": 4,
                                 "direction": "top",
                                 "random": true,
                                 "straight": false,
@@ -251,6 +245,11 @@
 
                     // Hide particles after celebration (8 seconds)
                     setTimeout(() => {
+                        if (window.pJSDom && window.pJSDom.length > 0) {
+                            window.pJSDom[0].pJS.fn.vendors.destroypJS();
+                            window.pJSDom = [];
+                        }
+
                         const particlesElement = document.getElementById('particles-js');
                         if (particlesElement) {
                             particlesElement.style.opacity = '0';

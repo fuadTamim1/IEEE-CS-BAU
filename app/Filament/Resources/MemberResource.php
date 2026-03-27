@@ -103,6 +103,7 @@ class MemberResource extends Resource
                                 'website' => 'Website',
                                 'email' => 'Email',
                                 'github' => 'GitHub',
+                                'behance' => 'Behance',
                                 // add more platforms as needed
                             ])
                             ->required()
