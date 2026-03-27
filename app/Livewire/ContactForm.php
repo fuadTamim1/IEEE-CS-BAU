@@ -14,6 +14,15 @@ class ContactForm extends Component
 
     public function submit()
     {
+        if (!filter_var(get_setting('enable_contact_form', true), FILTER_VALIDATE_BOOLEAN)) {
+            $this->notification()->warning(
+                title: 'Contact form is unavailable',
+                description: 'Please try again later.'
+            );
+
+            return;
+        }
+
         $validated = $this->validate((new ContactRequest)->rules());
         $result = $this->send($validated);
 

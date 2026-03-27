@@ -7,7 +7,6 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Notifications\Notification;
 use App\Models\Setting;
@@ -57,6 +56,10 @@ class Settings extends Page
                     ]),
                 Section::make('Contact & Social')
                     ->schema([
+                        Toggle::make('enable_contact_form')
+                            ->label('Enable Contact Form')
+                            ->default(true)
+                            ->helperText('Disable to hide contact forms across public pages.'),
                         TextInput::make('contact_email')->label('Contact Email'),
                         TextInput::make('whatsapp_support_number')->label('WhatsApp Support Number'),
                         TextInput::make('facebook_page')->label('Facebook Page'),

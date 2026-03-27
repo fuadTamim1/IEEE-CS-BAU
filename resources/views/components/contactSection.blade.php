@@ -1,3 +1,8 @@
+@php
+    $contactFormEnabled = filter_var(get_setting('enable_contact_form', true), FILTER_VALIDATE_BOOLEAN);
+@endphp
+
+@if ($contactFormEnabled)
 <div class="contact2 sp">
     <div class="container">
         <div class="row">
@@ -56,3 +61,17 @@
     </div>
 </div>
 {{-- quck edit --}}
+@else
+<div class="contact2 sp">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading2 text-center">
+                    <h2 class="text-anime-style-3">Contact Form Is Temporarily Unavailable</h2>
+                    <p class="mt-16">Please use our email or phone channels to reach us.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
