@@ -56,7 +56,7 @@
             .ieee-workshop-card__media {
                 position: relative;
                 display: block;
-                aspect-ratio: 16 / 10;
+                aspect-ratio: 8 / 10;
                 overflow: hidden;
             }
 
@@ -94,7 +94,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 0.75rem;
-                height: 100%;
+                /* height: 100%; */
             }
 
             .ieee-workshop-card__title {
