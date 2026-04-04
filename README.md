@@ -84,6 +84,8 @@ The application should now be running at: `http://127.0.0.1:8000`
 
 ---
 
+## If you want to see production virsion please checkhout the website here: https://ieeecsbau.site
+
 ## Project Status
 
 This project is still under active development. Feedback and suggestions are always welcome.
