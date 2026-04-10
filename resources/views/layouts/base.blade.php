@@ -45,6 +45,7 @@
     </main>
     {{-- @include('components.basetheme.footer') --}}
     <x-Footer />
+    <x-cookie-consent />
 
     @include('components.basetheme.scripts')
     @yield('scripts')

@@ -25,6 +25,7 @@ Route::get('/events', [PageController::class, "EventsPage"])->name('events');
 Route::get('/events/{event:slug}', [PageController::class, "ShowEventPage"])->name('events.show');
 Route::get('/ourteam', [PageController::class, "TeamPage"])->name('ourteam');
 Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
+Route::view('/privacy-policy', 'basetheme.privacy-policy')->name('privacy-policy');
 // Route::get('/soon', [PageController::class, "SoonPage"])->name('soon');
 
 Route::get('/leaderboard', [PageController::class, "LeaderboardPage"])->name('leaderboard');

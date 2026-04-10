@@ -30,6 +30,7 @@
                                 <li><a href="{{route('projects')}}">Projects</a></li>
                                 <li><a href="{{route('events')}}">Events</a></li>
                                 <li><a href="{{route('blogs')}}">Blog</a></li>
+                                <li><a href="{{route('privacy-policy')}}">Privacy Policy</a></li>
                                 <li><a href="{{route('contact')}}">Contact Us</a></li>
                             </ul>
                         </div>
@@ -88,6 +89,26 @@
     </div>
     <!-- footer area end -->
 
+    <div class="ieee-admin-links" aria-label="IEEE Administrative Links">
+        <div class="container">
+            <h5 class="ieee-admin-links__title">IEEE Administrative Links</h5>
+            <ul class="ieee-admin-links__list">
+                <li>
+                    <a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer">IEEE Home</a>
+                </li>
+                <li>
+                    <a href="https://www.ieee.org/security-privacy.html" target="_blank" rel="noopener noreferrer">IEEE Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="https://www.ieee.org/about/help/site-terms-conditions.html" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>
+                </li>
+                <li>
+                    <a href="https://www.ieee.org/about/corporate/governance/p9-26.html" target="_blank" rel="noopener noreferrer">Nondiscrimination Policy</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <!-- copy-right area start -->
     <div class="container">
         <div class="row vl-copyright4 _dv-top align-items-center">
@@ -106,5 +127,65 @@
         </div>
     </div>
     <!-- copy-right area end -->
+
+    <style>
+        .ieee-admin-links {
+            border-top: 1px solid rgba(255, 255, 255, 0.16);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 18px 0;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, rgba(0, 98, 155, 0.18) 0%, rgba(0, 41, 84, 0.18) 100%);
+        }
+
+        .ieee-admin-links__title {
+            margin: 0 0 10px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .ieee-admin-links__list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+        }
+
+        .ieee-admin-links__list a {
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 1.6;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .ieee-admin-links__list a:hover,
+        .ieee-admin-links__list a:focus-visible {
+            color: #9ad8ff;
+            border-bottom-color: #9ad8ff;
+        }
+
+        @media (max-width: 767.98px) {
+            .ieee-admin-links {
+                padding: 14px 0;
+            }
+
+            .ieee-admin-links__title {
+                font-size: 14px;
+            }
+
+            .ieee-admin-links__list {
+                gap: 8px 12px;
+            }
+
+            .ieee-admin-links__list a {
+                font-size: 13px;
+            }
+        }
+    </style>
 
 </footer>
