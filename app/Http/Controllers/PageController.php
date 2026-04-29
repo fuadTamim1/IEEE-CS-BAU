@@ -28,7 +28,17 @@ class PageController extends Controller
             ->latest('created_at')
             ->take(4)
             ->get(["id", "title", "slug", "image", "created_at", "author_id", "author_member_id", "status"]);
-        $recentEvents = Event::orderBy('created_at')->take(5)->get(['id', 'title', 'image', 'slug', 'description', 'created_at']);
+        $recentEvents = Event::orderBy('created_at')->take(5)->get(['id', 'title', 'image', 'slug', 'description', 'created_at', 'start_at', 'end_at'])->map(function ($event) {
+            $now = Carbon::now();
+            if ($now < $event->start_at) {
+                $event->status = 'Upcoming';
+            } elseif ($now >= $event->start_at && $now <= $event->end_at) {
+                $event->status = 'In Progress';
+            } else {
+                $event->status = 'Finished';
+            }
+            return $event;
+        });
 
         $activeTeamTab = $this->memberListingService->normalizeTab((string) request('team_tab', MemberListingService::TAB_COMMITTEE));
         $teamPage = max((int) request('team_page', 1), 1);
