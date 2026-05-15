@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\ContestRegistration;
+use App\Models\Bcpc\BcpcRegistration;
 
 it('renders the bcpc landing page with required sections', function () {
     $response = $this->get(route('bcpc'));
@@ -31,7 +31,7 @@ it('stores a bcpc team registration from the modal form', function () {
         ->assertRedirect('/bcpc')
         ->assertSessionHas('contest_registration_success');
 
-    expect(ContestRegistration::query()->where([
+    expect(BcpcRegistration::query()->where([
         'team_name' => 'Stack Smashers',
         'captain_name' => 'Amina Khaled',
         'captain_university_id' => 'BAU-2026-0091',
@@ -70,7 +70,7 @@ it('returns validation errors for missing required fields', function () {
             'member_two_name',
         ]);
 
-    expect(ContestRegistration::query()->count())->toBe(0);
+    expect(BcpcRegistration::query()->count())->toBe(0);
 });
 
 it('rejects submission when honeypot is filled', function () {
@@ -89,7 +89,7 @@ it('rejects submission when honeypot is filled', function () {
         ->assertRedirect('/bcpc')
         ->assertSessionHasErrors(['website']);
 
-    expect(ContestRegistration::query()->count())->toBe(0);
+    expect(BcpcRegistration::query()->count())->toBe(0);
 });
 
 it('enforces rate limiting on bcpc registration route', function () {

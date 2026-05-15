@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    @if ($backgroundVideo)
+        <link rel="preload" href="{{ asset($backgroundVideo) }}" as="video" type="video/mp4">
+    @endif
+    @if ($backgroundPatternImage)
+        <link rel="preload" href="{{ asset($backgroundPatternImage) }}" as="image" fetchpriority="high">
+    @endif
     <style>
         :root {
             --bg-dark: #070707;
@@ -40,6 +46,10 @@
             font-family: 'JetBrains Mono', monospace;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        body.video-fallback .bg-video {
+            opacity: 0 !important;
         }
 
         .boot-screen {
@@ -129,10 +139,7 @@
         .page {
             min-height: 100vh;
             padding: 1.5rem 0 4rem;
-            background:
-                radial-gradient(circle at 8% 0%, rgba(255, 210, 79, 0.09), transparent 40%),
-                radial-gradient(circle at 88% 10%, rgba(255, 111, 0, 0.13), transparent 46%),
-                linear-gradient(165deg, #050505 0%, #101010 45%, #050505 100%);
+            background: linear-gradient(160deg, #040404 0%, #090909 48%, #040404 100%);
             position: relative;
             overflow: hidden;
         }
@@ -147,13 +154,98 @@
             background-size: 40px 40px;
             pointer-events: none;
             mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 88%);
+            z-index: 1;
+        }
+
+        .bg-scene {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            isolation: isolate;
+        }
+
+        .bg-video {
+            position: absolute;
+            inset: -6%;
+            width: 112%;
+            height: 112%;
+            object-fit: cover;
+            opacity: 0;
+            filter: contrast(1.1) saturate(0.9) brightness(0.48);
+            transform: translate3d(0, 0, 0) scale(1.08);
+            will-change: transform, opacity;
+            transition: opacity 1.05s ease;
+            animation: bgVideoDrift 22s ease-in-out infinite alternate;
+        }
+
+        .bg-video.is-ready {
+            opacity: 0.46;
+        }
+
+        .bg-fallback {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 82% 8%, rgba(255, 149, 47, 0.22), transparent 42%),
+                radial-gradient(circle at 12% 88%, rgba(255, 210, 79, 0.12), transparent 50%),
+                linear-gradient(165deg, rgba(10, 10, 10, 0.7), rgba(4, 4, 4, 0.92));
+            z-index: 1;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            inset: -2%;
+            background-repeat: repeat;
+            background-position: center;
+            background-size: min(900px, 90vw) auto;
+            mix-blend-mode: screen;
+            opacity: 0.14;
+            filter: saturate(1.05) contrast(1.18);
+            z-index: 2;
+            animation: bgPatternDrift 38s linear infinite;
+        }
+
+        .bg-pattern.no-pattern {
+            background-image:
+                radial-gradient(circle at 25% 22%, rgba(255, 210, 79, 0.16) 0 1.2px, transparent 1.2px),
+                radial-gradient(circle at 75% 60%, rgba(255, 149, 47, 0.14) 0 1.1px, transparent 1.1px);
+            background-size: 56px 56px, 74px 74px;
+        }
+
+        .bg-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 44%, transparent 0%, rgba(0, 0, 0, 0.45) 70%, rgba(0, 0, 0, 0.78) 100%);
+            z-index: 3;
+        }
+
+        @keyframes bgVideoDrift {
+            0% {
+                transform: translate3d(-1.2%, -0.8%, 0) scale(1.08);
+            }
+
+            100% {
+                transform: translate3d(1%, 1.1%, 0) scale(1.11);
+            }
+        }
+
+        @keyframes bgPatternDrift {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-70px, -40px, 0);
+            }
         }
 
         .container {
             width: min(1150px, 92vw);
             margin: 0 auto;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .topbar {
@@ -193,11 +285,12 @@
         }
 
         .panel {
-            background: linear-gradient(160deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.96));
+            background: linear-gradient(160deg, rgba(20, 20, 20, 0.84), rgba(7, 7, 7, 0.88));
             border: 1px solid var(--line);
             border-radius: 16px;
             padding: 1.25rem;
             box-shadow: 0 22px 44px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px) saturate(105%);
             opacity: 0;
             transform: translateY(20px);
             transition: transform 0.55s ease, opacity 0.55s ease, border-color 0.3s ease;
@@ -657,6 +750,18 @@
                 grid-template-columns: 1fr;
             }
 
+            .bg-video {
+                inset: -10%;
+                width: 120%;
+                height: 120%;
+                filter: contrast(1.08) saturate(0.9) brightness(0.45);
+            }
+
+            .bg-pattern {
+                opacity: 0.11;
+                background-size: min(760px, 110vw) auto;
+            }
+
             .detail-grid,
             .sponsor-row,
             .form-grid {
@@ -665,14 +770,42 @@
         }
 
         @media (max-width: 640px) {
+            .page {
+                padding-top: 1rem;
+            }
+
             .topbar {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
+            .bg-video.is-ready {
+                opacity: 0.38;
+            }
+
+            .bg-pattern {
+                opacity: 0.08;
+            }
+
+            .panel {
+                padding: 1rem;
+            }
+
             .line {
                 grid-template-columns: 1fr;
                 gap: 0.2rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bg-video,
+            .bg-pattern,
+            .hero-brand .mascot {
+                animation: none !important;
+            }
+
+            .bg-video {
+                display: none;
             }
         }
     </style>
@@ -693,6 +826,17 @@
     </div>
 
     <main class="page" data-launch-at="{{ $contestDateIso }}">
+        <div class="bg-scene" aria-hidden="true">
+            @if ($backgroundVideo)
+                <video class="bg-video" id="contestBgVideo" autoplay muted loop playsinline preload="auto" @if ($backgroundPosterImage) poster="{{ asset($backgroundPosterImage) }}" @endif>
+                    <source src="{{ asset($backgroundVideo) }}" type="video/mp4">
+                </video>
+            @endif
+            <div class="bg-fallback"></div>
+            <div class="bg-pattern {{ $backgroundPatternImage ? 'has-pattern' : 'no-pattern' }}" @if ($backgroundPatternImage) style="background-image: url('{{ asset($backgroundPatternImage) }}');" @endif></div>
+            <div class="bg-vignette"></div>
+        </div>
+
         <div class="container">
             <div class="topbar">
                 <div class="left">
@@ -918,6 +1062,49 @@
     </div>
 
     <script>
+        (function() {
+            var video = document.getElementById('contestBgVideo');
+            if (!video) {
+                document.body.classList.add('video-fallback');
+                return;
+            }
+
+            var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var saveData = navigator.connection && navigator.connection.saveData;
+
+            if (reducedMotion || saveData) {
+                document.body.classList.add('video-fallback');
+                return;
+            }
+
+            function markReady() {
+                video.classList.add('is-ready');
+            }
+
+            video.addEventListener('loadeddata', markReady, {
+                once: true
+            });
+            video.addEventListener('canplay', markReady, {
+                once: true
+            });
+
+            video.addEventListener('error', function() {
+                document.body.classList.add('video-fallback');
+            });
+
+            try {
+                video.preload = 'auto';
+                var playPromise = video.play();
+                if (playPromise && typeof playPromise.then === 'function') {
+                    playPromise.then(markReady).catch(function() {
+                        document.body.classList.add('video-fallback');
+                    });
+                }
+            } catch (error) {
+                document.body.classList.add('video-fallback');
+            }
+        })();
+
         (function() {
             var bootScreen = document.getElementById('bootScreen');
             var bootLog = document.getElementById('bootLog');

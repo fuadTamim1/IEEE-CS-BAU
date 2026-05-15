@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContestRegistrationRequest;
+use App\Http\Controllers\Bcpc\BcpcController;
+use App\Http\Requests\Bcpc\BcpcRegistrationRequest;
 use App\Models\Blog;
-use App\Models\ContestRegistration;
 use App\Models\Event;
 use App\Models\Leaderboard;
 use App\Models\Member;
 use App\Models\Project;
+use App\Services\Bcpc\BcpcRegistrationService;
 use App\Services\MemberListingService;
-use App\Services\ContestRegistrationService;
 use App\Models\Workshop;
 use App\Models\WorkshopFeedback;
 use Illuminate\Http\Request;
@@ -293,53 +293,29 @@ class PageController extends Controller
         return view('basetheme.contact');
     }
 
-    public function BcpcPage()
+    public function BcpcPage(BcpcController $bcpcController)
     {
-        return view('basetheme.bcpc', [
-            'contestName' => 'BCPC Newbie Teams Cup 2026',
-            'contestDateIso' => '2026-07-25T09:00:00+03:00',
-            'contestDayTime' => 'Saturday, 9:00 AM - 1:00 PM',
-            'contestSubtitle' => 'Beginner and Newbie Teams Division',
-            'mascotImage' => 'IEEE/Pixel-20250805T060422Z-1-001/Pixel/Confident.png',
-            'logoImage' => 'images/IEEE-CS_LogoTM-orange.png',
-            'chapterLogoImage' => 'images/logo_name_description.svg',
-        ]);
+        return $bcpcController->show();
     }
 
     public function SubmitBcpcRegistration(
-        ContestRegistrationRequest $request,
-        ContestRegistrationService $contestRegistrationService
+        BcpcRegistrationRequest $request,
+        BcpcRegistrationService $bcpcRegistrationService,
+        BcpcController $bcpcController,
     ) {
-        $result = $contestRegistrationService->register(
-            $request->validated(),
-            (string) $request->ip(),
-            (string) $request->userAgent(),
-        );
-
-        if (!($result['saved'] ?? false)) {
-            return back()
-                ->withInput()
-                ->with('contest_registration_error', 'Team registration could not be completed. Please try again.');
-        }
-
-        /** @var ContestRegistration $registration */
-        $registration = $result['registration'];
-
-        return back()->with('contest_registration_success', sprintf(
-            'Team registration received. Your confirmation id is #%d.',
-            $registration->id,
-        ));
+        return $bcpcController->register($request, $bcpcRegistrationService);
     }
 
-    public function ComingSoonPage()
+    public function ComingSoonPage(BcpcController $bcpcController)
     {
-        return $this->BcpcPage();
+        return $bcpcController->show();
     }
 
     public function SubmitContestRegistration(
-        ContestRegistrationRequest $request,
-        ContestRegistrationService $contestRegistrationService
+        BcpcRegistrationRequest $request,
+        BcpcRegistrationService $bcpcRegistrationService,
+        BcpcController $bcpcController,
     ) {
-        return $this->SubmitBcpcRegistration($request, $contestRegistrationService);
+        return $bcpcController->register($request, $bcpcRegistrationService);
     }
 }

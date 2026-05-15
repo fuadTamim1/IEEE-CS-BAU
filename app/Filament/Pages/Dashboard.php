@@ -7,56 +7,70 @@ use App\Filament\Resources\BlogResource\Widgets\BlogPostCategoryChart;
 use App\Filament\Resources\BlogResource\Widgets\RecentBlogPostsTable;
 use App\Filament\Resources\EventResource;
 use App\Filament\Resources\ProjectResource;
+use App\Filament\Resources\WorkshopResource;
 use App\Filament\Resources\UserResource\Widgets\UserGrowthChart;
+use App\Filament\Widgets\BlogPipelineOverview;
+use App\Filament\Widgets\ContestRegistrationsOverview;
+use App\Filament\Widgets\ContestTeamSizeChart;
+use App\Filament\Widgets\ExamSessionsOverview;
+use App\Filament\Widgets\OperationsOverview;
+use App\Filament\Widgets\RecentContestRegistrationsTable;
 use App\Filament\Widgets\StatsOverview;
-use Filament\Pages\Page;
+use Filament\Actions\Action;
+use Filament\Pages\Dashboard as BaseDashboard;
 
-class Dashboard extends Page
+class Dashboard extends BaseDashboard
 {
     protected static ?string $navigationIcon = 'heroicon-o-home';
 
-    protected static string $view = 'filament.pages.dashboard';
-
-    protected function getHeaderWidgets(): array
+    public function getWidgets(): array
     {
         return [
             StatsOverview::class,
-        ];
-    }
-
-    protected function getFooterWidgets(): array
-    {
-        return [
+            ContestRegistrationsOverview::class,
+            BlogPipelineOverview::class,
+            OperationsOverview::class,
+            ExamSessionsOverview::class,
             UserGrowthChart::class,
+            ContestTeamSizeChart::class,
+            RecentContestRegistrationsTable::class,
             RecentBlogPostsTable::class,
-            BlogPostCategoryChart::class
+            BlogPostCategoryChart::class,
         ];
     }
 
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\Action::make('createBlogPost')
+            Action::make('createBlogPost')
                 ->label('Create Blog Post')
-                ->url(fn(): string => BlogResource::getUrl() . "/create")
+                ->url(fn (): string => BlogResource::getUrl('create'))
                 ->icon('heroicon-o-plus'),
-            \Filament\Actions\Action::make('addEvent')
+            Action::make('addEvent')
                 ->label('Add Event')
-                ->url(fn(): string => EventResource::getUrl() . "/create")
+                ->url(fn (): string => EventResource::getUrl('create'))
                 ->icon('heroicon-o-calendar'),
-            \Filament\Actions\Action::make('addProject')
+            Action::make('addProject')
                 ->label('Add Project')
-                ->url(fn(): string => ProjectResource::getUrl() . "/create")
+                ->url(fn (): string => ProjectResource::getUrl('create'))
                 ->icon('heroicon-o-folder'),
+            Action::make('addWorkshop')
+                ->label('Add Workshop')
+                ->url(fn (): string => WorkshopResource::getUrl('create'))
+                ->icon('heroicon-o-wrench-screwdriver'),
+            Action::make('openBcpcPage')
+                ->label('Open BCPC Page')
+                ->url(fn (): string => route('bcpc'))
+                ->openUrlInNewTab()
+                ->icon('heroicon-o-arrow-top-right-on-square'),
         ];
     }
 
-    protected function getColumns(): int | array
+    public function getColumns(): int | string | array
     {
-        return 1; // 2-column layout
+        return [
+            'md' => 2,
+            'xl' => 3,
+        ];
     }
-
-    // public static function canAccess() :bool {
-    //     return auth()->user()?->hasAnyRole(['super-admin', 'admin', 'editor', 'writer']) ?? false;
-    // }
 }

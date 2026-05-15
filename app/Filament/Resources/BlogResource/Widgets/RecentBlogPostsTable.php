@@ -2,16 +2,21 @@
 
 namespace App\Filament\Resources\BlogResource\Widgets;
 
+use App\Filament\Resources\BlogResource;
+use App\Filament\Resources\UserResource;
 use App\Models\Blog;
-use App\Models\User;
 use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Illuminate\Database\Eloquent\Builder;
 
 class RecentBlogPostsTable extends BaseWidget
 {
-    protected function getTableQuery(): \Illuminate\Database\Eloquent\Builder
+    protected function getTableQuery(): Builder
     {
-        return Blog::query()->latest()->limit(5);
+        return Blog::query()
+            ->with(['author:id,name', 'category:id,title'])
+            ->latest()
+            ->limit(5);
     }
 
     protected function getTableColumns(): array
@@ -19,15 +24,18 @@ class RecentBlogPostsTable extends BaseWidget
         return [
             Tables\Columns\TextColumn::make('title')->label('Title')
                 ->url(function ($record): string {
-                    return "/admin/blogs/" . $record->id . "/edit";
+                    return BlogResource::getUrl('edit', ['record' => $record->id]);
                 })
                 ->limit(20),
-            Tables\Columns\TextColumn::make("Author")
-                ->getStateUsing(function ($record) {
-                    return User::find($record->author_id)->name ?? "unkown";
-                })
-                ->url(function ($record): string {
-                    return "/admin/users/" . $record->author_id . "/edit";
+            Tables\Columns\TextColumn::make('author.name')
+                ->label('Author')
+                ->default('Unknown')
+                ->url(function ($record): ?string {
+                    if (blank($record->author_id)) {
+                        return null;
+                    }
+
+                    return UserResource::getUrl('edit', ['record' => $record->author_id]);
                 })
                 ->limit(10),
             Tables\Columns\TextColumn::make('category.title')->label('Category'),
