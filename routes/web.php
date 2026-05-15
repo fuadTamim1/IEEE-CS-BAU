@@ -36,6 +36,10 @@ Route::post('/workshops/{workshop:slug}/feedback', [PageController::class, "Subm
     ->middleware('throttle:8,1')
     ->name('workshops.feedback.store');
 
+Route::post('/coming-soon/register', [PageController::class, 'SubmitContestRegistration'])
+    ->middleware('throttle:3,60')
+    ->name('contest.register');
+
 Route::middleware(['under.development'])->group(function() {
     Route::get('/resources', [PageController::class, "ResourcesPage"])->name("resources");
 });
@@ -62,6 +66,6 @@ Route::get('/test-filament', function () {
         : 'Access denied';
 });
 
-Route::view('/coming-soon', 'basetheme.coming-soon')->name('coming-soon');
+Route::get('/coming-soon', [PageController::class, 'ComingSoonPage'])->name('coming-soon');
 
 require __DIR__ . '/auth.php';

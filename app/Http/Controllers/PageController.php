@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContestRegistrationRequest;
 use App\Models\Blog;
+use App\Models\ContestRegistration;
 use App\Models\Event;
 use App\Models\Leaderboard;
 use App\Models\Member;
 use App\Models\Project;
 use App\Services\MemberListingService;
+use App\Services\ContestRegistrationService;
 use App\Models\Workshop;
 use App\Models\WorkshopFeedback;
 use Illuminate\Http\Request;
@@ -288,5 +291,47 @@ class PageController extends Controller
     public function ContactPage()
     {
         return view('basetheme.contact');
+    }
+
+    public function ComingSoonPage()
+    {
+        return view('basetheme.coming-soon', [
+            'contestName' => 'IEEE CS BAU CodeSprint 2026',
+            'contestDateIso' => '2026-07-24T09:00:00+03:00',
+            'contestDateLabel' => 'July 24, 2026 - 09:00 AM (GMT+3)',
+            'languages' => [
+                'C++17',
+                'Python 3.12',
+                'Java 21',
+                'Kotlin 1.9',
+                'Rust 1.78',
+                'Go 1.22',
+            ],
+        ]);
+    }
+
+    public function SubmitContestRegistration(
+        ContestRegistrationRequest $request,
+        ContestRegistrationService $contestRegistrationService
+    ) {
+        $result = $contestRegistrationService->register(
+            $request->validated(),
+            (string) $request->ip(),
+            (string) $request->userAgent(),
+        );
+
+        if (!($result['saved'] ?? false)) {
+            return back()
+                ->withInput()
+                ->with('contest_registration_error', 'Registration could not be completed. Please try again.');
+        }
+
+        /** @var ContestRegistration $registration */
+        $registration = $result['registration'];
+
+        return back()->with('contest_registration_success', sprintf(
+            'Registration received. Your confirmation id is #%d.',
+            $registration->id,
+        ));
     }
 }

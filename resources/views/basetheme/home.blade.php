@@ -639,7 +639,7 @@
     </div>
 
     <!--===== TEAM AREA END =====-->
-{{-- 
+
     <x-slider sectionClass="sp member-stories-slider" title="{{ __('Voices of Our Community') }}"
         subtitle="{{ __('Member Stories') }}" icon="{{ asset('images/logo.png') }}" :slidesToShow="2"
         :autoplay="true" :autoplaySpeed="2000" :arrows="false" :dots="false">
@@ -668,7 +668,7 @@
                 </div>
             </x-slider-item>
         @endforeach
-    </x-slider> --}}
+    </x-slider> 
 
 
     <!-- Blog Section -->

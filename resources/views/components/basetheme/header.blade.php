@@ -19,6 +19,9 @@
                                 <li>
                                     <a href="{{ route('home') }}">Home</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('coming-soon') }}">Contest 2026</a>
+                                </li>
                                 <li class="has-dropdown">
                                     <a href="{{ route('about') }}">About Us<span><i
                                                 class="fa-regular fa-angle-down ms-2"></i></span></a>
