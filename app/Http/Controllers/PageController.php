@@ -293,24 +293,20 @@ class PageController extends Controller
         return view('basetheme.contact');
     }
 
-    public function ComingSoonPage()
+    public function BcpcPage()
     {
-        return view('basetheme.coming-soon', [
-            'contestName' => 'IEEE CS BAU CodeSprint 2026',
-            'contestDateIso' => '2026-07-24T09:00:00+03:00',
-            'contestDateLabel' => 'July 24, 2026 - 09:00 AM (GMT+3)',
-            'languages' => [
-                'C++17',
-                'Python 3.12',
-                'Java 21',
-                'Kotlin 1.9',
-                'Rust 1.78',
-                'Go 1.22',
-            ],
+        return view('basetheme.bcpc', [
+            'contestName' => 'BCPC Newbie Teams Cup 2026',
+            'contestDateIso' => '2026-07-25T09:00:00+03:00',
+            'contestDayTime' => 'Saturday, 9:00 AM - 1:00 PM',
+            'contestSubtitle' => 'Beginner and Newbie Teams Division',
+            'mascotImage' => 'IEEE/Pixel-20250805T060422Z-1-001/Pixel/Confident.png',
+            'logoImage' => 'images/IEEE-CS_LogoTM-orange.png',
+            'chapterLogoImage' => 'images/logo_name_description.svg',
         ]);
     }
 
-    public function SubmitContestRegistration(
+    public function SubmitBcpcRegistration(
         ContestRegistrationRequest $request,
         ContestRegistrationService $contestRegistrationService
     ) {
@@ -323,15 +319,27 @@ class PageController extends Controller
         if (!($result['saved'] ?? false)) {
             return back()
                 ->withInput()
-                ->with('contest_registration_error', 'Registration could not be completed. Please try again.');
+                ->with('contest_registration_error', 'Team registration could not be completed. Please try again.');
         }
 
         /** @var ContestRegistration $registration */
         $registration = $result['registration'];
 
         return back()->with('contest_registration_success', sprintf(
-            'Registration received. Your confirmation id is #%d.',
+            'Team registration received. Your confirmation id is #%d.',
             $registration->id,
         ));
+    }
+
+    public function ComingSoonPage()
+    {
+        return $this->BcpcPage();
+    }
+
+    public function SubmitContestRegistration(
+        ContestRegistrationRequest $request,
+        ContestRegistrationService $contestRegistrationService
+    ) {
+        return $this->SubmitBcpcRegistration($request, $contestRegistrationService);
     }
 }

@@ -15,32 +15,28 @@ class ContestRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => ['required', 'string', 'max:120'],
-            'university_id' => [
+            'team_name' => ['required', 'string', 'max:120'],
+            'captain_name' => ['required', 'string', 'max:120'],
+            'captain_university_id' => [
                 'required',
                 'string',
                 'max:60',
                 'regex:/^[A-Za-z0-9\/-]+$/',
                 Rule::unique('contest_registrations', 'university_id'),
             ],
-            'email' => [
+            'captain_email' => [
                 'required',
                 'email',
                 'max:190',
                 Rule::unique('contest_registrations', 'email'),
             ],
-            'platform_handle' => ['nullable', 'string', 'max:80', 'regex:/^[A-Za-z0-9_.-]+$/'],
-            'preferred_language' => [
+            'team_size' => [
                 'required',
-                Rule::in([
-                    'C++17',
-                    'Python 3.12',
-                    'Java 21',
-                    'Kotlin 1.9',
-                    'Rust 1.78',
-                    'Go 1.22',
-                ]),
+                'integer',
+                Rule::in([2, 3]),
             ],
+            'member_two_name' => ['required', 'string', 'max:120'],
+            'member_three_name' => ['nullable', 'required_if:team_size,3', 'string', 'max:120'],
             // Honeypot field should stay empty; bots typically fill hidden inputs.
             'website' => ['nullable', 'string', 'max:0'],
         ];
@@ -49,10 +45,10 @@ class ContestRegistrationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'university_id.regex' => 'University ID may only contain letters, numbers, "/", or "-".',
-            'platform_handle.regex' => 'Platform handle may only contain letters, numbers, dots, dashes, and underscores.',
-            'university_id.unique' => 'This University ID is already registered.',
-            'email.unique' => 'This email is already registered.',
+            'captain_university_id.regex' => 'University ID may only contain letters, numbers, "/", or "-".',
+            'captain_university_id.unique' => 'This captain University ID is already registered.',
+            'captain_email.unique' => 'This captain email is already registered.',
+            'member_three_name.required_if' => 'Member 3 name is required when team size is 3.',
         ];
     }
 }

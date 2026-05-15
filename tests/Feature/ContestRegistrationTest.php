@@ -2,103 +2,120 @@
 
 use App\Models\ContestRegistration;
 
-it('renders the coming-soon landing page with required sections', function () {
-    $response = $this->get(route('coming-soon'));
+it('renders the bcpc landing page with required sections', function () {
+    $response = $this->get(route('bcpc'));
 
     $response
         ->assertOk()
-        ->assertSeeText('Contest Details')
-        ->assertSeeText('Event Agenda')
-        ->assertSeeText('Submit Your Registration Payload')
-        ->assertSeeText('Frequently Asked Questions')
-        ->assertSeeText('Need Help?');
+        ->assertSeeText('BCPC Newbie Teams Cup')
+        ->assertSeeText('Competition Details')
+        ->assertSeeText('Certificates and Sponsors')
+        ->assertSeeText('Team Registration');
 });
 
-it('stores a contest registration from the landing page form', function () {
+it('stores a bcpc team registration from the modal form', function () {
     $payload = [
-        'full_name' => 'Amina Khaled',
-        'university_id' => 'BAU-2026-0091',
-        'email' => 'amina.khaled@example.edu',
-        'platform_handle' => 'amina_cp',
-        'preferred_language' => 'C++17',
+        'team_name' => 'Stack Smashers',
+        'captain_name' => 'Amina Khaled',
+        'captain_university_id' => 'BAU-2026-0091',
+        'captain_email' => 'amina.khaled@example.edu',
+        'team_size' => 3,
+        'member_two_name' => 'Lina Ahmad',
+        'member_three_name' => 'Yara Fares',
         'website' => '',
     ];
 
-    $response = $this->from('/coming-soon')->post(route('contest.register'), $payload);
+    $response = $this->from('/bcpc')->post(route('bcpc.register'), $payload);
 
     $response
-        ->assertRedirect('/coming-soon')
+        ->assertRedirect('/bcpc')
         ->assertSessionHas('contest_registration_success');
 
     expect(ContestRegistration::query()->where([
+        'team_name' => 'Stack Smashers',
+        'captain_name' => 'Amina Khaled',
+        'captain_university_id' => 'BAU-2026-0091',
+        'captain_email' => 'amina.khaled@example.edu',
+        'team_size' => 3,
+        'member_two_name' => 'Lina Ahmad',
+        'member_three_name' => 'Yara Fares',
         'full_name' => 'Amina Khaled',
         'university_id' => 'BAU-2026-0091',
         'email' => 'amina.khaled@example.edu',
-        'platform_handle' => 'amina_cp',
-        'preferred_language' => 'C++17',
+        'preferred_language' => 'N/A',
         'status' => 'submitted',
     ])->exists())->toBeTrue();
 });
 
 it('returns validation errors for missing required fields', function () {
-    $response = $this->from('/coming-soon')->post(route('contest.register'), [
-        'full_name' => '',
-        'university_id' => '',
-        'email' => '',
-        'platform_handle' => '',
-        'preferred_language' => '',
+    $response = $this->from('/bcpc')->post(route('bcpc.register'), [
+        'team_name' => '',
+        'captain_name' => '',
+        'captain_university_id' => '',
+        'captain_email' => '',
+        'team_size' => '',
+        'member_two_name' => '',
+        'member_three_name' => '',
         'website' => '',
     ]);
 
     $response
-        ->assertRedirect('/coming-soon')
+        ->assertRedirect('/bcpc')
         ->assertSessionHasErrors([
-            'full_name',
-            'university_id',
-            'email',
-            'preferred_language',
+            'team_name',
+            'captain_name',
+            'captain_university_id',
+            'captain_email',
+            'team_size',
+            'member_two_name',
         ]);
 
     expect(ContestRegistration::query()->count())->toBe(0);
 });
 
 it('rejects submission when honeypot is filled', function () {
-    $response = $this->from('/coming-soon')->post(route('contest.register'), [
-        'full_name' => 'Mohammed Sami',
-        'university_id' => 'BAU-2026-0198',
-        'email' => 'mohammed.sami@example.edu',
-        'platform_handle' => 'msami',
-        'preferred_language' => 'Python 3.12',
+    $response = $this->from('/bcpc')->post(route('bcpc.register'), [
+        'team_name' => 'Null Pointers',
+        'captain_name' => 'Mohammed Sami',
+        'captain_university_id' => 'BAU-2026-0198',
+        'captain_email' => 'mohammed.sami@example.edu',
+        'team_size' => 2,
+        'member_two_name' => 'Sara Nabil',
+        'member_three_name' => '',
         'website' => 'https://spam.example',
     ]);
 
     $response
-        ->assertRedirect('/coming-soon')
+        ->assertRedirect('/bcpc')
         ->assertSessionHasErrors(['website']);
 
     expect(ContestRegistration::query()->count())->toBe(0);
 });
 
-it('enforces rate limiting on contest registration route', function () {
+it('enforces rate limiting on bcpc registration route', function () {
     for ($i = 0; $i < 3; $i++) {
-        $response = $this->from('/coming-soon')->post(route('contest.register'), [
-            'full_name' => 'Student ' . $i,
-            'university_id' => 'BAU-2026-THROTTLE-' . $i,
-            'email' => 'student' . $i . '@example.edu',
-            'platform_handle' => 'handle_' . $i,
-            'preferred_language' => 'Java 21',
+        $response = $this->from('/bcpc')->post(route('bcpc.register'), [
+            'team_name' => 'Rate Team ' . $i,
+            'captain_name' => 'Student ' . $i,
+            'captain_university_id' => 'BAU-2026-THROTTLE-' . $i,
+            'captain_email' => 'student' . $i . '@example.edu',
+            'team_size' => 2,
+            'member_two_name' => 'Member Two ' . $i,
+            'member_three_name' => '',
             'website' => '',
         ]);
 
-        $response->assertRedirect('/coming-soon');
+        $response->assertRedirect('/bcpc');
     }
 
-    $blockedResponse = $this->post(route('contest.register'), [
-        'full_name' => 'Late Submitter',
-        'university_id' => 'BAU-2026-THROTTLE-OVER',
-        'email' => 'late.submitter@example.edu',
-        'platform_handle' => 'late_handle',
-        'preferred_language' => 'Java 21',
+    $blockedResponse = $this->post(route('bcpc.register'), [
+        'team_name' => 'Late Team',
+        'captain_name' => 'Late Submitter',
+        'captain_university_id' => 'BAU-2026-THROTTLE-OVER',
+        'captain_email' => 'late.submitter@example.edu',
+        'team_size' => 2,
+        'member_two_name' => 'Late Member',
+        'member_three_name' => '',
         'website' => '',
     ]);
 

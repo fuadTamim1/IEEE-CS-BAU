@@ -36,9 +36,12 @@ Route::post('/workshops/{workshop:slug}/feedback', [PageController::class, "Subm
     ->middleware('throttle:8,1')
     ->name('workshops.feedback.store');
 
-Route::post('/coming-soon/register', [PageController::class, 'SubmitContestRegistration'])
+Route::post('/bcpc/register', [PageController::class, 'SubmitBcpcRegistration'])
     ->middleware('throttle:3,60')
-    ->name('contest.register');
+    ->name('bcpc.register');
+
+Route::post('/coming-soon/register', [PageController::class, 'SubmitBcpcRegistration'])
+    ->middleware('throttle:3,60');
 
 Route::middleware(['under.development'])->group(function() {
     Route::get('/resources', [PageController::class, "ResourcesPage"])->name("resources");
@@ -66,6 +69,7 @@ Route::get('/test-filament', function () {
         : 'Access denied';
 });
 
-Route::get('/coming-soon', [PageController::class, 'ComingSoonPage'])->name('coming-soon');
+Route::get('/bcpc', [PageController::class, 'BcpcPage'])->name('bcpc');
+Route::redirect('/coming-soon', '/bcpc', 301)->name('coming-soon');
 
 require __DIR__ . '/auth.php';

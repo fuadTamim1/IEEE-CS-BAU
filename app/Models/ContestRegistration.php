@@ -10,6 +10,13 @@ class ContestRegistration extends Model
     use HasFactory;
 
     protected $fillable = [
+        'team_name',
+        'captain_name',
+        'captain_university_id',
+        'captain_email',
+        'team_size',
+        'member_two_name',
+        'member_three_name',
         'full_name',
         'university_id',
         'email',
