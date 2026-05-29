@@ -4,12 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BcpcRegistrationResource\Pages;
 use App\Models\Bcpc\BcpcRegistration;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class BcpcRegistrationResource extends Resource
 {
@@ -125,8 +127,43 @@ class BcpcRegistrationResource extends Resource
         ];
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
     public static function canCreate(): bool
     {
         return false;
+    }
+
+    protected static function canManageResource(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::managementRoles()) ?? false;
     }
 }

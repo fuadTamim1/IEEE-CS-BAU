@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\User;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
@@ -13,7 +14,7 @@ use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Filament\Resources\Pages\{CreateRecord, EditRecord, ListRecords, ViewRecord};
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
@@ -88,8 +89,43 @@ class UserResource extends Resource
         ];
     }
 
-    public static function authorizeResourceAccess(): bool
+    public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->hasAnyRole(['admin', 'super_admin']);
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    protected static function isSuperAdminUser(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::superAdminRoles()) ?? false;
     }
 }

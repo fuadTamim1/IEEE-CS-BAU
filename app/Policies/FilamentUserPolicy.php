@@ -3,11 +3,12 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Support\AdminRoles;
 
 class FilamentUserPolicy
 {
     public function access(User $user): bool
     {
-        return $user->hasAnyRole(['super-admin', 'super_admin', 'admin', 'editor', 'writer']);
+        return $user->hasAnyRole(AdminRoles::adminAccessRoles());
     }
 }

@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\ContactTicket;
 use App\Models\User;
+use App\Support\AdminRoles;
 
 class ContactTicketPolicy
 {
@@ -39,6 +40,6 @@ class ContactTicketPolicy
 
     protected function canManage(User $user): bool
     {
-        return $user->hasAnyRole(['super-admin', 'admin']);
+        return $user->hasAnyRole(AdminRoles::managementRoles());
     }
 }

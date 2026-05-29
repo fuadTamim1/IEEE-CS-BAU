@@ -4,9 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Chiiya\FilamentAccessControl\Contracts\AccessControlUser;
-use Chiiya\FilamentAccessControl\Enumerators\RoleName;
-use Chiiya\FilamentAccessControl\Notifications\TwoFactorCode;
+use App\Support\AdminRoles;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,12 +58,16 @@ class User extends Authenticatable implements FilamentUser
      */
     public function isSuperAdmin(): bool
     {
-        return $this->hasRole(RoleName::SUPER_ADMIN);
+        return $this->hasAnyRole(AdminRoles::superAdminRoles());
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        if ($panel->getId() !== 'admin') {
+            return false;
+        }
+
+        return $this->hasAnyRole(AdminRoles::adminAccessRoles());
     }
 
     public function getFilamentName(): string

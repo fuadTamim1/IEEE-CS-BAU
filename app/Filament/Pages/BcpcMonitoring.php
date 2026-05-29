@@ -5,7 +5,9 @@ namespace App\Filament\Pages;
 use App\Filament\Widgets\ContestRegistrationsOverview;
 use App\Filament\Widgets\ContestTeamSizeChart;
 use App\Filament\Widgets\RecentContestRegistrationsTable;
+use App\Support\AdminRoles;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Auth;
 
 class BcpcMonitoring extends Page
 {
@@ -16,6 +18,11 @@ class BcpcMonitoring extends Page
     protected static ?string $slug = 'bcpc-monitoring';
 
     protected static string $view = 'filament.pages.bcpc-monitoring';
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::managementRoles()) ?? false;
+    }
 
     protected function getHeaderWidgets(): array
     {

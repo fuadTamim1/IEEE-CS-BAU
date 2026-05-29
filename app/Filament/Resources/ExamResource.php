@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ExamResource\Pages;
 use App\Filament\Resources\ExamResource\RelationManagers;
 use App\Models\Exam;
+use App\Support\AdminRoles;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Actions;
 use Filament\Forms;
@@ -20,6 +21,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ExamResource extends Resource
@@ -165,5 +167,45 @@ class ExamResource extends Resource
             'create' => Pages\CreateExam::route('/create'),
             'edit' => Pages\EditExam::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    protected static function canManageResource(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::managementRoles()) ?? false;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Setting;
+use App\Support\SettingCatalog;
 use Illuminate\Console\Command;
 
 class updateConfig extends Command
@@ -12,36 +13,43 @@ class updateConfig extends Command
      *
      * @var string
      */
-    protected $signature = 'config:update {--key=} {--value=}';
+    protected $signature = 'config:update {key? : Setting key} {value? : Setting value} {--key=} {--value=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update exiting config setting';
+    protected $description = 'Update an existing config setting';
 
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
-        $key = $this->option('key');
-        $value = $this->option('value');
-        // Validate key presence
-        if (!$key) {
-            $this->error('The --key option is required.');
-            return;
+        $key = $this->argument('key') ?: $this->option('key');
+        $value = $this->argument('value');
+
+        if ($value === null) {
+            $value = $this->option('value');
         }
-        
-        try {
-            Setting::update([
-                'key' => $key,
-                'value' => $value,
-            ]);
-            $this->info("Config '{$key}' updated successfully.");
-        } catch (\Exception $e) {
-            $this->error('Failed to create config: ' . $e->getMessage());
+
+        if (!$key || $value === null) {
+            $this->error('Provide a key and value. Example: php artisan config:update site_name "IEEE CS"');
+
+            return self::FAILURE;
         }
+
+        $settingKey = (string) $key;
+        $normalizedValue = SettingCatalog::normalizeForStorage($settingKey, $value);
+
+        Setting::query()->updateOrCreate(
+            ['key' => $settingKey],
+            ['value' => $normalizedValue],
+        );
+
+        $this->info("Config '{$settingKey}' updated successfully.");
+
+        return self::SUCCESS;
     }
 }

@@ -6,6 +6,7 @@ use App\Filament\Exports\MemberExporter;
 use App\Filament\Resources\MemberResource\Pages;
 use App\Filament\Resources\MemberResource\RelationManagers;
 use App\Models\Member;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Auth;
 
 class MemberResource extends Resource
 {
@@ -197,5 +199,45 @@ class MemberResource extends Resource
             'create' => Pages\CreateMember::route('/create'),
             'edit' => Pages\EditMember::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    protected static function canManageResource(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::moderationRoles()) ?? false;
     }
 }

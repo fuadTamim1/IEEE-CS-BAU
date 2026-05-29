@@ -15,6 +15,12 @@ class MailService
 {
     public function sendContactSubmission(array $data): array
     {
+        $contactRecipient = trim((string) get_setting('contact_email', 'fuad89573@gmail.com'));
+
+        if ($contactRecipient === '') {
+            $contactRecipient = 'fuad89573@gmail.com';
+        }
+
         $ticket = ContactTicket::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -26,7 +32,7 @@ class MailService
         $mailSent = false;
 
         try {
-            Mail::to('fuad89573@gmail.com')->send(new ContactMail($data));
+            Mail::to($contactRecipient)->send(new ContactMail($data));
             $mailSent = true;
         } catch (Throwable $exception) {
             Log::error('Failed to send contact submission notification email.', [

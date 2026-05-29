@@ -5,12 +5,13 @@ namespace App\Policies;
 use App\Enums\BlogStatus;
 use App\Models\Blog;
 use App\Models\User;
+use App\Support\AdminRoles;
 
 class BlogPolicy
 {
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyRole(['super-admin', 'admin', 'editor', 'writer']);
+        return $user->hasAnyRole(AdminRoles::adminAccessRoles());
     }
 
     public function view(User $user, Blog $blog): bool
@@ -24,7 +25,7 @@ class BlogPolicy
 
     public function create(User $user): bool
     {
-        return $user->hasAnyRole(['super-admin', 'admin', 'editor', 'writer']);
+        return $user->hasAnyRole(AdminRoles::adminAccessRoles());
     }
 
     public function update(User $user, Blog $blog): bool
@@ -93,6 +94,6 @@ class BlogPolicy
 
     protected function canModerate(User $user): bool
     {
-        return $user->hasAnyRole(['super-admin', 'admin', 'editor']);
+        return $user->hasAnyRole(AdminRoles::moderationRoles());
     }
 }

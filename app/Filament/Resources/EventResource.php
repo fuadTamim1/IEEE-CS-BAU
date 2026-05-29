@@ -3,8 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EventResource\Pages;
-use App\Filament\Resources\EventResource\RelationManagers;
 use App\Models\Event;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -21,6 +21,7 @@ use FilamentTiptapEditor\Enums\TiptapOutput;
 use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class EventResource extends Resource
 {
@@ -121,7 +122,7 @@ class EventResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'App\\Filament\\Resources\\EventResource\\RelationManagers\\SponsorsRelationManager',
         ];
     }
 
@@ -132,5 +133,45 @@ class EventResource extends Resource
             'create' => Pages\CreateEvent::route('/create'),
             'edit' => Pages\EditEvent::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    protected static function canManageResource(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::moderationRoles()) ?? false;
     }
 }

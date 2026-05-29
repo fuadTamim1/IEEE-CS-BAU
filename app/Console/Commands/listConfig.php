@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Setting;
+use App\Support\SettingCatalog;
 use Illuminate\Console\Command;
-use League\CommonMark\Node\Inline\Newline;
 
 class listConfig extends Command
 {
@@ -13,7 +13,7 @@ class listConfig extends Command
      *
      * @var string
      */
-    protected $signature = 'config:list';
+    protected $signature = 'config:list {--key= : Filter by key substring}';
 
     /**
      * The console command description.
@@ -25,12 +25,37 @@ class listConfig extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
-        $settings_header = ["Idx", "Key", "Value"];
-        $settings = Setting::all();
-        // foreach ($settings as $key => $value) {
-        $this->table($settings_header, $settings);
-        // }
+        $query = Setting::query()->orderBy('key', 'asc');
+        $filter = trim((string) $this->option('key'));
+
+        if ($filter !== '') {
+            $query->where('key', 'like', '%' . $filter . '%');
+        }
+
+        $settings = $query->get(['key', 'value']);
+
+        if ($settings->isEmpty()) {
+            $this->warn('No settings found.');
+
+            return self::SUCCESS;
+        }
+
+        $rows = $settings
+            ->values()
+            ->map(function (Setting $setting, int $index): array {
+                return [
+                    $index + 1,
+                    $setting->key,
+                    SettingCatalog::type($setting->key),
+                    (string) SettingCatalog::cast($setting->key, $setting->value),
+                ];
+            })
+            ->all();
+
+        $this->table(['Idx', 'Key', 'Type', 'Value'], $rows);
+
+        return self::SUCCESS;
     }
 }

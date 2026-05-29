@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Route as RouteObject;
 
@@ -57,7 +58,12 @@ Route::middleware('auth')->group(function () {
 // In routes/web.php
 
 Route::get('/test-filament', function () {
-    return \App\Models\User::first()?->canAccessPanel(app(\Filament\Panel::class))
+    $panel = Filament::getPanel('admin');
+    if (! $panel) {
+        return 'Access denied';
+    }
+
+    return \App\Models\User::query()->first()?->canAccessPanel($panel)
         ? 'Has access'
         : 'Access denied';
 });

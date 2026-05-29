@@ -11,7 +11,7 @@
                                 width="160"></a>
                     </div>
                 </div>
-                <div class="col-lg-6 d-none d-lg-block text-center">
+                <div class="w-auto d-lg-block text-center">
                     <div class="vl-main-menu">
                         <!-- content -->
                         <nav class="vl-mobile-menu-active">
@@ -676,7 +676,7 @@
                         </nav>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-6">
+                <div class="col-lg-2 col-md-6 col-6">
                     <div class="vl-header4-btns text-end d-none d-lg-flex gap-2">
                         <div class="buttons">
                             {{-- <div class="vl-search1">

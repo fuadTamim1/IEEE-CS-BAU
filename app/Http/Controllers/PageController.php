@@ -138,8 +138,10 @@ class PageController extends Controller
 
     public function ShowProjectPage(Project $project)
     {
+        abort_if(! $project->is_published, 404);
+
         $project->tags = explode(',', $project->tags);
-        $otherProjects = Project::where("slug", "!=", $project->slug)->latest()->take(3)->get(["slug", "title", "image", "category_id", "created_at"])
+        $otherProjects = Project::published()->where("slug", "!=", $project->slug)->latest()->take(3)->get(["slug", "title", "image", "category_id", "created_at"])
             ->load(['category:id,title']);;
         return view('basetheme.portfolio-details', ['project' => $project, 'otherProjects' => $otherProjects]);
     }

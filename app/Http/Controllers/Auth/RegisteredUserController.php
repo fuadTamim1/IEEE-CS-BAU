@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Support\AdminRoles;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -44,7 +45,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if ($user->hasRole(['super-admin', 'admin', 'editor', 'writer'])) {
+        if ($user->hasAnyRole(AdminRoles::adminAccessRoles())) {
             return redirect()->route('filament.admin.pages.dashboard');
         }
 

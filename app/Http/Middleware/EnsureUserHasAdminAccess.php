@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\AdminRoles;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserHasAdminAccess
@@ -15,9 +17,9 @@ class EnsureUserHasAdminAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        if (! $user || ! $user->hasAnyRole(['super-admin', 'admin', 'editor', 'writer'])) {
+        if (! $user || ! $user->hasAnyRole(AdminRoles::adminAccessRoles())) {
             return redirect()->to('/'); // or redirect to home or login
         }
 

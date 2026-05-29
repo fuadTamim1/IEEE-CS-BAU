@@ -2,16 +2,21 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\PublicationStatus;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Models\Project;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use Filament\Support\Enums\FontWeight;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectResource extends Resource
 {
@@ -95,9 +100,18 @@ class ProjectResource extends Resource
                             ->hiddenOn(['edit']),
                     ]),
 
-                Forms\Components\Toggle::make('is_published')
-                    ->label('Publish Project')
-                    ->required(),
+                Forms\Components\Select::make('publication_status')
+                    ->label('Publication Status')
+                    ->options(PublicationStatus::options())
+                    ->default(PublicationStatus::DRAFT->value)
+                    ->required()
+                    ->visible(fn (): bool => static::canModerate()),
+
+                Forms\Components\Textarea::make('rejection_note')
+                    ->rows(4)
+                    ->columnSpanFull()
+                    ->disabled(fn (): bool => !static::canModerate())
+                    ->helperText('Required when rejecting project submissions.'),
             ]);
     }
 
@@ -134,12 +148,12 @@ class ProjectResource extends Resource
                     ->separator(',')
                     ->searchable()
                     ->color('primary'),
-                Tables\Columns\IconColumn::make('is_published')
-                    ->boolean()
+                Tables\Columns\TextColumn::make('publication_status')
+                    ->badge()
                     ->sortable()
-                    ->label('Published')
-                    ->trueColor('success')
-                    ->falseColor('danger'),
+                    ->label('Publication')
+                    ->formatStateUsing(fn(?string $state): string => PublicationStatus::tryFrom($state ?? '')?->label() ?? PublicationStatus::DRAFT->label())
+                    ->color(fn(?string $state): string => PublicationStatus::tryFrom($state ?? '')?->color() ?? PublicationStatus::DRAFT->color()),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -155,27 +169,101 @@ class ProjectResource extends Resource
                 Tables\Filters\SelectFilter::make('category')
                     ->relationship('category', 'title'),
 
-                Tables\Filters\TernaryFilter::make('is_published')
-                    ->label('Published Status')
-                    ->trueLabel('Only Published')
-                    ->falseLabel('Only Unpublished')
-                    ->nullable(),
+                SelectFilter::make('publication_status')
+                    ->label('Publication')
+                    ->options(PublicationStatus::options()),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\Action::make('submitForReview')
+                        ->label('Submit')
+                        ->icon('heroicon-o-paper-airplane')
+                        ->color('warning')
+                        ->visible(fn(Project $record): bool =>
+                            !static::canModerate()
+                            && in_array(static::resolvePublicationStatus($record), [PublicationStatus::DRAFT->value, PublicationStatus::REJECTED->value], true)
+                        )
+                        ->requiresConfirmation()
+                        ->action(function (Project $record): void {
+                            $record->update([
+                                'publication_status' => PublicationStatus::PENDING_REVIEW->value,
+                                'submitted_at' => now(),
+                                'rejection_note' => null,
+                                'reviewed_by' => null,
+                                'reviewed_at' => null,
+                            ]);
+
+                            Notification::make()
+                                ->title('Project submitted for review.')
+                                ->success()
+                                ->send();
+                        }),
+                    Tables\Actions\Action::make('approve')
+                        ->label('Approve & Publish')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->visible(fn(Project $record): bool =>
+                            static::canModerate() && static::resolvePublicationStatus($record) === PublicationStatus::PENDING_REVIEW->value
+                        )
+                        ->requiresConfirmation()
+                        ->action(function (Project $record): void {
+                            $record->update([
+                                'publication_status' => PublicationStatus::PUBLISHED->value,
+                                'reviewed_by' => Auth::id(),
+                                'reviewed_at' => now(),
+                                'rejection_note' => null,
+                            ]);
+
+                            Notification::make()
+                                ->title('Project approved and published.')
+                                ->success()
+                                ->send();
+                        }),
+                    Tables\Actions\Action::make('reject')
+                        ->label('Reject')
+                        ->icon('heroicon-o-x-circle')
+                        ->color('danger')
+                        ->visible(fn(Project $record): bool =>
+                            static::canModerate() && static::resolvePublicationStatus($record) === PublicationStatus::PENDING_REVIEW->value
+                        )
+                        ->form([
+                            Forms\Components\Textarea::make('rejection_note')
+                                ->label('Rejection Note')
+                                ->required()
+                                ->rows(5)
+                                ->maxLength(2000),
+                        ])
+                        ->action(function (Project $record, array $data): void {
+                            $record->update([
+                                'publication_status' => PublicationStatus::REJECTED->value,
+                                'rejection_note' => $data['rejection_note'],
+                                'reviewed_by' => Auth::id(),
+                                'reviewed_at' => now(),
+                            ]);
+
+                            Notification::make()
+                                ->title('Project rejected and note saved.')
+                                ->warning()
+                                ->send();
+                        }),
                     Tables\Actions\Action::make('publish')
                         ->icon('heroicon-m-check-circle')
                         ->color('success')
-                        ->action(fn(Project $record) => $record->update(['is_published' => true]))
-                        ->hidden(fn(Project $record): bool => $record->is_published),
+                        ->action(fn(Project $record) => $record->update([
+                            'publication_status' => PublicationStatus::PUBLISHED->value,
+                            'reviewed_by' => Auth::id(),
+                            'reviewed_at' => now(),
+                            'rejection_note' => null,
+                        ]))
+                        ->hidden(fn(Project $record): bool => static::resolvePublicationStatus($record) === PublicationStatus::PUBLISHED->value),
                     Tables\Actions\Action::make('unpublish')
                         ->icon('heroicon-m-x-circle')
                         ->color('danger')
-                        ->action(fn(Project $record) => $record->update(['is_published' => false]))
-                        ->hidden(fn(Project $record): bool => !$record->is_published),
+                        ->action(fn(Project $record) => $record->update(['publication_status' => PublicationStatus::DRAFT->value]))
+                        ->hidden(fn(Project $record): bool => static::resolvePublicationStatus($record) !== PublicationStatus::PUBLISHED->value),
                 ]),
             ])
             ->bulkActions([
@@ -184,11 +272,18 @@ class ProjectResource extends Resource
                     Tables\Actions\BulkAction::make('publish')
                         ->icon('heroicon-m-check-circle')
                         ->color('success')
-                        ->action(fn(Collection $records) => $records->each->update(['is_published' => true])),
+                        ->action(fn(Collection $records) => $records->each->update([
+                            'publication_status' => PublicationStatus::PUBLISHED->value,
+                            'reviewed_by' => Auth::id(),
+                            'reviewed_at' => now(),
+                            'rejection_note' => null,
+                        ])),
                     Tables\Actions\BulkAction::make('unpublish')
                         ->icon('heroicon-m-x-circle')
                         ->color('danger')
-                        ->action(fn(Collection $records) => $records->each->update(['is_published' => false])),
+                        ->action(fn(Collection $records) => $records->each->update([
+                            'publication_status' => PublicationStatus::DRAFT->value,
+                        ])),
                 ]),
             ])
             ->defaultSort('created_at', 'desc')
@@ -198,6 +293,52 @@ class ProjectResource extends Resource
             ->deferLoading()
             ->persistSearchInSession()
             ->persistColumnSearchesInSession();
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::canModerate();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::canModerate();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canModerate();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canModerate();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canModerate();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::canModerate();
+    }
+
+    protected static function canModerate(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::moderationRoles()) ?? false;
+    }
+
+    protected static function resolvePublicationStatus(Project $record): string
+    {
+        return $record->publication_status
+            ?: ($record->is_published ? PublicationStatus::PUBLISHED->value : PublicationStatus::DRAFT->value);
     }
 
     public static function getPages(): array

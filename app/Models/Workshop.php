@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\PublicationStatus;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,6 +28,11 @@ class Workshop extends Model
         'end_at',
         'location',
         'is_published',
+        'publication_status',
+        'rejection_note',
+        'reviewed_by',
+        'submitted_at',
+        'reviewed_at',
         'host_name',
         'host_title',
         'host_bio',
@@ -38,7 +45,30 @@ class Workshop extends Model
         'start_at' => 'datetime',
         'end_at' => 'datetime',
         'is_published' => 'boolean',
+        'submitted_at' => 'datetime',
+        'reviewed_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (Workshop $workshop): void {
+            $publicationStatus = $workshop->publication_status;
+
+            if (empty($publicationStatus)) {
+                $publicationStatus = $workshop->is_published
+                    ? PublicationStatus::PUBLISHED->value
+                    : PublicationStatus::DRAFT->value;
+
+                $workshop->publication_status = $publicationStatus;
+            }
+
+            $workshop->is_published = $publicationStatus === PublicationStatus::PUBLISHED->value;
+
+            if ($publicationStatus === PublicationStatus::PENDING_REVIEW->value && ! $workshop->submitted_at) {
+                $workshop->submitted_at = now();
+            }
+        });
+    }
 
     public function sluggable(): array
     {
@@ -59,6 +89,11 @@ class Workshop extends Model
         return $this->hasMany(WorkshopFeedback::class)->latest();
     }
 
+    public function reviewedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
+    }
+
     public function getStatusAttribute(): string
     {
         $now = Carbon::now();
@@ -74,8 +109,14 @@ class Workshop extends Model
         return 'past';
     }
 
-    public function scopePublished($query)
+    public function scopePublished(Builder $query): Builder
     {
-        return $query->where('is_published', true);
+        return $query->where(function (Builder $builder): void {
+            $builder
+                ->where('publication_status', PublicationStatus::PUBLISHED->value)
+                ->orWhere(function (Builder $fallback): void {
+                    $fallback->whereNull('publication_status')->where('is_published', true);
+                });
+        });
     }
 }

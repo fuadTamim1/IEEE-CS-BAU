@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Support\AdminRoles;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::attempt($request->only('email', 'password'), $remember)) {
             $user = Auth::user();
 
-            if ($user->hasRole(['super-admin', 'admin', 'editor', 'writer'])) {
+            if ($user->hasAnyRole(AdminRoles::adminAccessRoles())) {
                 return redirect()->route('filament.admin.pages.dashboard'); // Redirect admins to dashboard
             }
 

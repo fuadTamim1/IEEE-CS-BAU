@@ -1,14 +1,9 @@
 <x-filament::page>
-    <div>
-        <x-alert
-            style="background: #42241557;
-    padding: 1rem;
-    border: 2px solid #3f0000;
-    border-radius: 10px;
-    color: #8d5e05;">
-            <h2>* The Setting is still under-development they are not fully funcational yet.</h2>
-        </x-alert>
+    <div class="mb-4 rounded-xl border border-amber-300/70 bg-amber-50 p-4 text-amber-900">
+        Settings are saved with normalization and validation. Most toggles apply immediately; infrastructure features
+        still depend on their dedicated runtime modules.
     </div>
+
     <form wire:submit.prevent="save">
         {{ $this->form }}
 

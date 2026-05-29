@@ -6,6 +6,7 @@ use App\Enums\BlogStatus;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Models\Blog;
 use App\Models\Member;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -55,7 +56,7 @@ class BlogResource extends Resource
 
                 Select::make('author_member_id')
                     ->label('Display Author (Member)')
-                    ->options(fn() => Member::query()->orderBy('name')->pluck('name', 'id')->all())
+                    ->options(Member::query()->orderBy('name', 'asc')->pluck('name', 'id')->all())
                     ->searchable()
                     ->preload()
                     ->helperText('Optional: if selected, this member name will appear as the blog author on website.'),
@@ -243,6 +244,6 @@ class BlogResource extends Resource
 
     protected static function canModerate(): bool
     {
-        return Auth::user()?->hasAnyRole(['super-admin', 'admin', 'editor']) ?? false;
+        return Auth::user()?->hasAnyRole(AdminRoles::moderationRoles()) ?? false;
     }
 }

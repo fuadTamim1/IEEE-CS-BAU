@@ -4,6 +4,7 @@ namespace App\Filament\Resources\BlogResource\Pages;
 
 use App\Enums\BlogStatus;
 use App\Filament\Resources\BlogResource;
+use App\Support\AdminRoles;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class EditBlog extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        $isModerator = Auth::user()?->hasAnyRole(['super-admin', 'admin', 'editor']) ?? false;
+        $isModerator = Auth::user()?->hasAnyRole(AdminRoles::moderationRoles()) ?? false;
 
         if (!$isModerator) {
             unset($data['status']);
