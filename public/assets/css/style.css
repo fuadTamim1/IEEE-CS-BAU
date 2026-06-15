@@ -666,10 +666,10 @@ margin-top: 1rem;
     padding: 12px 14px;
 }
 
-/* At the lg breakpoint, allow buttons to wrap if needed and reduce spacing */
+/* At the narrow lg breakpoint (992–1199px), tighten spacing and allow wrapping */
 @media (min-width: 992px) and (max-width: 1199px) {
     .vl-header4-btns {
-        gap: 6px !important;
+        gap: 6px;
         flex-wrap: wrap;
         justify-content: flex-end;
         align-items: center;
@@ -680,14 +680,9 @@ margin-top: 1rem;
     }
 }
 
-/* Ensure only burger button is visible on mobile/tablet (below lg) */
+/* Mobile burger button alignment (below lg) */
 @media (max-width: 991px) {
-    .vl-header4-btns {
-        display: none !important;
-    }
-
     .vl-header-action-item {
-        display: flex !important;
         justify-content: flex-end;
         align-items: center;
     }

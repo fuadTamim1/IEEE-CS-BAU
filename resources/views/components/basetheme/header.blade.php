@@ -168,7 +168,7 @@
                     <img src="assets/img/icons/footer-contact-icon2.svg" alt="">
                 </div>
                 <div class="text">
-                    <a href="#">{!! wordwrap(getWidget('location'), 30, '<br>') !!}</a>
+                    <a href="#">{!! wordwrap(e(getWidget('location')), 30, '<br>') !!}</a>
                 </div>
             </div>
         </div>
