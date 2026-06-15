@@ -655,3 +655,35 @@ margin-top: 1rem;
       width: auto;
   }
 }
+
+/* ===== HEADER RESPONSIVE FIXES ===== */
+
+/* Prevent button text from wrapping in the desktop header */
+.vl-header4-btns .theme-btn8,
+.vl-header4-btns .theme-btn8-outline {
+    white-space: nowrap;
+    font-size: 14px;
+    padding: 12px 14px;
+}
+
+/* At the narrow lg breakpoint (992–1199px), tighten spacing and allow wrapping */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .vl-header4-btns {
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .vl-header4-btns .buttons {
+        flex-shrink: 0;
+    }
+}
+
+/* Mobile burger button alignment (below lg) */
+@media (max-width: 991px) {
+    .vl-header-action-item {
+        justify-content: flex-end;
+        align-items: center;
+    }
+}

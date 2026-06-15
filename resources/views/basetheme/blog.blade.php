@@ -27,18 +27,13 @@
     <div class="blog1 sp">
         <div class="container">
             @foreach ($blogs as $blog)
-                {{-- @dump($blog) --}}
                 <x-blog-card :blog=$blog></x-blog-card>
             @endforeach
 
-
-
-
-            {{-- @dd($blogs) --}}
             <div class="space60"></div>
             <div class="row">
                 <div class="col-12 m-auto">
-                    <!-- Pagination Links -->
+                    {{-- Keep the compact theme pagination markup in one place for easier Blade maintenance. --}}
                     @if ($blogs->hasPages())
                         <div class="theme-pagination text-center">
                             <ul>

@@ -70,51 +70,7 @@
     <!--===== ABOUT AREA END =====-->
 
     <!--===== COUNTER AREA START =====-->
-
-    <div class="inner-page-counter-sec bg-cover"
-        style="background-image: url({{ asset('images/network_diagrams.png') }});">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="white-heading text-center">
-                        <span class="sub-title"><img src="{{ asset('images/logo.png') }}" width="25" alt="">
-                            IEEE CS INTERESTING
-                            FACTS</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-10">
-                <div class="col-lg col-md-4">
-                    <div class="inner-counter-box mt-30">
-                        <h3>50+</h3>
-                        <p>Number of Events</p>
-                    </div>
-                </div>
-
-                <div class="col-lg col-md-4">
-                    <div class="inner-counter-box mt-30">
-                        <h3>10K+</h3>
-                        <p>Number of Attendees</p>
-                    </div>
-                </div>
-
-                <div class="col-lg col-md-4">
-                    <div class="inner-counter-box mt-30">
-                        <h3>300+</h3>
-                        <p>Number of Volunteers</p>
-                    </div>
-                </div>
-
-                <div class="col-lg col-md-4">
-                    <div class="inner-counter-box mt-30">
-                        <h3>150+</h3>
-                        <p>Number of Speakers</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <x-basetheme.stats-counter />
     <!--===== COUNTER AREA END =====-->
 
     <!--===== CHOOSE AREA START =====-->
@@ -302,27 +258,12 @@
             <div class="team2 sp" id="ourteam">
                 <div class="row">
                     @foreach ($members as $m)
+                        {{-- Reuse the shared team card so the about/team pages render members consistently. --}}
                         <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
-                            :links="$m->contacts" />
+                            :contacts="$m->contacts" />
                     @endforeach
                 </div>
-                                {{-- Pagenation --}}
-                                {{-- 
-                        <div class="space60"></div>
-                        <div class="row">
-                            <div class="col-12 m-auto">
-                            <div class="theme-pagination text-center">
-                                <ul>
-                                    <li><a href="#"><i class="fa-solid fa-angle-left"></i></a></li>
-                                    <li><a class="active" href="#">01</a></li>
-                                    <li><a href="#">02</a></li>
-                                    <li>...</li>
-                                    <li><a href="#">12</a></li>
-                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i></a></li>
-                                </ul>
-                            </div>
-                            </div>
-                        </div> --}}
+                {{-- Pagination markup can be restored here if the team section becomes paginated later. --}}
 
             </div>
         </div>
