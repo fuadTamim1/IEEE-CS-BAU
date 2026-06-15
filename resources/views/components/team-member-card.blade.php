@@ -3,11 +3,10 @@
     'role',
     'image' => null,
     'contacts' => null,
-    'links' => null,
 ])
 
 @php
-    $socialLinks = $contacts ?? $links ?? [];
+    $socialLinks = $contacts ?? [];
 @endphp
 
 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
@@ -25,9 +24,10 @@
                 <div class="social-icons">
                     <ul>
                         @foreach ($socialLinks as $contact)
+                            @php($platform = strtolower($contact['key'] ?? 'link'))
                             <li>
                                 <a href="{{ $contact['value'] ?? '#' }}" target="_blank" rel="noopener noreferrer">
-                                    @switch(strtolower($contact['key'] ?? ''))
+                                    @switch($platform)
                                         @case('facebook')
                                             <i class="fa-brands fa-facebook-f fa-lg"></i>
                                         @break
@@ -50,7 +50,7 @@
 
                                         @default
                                             <i class="fas fa-link fa-lg"></i>
-                                            {{ ucfirst($contact['key'] ?? 'Link') }}
+                                            {{ ucfirst($platform) }}
                                     @endswitch
                                 </a>
                             </li>
