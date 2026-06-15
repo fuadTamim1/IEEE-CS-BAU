@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Route as RouteObject;
 
@@ -15,6 +15,7 @@ Route::macro('underDevelopment', function (bool $enabled = false) {
 
 Route::get('/', [PageController::class, "HomePage"])->name('home');
 Route::get('/about', [PageController::class, "AboutPage"])->name('about');
+Route::get('/about/team-members', [PageController::class, 'AboutMembersChunk'])->name('about.team-members.chunk');
 Route::get('/blog', [PageController::class, "BlogPage"])->name('blogs');
 Route::get('/blog/{slug}', [PageController::class, "ShowBlogPage"])->name("blogs.show");
 
@@ -25,13 +26,18 @@ Route::get('/events', [PageController::class, "EventsPage"])->name('events');
 Route::get('/events/{event:slug}', [PageController::class, "ShowEventPage"])->name('events.show');
 Route::get('/ourteam', [PageController::class, "TeamPage"])->name('ourteam');
 Route::get('/contact', [PageController::class, "ContactPage"])->name('contact');
+Route::view('/privacy-policy', 'basetheme.privacy-policy')->name('privacy-policy');
 // Route::get('/soon', [PageController::class, "SoonPage"])->name('soon');
 
 Route::get('/leaderboard', [PageController::class, "LeaderboardPage"])->name('leaderboard');
 Route::get('/leaderboard/week/{id}', [PageController::class, "LeaderboardPage"])->name('leaderboard.show');
+Route::get('/workshops', [PageController::class, "WorkshopsPage"])->name("workshops");
+Route::get('/workshops/{workshop:slug}', [PageController::class, "ShowWorkshopPage"])->name('workshops.show');
+Route::post('/workshops/{workshop:slug}/feedback', [PageController::class, "SubmitWorkshopFeedback"])
+    ->middleware('throttle:8,1')
+    ->name('workshops.feedback.store');
 
 Route::middleware(['under.development'])->group(function() {
-    Route::get('/workshops', [PageController::class, "WorkshopsPage"])->name("workshops");
     Route::get('/resources', [PageController::class, "ResourcesPage"])->name("resources");
 });
 
@@ -44,7 +50,6 @@ Route::middleware(['under.development'])->group(function() {
 //         });
 //     }
 // );
-Route::post('/contact/send', [MailController::class, 'send'])->name('contact.send');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -53,11 +58,16 @@ Route::middleware('auth')->group(function () {
 // In routes/web.php
 
 Route::get('/test-filament', function () {
-    return \App\Models\User::first()?->canAccessPanel(app(\Filament\Panel::class))
+    $panel = Filament::getPanel('admin');
+    if (! $panel) {
+        return 'Access denied';
+    }
+
+    return \App\Models\User::query()->first()?->canAccessPanel($panel)
         ? 'Has access'
         : 'Access denied';
 });
 
-Route::view('/coming-soon', 'basetheme.coming-soon')->name('coming-soon');
+require __DIR__ . '/bcpc.php';
 
 require __DIR__ . '/auth.php';

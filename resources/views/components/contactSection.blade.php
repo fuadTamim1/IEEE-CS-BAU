@@ -1,13 +1,18 @@
+@php
+    $contactFormEnabled = filter_var(get_setting('enable_contact_form', true), FILTER_VALIDATE_BOOLEAN);
+@endphp
+
+@if ($contactFormEnabled)
 <div class="contact2 sp">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="heading2">
                     <div class="contact2-form">
                         <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
                                 src="{{ asset('images/logo.png') }}" width="25" alt="">CONTACT US
                         </span>
-                        <h2 class="text-anime-style-3">Lets Work Together</h2>
+                        <h2 class="text-anime-style-3">Let us Work Together</h2>
                         <p class="mt-16" data-aos="fade-right" data-aos-duration="900">eady to take your social
                             media presence to the next level? Let’s work together to create impactful strategies
                             drive engagement, growth, and success for your brand.</p>
@@ -52,11 +57,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                    <img class="w-full" src="{{ asset('images/contact.png') }}" alt="">
+        </div>
+    </div>
+</div>
+{{-- quck edit --}}
+@else
+<div class="contact2 sp">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading2 text-center">
+                    <h2 class="text-anime-style-3">Contact Form Is Temporarily Unavailable</h2>
+                    <p class="mt-16">Please use our email or phone channels to reach us.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif

@@ -254,20 +254,20 @@ $(".vl-offcanvas-close-toggle,.vl-offcanvas-overlay").on('click', function(){
       nextArrow: $('.tes5-next-arrow'),
     });
 
-    //-- testimonial 6 ---
-    $(".tes4-slider").slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      dots: true,
-      autoplay:false,
-      autoplaySpeed:2000,
-      loop: true,
-      focusOnSelect: true,
-      infinite: true,
-      prevArrow: $('.tes5-prev-arrow'),
-      nextArrow: $('.tes5-next-arrow'),
-    });
+    // //-- testimonial 6 ---
+    // $(".tes4-slider").slick({
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    //   arrows: false,
+    //   dots: true,
+    //   autoplay:false,
+    //   autoplaySpeed:2000,
+    //   loop: true,
+    //   focusOnSelect: true,
+    //   infinite: true,
+    //   prevArrow: $('.tes5-prev-arrow'),
+    //   nextArrow: $('.tes5-next-arrow'),
+    // });
 
     //-- testimonial 9 ---
     $(".tes9-slider").slick({

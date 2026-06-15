@@ -4,14 +4,14 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Setting;
+use App\Support\SettingCatalog;
 
 class SettingsSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        Setting::updateOrCreate(['key' => 'site_name'], ['value' => 'IEEE CS']);
-        Setting::updateOrCreate(['key' => 'enable_registration'], ['value' => '0']);
-        Setting::updateOrCreate(['key' => 'enable_sending_emails'], ['value' => '0']);
-        Setting::updateOrCreate(['key' => 'enable_preloader'], ['value' => '1']);
+        foreach (SettingCatalog::defaultsForStorage() as $key => $value) {
+            Setting::query()->updateOrCreate(['key' => $key], ['value' => $value]);
+        }
     }
 }

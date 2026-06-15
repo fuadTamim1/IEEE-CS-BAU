@@ -7489,9 +7489,9 @@ a:focus {
   }
 }
 .preloader5 .title-logo img {
-  width: 120px; /* Adjust logo size */
+  width: 180px; /* Adjust logo size */
   height: auto;
-  animation: rotate 12s linear infinite;
+  /* animation: rotate 12s linear infinite; */
 }
 .preloader5 .preloader-exit .title-logo {
   transform: scale(0);
@@ -23058,4 +23058,28 @@ a:focus {
 
 .stat-number {
     animation: countUp 0.8s ease-out;
+}
+.hero-cta{
+  border-width: 2px 0px 2px 0px;
+  background: #2A7B9B;
+  background: linear-gradient(90deg, rgba(42, 123, 155, 0) 0%, rgb(250 164 26 / 10%) 50%, rgba(250, 164, 26, 0) 100%);
+}
+
+.carousel-item{
+  height: 500px !important;
+}
+
+
+.carousel-item > img{
+  object-fit: cover;
+}
+
+.details-content img{
+  object-fit:contain;
+  max-height: 500px;
+}
+
+.horizontal-slider-item {
+    min-height: 350px;
+    max-height: 350px;
 }

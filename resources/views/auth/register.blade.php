@@ -13,7 +13,7 @@
                 <x-input-error :messages="$errors->get('fname')" class="mt-2" />
             </div>
             <div class="col-6">
-                <input type="text" placeholder="Last Name" lname="lname" class="guest-input w-100">
+                <input type="text" placeholder="Last Name" name="lname" class="guest-input w-100">
                 <x-input-error :messages="$errors->get('lname')" class="mt-2" />
             </div>
         </div>
@@ -33,6 +33,11 @@
             <div class="col-12">
                 <input type="password" name="password" placeholder="Password" class="guest-input w-100">
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input type="password" name="password_confirmation" placeholder="Confirm Password" class="guest-input w-100">
             </div>
         </div>
         <div class="row">

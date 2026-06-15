@@ -14,18 +14,43 @@ class ContactForm extends Component
 
     public function submit()
     {
-        // 1. validate against rules defined in ContactRequest
+        if (!filter_var(get_setting('enable_contact_form', true), FILTER_VALIDATE_BOOLEAN)) {
+            $this->notification()->warning(
+                title: 'Contact form is unavailable',
+                description: 'Please try again later.'
+            );
+
+            return;
+        }
+
         $validated = $this->validate((new ContactRequest)->rules());
+        $result = $this->send($validated);
 
-        // 2. send the data
-        $this->send($validated);
+        if ($result['saved'] && $result['mail_sent']) {
+            session()->flash('success', 'Message sent successfully!');
+            $this->successNotification();
+            $this->reset();
 
-        // 3. reset & flash
-        session()->flash('success', 'Message sent successfully!');
-        $this->reset();
+            return;
+        }
+
+        if ($result['saved']) {
+            session()->flash('success', 'Message received successfully. We will reply to you soon.');
+            $this->notification()->warning(
+                title: 'Message saved',
+                description: 'Your message was saved, but email notification is temporarily unavailable.'
+            );
+            $this->reset();
+
+            return;
+        }
+
+        $this->notification()->error(
+            title: 'Message not sent',
+            description: 'Please try again in a few minutes.'
+        );
     }
 
-    /** show a WireUI toast */
     protected function successNotification(): void
     {
         $this->notification()->success(
@@ -34,20 +59,9 @@ class ContactForm extends Component
         );
     }
 
-    /** NO type-hint here – accept the validated array */
-    protected function send(array $data): void
+    protected function send(array $data): array
     {
-        $sent = app(MailService::class)->send($data);
-
-        if ($sent) {
-            $this->successNotification();
-        }
-
-        $this->first_name = "";
-        $this->last_name = "";
-        $this->email = "";
-        $this->phone = "";
-        $this->message = "";
+        return app(MailService::class)->sendContactSubmission($data);
     }
 
     public function render()

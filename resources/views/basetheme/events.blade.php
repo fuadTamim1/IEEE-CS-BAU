@@ -7,19 +7,57 @@
 
     <!--===== HERO AREA START =====-->
 
-    <!--=== SERVICE AREA START === -->
+    <!--=== EVENTS SHOWCASE START === -->
 
-    <div class="service5 sp">
+    <section class="events-showcase sp">
         <div class="container">
-            <div class="row">
-                @foreach ($events as $e)
-                    <x-event-card :event=$e/>
-                @endforeach
-            </div>
-        </div>
-    </div>
+            <div class="events-showcase__top">
+                <div>
+                    <span class="events-showcase__eyebrow">
+                        <img src="{{ asset('images/logo.png') }}" alt="IEEE CS" width="22">
+                        Events For You
+                    </span>
+                    <h2 class="events-showcase__title">Discover Workshops, Meetups, Competitions, and Talks</h2>
+                </div>
 
-    <!--=== SERVICE AREA END === -->
+                <div class="events-showcase__controls" aria-label="Event slider controls">
+                    <button type="button" class="events-showcase__arrow events-showcase__arrow--prev" aria-label="Previous events">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button type="button" class="events-showcase__arrow events-showcase__arrow--next" aria-label="Next events">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            @if ($events->count())
+                <div class="swiper events-showcase__slider" id="eventsShowcaseSlider">
+                    <div class="swiper-wrapper">
+                        @foreach ($events as $e)
+                            <div class="swiper-slide events-showcase__slide">
+                                <x-event-card :event="$e" />
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="events-showcase__footer">
+                    <div class="events-showcase__pagination"></div>
+                    <a href="{{ route('events') }}" class="events-showcase__view-all">
+                        Browse All Events
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            @else
+                <div class="events-showcase__empty">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <p>No events yet. Check back soon for upcoming activities.</p>
+                </div>
+            @endif
+        </div>
+    </section>
+
+    <!--=== EVENTS SHOWCASE END === -->
 
     <!--===== COUNTER AREA START =====-->
 
@@ -96,10 +134,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image1.png" alt="">
+                                <img src="/assets/img/team/team2-image1.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>
@@ -126,10 +164,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image2.png" alt="">
+                                <img src="/assets/img/team/team2-image2.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>
@@ -156,10 +194,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image3.png" alt="">
+                                <img src="/assets/img/team/team2-image3.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>
@@ -186,10 +224,10 @@
                     <div class="team2-item mt-30">
                         <div class="team-image-area">
                             <div class="image">
-                                <img src="assets/img/team/team2-image4.png" alt="">
+                                <img src="/assets/img/team/team2-image4.png" alt="">
                             </div>
                             <div class="shape round-circle">
-                                <img src="assets/img/shapes/team2-items-shape.png" alt="">
+                                <img src="/assets/img/shapes/team2-items-shape.png" alt="">
                             </div>
                             <div class="social-icons">
                                 <ul>
@@ -223,4 +261,217 @@
     @include('components.contactSection')
 
     <!--===== CONTACT AREA END =====-->
+
+    @push('styles')
+        <style>
+            .events-showcase {
+                --events-bg-1: #f3f8e6;
+                --events-bg-2: #e5f2cd;
+                position: relative;
+                overflow: hidden;
+                background:
+                    radial-gradient(circle at 8% 10%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 40%),
+                    radial-gradient(circle at 85% 25%, rgba(161, 209, 72, 0.45) 0%, rgba(161, 209, 72, 0) 45%),
+                    linear-gradient(145deg, var(--events-bg-1) 0%, var(--events-bg-2) 100%);
+            }
+
+            .events-showcase__top {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 1.35rem;
+            }
+
+            .events-showcase__eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.4rem 0.72rem;
+                border-radius: 999px;
+                background: rgba(15, 23, 42, 0.08);
+                color: #1f2937;
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+            }
+
+            .events-showcase__title {
+                margin: 0.85rem 0 0;
+                max-width: 780px;
+                font-size: clamp(1.5rem, 2.8vw, 2.45rem);
+                line-height: 1.15;
+                color: #0f172a;
+            }
+
+            .events-showcase__controls {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55rem;
+            }
+
+            .events-showcase__arrow {
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                border: 1px solid rgba(15, 23, 42, 0.16);
+                background: rgba(255, 255, 255, 0.76);
+                color: #0f172a;
+                display: grid;
+                place-items: center;
+                transition: transform 0.28s ease, background 0.28s ease, color 0.28s ease;
+            }
+
+            .events-showcase__arrow:hover {
+                background: #0f172a;
+                color: #fff;
+                transform: translateY(-2px);
+            }
+
+            .events-showcase__slider {
+                padding: 0.35rem 0.3rem 0.8rem;
+            }
+
+            .events-showcase__slide {
+                height: auto;
+            }
+
+            .events-showcase__slide .ieee-event-card {
+                height: 100%;
+            }
+
+            .events-showcase__footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 0.9rem;
+                gap: 1rem;
+            }
+
+            .events-showcase__pagination {
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .events-showcase__pagination .swiper-pagination-bullet {
+                width: 10px;
+                height: 10px;
+                background: #6b7280;
+                opacity: 0.35;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+
+            .events-showcase__pagination .swiper-pagination-bullet-active {
+                transform: scale(1.2);
+                opacity: 1;
+                background: #ff5b37;
+            }
+
+            .events-showcase__view-all {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                text-decoration: none;
+                font-weight: 700;
+                color: #0f172a;
+                border-bottom: 2px solid rgba(15, 23, 42, 0.22);
+                transition: color 0.3s ease, border-color 0.3s ease;
+            }
+
+            .events-showcase__view-all:hover {
+                color: #ff5b37;
+                border-color: #ff5b37;
+            }
+
+            .events-showcase__empty {
+                border-radius: 16px;
+                border: 1px dashed rgba(15, 23, 42, 0.22);
+                padding: 2.2rem 1rem;
+                text-align: center;
+                color: #334155;
+                background: rgba(255, 255, 255, 0.55);
+            }
+
+            .events-showcase__empty i {
+                font-size: 2rem;
+                margin-bottom: 0.65rem;
+                color: #ff5b37;
+            }
+
+            @media (max-width: 991px) {
+                .events-showcase__top {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.9rem;
+                }
+
+                .events-showcase__title {
+                    max-width: 100%;
+                }
+            }
+
+            @media (max-width: 575px) {
+                .events-showcase__footer {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .events-showcase__controls {
+                    width: 100%;
+                    justify-content: flex-end;
+                }
+            }
+        </style>
+    @endpush
+
+    @section('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var sliderEl = document.getElementById('eventsShowcaseSlider');
+                if (!sliderEl || typeof Swiper === 'undefined') {
+                    return;
+                }
+
+                new Swiper(sliderEl, {
+                    slidesPerView: 1.1,
+                    spaceBetween: 16,
+                    speed: 700,
+                    grabCursor: true,
+                    loop: {{ $events->count() > 3 ? 'true' : 'false' }},
+                    autoplay: {
+                        delay: 3200,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true
+                    },
+                    navigation: {
+                        nextEl: '.events-showcase__arrow--next',
+                        prevEl: '.events-showcase__arrow--prev'
+                    },
+                    pagination: {
+                        el: '.events-showcase__pagination',
+                        clickable: true
+                    },
+                    breakpoints: {
+                        575: {
+                            slidesPerView: 1.35,
+                            spaceBetween: 18
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 20
+                        },
+                        992: {
+                            slidesPerView: 2.45,
+                            spaceBetween: 22
+                        },
+                        1200: {
+                            slidesPerView: 3,
+                            spaceBetween: 24
+                        }
+                    }
+                });
+            });
+        </script>
+    @endsection
 </x-base-layout>

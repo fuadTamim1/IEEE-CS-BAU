@@ -1,4 +1,7 @@
 <x-base-layout>
+    @php
+        $contactFormEnabled = filter_var(get_setting('enable_contact_form', true), FILTER_VALIDATE_BOOLEAN);
+    @endphp
     <!--===== HERO AREA START =====-->
 
 
@@ -23,7 +26,7 @@
                         </div>
                         <div class="content">
                             <h3>Email Address</h3>
-                            <a href="mailto:support@seox.com">support@ieeecsbau.com</a>
+                            <a href="mailto:{{getWidget('email')}}">{{getWidget('email')}}</a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +37,7 @@
                         </div>
                         <div class="content">
                             <h3>Phone Number</h3>
-                            <a href="tel:+123456-7890">+1 (123) 456-7890</a>
+                            <a href="tel:+962788822535">+962 7888 22 535</a>
                         </div>
                     </div>
                 </div>
@@ -52,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            @if ($contactFormEnabled)
             <div class="row">
                 <div class="col-lg-6 mt-60">
                     <div class="heading2">
@@ -79,16 +83,16 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="single-input">
-                                            <input type="number" placeholder="Phone Number">
+                                            <input type="tel" placeholder="Phone Number">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="single-input">
                                             <select class="wide">
-                                                <option value="1">Service Type</option>
-                                                <option value="2">Option 1</option>
-                                                <option value="3">Option 2</option>
-                                                <option value="4">Option 3</option>
+                                                <option value="1">Contact Type</option>
+                                                <option value="2">Inquery about CS</option>
+                                                <option value="3">Disccuss for future opperunity</option>
+                                                <option value="4">Other...</option>
                                             </select>
                                         </div>
                                     </div>
@@ -114,12 +118,22 @@
                     </div>
                 </div>
             </div>
+            @else
+            <div class="row mt-60">
+                <div class="col-lg-12">
+                    <div class="heading2 text-center">
+                        <h2 class="text-anime-style-3">Contact Form Is Temporarily Unavailable</h2>
+                        <p class="mt-16">Please use the listed email and phone channels to reach us.</p>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 
     <!--===== CONTACT AREA END =====-->
 
         <div class="contact-map-page">
-            <iframe src="https://maps.app.goo.gl/V5Lx9KGiZb12265F7" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.8201681897094!2d36.01818459999999!3d31.992890099999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151b66df729926c7%3A0x80a62dc05cbc89e0!2z2KzYp9mF2LnYqSDYp9mE2KjZhNmC2KfYoSDYp9mE2KrYt9io2YrZgtmK2KkgLSDZg9mE2YrYqSDYp9mE2YfZhtiv2LPYqSDYp9mE2KrZg9mG2YjZhNmI2KzZitipIC0g2KfZhNio2YjZhNmK2KrZg9mG2YM!5e0!3m2!1sar!2sjo!4v1751340846675!5m2!1sar!2sjo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 </x-base-layout>

@@ -2,7 +2,7 @@
 
    <!--===== HERO AREA START =====-->
 
-   <div class="inner-hero" style="background-image: url(assets/img/bg/inner-hero-bg.jpg);">
+   <div class="inner-hero" style="background-image: url(/assets/img/bg/inner-hero-bg.jpg);">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 m-auto text-center">
@@ -31,11 +31,11 @@
             <div class="col-lg-4">
                 <div class="tes11-left-side-images mt-30" data-aos="fade-up" data-aos-duration="900">
                     <div class="image">
-                        <img src="assets/img/testimonial/tes3-big-image.png" alt="">
+                        <img src="/assets/img/testimonial/tes3-big-image.png" alt="">
                     </div>
                     <div class="review-box">
                         <div class="review-image">
-                            <img src="assets/img/testimonial/tes3-reviews.png" alt="">
+                            <img src="/assets/img/testimonial/tes3-reviews.png" alt="">
                         </div>
                         <div class="review-starts">
                             <p>20k Reviews</p>
@@ -60,7 +60,7 @@
                             <div class="tes11-dv-top"></div>
                             <div class="author-area">
                                 <div class="author-thumb">
-                                    <img src="assets/img/testimonial/team2-image1.png" alt="">
+                                    <img src="/assets/img/testimonial/team2-image1.png" alt="">
                                 </div>
                                 <div class="author-text">
                                     <a href="#">Sarah Makiavelly</a>
@@ -74,7 +74,7 @@
                             <div class="tes11-dv-top"></div>
                             <div class="author-area">
                                 <div class="author-thumb">
-                                    <img src="assets/img/testimonial/team2-image1.png" alt="">
+                                    <img src="/assets/img/testimonial/team2-image1.png" alt="">
                                 </div>
                                 <div class="author-text">
                                     <a href="#">Sarah Makiavelly</a>
@@ -88,7 +88,7 @@
                             <div class="tes11-dv-top"></div>
                             <div class="author-area">
                                 <div class="author-thumb">
-                                    <img src="assets/img/testimonial/team2-image2.png" alt="">
+                                    <img src="/assets/img/testimonial/team2-image2.png" alt="">
                                 </div>
                                 <div class="author-text">
                                     <a href="#">Sarah Makiavelly</a>
@@ -102,7 +102,7 @@
                             <div class="tes11-dv-top"></div>
                             <div class="author-area">
                                 <div class="author-thumb">
-                                    <img src="assets/img/testimonial/team2-image2.png" alt="">
+                                    <img src="/assets/img/testimonial/team2-image2.png" alt="">
                                 </div>
                                 <div class="author-text">
                                     <a href="#">Sarah Makiavelly</a>
@@ -122,7 +122,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -139,7 +139,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author1.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author1.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Shakib Al Hasan</a>
@@ -151,7 +151,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -168,7 +168,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author2.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author2.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Tanzid Tamim</a>
@@ -181,7 +181,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -198,7 +198,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author3.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author3.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Taskin Ahmed</a>
@@ -211,7 +211,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -228,7 +228,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author4.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author4.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Lorri Warf</a>
@@ -241,7 +241,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -258,7 +258,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author5.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author5.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Jerry Helfer</a>
@@ -271,7 +271,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -288,7 +288,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author6.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author6.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Rhonda Rhodes</a>
@@ -301,7 +301,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -318,7 +318,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author7.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author7.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Kenneth Allen</a>
@@ -331,7 +331,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -348,7 +348,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author8.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author8.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Paula Mora</a>
@@ -361,7 +361,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="tes-page-box mt-30">
                     <div class="quote">
-                        <img src="assets/img/icons/quote.png" alt="">
+                        <img src="/assets/img/icons/quote.png" alt="">
                     </div>
                     <div class="stars">
                         <ul>
@@ -378,7 +378,7 @@
                     </div>
                     <div class="bottom-area">
                         <div class="author_thumb">
-                            <img src="assets/img/testimonial/tes-page-author9.png" alt="">
+                            <img src="/assets/img/testimonial/tes-page-author9.png" alt="">
                         </div>
                         <div class="author-text">
                             <a href="#">Frances Swann</a>

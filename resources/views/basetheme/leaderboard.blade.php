@@ -9,86 +9,70 @@
                 <div class="leaderboard-container">
 
                     <div class="glow"></div>
-                    @if ($currentLeaderboard)
-                        @if (strtotime($currentLeaderboard->publish_at) > time())
-                            <div id="countdown" class="countdown-container">
+                    @if (!empty($currentLeaderboard))
+                        @php
+                            $publishAt = $currentLeaderboard->publish_at ?? null;
+                            $weekStart = $currentLeaderboard->week_start_date ?? null;
+                            $leaderboardTitle = trim((string) ($currentLeaderboard->title ?? ''));
+                            $publishLabel = $publishAt
+                                ? (is_object($publishAt)
+                                    ? $publishAt->format('M j, Y g:i A')
+                                    : \Carbon\Carbon::parse($publishAt)->format('M j, Y g:i A'))
+                                : null;
+                        @endphp
+                        @if ($publishAt && strtotime($publishAt) > time())
+                            <div id="countdown" class="countdown-container" role="timer" aria-live="polite">
                                 <h1 class="title">LEADERBOARD REVEAL</h1>
                                 <div class="countdown-timer">
-                                    <div class="countdown-box">
-                                        <div id="days" class="countdown-number">00</div>
-                                        <div class="countdown-label">Days</div>
-                                    </div>
-                                    <div class="countdown-box">
-                                        <div id="hours" class="countdown-number">00</div>
-                                        <div class="countdown-label">Hours</div>
-                                    </div>
-                                    <div class="countdown-box">
-                                        <div id="minutes" class="countdown-number">00</div>
-                                        <div class="countdown-label">Minutes</div>
-                                    </div>
-                                    <div class="countdown-box">
-                                        <div id="seconds" class="countdown-number">00</div>
-                                        <div class="countdown-label">Seconds</div>
-                                    </div>
+                                    @foreach (['days' => 'Days', 'hours' => 'Hours', 'minutes' => 'Minutes', 'seconds' => 'Seconds'] as $id => $label)
+                                        <div class="countdown-box">
+                                            <div id="{{ $id }}" class="countdown-number" aria-label="{{ $label }}">00</div>
+                                            <div class="countdown-label">{{ $label }}</div>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="countdown-text">Until Leaderboard Reveal!</div>
+                                @if ($publishLabel)
+                                    <div class="countdown-meta">Reveal Time: {{ $publishLabel }}</div>
+                                @endif
                             </div>
                         @else
                             <div id="leaderboard">
-                                <h1 class="leaderboard-title">Members Of The Month
-                                    {{ $currentLeaderboard->week_start_date->format('F j, Y') }}</h1>
-                                <table class="leaderboard-table">
+                                <h1 class="leaderboard-title">
+                                    {{ $leaderboardTitle !== '' ? $leaderboardTitle : 'Members Of The Month' }}
+                                    <span class="leaderboard-period">
+                                        {{ $weekStart ? (is_object($weekStart) ? $weekStart->format('F j, Y') : \Carbon\Carbon::parse($weekStart)->format('F j, Y')) : '' }}
+                                    </span>
+                                </h1>
+                                <p class="leaderboard-subtitle">This month\'s top contributors. Keep pushing to climb the next reveal.</p>
+                                <table class="leaderboard-table" aria-label="Current leaderboard rankings">
                                     <thead>
                                         <tr>
-                                            <th>Rank</th>
-                                            <th>Name</th>
+                                            <th scope="col">Rank</th>
+                                            <th scope="col">Name</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>🥇 1</td>
-                                            <td>{{ $currentLeaderboard->member1->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>🥈 2</td>
-                                            <td>{{ $currentLeaderboard->member2?->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>🥉 3</td>
-                                            <td>{{ $currentLeaderboard->member3?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 4</td>
-                                            <td>{{ $currentLeaderboard->member4?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 5</td>
-                                            <td>{{ $currentLeaderboard->member5?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 6</td>
-                                            <td>{{ $currentLeaderboard->member6?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 7</td>
-                                            <td>{{ $currentLeaderboard->member7?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 8</td>
-                                            <td>{{ $currentLeaderboard->member8?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 9</td>
-                                            <td>{{ $currentLeaderboard->member9?->name ?? '-' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td># 10</td>
-                                            <td>{{ $currentLeaderboard->member10?->name ?? '-' }}</td>
-                                        </tr>
+                                        @foreach (range(1, 10) as $i)
+                                            @php
+                                                $member = $currentLeaderboard->{'member'.$i} ?? null;
+                                                $rankIcons = [1 => '🥇', 2 => '🥈', 3 => '🥉'];
+                                                $rank = $rankIcons[$i] ?? "#";
+                                            @endphp
+                                            <tr class="{{ $i <= 3 ? 'top-rank' : '' }}">
+                                                <td>{{ $rank }} {{ $i }}</td>
+                                                <td>{{ $member?->name ?? '-' }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         @endif
+                    @else
+                        <div class="no-leaderboard">
+                            <h1 class="title">No Leaderboard Available</h1>
+                            <p class="message">Please check back later for updates.</p>
+                        </div>
                     @endif
 
 
@@ -97,64 +81,48 @@
         </div>
         <div id="particles-js"></div>
         <hr>
-
-        <div class="leaderboards-cards">
-            <div class="container">
-                <div class="row  mt-5">
-                    @foreach ($leaderboards as $leaderboard)
-                        <div class="col-sm-12 col-lg-4 mb-3">
-                            <x-leaderboard-card :leaderboard="$leaderboard" />
-                        </div>
-                    @endforeach
+        @if(isset($leaderboards))
+            <div class="leaderboards-cards">
+                <div class="container">
+                    <div class="row  mt-5">
+                        @foreach ($leaderboards as $leaderboard)
+                            <div class="col-sm-12 col-lg-4 mb-3">
+                                <x-leaderboard-card :leaderboard="$leaderboard" />
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         @section('scripts')
-            <script>
-                const swiper = new Swiper('#topMembers', {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    breakpoints: {
-                        768: {
-                            slidesPerView: 2,
-                        },
-                        992: {
-                            slidesPerView: 3,
-                            allowTouchMove: false, // Desktop should not swipe
-                        }
-                    }
-                });
-            </script>
             <!-- Include particles.js from CDN -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
-                    // Get publish timestamp from Laravel
-                    const publishTimestamp = {{ strtotime($currentLeaderboard->publish_at) * 1000 }};
-                    const currentTimestamp = Date.now();
-                    const hasShownBefore = localStorage.getItem('leaderboardShown_{{ $currentLeaderboard->id }}');
-
-                    // Check if already published
-                    if (currentTimestamp >= publishTimestamp) {
-                        // If first time viewing for this user, show celebration
-                        if (!hasShownBefore) {
-                            startCelebration();
-                            localStorage.setItem('leaderboardShown_{{ $currentLeaderboard->id }}', 'true');
+                    @if (!empty($currentLeaderboard) && !empty($currentLeaderboard->id))
+                        if(localStorage.getItem('leaderboardShown_{{ $currentLeaderboard->id }}')) {
+                            // If already shown, skip celebration and keep normal page view.
+                            return;
                         }
-                    } else {
-                        // If not published yet, start countdown
-                        startCountdown(publishTimestamp);
-                    }
+                        // Get publish timestamp from Laravel
+                        const publishTimestamp = {{ strtotime($currentLeaderboard->publish_at ?? '') * 1000 }};
+                        const currentTimestamp = Date.now();
+                        const hasShownBefore = localStorage.getItem('leaderboardShown_{{ $currentLeaderboard->id }}');
+
+                        // Check if already published
+                        if (currentTimestamp >= publishTimestamp) {
+                            // If first time viewing for this user, show celebration
+                            if (!hasShownBefore) {
+                                startCelebration();
+                                localStorage.setItem('leaderboardShown_{{ $currentLeaderboard->id }}', 'true');
+                            }
+                        } else {
+                            // If not published yet, start countdown
+                            startCountdown(publishTimestamp);
+                        }
+                    @endif
                 });
 
                 function startCountdown(endTime) {
@@ -184,10 +152,12 @@
                         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                         // Update the display
-                        timerElement.days.textContent = days.toString().padStart(2, '0');
-                        timerElement.hours.textContent = hours.toString().padStart(2, '0');
-                        timerElement.minutes.textContent = minutes.toString().padStart(2, '0');
-                        timerElement.seconds.textContent = seconds.toString().padStart(2, '0');
+                        if (timerElement.days && timerElement.hours && timerElement.minutes && timerElement.seconds) {
+                            timerElement.days.textContent = days.toString().padStart(2, '0');
+                            timerElement.hours.textContent = hours.toString().padStart(2, '0');
+                            timerElement.minutes.textContent = minutes.toString().padStart(2, '0');
+                            timerElement.seconds.textContent = seconds.toString().padStart(2, '0');
+                        }
                     }
 
                     // Update immediately then set interval
@@ -196,11 +166,15 @@
                 }
 
                 function startCelebration() {
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || typeof particlesJS !== 'function') {
+                        return;
+                    }
+
                     // Initialize particles.js
                     particlesJS('particles-js', {
                         "particles": {
                             "number": {
-                                "value": 150,
+                                "value": 90,
                                 "density": {
                                     "enable": true,
                                     "value_area": 800
@@ -241,7 +215,7 @@
                             },
                             "move": {
                                 "enable": true,
-                                "speed": 6,
+                                "speed": 4,
                                 "direction": "top",
                                 "random": true,
                                 "straight": false,
@@ -271,6 +245,11 @@
 
                     // Hide particles after celebration (8 seconds)
                     setTimeout(() => {
+                        if (window.pJSDom && window.pJSDom.length > 0) {
+                            window.pJSDom[0].pJS.fn.vendors.destroypJS();
+                            window.pJSDom = [];
+                        }
+
                         const particlesElement = document.getElementById('particles-js');
                         if (particlesElement) {
                             particlesElement.style.opacity = '0';

@@ -12,6 +12,8 @@ class ListMembers extends ListRecords
 
     protected function getHeaderActions(): array
     {
+        $maxImportFileKb = (int) get_setting('file_upload_size_limit', 10240);
+
         return [
             Actions\CreateAction::make(),
             Actions\ImportAction::make()
@@ -24,7 +26,7 @@ class ListMembers extends ListRecords
                 // ])
                 ->fileRules([
                     'mimes:xlsx,csv', // Restrict to Excel and CSV files
-                    'max:1024', // Max file size of 1MB
+                    'max:' . $maxImportFileKb, // Max size in KB (default 10MB)
                 ]),
         ];
     }

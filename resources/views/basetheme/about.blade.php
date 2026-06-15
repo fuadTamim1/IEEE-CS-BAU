@@ -32,10 +32,10 @@
                 <div class="col-lg-6">
                     <div class="about2-images">
                         <div class="image1 image-anime reveal">
-                            <img src="{{ asset('images/work.jpg') }}" width="500px" alt="">
+                            <img src="{{ asset('IEEE/l.JPG') }}" width="500px" alt="">
                         </div>
                         <div class="image2 image-anime reveal">
-                            <img src="{{ asset('images/work2.jpg') }}" width="500px" alt="">
+                            <img src="{{ asset('IEEE/Managment-20250805T060425Z-1-001/Managment_2024/team_1.jpg') }}" width="500px" alt="">
                         </div>
                     </div>
                 </div>
@@ -93,22 +93,15 @@
 
                 <div class="col-lg col-md-4">
                     <div class="inner-counter-box mt-30">
-                        <h3>10K+</h3>
-                        <p>Number of Attendees</p>
+                        <h3>100+</h3>
+                        <p>Number of Volunter</p>
                     </div>
                 </div>
 
                 <div class="col-lg col-md-4">
                     <div class="inner-counter-box mt-30">
-                        <h3>300+</h3>
-                        <p>Number of Volunteers</p>
-                    </div>
-                </div>
-
-                <div class="col-lg col-md-4">
-                    <div class="inner-counter-box mt-30">
-                        <h3>150+</h3>
-                        <p>Number of Speakers</p>
+                        <h3>50+</h3>
+                        <p>Number of Workshops</p>
                     </div>
                 </div>
             </div>
@@ -163,19 +156,26 @@
                     <div class="about-choose-images ml-50 md:ml-0 sm:ml-0">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('images/about1.png') }}" alt="">
+                                
+                                <div class="image image-anime reveal">
+                                    <img class="w-full" src="{{ asset('IEEE/p.jpg') }}" alt="">
                                 </div>
                                 <div class="image mt-30 image-anime reveal">
-                                    <img class="w-full" src="{{ asset('images/about2.png') }}" alt="">
+                                    <img class="w-full" src="{{ asset('IEEE/q.jpg') }}" alt="">
                                 </div>
+                                
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 d-none d-lg-block">
                                 <div class="image image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="{{ asset('images/about3.png') }}" alt="">
+                                    <img class="w-full" src="{{ asset('IEEE/Visits-20250805T060418Z-1-001/Visits/Tamatem/487377573_1240146528150480_4597872574937663976_n.jpg') }}" alt="">
                                 </div>
-                                <div class="image image-anime reveal md:mt-30 sm:mt-30">
-                                    <img class="w-full" src="{{ asset('images/about4.png') }}" alt="">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="image mt-30 image-anime reveal">
+                                    <img class="w-full" src="{{ asset('IEEE/gathering.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                 <div class="col-lg-6">
                     <div class="overflow-hidden">
                         <div class="service1-image image-anime reveal md:mt-30 sm:mt-30">
-                            <img src="{{ asset('images/about5.png') }}" alt="">
+                            <img src="{{ asset('IEEE/Activities-20250805T060452Z-1-001/Activities/PodcasTech/481179645_9778143308884182_3778756239115729132_n.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -299,13 +299,15 @@
                     </div>
                 </div>
             </div>
+
             <div class="team2 sp" id="ourteam">
-                <div class="row">
-                    @foreach ($members as $m)
-                        <x-team-member-card name="{{ $m->name }}" role="{{ $m->title }}"
-                            :links="$m->contacts" />
-                    @endforeach
-                </div>
+                <x-team-members-section
+                    mode="load-more"
+                    :members="$teamMembers"
+                    :active-tab="$activeTeamTab"
+                    :load-more-url="route('about.team-members.chunk')"
+                    anchor-id="ourteam"
+                />
                                 {{-- Pagenation --}}
                                 {{-- 
                         <div class="space60"></div>
@@ -334,6 +336,5 @@
     @include('components.contactSection')
 
     <!--===== CONTACT AREA END =====-->
-
 
 </x-base-layout>

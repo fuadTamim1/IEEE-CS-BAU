@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
+use App\Support\AdminRoles;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -16,6 +19,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        abort_unless((bool) get_setting('enable_login', true), 403, 'Login is currently disabled.');
+
         return view('auth.login');
     }
 
@@ -23,27 +28,54 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
 
-    public function store(Request $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        abort_unless((bool) get_setting('enable_login', true), 403, 'Login is currently disabled.');
 
-        $remember = $request->has("remember");
+        $request->authenticate();
+        $request->session()->regenerate();
 
-        // dd('logined');
-        if (Auth::attempt($request->only('email', 'password'), $remember)) {
-            $user = Auth::user();
+        /** @var User|null $user */
+        $user = Auth::user();
 
-            if ($user->hasRole(['super-admin', 'admin', 'editor', 'writer'])) {
-                return redirect()->route('filament.admin.pages.dashboard'); // Redirect admins to dashboard
-            }
-
-            return redirect()->route('home'); // Redirect regular users to home
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'email' => 'Unable to log in. Please try again.',
+            ]);
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        if (!$user->isApproved()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            throw ValidationException::withMessages([
+                'email' => 'Your account is pending admin approval.',
+            ]);
+        }
+
+        $expirationDays = (int) get_setting('password_expiration_days', 90);
+        if ($user->passwordExpired($expirationDays)) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            throw ValidationException::withMessages([
+                'email' => 'Your password has expired. Please reset your password to continue.',
+            ]);
+        }
+
+        if ((bool) get_setting('enable_email_verification', true) && !$user->hasVerifiedEmail()) {
+            $user->sendEmailVerificationNotification();
+
+            return redirect()->route('verification.notice');
+        }
+
+        if ($user->hasAnyRole(AdminRoles::adminAccessRoles())) {
+            return redirect()->route('filament.admin.pages.dashboard');
+        }
+
+        return redirect()->intended(route('home'));
     }
 
     /**

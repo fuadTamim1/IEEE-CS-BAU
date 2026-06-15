@@ -3,22 +3,28 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "awcodes/filament-tiptap-editor": "^3.5",
         "bezhansalleh/filament-shield": "^3.3",
-        "chiiya/filament-access-control": "^2.6",
+        "chiiya/filament-access-control": "2.6",
         "cviebrock/eloquent-sluggable": "^12.0",
         "filament/filament": "3.3",
         "graham-campbell/markdown": "^16.0",
+        "husam-tariq/filament-timepicker": "*",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.18",
         "laravel/telescope": "^5.5",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
-        "maatwebsite/excel": "^1.1",
+        "maatwebsite/excel": "*",
+        "predis/predis": "^3.0",
         "spatie/laravel-backup": "^9.2",
         "spatie/laravel-medialibrary": "^11.12",
         "spatie/laravel-permission": "^6.16",
@@ -32,7 +38,7 @@
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",
-        "laravel/sail": "^1.42",
+        "laravel/sail": "^1.52",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^3.7",
@@ -44,7 +50,9 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
-        "files": ["app/Helpers/helper.php"]
+        "files": [
+            "app/Helpers/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -85,6 +93,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "block-insecure": false
         }
     },
     "minimum-stability": "stable",

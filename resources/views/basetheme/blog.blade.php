@@ -87,4 +87,74 @@
     </div>
 
     <!--===== BLOG AREA END =====-->
+
+    @push('styles')
+        <style>
+            .blog1 .ieee-blog-card {
+                border: 1px solid rgba(15, 23, 42, 0.1);
+                border-radius: 14px;
+                overflow: hidden;
+                background: #fff;
+                box-shadow: 0 7px 22px rgba(15, 23, 42, 0.06);
+                transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+            }
+
+            .blog1 .ieee-blog-card:hover {
+                transform: translateY(-6px);
+                border-color: rgba(250, 164, 26, 0.55);
+                box-shadow: 0 18px 36px rgba(15, 23, 42, 0.14);
+            }
+
+            .blog1 .ieee-blog-card__thumb {
+                height: 100%;
+                min-height: 250px;
+                border-radius: 0;
+            }
+
+            .blog1 .ieee-blog-card__thumb-link,
+            .blog1 .ieee-blog-card__title a,
+            .blog1 .ieee-blog-card__read-more {
+                position: relative;
+                z-index: 2;
+            }
+
+            .blog1 .ieee-blog-card .image-anime::after {
+                pointer-events: none;
+            }
+
+            .blog1 .ieee-blog-card__content {
+                padding: 1.5rem 1.4rem;
+                background: linear-gradient(175deg, #fff 0%, #fffdf8 100%);
+            }
+
+            .blog1 .ieee-blog-card__meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.65rem 1.1rem;
+            }
+
+            .blog1 .ieee-blog-card__meta span {
+                color: #334155;
+                font-size: 0.92rem;
+                font-weight: 600;
+            }
+
+            .blog1 .ieee-blog-card__title {
+                margin-top: 0.25rem;
+                line-height: 1.35;
+            }
+
+            .blog1 .ieee-blog-card__excerpt {
+                color: #475569;
+                line-height: 1.72;
+                margin-bottom: 0;
+            }
+
+            @media (max-width: 991px) {
+                .blog1 .ieee-blog-card__thumb {
+                    min-height: 220px;
+                }
+            }
+        </style>
+    @endpush
 </x-base-layout>

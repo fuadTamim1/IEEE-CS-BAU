@@ -15,13 +15,15 @@
                     <article>
                         <div class="details-content">
                             <div class="image d-flex">
-                                <img class="mx-auto" src="{{ asset('images/event.png') }}" style="width: 60%"
+                                <img class="mx-auto" src="{{ asset('storage/'.$event->image) }}" style="width: 60%"
                                     alt="">
                             </div>
                         </div>
                     </article>
                 </div>
-                <div class="col-lg-4">
+                @if (false)
+                    
+                <div class="col-lg-4" >
                     <div class="sidebar-area mt-50">
                         {{-- <div class="_sidebar-widget _search">
                             <h3>Search</h3>
@@ -62,13 +64,13 @@
                                 us. Web will answer you shortly!</p>
                             <div class="buttons mt-16">
                                 <a href="mailto:Infoseoxagency@gmail.com" class="sidebar-btn1"><img
-                                        src="assets/img/icons/sidebar-email.png" alt="">
+                                        src="/assets/img/icons/sidebar-email.png" alt="">
                                     Infoseoxagency@gmail.com</a>
                                 <a href="tel:123-456-7890" class="sidebar-btn2"><img
-                                        src="assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
+                                        src="/assets/img/icons/sidebar-phone.png" alt=""> 123-456-7890</a>
                             </div>
                         </div> --}}
-
+                        {{-- 
                         <div class="_sidebar-widget _contact mt-40">
                             <h3>Get A Free Quote</h3>
                             <div class="_contact-form mt-10">
@@ -83,11 +85,13 @@
                                                 class="fa-solid fa-arrow-right"></i></span></button>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
-                <div class="col-lg-8">
+                @endif
+
+                <div class="col-lg-12">
                     <div class="blog-details-content ml-30 md:ml-0 sm:ml-0 mt-50">
                         <article>
                             <div class="details-content"
@@ -184,13 +188,15 @@
     <!--===== CTA AREA ENDS =======-->
 
     <!-- schedule-area-start -->
+    @if (false) <!-- should be if there is a schould -->
+        
     <section class="schedule-area sp">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 m-auto text-center">
                     <div class="heading2">
                         <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900">
-                            <img src="{{ asset('images/calendar-icon.png') }}" width="25" alt=""> EVENT
+                            <img src="{{ asset('images/logo.png') }}" width="25" alt=""> EVENT
                             SCHEDULE
                         </span>
                         <h2 class="text-anime-style-3">Conference Agenda & Timeline</h2>
@@ -475,27 +481,23 @@
             </div>
         </div>
     </section>
+    @endif
+    
     <!-- analysis-area-end -->
 
     <!--===== SERVICE SECTION AREA START =====-->
 
-    <div class="service sp sec-bg1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 m-auto text-center">
-                    <div class="heading2">
-                        <h2>More Events</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-30">
-                @foreach ($otherEvents as $event)
+    @if ($otherEvents->count())
+        <x-slider sectionClass="service sp sec-bg1 event-details-related-slider" title="More Events" subtitle="Discover Similar Activities"
+            icon="{{ asset('images/logo.png') }}" :slidesToShow="3" :autoplay="true" :autoplaySpeed="4000"
+            :arrows="false" :dots="false">
+            @foreach ($otherEvents as $event)
+                <x-slider-item class="related-event-item">
                     <x-event-card :event="$event" />
-                @endforeach
-            </div>
-        </div>
-    </div>
+                </x-slider-item>
+            @endforeach
+        </x-slider>
+    @endif
 
     <!--===== SERVICE SECTION AREA END =====-->
 
@@ -564,7 +566,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="contact2-image image-anime reveal ml-40 md:ml-0 sm:ml-0 md:mt-30 sm:mt-30">
-                        <img class="w-full" src="assets/img/others/contact2-image.png" alt="">
+                        <img class="w-full" src="/assets/img/others/contact2-image.png" alt="">
                     </div>
                 </div>
             </div>
@@ -573,3 +575,36 @@
 
     <!--===== CONTACT AREA END =====-->
 </x-base-layout>
+
+@push('styles')
+    <style>
+        .blog-details-area .details-content .image img {
+            width: min(60%, 780px);
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .event-details-related-slider .ieee-slider .slick-slide {
+            padding: 0 8px;
+            box-sizing: border-box;
+        }
+
+        .event-details-related-slider .related-event-item .ieee-slider-item__inner {
+            padding: 0.65rem;
+        }
+
+        @media (max-width: 768px) {
+            .event-details-related-slider .ieee-slider .slick-slide {
+                padding: 0 4px;
+            }
+
+            .event-details-related-slider .related-event-item .ieee-slider-item__inner {
+                padding: 0.35rem;
+            }
+
+            .blog-details-area .details-content .image img {
+                width: 100%;
+            }
+        }
+    </style>
+@endpush

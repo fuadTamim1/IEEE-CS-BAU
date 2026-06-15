@@ -4,23 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'IEEE CS BAU Chapter') }} - {{ $title ?? 'Home' }}</title>
+    @php
+        $siteName = (string) get_setting('site_name', config('app.name', 'IEEE CS BAU Chapter'));
+        $faviconSetting = trim((string) get_setting('site_favicon', '/images/logo.png'));
+
+        if ($faviconSetting === '') {
+            $faviconSetting = '/images/logo.png';
+        }
+
+        $faviconUrl = (str_starts_with($faviconSetting, 'http://') || str_starts_with($faviconSetting, 'https://'))
+            ? $faviconSetting
+            : asset(ltrim($faviconSetting, '/'));
+    @endphp
+    <title>{{ $siteName }} - {{ $title ?? 'Home' }}</title>
     <!--=====FAB ICON=======-->
-    <link rel="shortcut icon" href="{{ asset('images/logo.png') }} " type="image/x-icon">
+    <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon">
     @include('components.basetheme.heads')
     @vite('resources/js/app.js')
     <wireui:scripts />
-    <script src="//unpkg.com/alpinejs" defer></script>
     <style>
-        canvas{
-            position: absolute;
-            top: 0;
-            left: 0;
-            display:block;
-            z-index: 1000
-
+        [x-data="wireui_notifications"] {
+            z-index: 2147483647 !important;
         }
     </style>
+    {{-- allow pages/components to push additional styles --}}
+    @stack('styles')
+
+    
 </head>
 
 <body class="body1">
@@ -35,7 +45,7 @@
     </div>
 
     <!--=====progress END=======-->
-    @if (get_setting('enable_preloader') != 0)
+    @if (get_setting('enable_preloader', true))
         @include('components.basetheme.preloader')
     @endif
     @include('components.basetheme.popup-searchbar')
@@ -43,10 +53,11 @@
     @include('components.basetheme.header')
     <main>
         {{ $slot }}
-           <x-notifications />
+            <x-notifications position="top-end" z-index="z-[2147483647]" />
     </main>
     {{-- @include('components.basetheme.footer') --}}
     <x-Footer />
+    <x-cookie-consent />
 
     @include('components.basetheme.scripts')
     @yield('scripts')

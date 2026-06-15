@@ -6,6 +6,7 @@ use App\Filament\Resources\LeaderboardResource\Pages;
 use App\Filament\Resources\LeaderboardResource\RelationManagers;
 use App\Models\Leaderboard;
 use App\Models\Member;
+use App\Support\AdminRoles;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -19,6 +20,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class LeaderboardResource extends Resource
 {
@@ -130,5 +132,45 @@ class LeaderboardResource extends Resource
             'create' => Pages\CreateLeaderboard::route('/create'),
             'edit' => Pages\EditLeaderboard::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    protected static function canManageResource(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::moderationRoles()) ?? false;
     }
 }

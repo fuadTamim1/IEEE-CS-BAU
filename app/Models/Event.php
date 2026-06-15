@@ -29,10 +29,14 @@ class Event extends Model
 
     public function sluggable(): array
     {
-        return ['slug' => ['source' => 'title']];
+        return ["slug" => ["source" => "title"]];
     }
 
-    public function Sponsors(): BelongsToMany {
-        return $this->belongsToMany(Sponsor::class, 'event_sponsor');
+    public function sponsors(): BelongsToMany
+    {
+        return $this->belongsToMany(Sponsor::class, "event_sponsor")
+            ->withPivot(["tier", "display_order"])
+            ->withTimestamps()
+            ->orderByPivot("display_order");
     }
 }

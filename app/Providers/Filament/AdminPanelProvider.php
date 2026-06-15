@@ -2,29 +2,31 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\BcpcMonitoring;
+use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\Settings;
 use App\Filament\Pages\TextWidgets;
 use App\Filament\Resources\BlogResource\Widgets\BlogPostCategoryChart;
 use App\Filament\Resources\BlogResource\Widgets\RecentBlogPostsTable;
+use App\Filament\Resources\ContactTicketResource;
+use App\Filament\Resources\ExamResource;
+use App\Filament\Resources\ExamSessionResource;
 use App\Filament\Resources\LeaderboardResource;
 use App\Filament\Resources\SubscriberResource;
 use App\Filament\Resources\TextWidgetResource;
+use App\Filament\Resources\WorkshopResource;
 use App\Filament\Resources\UserResource\Widgets\UserGrowthChart;
+use App\Support\AdminRoles;
 use App\Filament\Widgets\StatsOverview;
 use App\Http\Middleware\EnsureUserHasAdminAccess;
-use App\Models\Subscriber;
-use Chiiya\FilamentAccessControl\FilamentAccessControlPlugin;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Illuminate\Support\Facades\Blade;
-use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -39,7 +41,9 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
-                return $builder
+                $isSuperAdmin = Auth::user()?->hasAnyRole(AdminRoles::superAdminRoles()) ?? false;
+
+                $navigation = $builder
                     ->item(
                         NavigationItem::make('Visit Site')
                             ->url('/')
@@ -53,12 +57,20 @@ class AdminPanelProvider extends PanelProvider
                             ->url(fn(): string => Dashboard::getUrl()),
                     )
                     ->item(
+                        NavigationItem::make('BCPC Monitoring')
+                            ->icon('heroicon-o-presentation-chart-line')
+                            ->isActiveWhen(fn(): bool => request()->routeIs('filament.admin.pages.bcpc-monitoring'))
+                            ->url(fn(): string => BcpcMonitoring::getUrl()),
+                    )
+                    ->item(
                         NavigationItem::make('Text Widgets')
                             ->icon('heroicon-o-document-text')
                             ->url(fn(): string => TextWidgetResource::getUrl())
                             ->isActiveWhen(fn(): bool => request()->routeIs('filament.admin.resources.text-widgets.*')),
-                    )
-                    ->group(
+                    );
+
+                if ($isSuperAdmin) {
+                    $navigation = $navigation->group(
                         NavigationGroup::make('Users')
                             ->items([
                                 NavigationItem::make('All Users')
@@ -68,7 +80,10 @@ class AdminPanelProvider extends PanelProvider
                                     ->icon('heroicon-o-user-plus')
                                     ->url('/admin/users/create'),
                             ]),
-                    )
+                    );
+                }
+
+                $navigation = $navigation
                     ->group(
                         NavigationGroup::make('Content')
                             ->items([
@@ -92,6 +107,15 @@ class AdminPanelProvider extends PanelProvider
                                             ->url('/admin/projects'),
                                         NavigationItem::make('Add New Project')
                                             ->url('/admin/projects/create'),
+                                    ]),
+                                NavigationItem::make('Workshops')
+                                    ->icon('heroicon-o-wrench-screwdriver')
+                                    ->url(fn(): string => WorkshopResource::getUrl())
+                                    ->childItems([
+                                        NavigationItem::make('All Workshops')
+                                            ->url(fn(): string => WorkshopResource::getUrl()),
+                                        NavigationItem::make('Add New Workshop')
+                                            ->url(fn(): string => WorkshopResource::getUrl('create')),
                                     ]),
                                 NavigationItem::make('Members')
                                     ->icon('heroicon-o-users')
@@ -127,14 +151,31 @@ class AdminPanelProvider extends PanelProvider
                             ]),
                     )
                     ->group(
+                        NavigationGroup::make('Exams')
+                            ->items([
+                                NavigationItem::make('Exam')
+                                    ->icon('heroicon-o-envelope')
+                                    ->url(fn(): string => ExamResource::getUrl()),
+                                    
+                                NavigationItem::make('Exam Session')
+                                    ->icon('heroicon-o-envelope')
+                                    ->url(fn(): string => ExamSessionResource::getUrl())
+                            ])
+                    )
+                    ->group(
                         NavigationGroup::make('Mails')
                             ->items([
+                                NavigationItem::make('Contact Tickets')
+                                    ->icon('heroicon-o-inbox-stack')
+                                    ->url(fn(): string => ContactTicketResource::getUrl()),
                                 NavigationItem::make('Subscribers')
                                     ->icon('heroicon-o-envelope')
                                     ->url(fn(): string => SubscriberResource::getUrl())
                             ])
-                    )
-                    ->group(
+                    );
+
+                if ($isSuperAdmin) {
+                    $navigation = $navigation->group(
                         NavigationGroup::make('Settings')
                             ->items([
                                 NavigationItem::make('General Settings')
@@ -145,12 +186,12 @@ class AdminPanelProvider extends PanelProvider
                                 //     ->url('/admin/settings/advanced'),
                             ]),
                     );
+                }
+
+                return $navigation;
             })
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->middleware([
                 \Illuminate\Cookie\Middleware\EncryptCookies::class,

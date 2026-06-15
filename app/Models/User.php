@@ -2,22 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use Chiiya\FilamentAccessControl\Contracts\AccessControlUser;
-use Chiiya\FilamentAccessControl\Enumerators\RoleName;
-use Chiiya\FilamentAccessControl\Notifications\TwoFactorCode;
+use App\Support\AdminRoles;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Filament\Panel;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory , HasRoles;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +26,9 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'title',
         'password',
+        'approval_status',
+        'approved_at',
+        'password_changed_at',
     ];
 
     /**
@@ -51,6 +51,8 @@ class User extends Authenticatable implements FilamentUser
     {
         return [
             'email_verified_at' => 'datetime',
+            'approved_at' => 'datetime',
+            'password_changed_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -60,12 +62,16 @@ class User extends Authenticatable implements FilamentUser
      */
     public function isSuperAdmin(): bool
     {
-        return $this->hasRole(RoleName::SUPER_ADMIN);
+        return $this->hasAnyRole(AdminRoles::superAdminRoles());
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        if ($panel->getId() !== 'admin') {
+            return false;
+        }
+
+        return $this->hasAnyRole(AdminRoles::adminAccessRoles());
     }
 
     public function getFilamentName(): string
@@ -81,5 +87,24 @@ class User extends Authenticatable implements FilamentUser
     public function getFullNameAttribute(): string
     {
         return $this->attributes['name'] ?? null; // Directly access the underlying attribute
+    }
+
+    public function isApproved(): bool
+    {
+        return ($this->approval_status ?? 'approved') === 'approved';
+    }
+
+    public function passwordExpired(int $expirationDays): bool
+    {
+        if ($expirationDays <= 0) {
+            return false;
+        }
+
+        $changedAt = $this->password_changed_at ?? $this->created_at;
+        if (!$changedAt) {
+            return false;
+        }
+
+        return $changedAt->lt(now()->subDays($expirationDays));
     }
 }

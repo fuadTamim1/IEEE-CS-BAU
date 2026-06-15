@@ -19,5 +19,6 @@
 <script src="{{ asset('assets/js/jquery.lineProgressbar.js') }}"></script>
 <script src="{{ asset('assets/js/animation.js') }}"></script>
 <script src="{{ asset('assets/js/particles.min.js') }}"></script>
+<script src="{{ asset('assets/js/slider.js') }}"></script>
 {{-- <script src="{{ asset('assets/js/') }}"></script> --}}
 <script src="{{ asset('assets/js/main.js') }}"></script>

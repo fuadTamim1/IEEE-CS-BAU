@@ -1,439 +1,909 @@
-<style>
-    body {
-        background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
-        min-height: 100vh;
-        font-family: 'Arial', sans-serif;
-        overflow-x: hidden;
-        overflow-y: hidden;
-    }
+<x-base-layout>
+    @php
+        $contestName = $contestName ?? 'IEEE CS BAU CodeSprint 2026';
+        $contestDateIso = $contestDateIso ?? '2026-07-24T09:00:00+03:00';
+        $contestDateLabel = $contestDateLabel ?? 'July 24, 2026 - 09:00 AM (GMT+3)';
+        $languages = $languages ?? ['C++17', 'Python 3.12', 'Java 21', 'Kotlin 1.9', 'Rust 1.78', 'Go 1.22'];
 
-    .coming-soon-container {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
+        $agenda = [
+            ['time' => '08:15', 'title' => 'Check-in and Environment Verification', 'detail' => 'Identity check, seat assignment, and system warm-up.'],
+            ['time' => '09:00', 'title' => 'Contest Kickoff and Rules Brief', 'detail' => 'Problem packet release and scoring model walkthrough.'],
+            ['time' => '09:30', 'title' => 'Round 1: Algorithmic Sprint', 'detail' => 'Fast-paced warmup set to calibrate strategy.'],
+            ['time' => '11:15', 'title' => 'Round 2: Advanced Problem Solving', 'detail' => 'Graph, DP, and greedy-heavy challenge batch.'],
+            ['time' => '13:15', 'title' => 'Final Submission Freeze', 'detail' => 'Judging queue closes and plagiarism checks start.'],
+            ['time' => '14:00', 'title' => 'Leaderboard Reveal and Closing', 'detail' => 'Top teams announcement and networking session.'],
+        ];
 
-    .floating-particles {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        top: 0;
-        left: 0;
-        z-index: 1;
-    }
+        $faqs = [
+            ['q' => 'What IDEs are allowed?', 'a' => 'Any local IDE is allowed, including VS Code, JetBrains IDEs, and Vim. Internet access is restricted to contest platform pages and approved language documentation.'],
+            ['q' => 'Are there registration fees?', 'a' => 'No. Participation is free for all currently enrolled university students.'],
+            ['q' => 'How many members are allowed per team?', 'a' => 'Teams can have up to 3 members. Solo participation is also accepted.'],
+            ['q' => 'Can I change my preferred language later?', 'a' => 'Yes. The language choice in this form is for planning. You can use any allowed language during the contest.'],
+        ];
+    @endphp
 
-    .particle {
-        position: absolute;
-        background: linear-gradient(45deg, #FFD700, #FFA500, #FFFF00);
-        border-radius: 50%;
-        animation: float 6s ease-in-out infinite;
-        opacity: 0.7;
-    }
+    <div class="cs-landing" data-launch-at="{{ $contestDateIso }}">
+        <div class="cs-landing__bg" aria-hidden="true"></div>
 
-    .particle:nth-child(1) {
-        width: 10px;
-        height: 10px;
-        left: 10%;
-        animation-delay: 0s;
-        animation-duration: 8s;
-    }
+        <div class="container cs-shell">
+            <section id="hero" class="cs-panel cs-reveal" style="--reveal-delay: 0ms;">
+                <div class="cs-hero__left">
+                    <p class="cs-tag">$ boot --contest-mode</p>
+                    <h1>{{ $contestName }}</h1>
+                    <p class="cs-subtitle">
+                        A university-wide problem-solving and competitive programming challenge built for thinkers,
+                        debuggers, and speed coders.
+                    </p>
 
-    .particle:nth-child(2) {
-        width: 6px;
-        height: 6px;
-        left: 20%;
-        animation-delay: 2s;
-        animation-duration: 6s;
-    }
-
-    .particle:nth-child(3) {
-        width: 8px;
-        height: 8px;
-        left: 80%;
-        animation-delay: 4s;
-        animation-duration: 10s;
-    }
-
-    .particle:nth-child(4) {
-        width: 12px;
-        height: 12px;
-        left: 70%;
-        animation-delay: 1s;
-        animation-duration: 7s;
-    }
-
-    .particle:nth-child(5) {
-        width: 5px;
-        height: 5px;
-        left: 60%;
-        animation-delay: 3s;
-        animation-duration: 9s;
-    }
-
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
-        10% {
-            opacity: 0.7;
-        }
-        90% {
-            opacity: 0.7;
-        }
-        50% {
-            transform: translateY(-10vh) rotate(180deg);
-            opacity: 1;
-        }
-    }
-
-    .main-content {
-        text-align: center;
-        z-index: 10;
-        position: relative;
-        animation: fadeInUp 1s ease-out;
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .logo-container {
-        margin-bottom: 3rem;
-        animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.05);
-        }
-    }
-
-    .gear-icon {
-        width: 120px;
-        height: 120px;
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFFF00 100%);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-        animation: rotate 4s linear infinite;
-    }
-
-    @keyframes rotate {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    .gear-icon i {
-        font-size: 3rem;
-        color: #000;
-    }
-
-    .main-title {
-        font-size: 4rem;
-        font-weight: bold;
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFFF00 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1rem;
-        text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-        animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-        from {
-            filter: brightness(1);
-        }
-        to {
-            filter: brightness(1.2);
-        }
-    }
-
-    .subtitle {
-        font-size: 1.5rem;
-        color: #FFA500;
-        margin-bottom: 2rem;
-        opacity: 0.9;
-    }
-
-    .description {
-        font-size: 1.1rem;
-        color: #CCCCCC;
-        margin-bottom: 3rem;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.6;
-    }
-
-    .btn-back {
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-        border: none;
-        color: #000;
-        font-weight: bold;
-        font-size: 1.2rem;
-        padding: 15px 40px;
-        border-radius: 50px;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn-back:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
-        color: #000;
-        text-decoration: none;
-    }
-
-    .btn-back::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        transition: left 0.5s;
-    }
-
-    .btn-back:hover::before {
-        left: 100%;
-    }
-
-    .countdown-container {
-        margin-top: 3rem;
-        animation: fadeIn 2s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    .countdown-flex {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    .countdown-box {
-        background: rgba(255, 215, 0, 0.1);
-        border: 2px solid #FFD700;
-        border-radius: 15px;
-        padding: 20px;
-        margin: 0 10px;
-        backdrop-filter: blur(10px);
-        transition: transform 0.3s ease;
-    }
-
-    .countdown-box:hover {
-        transform: scale(1.05);
-    }
-
-    .countdown-number {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #FFD700;
-        display: block;
-    }
-
-    .countdown-label {
-        font-size: 0.9rem;
-        color: #FFA500;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    @media (max-width: 768px) {
-        .main-title {
-            font-size: 2.5rem;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-        }
-        
-        .gear-icon {
-            width: 80px;
-            height: 80px;
-        }
-        
-        .gear-icon i {
-            font-size: 2rem;
-        }
-        
-        .countdown-box {
-            margin: 5px;
-            padding: 15px;
-        }
-        
-        .countdown-number {
-            font-size: 2rem;
-        }
-
-        .countdown-flex {
-            flex-direction: column;
-            gap: 10px;
-            align-items: stretch;
-        }
-    }
-</style>
-
-<div class="coming-soon-container">
-    <!-- Floating Particles -->
-    <div class="floating-particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-
-    <div class="container">
-        <div class="main-content">
-            <!-- Logo/Icon -->
-            <div class="logo-container">
-                <div class="gear-icon">
-                    <i class="fas fa-cog"></i>
-                </div>
-            </div>
-
-            <!-- Main Title -->
-            <h1 class="main-title">Coming Soon</h1>
-            
-            <!-- Subtitle -->
-            <p class="subtitle">Something Amazing is on the Way!</p>
-            
-            <!-- Description -->
-            <p class="description">
-                We're working hard to bring you an incredible experience. 
-                Our team is putting the finishing touches on something special that will exceed your expectations. 
-                Stay tuned for the big reveal!
-            </p>
-
-            <!-- Countdown Timer -->
-            {{-- <div class="countdown-container mb-5">
-                <div class="countdown-flex">
-                    <div class="countdown-box text-center">
-                        <span class="countdown-number" id="days">00</span>
-                        <span class="countdown-label">Days</span>
-                    </div>
-                    <div class="countdown-box text-center">
-                        <span class="countdown-number" id="hours">00</span>
-                        <span class="countdown-label">Hours</span>
-                    </div>
-                    <div class="countdown-box text-center">
-                        <span class="countdown-number" id="minutes">00</span>
-                        <span class="countdown-label">Minutes</span>
-                    </div>
-                    <div class="countdown-box text-center">
-                        <span class="countdown-number" id="seconds">00</span>
-                        <span class="countdown-label">Seconds</span>
+                    <div class="cs-actions">
+                        <a href="#registration" class="cs-btn cs-btn--primary">Register Now</a>
+                        <a href="#details" class="cs-btn cs-btn--secondary">Read Problem Statement</a>
                     </div>
                 </div>
-            </div> --}}
 
-            <!-- Back Button -->
-            <div class="mt-5" style="margin: 2rem 0;">
-                <a href="{{ url()->previous() }}" class="btn-back">
-                    <i class="fas fa-arrow-left me-2"></i>
-                    Go Back
-                </a>
-            </div>
+                <div class="cs-terminal" role="status" aria-live="polite">
+                    <div class="cs-terminal__head">
+                        <span class="cs-dot cs-dot--red"></span>
+                        <span class="cs-dot cs-dot--yellow"></span>
+                        <span class="cs-dot cs-dot--green"></span>
+                        <span class="cs-terminal__title">terminal://contest/runtime</span>
+                    </div>
+                    <div class="cs-terminal__body">
+                        <p><span class="token-comment">// launch timestamp</span> {{ $contestDateLabel }}</p>
+                        <p><span class="token-key">const</span> state = <span id="countdown-state" class="token-string">"T_MINUS"</span>;</p>
+
+                        <div class="cs-countdown" aria-label="Contest countdown">
+                            <div class="cs-countdown__cell">
+                                <span class="cs-countdown__num" data-countdown="days">00</span>
+                                <span class="cs-countdown__label">days</span>
+                            </div>
+                            <div class="cs-countdown__cell">
+                                <span class="cs-countdown__num" data-countdown="hours">00</span>
+                                <span class="cs-countdown__label">hours</span>
+                            </div>
+                            <div class="cs-countdown__cell">
+                                <span class="cs-countdown__num" data-countdown="minutes">00</span>
+                                <span class="cs-countdown__label">minutes</span>
+                            </div>
+                            <div class="cs-countdown__cell">
+                                <span class="cs-countdown__num" data-countdown="seconds">00</span>
+                                <span class="cs-countdown__label">seconds</span>
+                            </div>
+                        </div>
+
+                        <p class="cs-terminal__footer"><span class="token-fn">print</span>("Ready to compile your strategy?");</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="details" class="cs-panel cs-reveal" style="--reveal-delay: 90ms;">
+                <div class="cs-section-head">
+                    <p class="cs-tag"># The Problem Statement</p>
+                    <h2>Contest Details</h2>
+                </div>
+
+                <p class="cs-section-copy">
+                    Participants will solve a curated set of algorithmic problems under time pressure. Solutions are
+                    judged on correctness and execution efficiency.
+                </p>
+
+                <div class="cs-spec-grid">
+                    <article class="cs-spec-card">
+                        <h3>Target Platform</h3>
+                        <p class="cs-spec-value">Codeforces-style online judge</p>
+                    </article>
+                    <article class="cs-spec-card">
+                        <h3>Allowed Languages</h3>
+                        <div class="cs-language-list">
+                            @foreach ($languages as $language)
+                                <span>{{ $language }}</span>
+                            @endforeach
+                        </div>
+                    </article>
+                    <article class="cs-spec-card">
+                        <h3>Team Size Limit</h3>
+                        <p class="cs-spec-value">1 to 3 students per team</p>
+                    </article>
+                    <article class="cs-spec-card">
+                        <h3>Standard Limits</h3>
+                        <p class="cs-spec-value">Time: 2 sec / Memory: 256 MB</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="agenda" class="cs-panel cs-reveal" style="--reveal-delay: 180ms;">
+                <div class="cs-section-head">
+                    <p class="cs-tag"># Execution Pipeline</p>
+                    <h2>Event Agenda</h2>
+                </div>
+
+                <div class="cs-pipeline" aria-label="Event timeline in code style">
+                    <p class="cs-pipeline__header">const agenda = [</p>
+                    <ol>
+                        @foreach ($agenda as $index => $slot)
+                            <li>
+                                <span class="cs-line">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="cs-time">{{ $slot['time'] }}</span>
+                                <span class="cs-task">{{ $slot['title'] }}</span>
+                                <span class="cs-detail">{{ $slot['detail'] }}</span>
+                            </li>
+                        @endforeach
+                    </ol>
+                    <p class="cs-pipeline__footer">];</p>
+                </div>
+            </section>
+
+            <section id="registration" class="cs-panel cs-reveal" style="--reveal-delay: 260ms;">
+                <div class="cs-section-head">
+                    <p class="cs-tag"># Registration System</p>
+                    <h2>Submit Your Registration Payload</h2>
+                </div>
+
+                <p class="cs-section-copy">
+                    Fill in your student details. Submission is stored securely in our registration database and used
+                    only for contest operations.
+                </p>
+
+                @if (session('contest_registration_success'))
+                    <div class="cs-alert cs-alert--success" role="status">
+                        {{ session('contest_registration_success') }}
+                    </div>
+                @endif
+
+                @if (session('contest_registration_error'))
+                    <div class="cs-alert cs-alert--error" role="alert">
+                        {{ session('contest_registration_error') }}
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('contest.register') }}" class="cs-form" novalidate>
+                    @csrf
+
+                    <div class="cs-honeypot" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off"
+                            value="{{ old('website') }}">
+                    </div>
+
+                    <div class="cs-form-grid">
+                        <div class="cs-field">
+                            <label for="full_name">Full Name</label>
+                            <input id="full_name" name="full_name" type="text" value="{{ old('full_name') }}" required>
+                            @error('full_name')
+                                <p class="cs-field__error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="cs-field">
+                            <label for="university_id">University ID</label>
+                            <input id="university_id" name="university_id" type="text" value="{{ old('university_id') }}"
+                                required>
+                            @error('university_id')
+                                <p class="cs-field__error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="cs-field">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" value="{{ old('email') }}" required>
+                            @error('email')
+                                <p class="cs-field__error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="cs-field">
+                            <label for="platform_handle">Platform Handle (optional)</label>
+                            <input id="platform_handle" name="platform_handle" type="text"
+                                value="{{ old('platform_handle') }}" placeholder="e.g. coder_123">
+                            @error('platform_handle')
+                                <p class="cs-field__error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="cs-field cs-field--full">
+                            <label for="preferred_language">Preferred Programming Language</label>
+                            <select id="preferred_language" name="preferred_language" required>
+                                <option value="">Select language</option>
+                                @foreach ($languages as $language)
+                                    <option value="{{ $language }}" @selected(old('preferred_language') === $language)>
+                                        {{ $language }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('preferred_language')
+                                <p class="cs-field__error">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="cs-form__actions">
+                        <button type="submit" class="cs-btn cs-btn--primary">Submit Registration</button>
+                        <p>
+                            By submitting, you agree to our
+                            <a href="{{ route('privacy-policy') }}">privacy policy</a>
+                            and contest code of conduct.
+                        </p>
+                    </div>
+                </form>
+            </section>
+
+            <section id="faq" class="cs-panel cs-reveal" style="--reveal-delay: 340ms;">
+                <div class="cs-section-head">
+                    <p class="cs-tag"># Knowledge Base</p>
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+
+                <div class="cs-faq" data-accordion>
+                    @foreach ($faqs as $index => $faq)
+                        <article class="cs-faq-item">
+                            <button type="button" class="cs-faq-trigger" id="faq-trigger-{{ $index }}"
+                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                aria-controls="faq-panel-{{ $index }}">
+                                <span>{{ $faq['q'] }}</span>
+                                <span class="cs-faq-icon" aria-hidden="true">+</span>
+                            </button>
+                            <div id="faq-panel-{{ $index }}" class="cs-faq-panel {{ $index === 0 ? 'is-open' : '' }}"
+                                role="region" aria-labelledby="faq-trigger-{{ $index }}"
+                                @if ($index !== 0) hidden @endif>
+                                <p>{{ $faq['a'] }}</p>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
+
+            <section id="contact" class="cs-panel cs-reveal" style="--reveal-delay: 420ms;">
+                <div class="cs-section-head">
+                    <p class="cs-tag"># Contact and Footer</p>
+                    <h2>Need Help?</h2>
+                </div>
+
+                <div class="cs-contact-grid">
+                    <article>
+                        <h3>Contact</h3>
+                        <p>Email: <a href="mailto:contest@ieeecs-bau.org">contest@ieeecs-bau.org</a></p>
+                        <p>General inquiries: <a href="{{ route('contact') }}">Contact IEEE CS BAU</a></p>
+                    </article>
+
+                    <article>
+                        <h3>Socials</h3>
+                        <p><a href="#" aria-label="Facebook">Facebook</a> / <a href="#" aria-label="Instagram">Instagram</a> /
+                            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                        </p>
+                    </article>
+
+                    <article>
+                        <h3>Administrative Links</h3>
+                        <p><a href="{{ route('privacy-policy') }}">Privacy Policy</a></p>
+                        <p><a href="https://www.ieee.org/about/corporate/governance/p9-26.html" target="_blank" rel="noopener">Terms and Conditions</a></p>
+                        <p><a href="https://www.ieee.org/about/corporate/governance/p9-26.html" target="_blank" rel="noopener">Code of Conduct</a></p>
+                    </article>
+                </div>
+            </section>
         </div>
     </div>
-</div>
 
-<script>
-// // Countdown Timer
-// function updateCountdown() {
-//     // Set the date we're counting down to (30 days from now)
-//     const countDownDate = new Date().getTime() + (30 * 24 * 60 * 60 * 1000);
-    
-//     // Update the count down every 1 second
-//     const timer = setInterval(function() {
-//         const now = new Date().getTime();
-//         const distance = countDownDate - now;
-        
-//         // Time calculations for days, hours, minutes and seconds
-//         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-//         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-//         // Display the result
-//         document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
-//         document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-//         document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
-//         document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
-        
-//         // If the count down is finished, write some text
-//         if (distance < 0) {
-//             clearInterval(timer);
-//             document.getElementById("days").innerHTML = "00";
-//             document.getElementById("hours").innerHTML = "00";
-//             document.getElementById("minutes").innerHTML = "00";
-//             document.getElementById("seconds").innerHTML = "00";
-//         }
-//     }, 1000);
-// }
+    @push('styles')
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
 
-// // Initialize countdown when page loads
-// document.addEventListener('DOMContentLoaded', function() {
-//     updateCountdown();
-// });
+            :root {
+                --cs-bg: #0b1020;
+                --cs-panel: rgba(9, 14, 27, 0.92);
+                --cs-border: rgba(121, 192, 255, 0.24);
+                --cs-text: #e6edf3;
+                --cs-muted: #95a8c3;
+                --cs-blue: #79c0ff;
+                --cs-green: #7ee787;
+                --cs-orange: #ffa657;
+                --cs-red: #ff7b72;
+                --cs-pink: #ffaecc;
+            }
 
-// Add some interactive particles on mouse move
-// document.addEventListener('mousemove', function(e) {
-//     const particle = document.createElement('div');
-//     particle.className = 'particle';
-//     particle.style.left = e.clientX + 'px';
-//     particle.style.top = e.clientY + 'px';
-//     particle.style.width = '4px';
-//     particle.style.height = '4px';
-//     particle.style.position = 'fixed';
-//     particle.style.pointerEvents = 'none';
-//     particle.style.zIndex = '5';
-    
-//     document.body.appendChild(particle);
-    
-//     setTimeout(() => {
-//         particle.remove();
-//     }, 1000);
-// });
-</script>
+            .cs-landing {
+                position: relative;
+                padding: 5.2rem 0;
+                background:
+                    radial-gradient(circle at 12% 14%, rgba(121, 192, 255, 0.16), transparent 40%),
+                    radial-gradient(circle at 90% 10%, rgba(255, 166, 87, 0.14), transparent 43%),
+                    linear-gradient(160deg, #050912 0%, #0c1328 46%, #090f1f 100%);
+                overflow: hidden;
+                color: var(--cs-text);
+            }
 
-<!-- Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            .cs-landing__bg {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(121, 192, 255, 0.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(121, 192, 255, 0.08) 1px, transparent 1px);
+                background-size: 40px 40px;
+                mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 82%);
+                pointer-events: none;
+            }
+
+            .cs-shell {
+                position: relative;
+                z-index: 2;
+                display: grid;
+                gap: 1.35rem;
+            }
+
+            .cs-panel {
+                border: 1px solid var(--cs-border);
+                border-radius: 16px;
+                background: var(--cs-panel);
+                box-shadow: 0 20px 38px rgba(0, 0, 0, 0.38);
+                padding: 1.6rem;
+            }
+
+            .cs-reveal {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: csReveal 0.68s ease forwards;
+                animation-delay: var(--reveal-delay, 0ms);
+            }
+
+            @keyframes csReveal {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .cs-tag {
+                margin: 0;
+                color: var(--cs-green);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.84rem;
+                letter-spacing: 0.03em;
+            }
+
+            h1,
+            h2,
+            h3 {
+                margin-top: 0;
+                color: var(--cs-text);
+            }
+
+            h1,
+            h2 {
+                font-family: 'Space Grotesk', sans-serif;
+                letter-spacing: 0.01em;
+            }
+
+            h1 {
+                font-size: clamp(1.8rem, 4vw, 3.15rem);
+                margin: 0.6rem 0 0.8rem;
+            }
+
+            h2 {
+                font-size: clamp(1.35rem, 2.8vw, 2.1rem);
+                margin-bottom: 0.25rem;
+            }
+
+            .cs-subtitle,
+            .cs-section-copy,
+            .cs-terminal p,
+            .cs-form__actions p,
+            .cs-faq-panel p,
+            .cs-contact-grid p {
+                color: var(--cs-muted);
+                line-height: 1.65;
+                margin-top: 0;
+            }
+
+            .cs-hero__left {
+                margin-bottom: 1.2rem;
+            }
+
+            .cs-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.7rem;
+            }
+
+            .cs-btn {
+                border: 1px solid transparent;
+                border-radius: 10px;
+                padding: 0.7rem 1.05rem;
+                text-decoration: none;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.88rem;
+                font-weight: 600;
+                transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+            }
+
+            .cs-btn:hover {
+                transform: translateY(-2px);
+            }
+
+            .cs-btn--primary {
+                color: #05101d;
+                background: linear-gradient(120deg, var(--cs-green), #87d8ff);
+                box-shadow: 0 12px 26px rgba(126, 231, 135, 0.2);
+            }
+
+            .cs-btn--secondary {
+                color: var(--cs-blue);
+                border-color: rgba(121, 192, 255, 0.35);
+                background: rgba(121, 192, 255, 0.1);
+            }
+
+            .cs-terminal {
+                border: 1px solid rgba(148, 163, 184, 0.22);
+                background: linear-gradient(180deg, rgba(4, 8, 16, 0.96), rgba(7, 12, 24, 0.96));
+                border-radius: 12px;
+                font-family: 'JetBrains Mono', monospace;
+                overflow: hidden;
+            }
+
+            .cs-terminal__head {
+                display: flex;
+                align-items: center;
+                gap: 0.42rem;
+                padding: 0.55rem 0.75rem;
+                background: rgba(148, 163, 184, 0.08);
+                border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+            }
+
+            .cs-dot {
+                width: 9px;
+                height: 9px;
+                border-radius: 999px;
+                display: inline-block;
+            }
+
+            .cs-dot--red {
+                background: #ff5f56;
+            }
+
+            .cs-dot--yellow {
+                background: #ffbd2e;
+            }
+
+            .cs-dot--green {
+                background: #27c93f;
+            }
+
+            .cs-terminal__title {
+                margin-left: 0.35rem;
+                color: #a7bdd8;
+                font-size: 0.72rem;
+            }
+
+            .cs-terminal__body {
+                padding: 1rem;
+            }
+
+            .token-comment {
+                color: #8b949e;
+            }
+
+            .token-key {
+                color: var(--cs-pink);
+            }
+
+            .token-string {
+                color: var(--cs-orange);
+            }
+
+            .token-fn {
+                color: var(--cs-blue);
+            }
+
+            .cs-countdown {
+                margin: 0.8rem 0;
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 0.55rem;
+            }
+
+            .cs-countdown__cell {
+                border: 1px solid rgba(126, 231, 135, 0.3);
+                background: rgba(16, 33, 22, 0.5);
+                border-radius: 10px;
+                text-align: center;
+                padding: 0.75rem 0.35rem;
+            }
+
+            .cs-countdown__num {
+                display: block;
+                color: var(--cs-green);
+                font-weight: 700;
+                font-size: clamp(1.15rem, 3vw, 1.6rem);
+            }
+
+            .cs-countdown__label {
+                display: block;
+                color: #9bd9bf;
+                font-size: 0.71rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+
+            .cs-terminal__footer {
+                margin-bottom: 0;
+            }
+
+            .cs-section-head {
+                margin-bottom: 0.65rem;
+            }
+
+            .cs-spec-grid {
+                display: grid;
+                gap: 0.85rem;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .cs-spec-card {
+                border: 1px solid rgba(121, 192, 255, 0.25);
+                border-radius: 12px;
+                background: rgba(8, 13, 24, 0.82);
+                padding: 0.9rem;
+            }
+
+            .cs-spec-card h3 {
+                margin-bottom: 0.45rem;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.9rem;
+                color: var(--cs-blue);
+            }
+
+            .cs-spec-value {
+                margin-bottom: 0;
+            }
+
+            .cs-language-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+            }
+
+            .cs-language-list span {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.75rem;
+                color: #f6d78f;
+                border: 1px solid rgba(255, 166, 87, 0.33);
+                border-radius: 999px;
+                padding: 0.26rem 0.6rem;
+                background: rgba(255, 166, 87, 0.08);
+            }
+
+            .cs-pipeline {
+                border: 1px solid rgba(121, 192, 255, 0.25);
+                border-radius: 12px;
+                background: rgba(6, 10, 18, 0.92);
+                font-family: 'JetBrains Mono', monospace;
+                padding: 0.95rem;
+            }
+
+            .cs-pipeline__header,
+            .cs-pipeline__footer {
+                color: var(--cs-blue);
+                margin: 0;
+                font-size: 0.86rem;
+            }
+
+            .cs-pipeline ol {
+                margin: 0.55rem 0;
+                padding: 0;
+                list-style: none;
+                display: grid;
+                gap: 0.45rem;
+            }
+
+            .cs-pipeline li {
+                display: grid;
+                grid-template-columns: 2rem 4.6rem 1fr;
+                grid-template-areas:
+                    'line time task'
+                    '. detail detail';
+                column-gap: 0.7rem;
+                row-gap: 0.28rem;
+                padding: 0.42rem 0.2rem;
+                border-bottom: 1px dashed rgba(148, 163, 184, 0.2);
+            }
+
+            .cs-pipeline li:last-child {
+                border-bottom: 0;
+            }
+
+            .cs-line {
+                grid-area: line;
+                color: #8b949e;
+            }
+
+            .cs-time {
+                grid-area: time;
+                color: var(--cs-green);
+            }
+
+            .cs-task {
+                grid-area: task;
+                color: var(--cs-text);
+            }
+
+            .cs-detail {
+                grid-area: detail;
+                color: #8aa1be;
+                font-size: 0.78rem;
+            }
+
+            .cs-alert {
+                border-radius: 10px;
+                padding: 0.68rem 0.82rem;
+                margin-bottom: 0.9rem;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+            }
+
+            .cs-alert--success {
+                border: 1px solid rgba(126, 231, 135, 0.4);
+                background: rgba(16, 54, 35, 0.5);
+                color: #9de7bc;
+            }
+
+            .cs-alert--error {
+                border: 1px solid rgba(255, 123, 114, 0.4);
+                background: rgba(62, 22, 25, 0.52);
+                color: #ffb5ac;
+            }
+
+            .cs-form-grid {
+                display: grid;
+                gap: 0.8rem;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .cs-field {
+                display: flex;
+                flex-direction: column;
+                gap: 0.36rem;
+            }
+
+            .cs-field--full {
+                grid-column: 1 / -1;
+            }
+
+            .cs-field label {
+                color: var(--cs-blue);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+            }
+
+            .cs-field input,
+            .cs-field select {
+                border: 1px solid rgba(121, 192, 255, 0.28);
+                border-radius: 9px;
+                background: rgba(4, 10, 20, 0.85);
+                color: var(--cs-text);
+                padding: 0.65rem 0.72rem;
+                font-size: 0.92rem;
+            }
+
+            .cs-field input:focus,
+            .cs-field select:focus {
+                border-color: rgba(126, 231, 135, 0.6);
+                outline: 0;
+                box-shadow: 0 0 0 3px rgba(126, 231, 135, 0.12);
+            }
+
+            .cs-field__error {
+                margin: 0;
+                color: #ffb5ac;
+                font-size: 0.76rem;
+            }
+
+            .cs-honeypot {
+                position: absolute;
+                left: -9999px;
+                top: -9999px;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .cs-form__actions {
+                margin-top: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.82rem;
+            }
+
+            .cs-form__actions p {
+                margin-bottom: 0;
+                font-size: 0.83rem;
+            }
+
+            .cs-form__actions a,
+            .cs-contact-grid a {
+                color: var(--cs-green);
+                text-decoration: none;
+            }
+
+            .cs-form__actions a:hover,
+            .cs-contact-grid a:hover {
+                color: #a7f2ce;
+            }
+
+            .cs-faq {
+                display: grid;
+                gap: 0.55rem;
+            }
+
+            .cs-faq-item {
+                border: 1px solid rgba(121, 192, 255, 0.23);
+                border-radius: 10px;
+                background: rgba(5, 10, 19, 0.84);
+            }
+
+            .cs-faq-trigger {
+                width: 100%;
+                border: 0;
+                background: transparent;
+                color: var(--cs-text);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+                padding: 0.82rem 0.9rem;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.85rem;
+            }
+
+            .cs-faq-icon {
+                color: var(--cs-green);
+                transition: transform 0.2s ease;
+            }
+
+            .cs-faq-trigger[aria-expanded='true'] .cs-faq-icon {
+                transform: rotate(45deg);
+            }
+
+            .cs-faq-panel {
+                padding: 0 0.9rem 0.8rem;
+            }
+
+            .cs-faq-panel p {
+                margin: 0;
+                font-size: 0.91rem;
+            }
+
+            .cs-contact-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.8rem;
+            }
+
+            .cs-contact-grid article {
+                border: 1px solid rgba(121, 192, 255, 0.2);
+                border-radius: 11px;
+                padding: 0.85rem;
+                background: rgba(6, 11, 21, 0.84);
+            }
+
+            .cs-contact-grid h3 {
+                margin-bottom: 0.45rem;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.92rem;
+                color: var(--cs-orange);
+            }
+
+            @media (max-width: 991px) {
+                .cs-form-grid,
+                .cs-spec-grid,
+                .cs-contact-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            @media (max-width: 720px) {
+                .cs-landing {
+                    padding: 4.1rem 0;
+                }
+
+                .cs-panel {
+                    padding: 1rem;
+                }
+
+                .cs-countdown {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .cs-pipeline li {
+                    grid-template-columns: 1.7rem 1fr;
+                    grid-template-areas:
+                        'line time'
+                        'line task'
+                        'line detail';
+                }
+            }
+        </style>
+    @endpush
+
+    @section('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var root = document.querySelector('.cs-landing');
+                if (root) {
+                    var launchRaw = root.getAttribute('data-launch-at');
+                    var launchDate = new Date(launchRaw);
+                    var launchMs = launchDate.getTime();
+                    var stateNode = document.getElementById('countdown-state');
+                    var parts = {
+                        days: document.querySelector('[data-countdown="days"]'),
+                        hours: document.querySelector('[data-countdown="hours"]'),
+                        minutes: document.querySelector('[data-countdown="minutes"]'),
+                        seconds: document.querySelector('[data-countdown="seconds"]')
+                    };
+
+                    var setValues = function (d, h, m, s) {
+                        parts.days.textContent = String(d).padStart(2, '0');
+                        parts.hours.textContent = String(h).padStart(2, '0');
+                        parts.minutes.textContent = String(m).padStart(2, '0');
+                        parts.seconds.textContent = String(s).padStart(2, '0');
+                    };
+
+                    var tick = function () {
+                        if (Number.isNaN(launchMs)) {
+                            stateNode.textContent = '"INVALID_LAUNCH_DATE"';
+                            setValues(0, 0, 0, 0);
+                            return;
+                        }
+
+                        var remainingMs = launchMs - Date.now();
+                        if (remainingMs <= 0) {
+                            stateNode.textContent = '"LIVE_NOW"';
+                            setValues(0, 0, 0, 0);
+                            return;
+                        }
+
+                        var totalSeconds = Math.floor(remainingMs / 1000);
+                        var days = Math.floor(totalSeconds / 86400);
+                        var hours = Math.floor((totalSeconds % 86400) / 3600);
+                        var minutes = Math.floor((totalSeconds % 3600) / 60);
+                        var seconds = totalSeconds % 60;
+
+                        setValues(days, hours, minutes, seconds);
+                        stateNode.textContent = '"T_MINUS_' + String(days).padStart(2, '0') + 'D"';
+                    };
+
+                    tick();
+                    setInterval(tick, 1000);
+                }
+
+                var accordion = document.querySelector('[data-accordion]');
+                if (!accordion) {
+                    return;
+                }
+
+                var items = Array.prototype.slice.call(accordion.querySelectorAll('.cs-faq-item'));
+
+                var setItemState = function (item, isOpen) {
+                    var trigger = item.querySelector('.cs-faq-trigger');
+                    var panel = item.querySelector('.cs-faq-panel');
+                    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    if (isOpen) {
+                        panel.removeAttribute('hidden');
+                    } else {
+                        panel.setAttribute('hidden', 'hidden');
+                    }
+                };
+
+                items.forEach(function (item) {
+                    var trigger = item.querySelector('.cs-faq-trigger');
+                    trigger.addEventListener('click', function () {
+                        var isCurrentlyOpen = trigger.getAttribute('aria-expanded') === 'true';
+                        items.forEach(function (currentItem) {
+                            setItemState(currentItem, false);
+                        });
+                        if (!isCurrentlyOpen) {
+                            setItemState(item, true);
+                        }
+                    });
+                });
+            });
+        </script>
+    @endsection
+</x-base-layout>

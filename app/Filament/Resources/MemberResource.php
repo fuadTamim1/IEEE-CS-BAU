@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\MemberExporter;
 use App\Filament\Resources\MemberResource\Pages;
 use App\Filament\Resources\MemberResource\RelationManagers;
 use App\Models\Member;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -17,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Auth;
 
 class MemberResource extends Resource
 {
@@ -67,10 +70,15 @@ class MemberResource extends Resource
                     ->maxLength(255),
                 Select::make('title')
                     ->options([
-                        "chairperson" => "chairperson",
-                        "PR" => "PR",
-                        "MD" => "MD",
-                        "Treauser" => "Treauser",
+                        "Chairperson" => "Chairperson",
+                        "Vice-Chair" => "Vice-Chair",
+                        "PR Leader" => "PR Leader",
+                        "Membership Development" => "Membership Development",
+                        "Social Media Leader" => "Social Media Leader",
+                        "Technical Leader" => "Technical Leader",
+                        "Event Manager" => "Event Manager",
+                        "Treasurer" => "Treasurer",
+                        "Secertery" => "Secertery",
                         "Member" => "Member"
                     ]),
                 Forms\Components\TextInput::make('major')
@@ -79,6 +87,12 @@ class MemberResource extends Resource
                 Select::make('class_of_the_year')
                     ->options($yeaars)
                     ->searchable(),
+                TextInput::make('order')
+                    ->label('Order')
+                    ->numeric()      // ensures numeric input
+                    ->default(0)
+                    ->minValue(0)    // optional: prevents negative numbers
+                    ->step(1),
                 Repeater::make('contacts')
                     ->schema([
                         Select::make('key')
@@ -89,6 +103,9 @@ class MemberResource extends Resource
                                 'twitter' => 'Twitter',
                                 'youtube' => 'YouTube',
                                 'website' => 'Website',
+                                'email' => 'Email',
+                                'github' => 'GitHub',
+                                'behance' => 'Behance',
                                 // add more platforms as needed
                             ])
                             ->required()
@@ -109,9 +126,16 @@ class MemberResource extends Resource
                     ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
                         return collect($data)->pluck('value', 'key')->toArray();
                     }),
-                Forms\Components\FileUpload::make('image')
+                    TextInput::make("story")
+                    ->label("Story With IEEE CS")
+                    ->minLength(20)
+                    ->maxLength(100)
+                    ->columnSpanFull(),
+                    Forms\Components\FileUpload::make('image')
                     ->image()
                     ->label("Personal Photo")
+                    ->disk("public")
+                    ->imageEditor()
                     ->default("pixel.jpg"),
             ]);
     }
@@ -128,7 +152,7 @@ class MemberResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('class_of_the_year')
                     ->sortable(),
-                IconColumn::make('hasImage')
+                IconColumn::make('image')
                     ->label('Has Image')
                     ->boolean()
                     ->getStateUsing(function ($record) {
@@ -149,10 +173,14 @@ class MemberResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+          
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    \Filament\Tables\Actions\ExportBulkAction::make()
+                        ->label('Export Selected')
+                        ->exporter(MemberExporter::class),
                 ]),
             ]);
     }
@@ -171,5 +199,45 @@ class MemberResource extends Resource
             'create' => Pages\CreateMember::route('/create'),
             'edit' => Pages\EditMember::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canManageResource();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::canManageResource();
+    }
+
+    protected static function canManageResource(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::moderationRoles()) ?? false;
     }
 }

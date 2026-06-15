@@ -1,1037 +1,959 @@
 <x-base-layout>
-    <div class="hero4" style="background-image: url({{ asset('images/home_bg.png') }}); filter: brightness(0.85);">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 m-auto text-center">
-                    <div class="main-heading4">
-                        <h1 class="text-anime-style-3">Empowering Innovation & <span
-                                style="color: #FAA41A">Technology</span></h1>
-                        <p class="mt-16" data-aos="fade-left" data-aos-duration="800">
-                            Join IEEE Computer Society to explore the world of computing, collaborate with experts, and
-                            shape the future of technology.
-                        </p>
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section class="hero4">
+        <div class="hero4__backdrop" aria-hidden="true"></div>
+        <div class="container text-center hero4__content-wrap">
+            <div class="main-heading4 hero4__content">
+                <span class="hero4__badge" data-aos="fade-down" data-aos-duration="700">
+                    <img src="{{ asset('images/logo.png') }}" width="18" alt="IEEE CS icon">
+                    IEEE Computer Society
+                </span>
 
-                        <!-- Call to Action Section -->
-                        <div class="hero-cta mt-40" data-aos="fade-up" data-aos-duration="1400">
-                            <div class="cta-box">
-                                <h3>Ready to Start Your Tech Journey?</h3>
-                                <p class="mb-24">Discover upcoming events, workshops, and opportunities to grow your
-                                    skills</p>
+                <h1 class="text-anime-style-3 hero4__title" data-aos="fade-up" data-aos-duration="900">
+                    Empowering Innovation in <span>Computing</span>
+                </h1>
 
-                                <div class="cta-buttons d-flex gap-15 justify-center flex-wrap">
-                                    <div class="button">
-                                        <a href="#events" class="theme-btn8">
-                                            <span class="theme-btn8__text">
-                                                <i class="fas fa-calendar-alt me-2"></i>View Events
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="button">
-                                        <a href="#projects" class="theme-btn8-secondary">
-                                            <span class="theme-btn8__text">
-                                                <i class="fas fa-folder-open me-2"></i>Browse Projects
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <p class="hero4__lead mt-4" data-aos="fade-up" data-aos-duration="1000">
+                    Engage with computer engineers, scientists, academia, and industry professionals from all areas
+                    of computing and fuel global technological advancements.
+                </p>
 
-                        <!-- Next Event Highlight -->
-                        <div class="next-event my-5" data-aos="fade-up" data-aos-duration="1600">
-                            <div class="event-highlight">
-                                <div class="event-badge">
-                                    <i class="fas fa-star"></i>
-                                    <span>Next Event</span>
-                                </div>
-                                <h4>Web Development Workshop</h4>
-                                <div class="event-details">
-                                    <span class="event-date">
-                                        <i class="fas fa-calendar"></i>
-                                        July 15, 2025
-                                    </span>
-                                    <span class="event-time">
-                                        <i class="fas fa-clock"></i>
-                                        2:00 PM - 5:00 PM
-                                    </span>
-                                    <span class="event-location">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Tech Lab, Room 201
-                                    </span>
-                                </div>
-                                <a href="#register" class="event-register-btn">
-                                    Register Now <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        {{-- Commented out original buttons
-                    <div class="d-flex gap-15 justify-center mt-10">
-                        <div class="button">
-                            <a href="#" class="theme-btn8">
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__text">Join Us</span>
-                            </a>
-                        </div>
-                        <div class="button">
-                            <a href="#" class="theme-btn8-secondary">
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__text">Explore More</span>
-                            </a>
-                        </div>
-                    </div>
-                    --}}
-                    </div>
+                <div class="hero4__cta mt-5" data-aos="fade-up" data-aos-duration="1200">
+                    <x-theme-button href="{{ route('events') }}" icon="fa-calendar-days" text="Explore Events" />
+                    <x-theme-button href="{{ route('workshops') }}" icon="fa-laptop-code" text="Browse Workshops" secondary />
                 </div>
+
+                <p class="hero4__note mt-3" data-aos="fade-up" data-aos-duration="1300">
+                    Membership requests are currently paused.
+                </p>
+            </div>
+
+            <div class="hero4__ascii" aria-hidden="true">
+                <canvas id="heroAsciiCanvas" width="900" height="260" data-logo-src="{{ asset('images/logo.png') }}"></canvas>
             </div>
         </div>
-
-        @if (config('app.show_hero_images', false))
-            <div class="hero4-images">
-                <div class="row mx-auto">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hero5-image image1 animate4">
-                            <img src="{{ asset('images/python.png') }}" alt="Python 3D logo" width="160">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hero5-image image2 animate2">
-                            <img src="{{ asset('images/flutter.png') }}" alt="Flutter 3D logo" width="160">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hero5-image image3 animate3">
-                            <img src="{{ asset('images/linux.png') }}" alt="Linux 3D logo" width="160">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 animate1">
-                        <div class="hero5-image image4">
-                            <img src="{{ asset('images/node-tree.png') }}" alt="Network 3D logo" width="160">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-    </div>
-
-    {{-- <script>
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number[data-count]');
-
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-count'));
-                const duration = 2000; // 2 seconds
-                const step = target / (duration / 16); // 60fps
-                let current = 0;
-
-                const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    counter.textContent = Math.floor(current);
-                }, 16);
-            });
-        }
-
-        // Trigger animation when element comes into view
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Start observing when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            const statsSection = document.querySelector('.hero-stats');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
-        });
-    </script> --}}
-
-    <div class="about4 sp">
+    </section>
+    <!-- About Section -->
+    <section class="about4 sp">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="about4-images">
                         <div class="image1 image-anime reveal">
-                            <img src="{{ asset('images/office1.jpg') }}" width="258" height="500"
-                                alt="Office Image">
+                            <img src="{{ asset('IEEE/Members-20250805T060423Z-1-001/Members/ieee_members_1.jpg') }}"
+                                width="400" height="500" alt="Office Image">
                         </div>
                         <div class="image2 image-anime reveal">
-                            <img src="{{ asset('images/office2.jpg') }}" width="258" height="500"
-                                alt="Office Image">
-                        </div>
-                        <div class="shape">
-                            <img src="{{ asset('images/office3.jpg') }}" width="258" height="500" alt="Shape">
+                            <img src="{{ asset('IEEE/Members-20250805T060423Z-1-001/Members/ieee_members_2.jpg') }}"
+                                width="258" height="500" alt="Office Image">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="heading4 ml-40 sm:ml-0 md:ml-0">
-                        <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900">
-                            <img src="{{ asset('images/logo.png') }}" width="25" alt="IEEE CS Logo"> About IEEE
-                            CS
-                        </span>
-                        <h2 class="text-anime-style-3">Empowering Future Innovators in Technology</h2>
-                        <p class="mt-16" data-aos="fade-left" data-aos-duration="800">
-                            IEEE Computer Society (IEEE CS) is a leading community dedicated to advancing computing
-                            technology through education, research, and collaboration. We provide students and
-                            professionals with opportunities to grow, network, and innovate in the field of computer
-                            science.
+                    <x-section-heading subtitle="About IEEE CS" title="Empowering Future Innovators in Technology"
+                        icon="{{ asset('images/logo.png') }}">
+                        <p class="mt-4" data-aos="fade-left" data-aos-duration="800">
+                            IEEE Computer Society (IEEE CS) advances computing through education, research, and
+                            collaboration, offering opportunities for students and professionals to innovate.
                         </p>
-                        <div class="about4-service-list" data-aos="fade-left" data-aos-duration="1000">
+                        <div class="about4-service-list mt-4" data-aos="fade-left" data-aos-duration="1000">
                             <h5>Why Choose Us?</h5>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <div class="list">
-                                        <ul>
-                                            <li><span class="check"><i class="fa-solid fa-check"></i></span>
-                                                Cutting-Edge Knowledge</li>
-                                            <li><span class="check"><i class="fa-solid fa-check"></i></span>
-                                                Professional Networking</li>
-                                        </ul>
-                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li><span class="check"><i class="fa-solid fa-check"></i></span> Cutting-Edge
+                                            Knowledge</li>
+                                        <li><span class="check"><i class="fa-solid fa-check"></i></span> Professional
+                                            Networking</li>
+                                    </ul>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="list">
-                                        <ul>
-                                            <li><span class="check"><i class="fa-solid fa-check"></i></span> Hands-on
-                                                Learning</li>
-                                            <li><span class="check"><i class="fa-solid fa-check"></i></span> Career
-                                                Growth</li>
-                                        </ul>
-                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li><span class="check"><i class="fa-solid fa-check"></i></span> Hands-on
+                                            Learning</li>
+                                        <li><span class="check"><i class="fa-solid fa-check"></i></span> Career Growth
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="button mt-30" data-aos="fade-left" data-aos-duration="1100">
-                            <a href="{{ route('about') }}" class="theme-btn8">
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__shape"></span>
-                                <span class="theme-btn8__text">Learn More</span>
-                            </a>
-                        </div>
-                    </div>
+                        <x-theme-button href="{{ route('about') }}" text="Learn More" class="mt-4" />
+                    </x-section-heading>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="service4 sp sec-bg3">
+    <!-- Services Section (Restored Original Styling) -->
+    <section class="service4 sp sec-bg3">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="heading4">
-                        <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900">
-                            <img src="{{ asset('images/logo.png') }}" width="25" alt="IEEE CS Logo"> Our Focus
-                            Areas in Technology
-                        </span>
-                        <h2 class="text-anime-style-3">Exploring the Frontiers of Innovation</h2>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="text-end button md:mt-20 sm:mt-20 md:text-start sm:text-start">
-                        <a href="{{ route('projects') }}" class="theme-btn8">
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__text">See Projects</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <x-section-heading subtitle="Our Focus Areas in Technology" title="Exploring the Frontiers of Innovation"
+                icon="{{ asset('images/logo.png') }}">
+                <x-theme-button href="{{ route('projects') }}" text="See Projects"
+                    class="text-end md:text-start sm:text-start md:mt-20 sm:mt-20" />
+            </x-section-heading>
             <div class="row mt-30">
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="200">
-                    <div class="service4-box mt-30">
-                        <div class="icon">
-                            <img src="{{ asset('assets/img/icons/service4-icon1.svg') }}" alt="Networking Icon">
-                        </div>
-                        <div class="heading4 mt-20">
-                            <h4><a href="#">Networking & Cloud Computing</a></h4>
-                            <p class="mt-16">Building and managing secure, scalable networks and cloud-based
-                                infrastructures to power global connectivity.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="300">
-                    <div class="service4-box mt-30">
-                        <div class="icon">
-                            <img src="{{ asset('assets/img/icons/service4-icon2.svg') }}" alt="Linux Icon">
-                        </div>
-                        <div class="heading4 mt-20">
-                            <h4><a href="#">Linux & System Administration</a></h4>
-                            <p class="mt-16">Mastering Linux environments, server management, and automation for
-                                optimized system performance.</p>
+                @foreach ([
+        ['icon' => 'service4-icon1.svg', 'title' => 'Networking & Cloud Computing', 'desc' => 'Building and managing secure, scalable networks and cloud-based infrastructures to power global connectivity.', 'delay' => 200],
+        ['icon' => 'service4-icon2.svg', 'title' => 'Linux & System Administration', 'desc' => 'Mastering Linux environments, server management, and automation for optimized system performance.', 'delay' => 300],
+        ['icon' => 'service4-icon3.svg', 'title' => 'Python & Software Development', 'desc' => 'Leveraging Python for automation, data science, and software engineering to solve real-world challenges.', 'delay' => 400],
+        ['icon' => 'service4-icon1.svg', 'title' => 'Cybersecurity & Ethical Hacking', 'desc' => 'Protecting digital assets through penetration testing, cryptography, and advanced security practices.', 'delay' => 200],
+        ['icon' => 'service4-icon1.svg', 'title' => 'Web Design & Development', 'desc' => 'Make a lasting impression with a professionally designed and user-friendly website.', 'delay' => 300],
+    ] as $service)
+                    <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000"
+                        data-aos-delay="{{ $service['delay'] }}">
+                        <div class="service4-box mt-30">
+                            <div class="icon">
+                                <img src="{{ asset('assets/img/icons/' . $service['icon']) }}"
+                                    alt="{{ $service['title'] }} icon">
+                            </div>
+                            <div class="heading4 mt-20">
+                                <h4><a href="#">{{ $service['title'] }}</a></h4>
+                                <p class="mt-16">{{ $service['desc'] }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="400">
-                    <div class="service4-box mt-30">
-                        <div class="icon">
-                            <img src="{{ asset('assets/img/icons/service4-icon3.svg') }}" alt="Python Icon">
-                        </div>
-                        <div class="heading4 mt-20">
-                            <h4><a href="#">Python & Software Development</a></h4>
-                            <p class="mt-16">Leveraging Python for automation, data science, and software engineering
-                                to solve real-world challenges.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6" data-aos="zoom-in-up" data-aos-duration="800" data-aos-delay="200">
-                    <div class="service4-box mt-30">
-                        <div class="icon">
-                            <img src="{{ asset('assets/img/icons/service4-icon1.svg') }}" alt="Cybersecurity Icon">
-                        </div>
-                        <div class="heading4 mt-20">
-                            <h4><a href="#">Cybersecurity & Ethical Hacking</a></h4>
-                            <p class="mt-16">Protecting digital assets through penetration testing, cryptography, and
-                                advanced security practices.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6" data-aos="zoom-in-up" data-aos-duration="1000" data-aos-delay="300">
-                    <div class="service4-box mt-30">
-                        <div class="icon">
-                            <img src="{{ asset('assets/img/icons/service4-icon1.svg') }}" alt="Web Design Icon">
-                        </div>
-                        <div class="heading4 mt-20">
-                            <h4><a href="#">Web Design & Development</a></h4>
-                            <p class="mt-16">Make a lasting impression with a professionally designed and
-                                user-friendly website.</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="case4 sp sec-bg3">
+    <!-- Events Section -->
+    <section class="events-showcase sp">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="heading4">
-                        <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900">
-                            <img src="{{ asset('images/logo.png') }}" width="25" alt="IEEE CS Logo"> Explore Our
-                            Latest Events
-                        </span>
-                        <h2 class="text-anime-style-3">Engaging Activities to Learn, Innovate, and Connect</h2>
-                    </div>
+            <div class="events-showcase__top">
+                <div>
+                    <span class="events-showcase__eyebrow">
+                        <img src="{{ asset('images/logo.png') }}" alt="IEEE CS" width="22">
+                        Explore Our Events
+                    </span>
+                    <h2 class="events-showcase__title">Discover Workshops, Meetups, Competitions, and Talks</h2>
                 </div>
-                <div class="col-lg-6">
-                    <div class="text-end button md:mt-20 sm:mt-20 md:text-start sm:text-start" data-aos="fade-left"
-                        data-aos-duration="800">
-                        <a href="{{ route('events') }}" class="theme-btn8">
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__text">View All Events</span>
-                        </a>
-                    </div>
+
+                <div class="events-showcase__controls" aria-label="Event slider controls">
+                    <button type="button" class="events-showcase__arrow events-showcase__arrow--prev" aria-label="Previous events">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button type="button" class="events-showcase__arrow events-showcase__arrow--next" aria-label="Next events">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
-            @if ($events && $events->count())
-                <div class="row mt-40">
-                    <div class="col-lg-10 m-auto">
-                        <div class="events-slider-section" data-aos="fade-up" data-aos-duration="800">
-                            <!-- Section Header -->
-                            <div class="text-center mb-40">
-                                <h2 class="events-section-title">Upcoming Events</h2>
-                                <p class="events-section-subtitle">Don't miss out on our exciting events and workshops
-                                </p>
+
+            @if ($events->count())
+                <div class="swiper events-showcase__slider" id="eventsShowcaseSlider">
+                    <div class="swiper-wrapper">
+                        @foreach ($events as $e)
+                            <div class="swiper-slide events-showcase__slide">
+                                <x-event-card :event="$e" />
                             </div>
-
-                            <!-- Slider Container -->
-                            <div class="events-slider-container">
-                                <div class="events-slider" id="eventsSlider">
-                                    @foreach ($events as $index => $event)
-                                        <div class="event-slide {{ $index === 0 ? 'active' : '' }}">
-                                            <div class="event-card">
-                                                <div class="event-image">
-                                                    <img src="{{ asset('images/event.png') }}"
-                                                        alt="{{ $event->title }}">
-                                                    <div class="event-overlay">
-                                                        <div class="event-date">
-                                                            <span
-                                                                class="day">{{ $event->created_at->format('d') }}</span>
-                                                            <span
-                                                                class="month">{{ $event->created_at->format('M') }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="event-content">
-                                                    <div class="event-meta">
-                                                        <span class="event-category">
-                                                            <i class="fas fa-tag"></i>
-                                                            Workshop
-                                                        </span>
-                                                        <span class="event-time">
-                                                            <i class="fas fa-clock"></i>
-                                                            {{ $event->created_at->format('H:i A') }}
-                                                        </span>
-                                                    </div>
-                                                    <h3 class="event-title">
-                                                        <a href="{{ route('events.show', ['event' => $event]) }}">
-                                                            {{ $event->title }}
-                                                        </a>
-                                                    </h3>
-                                                    <p class="event-description">
-                                                        {{ Str::limit($event->description, 120) }}
-                                                    </p>
-                                                    <div class="event-footer">
-                                                        <div class="event-location">
-                                                            <i class="fas fa-map-marker-alt"></i>
-                                                            <span>Tech Lab, Room 201</span>
-                                                        </div>
-                                                        <a href="{{ route('events.show', ['event' => $event]) }}"
-                                                            class="event-btn">
-                                                            <span>Learn More</span>
-                                                            <i class="fas fa-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <!-- Navigation Arrows -->
-                                <div class="slider-nav">
-                                    <button class="slider-btn prev-btn" onclick="changeSlide(-1)">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <button class="slider-btn next-btn" onclick="changeSlide(1)">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                </div>
-
-                                <!-- Dots Indicator -->
-                                <div class="slider-dots">
-                                    @foreach ($events as $index => $event)
-                                        <span class="dot {{ $index === 0 ? 'active' : '' }}"
-                                            onclick="currentSlide({{ $index + 1 }})"></span>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
+                </div>
+
+                <div class="events-showcase__footer">
+                    <div class="events-showcase__pagination"></div>
+                    <a href="{{ route('events') }}" class="events-showcase__view-all">
+                        Browse All Events
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            @else
+                <div class="events-showcase__empty">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <p>No events yet. Check back soon for upcoming activities.</p>
                 </div>
             @endif
+        </div>
+    </section>
+@push('styles')
+        <style>
+            .events-showcase {
+                --events-bg-1: #f8f3e6;
+                --events-bg-2: #f2ebcd;
+                position: relative;
+                overflow: hidden;
+                background:
+                    radial-gradient(circle at 8% 10%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 40%),
+                    radial-gradient(circle at 85% 25%, rgba(209, 184, 72, 0.45) 0%, rgba(209, 184, 72, 0) 45%),
+                    linear-gradient(145deg, var(--events-bg-1) 0%, var(--events-bg-2) 100%);
+            }
 
-            <style>
-                /* Events Slider Section */
-                .events-slider-section {
-                    padding: 40px 0;
-                }
+            .events-showcase__top {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 1.35rem;
+            }
 
-                .events-section-title {
-                    color: #FAA41A;
-                    font-size: 2.5rem;
-                    font-weight: bold;
-                    margin-bottom: 15px;
-                }
+            .events-showcase__eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.4rem 0.72rem;
+                border-radius: 999px;
+                background: rgba(42, 33, 15, 0.08);
+                color: #37351f;
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+            }
 
-                .events-section-subtitle {
-                    color: rgba(255, 255, 255, 0.8);
-                    font-size: 1.1rem;
-                    margin-bottom: 0;
-                }
+            .events-showcase__title {
+                margin: 0.85rem 0 0;
+                max-width: 780px;
+                font-size: clamp(1.5rem, 2.8vw, 2.45rem);
+                line-height: 1.15;
+                color: #2a280f;
+            }
 
-                /* Slider Container */
-                .events-slider-container {
-                    position: relative;
-                    max-width: 100%;
-                    margin: 0 auto;
-                    overflow: hidden;
-                    border-radius: 20px;
-                    background: rgba(0, 0, 0, 0.3);
-                    backdrop-filter: blur(10px);
-                    border: 1px solid rgba(250, 164, 26, 0.2);
-                }
+            .events-showcase__controls {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55rem;
+            }
 
-                .events-slider {
-                    display: flex;
-                    transition: transform 0.5s ease-in-out;
-                    width: 100%;
-                }
+            .events-showcase__arrow {
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                border: 1px solid rgba(42, 41, 15, 0.16);
+                background: rgba(255, 255, 255, 0.76);
+                color: #2a260f;
+                display: grid;
+                place-items: center;
+                transition: transform 0.28s ease, background 0.28s ease, color 0.28s ease;
+            }
 
-                .event-slide {
-                    min-width: 100%;
-                    opacity: 0;
-                    transition: opacity 0.5s ease-in-out;
-                }
+            .events-showcase__arrow:hover {
+                background: #282a0f;
+                color: #fff;
+                transform: translateY(-2px);
+            }
 
-                .event-slide.active {
-                    opacity: 1;
-                }
+            .events-showcase__slider {
+                padding: 0.35rem 0.3rem 0.8rem;
+            }
 
-                /* Event Card */
-                .event-card {
-                    display: flex;
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
-                    overflow: hidden;
-                    margin: 20px;
-                    transition: all 0.3s ease;
-                    border: 1px solid rgba(250, 164, 26, 0.1);
-                }
+            .events-showcase__slide {
+                height: auto;
+            }
 
-                .event-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 10px 30px rgba(250, 164, 26, 0.2);
-                    border-color: rgba(250, 164, 26, 0.3);
-                }
+            .events-showcase__slide .ieee-event-card {
+                height: 100%;
+            }
 
-                /* Event Image */
-                .event-image {
-                    position: relative;
-                    flex: 0 0 40%;
-                    min-height: 300px;
-                    overflow: hidden;
-                }
+            .events-showcase__footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 0.9rem;
+                gap: 1rem;
+            }
 
-                .event-image img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transition: transform 0.3s ease;
-                }
+            .events-showcase__pagination {
+                display: inline-flex;
+                align-items: center;
+            }
 
-                .event-card:hover .event-image img {
-                    transform: scale(1.05);
-                }
+            .events-showcase__pagination .swiper-pagination-bullet {
+                width: 10px;
+                height: 10px;
+                background: #6b7280;
+                opacity: 0.35;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
 
-                .event-overlay {
-                    position: absolute;
-                    top: 20px;
-                    right: 20px;
-                    background: linear-gradient(135deg, #FAA41A, #FF8C00);
-                    border-radius: 12px;
-                    padding: 8px 12px;
-                    text-align: center;
-                    box-shadow: 0 4px 15px rgba(250, 164, 26, 0.3);
-                }
+            .events-showcase__pagination .swiper-pagination-bullet-active {
+                transform: scale(1.2);
+                opacity: 1;
+                background: #ff5b37;
+            }
 
-                .event-date .day {
-                    display: block;
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    color: white;
-                    line-height: 1;
-                }
+            .events-showcase__view-all {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                text-decoration: none;
+                font-weight: 700;
+                color: #0f172a;
+                border-bottom: 2px solid rgba(42, 37, 15, 0.22);
+                transition: color 0.3s ease, border-color 0.3s ease;
+            }
 
-                .event-date .month {
-                    display: block;
-                    font-size: 0.8rem;
-                    color: white;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                }
+            .events-showcase__view-all:hover {
+                color: #ff5b37;
+                border-color: #ff5b37;
+            }
 
-                /* Event Content */
-                .event-content {
-                    flex: 1;
-                    padding: 30px;
-                    display: flex;
+            .events-showcase__empty {
+                border-radius: 16px;
+                border: 1px dashed rgba(42, 39, 15, 0.22);
+                padding: 2.2rem 1rem;
+                text-align: center;
+                color: #334155;
+                background: rgba(255, 255, 255, 0.55);
+            }
+
+            .events-showcase__empty i {
+                font-size: 2rem;
+                margin-bottom: 0.65rem;
+                color: #ff5b37;
+            }
+
+            @media (max-width: 991px) {
+                .events-showcase__top {
                     flex-direction: column;
-                    justify-content: space-between;
+                    align-items: flex-start;
+                    gap: 0.9rem;
                 }
 
-                .event-meta {
-                    display: flex;
-                    gap: 20px;
-                    margin-bottom: 15px;
-                    flex-wrap: wrap;
+                .events-showcase__title {
+                    max-width: 100%;
+                }
+            }
+
+            @media (max-width: 575px) {
+                .events-showcase__footer {
+                    flex-direction: column;
+                    align-items: flex-start;
                 }
 
-                .event-category,
-                .event-time {
-                    color: #FAA41A;
-                    font-size: 0.9rem;
-                    display: flex;
-                    align-items: center;
-                    gap: 5px;
-                    font-weight: 500;
-                }
-
-                .event-title {
-                    font-size: 1.8rem;
-                    margin-bottom: 15px;
-                    line-height: 1.3;
-                }
-
-                .event-title a {
-                    color: white;
-                    text-decoration: none;
-                    transition: color 0.3s ease;
-                }
-
-                .event-title a:hover {
-                    color: #FAA41A;
-                }
-
-                .event-description {
-                    color: rgba(255, 255, 255, 0.8);
-                    line-height: 1.6;
-                    margin-bottom: 25px;
-                    font-size: 1rem;
-                }
-
-                .event-footer {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 15px;
-                }
-
-                .event-location {
-                    color: rgba(255, 255, 255, 0.7);
-                    font-size: 0.9rem;
-                    display: flex;
-                    align-items: center;
-                    gap: 5px;
-                }
-
-                .event-location i {
-                    color: #FAA41A;
-                }
-
-                .event-btn {
-                    background: linear-gradient(135deg, #FAA41A, #FF8C00);
-                    color: white;
-                    padding: 10px 20px;
-                    border-radius: 25px;
-                    text-decoration: none;
-                    font-weight: 600;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    transition: all 0.3s ease;
-                    font-size: 0.9rem;
-                }
-
-                .event-btn:hover {
-                    background: linear-gradient(135deg, #FF8C00, #FAA41A);
-                    transform: translateX(5px);
-                    color: white;
-                    text-decoration: none;
-                }
-
-                /* Slider Navigation */
-                .slider-nav {
-                    position: absolute;
-                    top: 50%;
+                .events-showcase__controls {
                     width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 0 10px;
-                    pointer-events: none;
+                    justify-content: flex-end;
+                }
+            }
+        </style>
+    @endpush
+
+    @section('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var sliderEl = document.getElementById('eventsShowcaseSlider');
+                if (sliderEl && typeof Swiper !== 'undefined') {
+                    new Swiper(sliderEl, {
+                        slidesPerView: 1.1,
+                        spaceBetween: 16,
+                        speed: 700,
+                        grabCursor: true,
+                        loop: {{ $events->count() > 3 ? 'true' : 'false' }},
+                        autoplay: {
+                            delay: 3200,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true
+                        },
+                        navigation: {
+                            nextEl: '.events-showcase__arrow--next',
+                            prevEl: '.events-showcase__arrow--prev'
+                        },
+                        pagination: {
+                            el: '.events-showcase__pagination',
+                            clickable: true
+                        },
+                        breakpoints: {
+                            575: {
+                                slidesPerView: 1.35,
+                                spaceBetween: 18
+                            },
+                            768: {
+                                slidesPerView: 2,
+                                spaceBetween: 20
+                            },
+                            992: {
+                                slidesPerView: 2.45,
+                                spaceBetween: 22
+                            },
+                            1200: {
+                                slidesPerView: 3,
+                                spaceBetween: 24
+                            }
+                        }
+                    });
                 }
 
-                .slider-btn {
-                    background: rgba(250, 164, 26, 0.9);
-                    border: none;
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    color: white;
-                    font-size: 1.2rem;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    pointer-events: all;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    backdrop-filter: blur(10px);
+                var heroCanvas = document.getElementById('heroAsciiCanvas');
+                if (!heroCanvas) {
+                    return;
                 }
 
-                .slider-btn:hover {
-                    background: #FAA41A;
-                    transform: scale(1.1);
+                var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var ctx = heroCanvas.getContext('2d');
+                var wrapper = heroCanvas.closest('.hero4');
+                var particles = [];
+                var mouse = {
+                    x: -999,
+                    y: -999,
+                    active: false
+                };
+                var phrase = 'IEEE CS';
+                var density = 6;
+                var rafId = null;
+                var isHeroVisible = true;
+                var logoImg = new Image();
+                var logoReady = false;
+                var logoSource = heroCanvas.getAttribute('data-logo-src') || '';
+                var offsetX = 0;
+                var offsetY = 0;
+                var canvasScale = 1;
+                
+                function resizeCanvas() {
+                    var aspect = logoReady ? ((logoImg.naturalWidth || 1) / (logoImg.naturalHeight || 1)) : 1;
+                    var maxCanvasWidth = Math.min((wrapper.clientWidth || 900) * 0.72, 980);
+                    var maxCanvasHeight = Math.max((wrapper.clientHeight || 420) * 0.82, 220);
+                    var canvasWidth = maxCanvasWidth;
+                    var canvasHeight = canvasWidth / aspect;
+
+                    if (canvasHeight > maxCanvasHeight) {
+                        canvasHeight = maxCanvasHeight;
+                        canvasWidth = canvasHeight * aspect;
+                    }
+
+                    heroCanvas.width = Math.max(Math.floor(canvasWidth), 220);
+                    heroCanvas.height = Math.max(Math.floor(canvasHeight), 140);
+                    
+                    var rect = heroCanvas.getBoundingClientRect();
+                    canvasScale = heroCanvas.width / rect.width;
+                    
+                    buildParticles();
                 }
 
-                .slider-btn:disabled {
-                    opacity: 0.5;
-                    cursor: not-allowed;
-                }
+                function buildParticles() {
+                    particles = [];
+                    var mapCanvas = document.createElement('canvas');
+                    var mapCtx = mapCanvas.getContext('2d');
 
-                /* Slider Dots */
-                .slider-dots {
-                    text-align: center;
-                    padding: 20px 0;
-                    display: flex;
-                    justify-content: center;
-                    gap: 10px;
-                }
+                    mapCanvas.width = heroCanvas.width;
+                    mapCanvas.height = heroCanvas.height;
+                    mapCtx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
 
-                .dot {
-                    height: 12px;
-                    width: 12px;
-                    background-color: rgba(255, 255, 255, 0.3);
-                    border-radius: 50%;
-                    display: inline-block;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                }
+                    if (logoReady) {
+                        var maxLogoWidth = mapCanvas.width * 0.96;
+                        var maxLogoHeight = mapCanvas.height * 0.96;
+                        var logoAspect = (logoImg.naturalWidth || 1) / (logoImg.naturalHeight || 1);
+                        var drawWidth = maxLogoWidth;
+                        var drawHeight = drawWidth / logoAspect;
 
-                .dot.active,
-                .dot:hover {
-                    background-color: #FAA41A;
-                    transform: scale(1.2);
-                }
+                        if (drawHeight > maxLogoHeight) {
+                            drawHeight = maxLogoHeight;
+                            drawWidth = drawHeight * logoAspect;
+                        }
 
-                /* Responsive Design */
-                @media (max-width: 768px) {
-                    .event-card {
-                        flex-direction: column;
-                        margin: 15px;
+                        var logoX = (mapCanvas.width - drawWidth) / 2;
+                        var logoY = (mapCanvas.height - drawHeight) / 2;
+                        mapCtx.drawImage(logoImg, logoX, logoY, drawWidth, drawHeight);
+                    } else {
+                        mapCtx.fillStyle = '#ffffff';
+                        var fontSize = Math.floor(Math.min(mapCanvas.width * 0.18, 130));
+                        mapCtx.font = '700 ' + fontSize + 'px "Consolas", "Courier New", monospace';
+                        mapCtx.textAlign = 'center';
+                        mapCtx.textBaseline = 'middle';
+                        mapCtx.fillText(phrase, mapCanvas.width / 2, mapCanvas.height / 2 + 6);
                     }
 
-                    .event-image {
-                        flex: none;
-                        min-height: 200px;
-                    }
-
-                    .event-content {
-                        padding: 20px;
-                    }
-
-                    .event-title {
-                        font-size: 1.4rem;
-                    }
-
-                    .events-section-title {
-                        font-size: 2rem;
-                    }
-
-                    .event-footer {
-                        flex-direction: column;
-                        align-items: flex-start;
-                        gap: 15px;
-                    }
-
-                    .slider-btn {
-                        width: 40px;
-                        height: 40px;
-                        font-size: 1rem;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .event-card {
-                        margin: 10px;
-                    }
-
-                    .event-content {
-                        padding: 15px;
-                    }
-
-                    .events-section-title {
-                        font-size: 1.8rem;
-                    }
-                }
-            </style>
-
-            <script>
-                let currentSlideIndex = 0;
-                const slides = document.querySelectorAll('.event-slide');
-                const dots = document.querySelectorAll('.dot');
-                const totalSlides = slides.length;
-
-                function showSlide(index) {
-                    // Hide all slides
-                    slides.forEach(slide => slide.classList.remove('active'));
-                    dots.forEach(dot => dot.classList.remove('active'));
-
-                    // Show current slide
-                    if (slides[index]) {
-                        slides[index].classList.add('active');
-                        dots[index].classList.add('active');
-                    }
-
-                    // Update navigation buttons
-                    const prevBtn = document.querySelector('.prev-btn');
-                    const nextBtn = document.querySelector('.next-btn');
-
-                    if (prevBtn && nextBtn) {
-                        prevBtn.disabled = index === 0;
-                        nextBtn.disabled = index === totalSlides - 1;
-                    }
-                }
-
-                function changeSlide(direction) {
-                    currentSlideIndex += direction;
-
-                    if (currentSlideIndex < 0) {
-                        currentSlideIndex = 0;
-                    } else if (currentSlideIndex >= totalSlides) {
-                        currentSlideIndex = totalSlides - 1;
-                    }
-
-                    showSlide(currentSlideIndex);
-                }
-
-                function currentSlide(index) {
-                    currentSlideIndex = index - 1;
-                    showSlide(currentSlideIndex);
-                }
-
-                // Auto-slide functionality (optional)
-                function autoSlide() {
-                    currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
-                    showSlide(currentSlideIndex);
-                }
-
-                // Initialize slider when DOM is loaded
-                document.addEventListener('DOMContentLoaded', function() {
-                    if (totalSlides > 0) {
-                        showSlide(0);
-
-                        // Optional: Enable auto-slide every 5 seconds
-                        // setInterval(autoSlide, 5000);
-                    }
-                });
-
-                // Keyboard navigation
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'ArrowLeft') {
-                        changeSlide(-1);
-                    } else if (e.key === 'ArrowRight') {
-                        changeSlide(1);
-                    }
-                });
-
-                // Touch/swipe support for mobile
-                let startX = 0;
-                let endX = 0;
-
-                document.addEventListener('touchstart', function(e) {
-                    startX = e.touches[0].clientX;
-                });
-
-                document.addEventListener('touchend', function(e) {
-                    endX = e.changedTouches[0].clientX;
-                    handleSwipe();
-                });
-
-                function handleSwipe() {
-                    const threshold = 50;
-                    const diff = startX - endX;
-
-                    if (Math.abs(diff) > threshold) {
-                        if (diff > 0) {
-                            changeSlide(1); // Swipe left - next slide
-                        } else {
-                            changeSlide(-1); // Swipe right - previous slide
+                    var imageData = mapCtx.getImageData(0, 0, mapCanvas.width, mapCanvas.height).data;
+                    for (var y = 0; y < mapCanvas.height; y += density) {
+                        for (var x = 0; x < mapCanvas.width; x += density) {
+                            var idx = (y * mapCanvas.width + x) * 4 + 3;
+                            if (imageData[idx] > 120) {
+                                particles.push({
+                                    x: x + (Math.random() - 0.5) * 26,
+                                    y: y + (Math.random() - 0.5) * 26,
+                                    tx: x,
+                                    ty: y,
+                                    vx: 0,
+                                    vy: 0,
+                                    c: Math.random() > 0.72 ? 'rgba(255, 210, 122, 0.95)' : 'rgba(250, 164, 26, 0.78)'
+                                });
+                            }
                         }
                     }
                 }
-            </script>
+
+                function draw() {
+                    rafId = null;
+                    if (!isHeroVisible) {
+                        return;
+                    }
+
+                    ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+
+                    for (var i = 0; i < particles.length; i++) {
+                        var p = particles[i];
+                        var dx = p.tx - p.x;
+                        var dy = p.ty - p.y;
+
+                        p.vx += dx * 0.012;
+                        p.vy += dy * 0.012;
+
+                        if (mouse.active) {
+                            var mx = p.x - mouse.x;
+                            var my = p.y - mouse.y;
+                            var d2 = mx * mx + my * my;
+                            if (d2 < 6400) {
+                                var repel = (6400 - d2) / 6400;
+                                p.vx += (mx / 30) * repel;
+                                p.vy += (my / 30) * repel;
+                            }
+                        }
+
+                        p.vx *= 0.88;
+                        p.vy *= 0.88;
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        ctx.fillStyle = p.c;
+                        ctx.fillText('.', p.x, p.y);
+                    }
+
+                    if (!prefersReducedMotion) {
+                        rafId = window.requestAnimationFrame(draw);
+                    }
+                }
+
+                wrapper.addEventListener('mousemove', function (event) {
+                    var rect = heroCanvas.getBoundingClientRect();
+                    mouse.x = (event.clientX - rect.left) * canvasScale;
+                    mouse.y = (event.clientY - rect.top) * canvasScale;
+                    mouse.active = true;
+                });
+
+                wrapper.addEventListener('mouseleave', function () {
+                    mouse.active = false;
+                    mouse.x = -999;
+                    mouse.y = -999;
+                });
+
+                function startAnimation() {
+                    if (!isHeroVisible) {
+                        return;
+                    }
+
+                    if (prefersReducedMotion) {
+                        draw();
+                        return;
+                    }
+
+                    if (rafId === null) {
+                        rafId = window.requestAnimationFrame(draw);
+                    }
+                }
+
+                if ('IntersectionObserver' in window) {
+                    var asciiLayer = heroCanvas.parentElement;
+                    var observer = new IntersectionObserver(function (entries) {
+                        var entry = entries[0];
+                        isHeroVisible = !!(entry && entry.isIntersecting);
+
+                        if (asciiLayer) {
+                            asciiLayer.style.display = isHeroVisible ? '' : 'none';
+                        }
+
+                        if (!isHeroVisible && rafId !== null) {
+                            window.cancelAnimationFrame(rafId);
+                            rafId = null;
+                        }
+
+                        if (isHeroVisible) {
+                            startAnimation();
+                        }
+                    }, {
+                        threshold: 0.05
+                    });
+
+                    observer.observe(wrapper);
+                }
+
+                ctx.font = '700 15px "Consolas", "Courier New", monospace';
+                ctx.textAlign = 'center';
+
+                if (logoSource) {
+                    logoImg.onload = function () {
+                        logoReady = true;
+                        resizeCanvas();
+                        startAnimation();
+                    };
+
+                    logoImg.onerror = function () {
+                        logoReady = false;
+                        resizeCanvas();
+                        startAnimation();
+                    };
+
+                    logoImg.src = logoSource;
+                } else {
+                    resizeCanvas();
+                    startAnimation();
+                }
+
+                window.addEventListener('resize', resizeCanvas);
+            });
+        </script>
+    @endsection
+
+    <!--===== TEAM AREA START =====-->
+
+    <div class="team2 sp sec-bg2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="heading2">
+                        <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900"><img
+                                src="{{ asset('images/logo.png') }}" width="25" alt="">OUR TEAM MEMBER
+                        </span>
+                        <h2 class="text-anime-style-3">Meet Our Team Member</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team2 sp" id="ourteam">
+                <x-team-members-section
+                    mode="pagination"
+                    :members="$teamMembers"
+                    :active-tab="$activeTeamTab"
+                    anchor-id="ourteam"
+                />
+                {{-- Pagenation --}}
+                {{-- 
+                        <div class="space60"></div>
+                        <div class="row">
+                            <div class="col-12 m-auto">
+                            <div class="theme-pagination text-center">
+                                <ul>
+                                    <li><a href="#"><i class="fa-solid fa-angle-left"></i></a></li>
+                                    <li><a class="active" href="#">01</a></li>
+                                    <li><a href="#">02</a></li>
+                                    <li>...</li>
+                                    <li><a href="#">12</a></li>
+                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i></a></li>
+                                </ul>
+                            </div>
+                            </div>
+                        </div> --}}
+
+            </div>
         </div>
     </div>
 
-    <div class="tes4 sp">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="heading4">
-                        <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900">
-                            <img src="{{ asset('images/logo.png') }}" width="25" alt="IEEE CS Logo"> Member
-                            Stories
-                        </span>
-                        <h2 class="text-anime-style-3">Voices of Our Community</h2>
+    <!--===== TEAM AREA END =====-->
+
+    <x-slider sectionClass="sp member-stories-slider" title="{{ __('Voices of Our Community') }}"
+        subtitle="{{ __('Member Stories') }}" icon="{{ asset('images/logo.png') }}" :slidesToShow="2"
+        :autoplay="true" :autoplaySpeed="2000" :arrows="false" :dots="false">
+        @foreach ($membersWithStory as $m)
+            <x-slider-item class="horizontal-slider-item">
+                <div class="row align-items-center">
+                    <div class="col-md-5 col-sm-12 mb-3 mb-md-0">
+                        <div style="height: 300px; overflow: hidden; border-radius: 8px;">
+                            <img src="{{ asset('storage/' . $m->image) }}" alt="{{ $m->name }} profile"
+                                class="w-100 h-100 object-fit-cover" loading="lazy">
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                </div>
-            </div>
-            @if ($memberStories)
-                <div class="row">
-                    <div class="col-lg-8 m-auto">
-                        <div class="tes4-slider-all mt-60" data-aos="fade-up" data-aos-delay="300"
-                            data-aos-duration="900">
-                            <div class="tes4-slider">
-                                @foreach ($memberStories as $m)
-                                    <div class="tes4-single-slider">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-5">
-                                                <div class="auhtor_thumb">
-                                                    <img src="{{ asset('images/profile.png') }}"
-                                                        alt="Member Profile">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <div class="author_text">
-                                                    <div class="qoute">
-                                                        <img src="{{ asset('assets/img/icons/qoute4.png') }}"
-                                                            alt="Quote Icon">
-                                                    </div>
-                                                    <h5>"{{ $m->story }}"</h5>
-                                                    <div class="info">
-                                                        <a href="#">{{ $m->name }}</a>
-                                                        <p>{{ $m->role }}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                    <div class="col-md-7 col-sm-12">
+                        <div class="author_text p-3">
+                            <img src="{{ asset('assets/img/icons/qoute4.png') }}" alt="Quote icon" class="mb-3"
+                                style="max-width: 40px;">
+                            <h5 class="fs-5 mb-4" style="line-height: 1.6;">
+                                "{{ $m->story }}"
+                            </h5>
+                            <div class="info">
+                                <a href="#" class="d-block mb-2 fw-bold" style="color: orange">{{ $m->name }}</a>
+                                <p class="m-0 text-muted">{{ $m->title }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
-        </div>
-    </div>
+            </x-slider-item>
+        @endforeach
+    </x-slider> 
 
-    <div class="blog4 sp sec-bg3">
+
+    <!-- Blog Section -->
+    <section class="blog4 sp sec-bg3">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="heading4">
-                        <span class="sub-title" data-aos="zoom-in-left" data-aos-duration="900">
-                            <img src="{{ asset('images/logo.png') }}" width="25" alt="IEEE CS Logo"> BLOG
-                        </span>
-                        <h2 class="text-anime-style-3">Our Latest Blog & Insight</h2>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="text-end button md:mt-20 sm:mt-20 md:text-start sm:text-start">
-                        <a href="{{ route('blogs') }}" class="theme-btn8">
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__shape"></span>
-                            <span class="theme-btn8__text">View All Blogs</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <x-section-heading subtitle="Blog" title="Our Latest Blog & Insight"
+                icon="{{ asset('images/logo.png') }}">
+                <x-theme-button href="{{ route('blogs') }}" text="View All Blogs" class="text-end md:text-start" />
+            </x-section-heading>
             @if ($posts->count())
-                <div class="row mt-30">
-                    @foreach ($posts as $index => $post)
-                        @if ($index === 0)
-                            <div class="col-lg-12">
-                                <div class="vl-blog-4-item big_post mt-30" data-aos="fade-up"
-                                    data-aos-duration="1100">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-6">
-                                            <div class="vl-blog-4-thumb-big image-anime overflow-hidden _relative">
-                                                <img class="w-full" src="{{ asset('storage/' . $post->image) }}"
-                                                    alt="{{ $post->title }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="vl-blog-4-content heading4">
-                                                <div class="vl-blog4-meta pb-16">
-                                                    <a href="#" class="date"><img
-                                                            src="{{ asset('assets/img/icons/date1.svg') }}"
-                                                            alt="Date Icon">
-                                                        {{ $post->created_at->format('d/m/Y') }}</a>
-                                                    <a href="#" class="author"><img
-                                                            src="{{ asset('assets/img/icons/author1.svg') }}"
-                                                            alt="Author Icon"> {{ $post->author->name }}</a>
-                                                </div>
-                                                <h3><a
-                                                        href="{{ route('blogs.show', $post->slug) }}">{{ $post->title }}</a>
-                                                </h3>
-                                                <p class="mt-16"></p>
-                                                <a href="{{ route('blogs.show', $post->slug) }}" class="learn1">Read
-                                                    More
-                                                    <span class="arrow1"><i
-                                                            class="fa-solid fa-arrow-right"></i></span>
-                                                    <span class="arrow2"><i
-                                                            class="fa-solid fa-arrow-right"></i></span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @else
-                            <div class="col-lg-4 col-md-6" data-aos="fade-up"
-                                data-aos-duration="{{ 800 + $index * 100 }}">
-                                <div class="vl-blog-4-item add-bg mt-30">
-                                    <div class="vl-blog-4-thumb">
-
-                                        <x-img :img="$post->image" alt="{{ $post->title }}" />
-                                    </div>
-                                    <div class="vl-blog-4-content heading4 mt-30">
-                                        <div class="vl-blog4-meta pb-16">
-                                            <a href="#" class="date"><img
-                                                    src="{{ asset('assets/img/icons/date1.svg') }}" alt="Date Icon">
-                                                {{ $post->created_at->format('d/m/Y') }}</a>
-                                            <a href="#" class="author"><img
-                                                    src="{{ asset('assets/img/icons/author1.svg') }}"
-                                                    alt="Author Icon"> {{ $post->author->name }}</a>
-                                        </div>
-                                        <h5><a href="{{ route('blogs.show', $post->slug) }}">{{ $post->title }}</a>
-                                        </h5>
-                                        <a href="{{ route('blogs.show', $post->slug) }}" class="learn1">Read More
-                                            <span class="arrow1"><i class="fa-solid fa-arrow-right"></i></span>
-                                            <span class="arrow2"><i class="fa-solid fa-arrow-right"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
+                @foreach ($posts as $post)
+                    <x-blog-card :blog="$post" />
+                @endforeach
             @endif
         </div>
-    </div>
+    </section>
 
+    <!-- Contact Section -->
     @include('components.contactSection')
 
-    <div class="cta4">
+    <!-- Newsletter CTA -->
+    <section class="cta4">
         <div class="container">
-            <div class="row align-items-center justify-center">
+            <div class="row justify-center">
                 <div class="col-lg-8">
-                    <div class="cta4-form-area">
-                        <div class="white-heading">
-                            <h2>Join Our Newsletter</h2>
-                        </div>
-                        <div class="form-area">
-                            <form action="#">
-                                <div class="single-input">
-                                    <input type="text" placeholder="Enter Your Email">
-                                </div>
-                                <div class="button">
-                                    <button type="submit" class="theme-btn9">
-                                        <span class="theme-btn9__shape"></span>
-                                        <span class="theme-btn9__shape"></span>
-                                        <span class="theme-btn9__shape"></span>
-                                        <span class="theme-btn9__shape"></span>
-                                        <span class="theme-btn9__text">Subscribe</span>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    @livewire('newsletter-form')
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+@push('styles')
+    <style>
+
+        .newletter-btn{
+            background: #1d1300 !important;
+        }
+
+        .hero4 {
+            --hero-bg-0: #090d12;
+            --hero-bg-1: #101823;
+            --hero-gold: #faa41a;
+            --hero-gold-soft: #ffd27a;
+            --hero-text: #f7f8fa;
+            --hero-muted: #b8c0cc;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 78px 0 64px;
+            background:
+                radial-gradient(circle at 20% 18%, rgba(250, 164, 26, 0.24) 0%, rgba(250, 164, 26, 0) 40%),
+                radial-gradient(circle at 82% 12%, rgba(255, 210, 122, 0.18) 0%, rgba(255, 210, 122, 0) 42%),
+                linear-gradient(130deg, var(--hero-bg-0) 0%, var(--hero-bg-1) 100%);
+        }
+
+        .hero4__backdrop {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.95) 45%, transparent 100%);
+        }
+
+        .hero4__content-wrap {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero4__content {
+            max-width: 860px;
+            margin: 3rem auto auto auto;
+            padding-top: 0;
+            padding-right: 0;
+        }
+
+        .hero4__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.42rem 0.78rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #e5e7eb;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .hero4__title {
+            margin-top: 1rem;
+            color: var(--hero-text);
+            font-size: clamp(1.9rem, 4.4vw, 3.3rem);
+            line-height: 1.07;
+            text-wrap: balance;
+        }
+
+        .hero4__title span {
+            color: var(--hero-gold);
+        }
+
+        .hero4__lead {
+            color: var(--hero-muted);
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: clamp(1rem, 2.1vw, 1.15rem);
+            line-height: 1.65;
+        }
+
+        .hero4__cta {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .hero4__note {
+            color: rgba(247, 248, 250, 0.78);
+            font-size: 0.92rem;
+            letter-spacing: 0.01em;
+        }
+
+        .hero4__ascii {
+            position: absolute;
+            top: 204px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .hero4__ascii canvas {
+            position: absolute;
+            left: 50%;
+            top: 56%;
+            transform: translate(-50%, -50%);
+            width: min(72vw, 980px);
+            max-width: 95%;
+            height: auto;
+            display: block;
+            opacity: 1;
+            filter: none;
+        }
+
+        .event-card:hover .hover-scale-105 {
+            transform: scale(1.05);
+        }
+
+        .hover-text-warning:hover {
+            color: #ffc107 !important;
+        }
+
+        .w-10 {
+            width: 2.5rem;
+        }
+
+        .h-10 {
+            height: 2.5rem;
+        }
+
+        .min-h-200px {
+            min-height: 200px;
+        }
+
+        .min-h-md-300px {
+            min-height: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .w-md-40 {
+                width: 100%;
+            }
+
+            .min-h-md-300px {
+                min-height: 200px;
+            }
+        }
+
+        .disabled-opacity-50:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .home-events-slider .ieee-slider .slick-slide {
+            display: block;
+            box-sizing: border-box;
+            /* remove external margins that break centering; use internal padding instead */
+            padding: 0 8px;
+        }
+
+        .home-events-slider .ieee-slider .slick-slide > * {
+            width: 100%;
+        }
+
+        .home-events-slider .ieee-slider-item__inner {
+            padding: 0.7rem;
+        }
+
+        .horizontal-slider-item .row {
+            margin: 0;
+        }
+
+        .member-stories-slider {
+            --ieee-theme-primary: #faa41a;
+            --ieee-theme-ink: #0f172a;
+            --ieee-theme-muted: #94a3b8;
+        }
+
+        .member-stories-slider .author_text {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 14px;
+            background: linear-gradient(145deg, #ffffff 0%, #fff9ee 100%);
+        }
+
+        .member-stories-slider .author_text .info a {
+            color: var(--ieee-theme-ink);
+        }
+
+        .member-stories-slider .author_text .info p {
+            color: #4b5563 !important;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots {
+            bottom: -34px;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li {
+            width: auto;
+            height: auto;
+            margin: 0;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li button {
+            width: 10px;
+            height: 10px;
+            padding: 0;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li button:before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            opacity: 1;
+            background: var(--ieee-theme-muted);
+            transition: all 0.25s ease;
+        }
+
+        .member-stories-slider .ieee-slider .slick-dots li.slick-active button:before {
+            width: 26px;
+            border-radius: 999px;
+            background: var(--ieee-theme-primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero4 {
+                padding: 64px 0 52px;
+            }
+
+            .hero4__cta {
+                gap: 0.55rem;
+            }
+
+            .home-events-slider .ieee-slider .slick-slide {
+                padding: 0 4px;
+            }
+
+            .home-events-slider .ieee-slider-item__inner {
+                padding: 0.4rem;
+            }
+
+            .member-stories-slider .ieee-slider .slick-dots {
+                bottom: -28px;
+            }
+        }
+    </style>
+@endpush
 </x-base-layout>

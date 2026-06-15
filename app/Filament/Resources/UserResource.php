@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\User;
+use App\Support\AdminRoles;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
@@ -13,7 +14,7 @@ use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Filament\Resources\Pages\{CreateRecord, EditRecord, ListRecords, ViewRecord};
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
@@ -34,13 +35,25 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true),
-                Select::make('title')
+                Select::make('role')
+                    ->label('Role')
                     ->options([
-                        "chairperson" => "chairperson",
-                        "MD" => "MD",
-                        "Treauser" => "Treauser",
-                        "Member" => "Member"
-                    ]),
+                        'super-admin' => 'Super Admin',
+                        'admin' => 'Admin',
+                        'editor' => 'Editor',
+                        'writer' => 'Writer',
+                        'user' => 'User',
+                    ])
+                    ->required(),
+                Select::make('approval_status')
+                    ->label('Approval Status')
+                    ->options([
+                        'approved' => 'Approved',
+                        'pending' => 'Pending',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('approved')
+                    ->required(),
                 TextInput::make('password')
                     ->password()
                     ->required()
@@ -57,7 +70,19 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('title')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('roles.0.name')
+                    ->label('Role')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('approval_status')
+                    ->label('Approval')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'approved' => 'success',
+                        'pending' => 'warning',
+                        'rejected' => 'danger',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([
@@ -82,8 +107,43 @@ class UserResource extends Resource
         ];
     }
 
-    public static function authorizeResourceAccess(): bool
+    public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->hasAnyRole(['admin', 'super_admin']);
+        return static::canViewAny();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canView($record): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::isSuperAdminUser();
+    }
+
+    protected static function isSuperAdminUser(): bool
+    {
+        return Auth::user()?->hasAnyRole(AdminRoles::superAdminRoles()) ?? false;
     }
 }

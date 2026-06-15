@@ -7,7 +7,7 @@
                     <div class="search__top d-flex justify-content-between align-items-center">
                         <div class="search__logo">
                             <a href="index.html">
-                                <img src="assets/img/logo/white-logo.png" alt="">
+                                <img src="{{ asset('assets/img/logo/white-logo.png') }}" alt="">
                             </a>
                         </div>
                         <div class="search__close">

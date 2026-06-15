@@ -14,16 +14,16 @@ class leaderboardCard extends Component
     public $publish_at; 
     public $first; 
     public $second; 
-    public $thierd; 
+    public $third; 
     public function __construct($leaderboard)
     {
-        $this->id = $leaderboard->id;
-        $this->week = $leaderboard->week_start_date->format('M/d') ?? "1";
-        $this->publish_at = $leaderboard->publish_at;
+        $this->id = $leaderboard->id ?? null;
+        $this->week = optional($leaderboard->week_start_date)->format('M/d') ?? '-';
+        $this->publish_at = $leaderboard->publish_at ?? null;
         $this->first = $leaderboard->member1->name ?? "-";
-        $this->image = $leaderboard->member1->image;
+        $this->image = $leaderboard->member1->image ?? asset('images/profile.png');
         $this->second = $leaderboard->member2->name ?? "-";
-        $this->thierd = $leaderboard->member3->name ?? "-";
+        $this->third = $leaderboard->member3->name ?? "-";
     }
 
     /**
