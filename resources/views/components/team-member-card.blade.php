@@ -1,3 +1,15 @@
+@props([
+    'name',
+    'role',
+    'image' => null,
+    'contacts' => null,
+    'links' => null,
+])
+
+@php
+    $socialLinks = $contacts ?? $links ?? [];
+@endphp
+
 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
     <div class="team-page-item  mt-30">
 
@@ -9,13 +21,13 @@
             <div class="shape round-circle">
                 {{-- <img src="{{asset('images/guy.png')}}" alt=""> --}}
             </div>
-            @if (!empty($contacts))
+            @if (!empty($socialLinks))
                 <div class="social-icons">
                     <ul>
-                        @foreach ($contacts as $contact)
+                        @foreach ($socialLinks as $contact)
                             <li>
-                                <a href="{{ $contact['value'] ?? '#' }}" target="_blank">
-                                    @switch(strtolower($contact['key']))
+                                <a href="{{ $contact['value'] ?? '#' }}" target="_blank" rel="noopener noreferrer">
+                                    @switch(strtolower($contact['key'] ?? ''))
                                         @case('facebook')
                                             <i class="fa-brands fa-facebook-f fa-lg"></i>
                                         @break
@@ -38,7 +50,7 @@
 
                                         @default
                                             <i class="fas fa-link fa-lg"></i>
-                                            {{ ucfirst($platform) }}
+                                            {{ ucfirst($contact['key'] ?? 'Link') }}
                                     @endswitch
                                 </a>
                             </li>
