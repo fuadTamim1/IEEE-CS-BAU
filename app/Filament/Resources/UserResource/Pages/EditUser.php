@@ -22,6 +22,11 @@ class EditUser extends EditRecord
         $role = $data['role'] ?? 'user';
         unset($data['role']);
         $this->roleToAssign = $role;
+
+        $approvalStatus = $data['approval_status'] ?? ($this->record->approval_status ?? 'approved');
+        $data['approval_status'] = $approvalStatus;
+        $data['approved_at'] = $approvalStatus === 'approved' ? ($this->record->approved_at ?? now()) : null;
+
         return $data;
     }
 

@@ -3,7 +3,7 @@
 <header>
     <div id="vl-header-sticky" class="vl-header-area4 header-tranperent">
         <div class="container header2-bg">
-            <div class="row align-items-center px-4">
+            <div class="row align-items-center px-4 flex-lg-nowrap">
                 <div class="col-lg-2 col-md-6 col-6">
                     <div class="vl-logo">
                         <a href="{{ route('home') }}" class="header1-logo-block"><img
@@ -11,7 +11,7 @@
                                 width="160"></a>
                     </div>
                 </div>
-                <div class="w-auto d-lg-block text-center">
+                <div class="col d-none d-lg-block text-center">
                     <div class="vl-main-menu">
                         <!-- content -->
                         <nav class="vl-mobile-menu-active">
@@ -577,11 +577,21 @@
                                             min-width: 100%;
                                             position: static;
                                             transform: none;
-                                            opacity: 1;
-                                            visibility: visible;
+                                            opacity: 0;
+                                            visibility: hidden;
                                             box-shadow: none;
                                             border-radius: 0;
                                             margin-top: 0;
+                                            max-height: 0;
+                                            overflow: hidden;
+                                            border: 0;
+                                            transition: max-height 0.3s ease, opacity 0.2s ease;
+                                        }
+
+                                        .mega-menu-widget.show {
+                                            opacity: 1;
+                                            visibility: visible;
+                                            max-height: 1200px;
                                         }
                                     }
                                 </style>
@@ -592,6 +602,7 @@
                                         constructor(triggerId, menuId) {
                                             this.trigger = document.querySelector(triggerId);
                                             this.menu = document.querySelector(menuId);
+                                            this.triggerLink = this.trigger ? this.trigger.querySelector('a') : null;
                                             this.hideTimeout = null;
 
                                             if (this.trigger && this.menu) {
@@ -602,23 +613,73 @@
                                         }
 
                                         init() {
-                                            // Show menu on hover
+                                            // Show menu on hover (desktop)
                                             this.trigger.addEventListener('mouseenter', () => {
+                                                if (this.isMobileView()) {
+                                                    return;
+                                                }
+
                                                 this.show();
                                             });
 
                                             this.trigger.addEventListener('mouseleave', () => {
+                                                if (this.isMobileView()) {
+                                                    return;
+                                                }
+
                                                 this.hideWithDelay();
                                             });
 
                                             // Keep menu open when hovering over it
                                             this.menu.addEventListener('mouseenter', () => {
+                                                if (this.isMobileView()) {
+                                                    return;
+                                                }
+
                                                 this.clearHideTimeout();
                                             });
 
                                             this.menu.addEventListener('mouseleave', () => {
+                                                if (this.isMobileView()) {
+                                                    return;
+                                                }
+
                                                 this.hide();
                                             });
+
+                                            // Toggle menu on tap (mobile)
+                                            if (this.triggerLink) {
+                                                this.triggerLink.addEventListener('click', (event) => {
+                                                    if (!this.isMobileView()) {
+                                                        return;
+                                                    }
+
+                                                    event.preventDefault();
+                                                    this.toggle();
+                                                });
+                                            }
+
+                                            // Close when tapping outside on mobile
+                                            document.addEventListener('click', (event) => {
+                                                if (!this.isMobileView()) {
+                                                    return;
+                                                }
+
+                                                if (!this.trigger.contains(event.target)) {
+                                                    this.hide();
+                                                }
+                                            });
+
+                                            // Reset state when switching between mobile/desktop viewports
+                                            window.addEventListener('resize', () => {
+                                                if (!this.isMobileView()) {
+                                                    this.hide();
+                                                }
+                                            });
+                                        }
+
+                                        isMobileView() {
+                                            return window.innerWidth <= 1068;
                                         }
 
                                         show() {
@@ -628,6 +689,10 @@
 
                                         hide() {
                                             this.menu.classList.remove('show');
+                                        }
+
+                                        toggle() {
+                                            this.menu.classList.toggle('show');
                                         }
 
                                         hideWithDelay() {

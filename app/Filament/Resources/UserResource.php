@@ -45,6 +45,15 @@ class UserResource extends Resource
                         'user' => 'User',
                     ])
                     ->required(),
+                Select::make('approval_status')
+                    ->label('Approval Status')
+                    ->options([
+                        'approved' => 'Approved',
+                        'pending' => 'Pending',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('approved')
+                    ->required(),
                 TextInput::make('password')
                     ->password()
                     ->required()
@@ -65,6 +74,15 @@ class UserResource extends Resource
                     ->label('Role')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('approval_status')
+                    ->label('Approval')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'approved' => 'success',
+                        'pending' => 'warning',
+                        'rejected' => 'danger',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([

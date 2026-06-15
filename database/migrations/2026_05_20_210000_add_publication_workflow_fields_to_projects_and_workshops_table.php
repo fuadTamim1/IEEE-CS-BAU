@@ -15,35 +15,78 @@ return new class extends Migration
     {
         $this->normalizeLegacyZeroDates();
 
-        Schema::table('projects', function (Blueprint $table) {
-            $table->string('publication_status', 32)->nullable();
-            $table->text('rejection_note')->nullable();
-            $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamp('submitted_at')->nullable();
-            $table->timestamp('reviewed_at')->nullable();
-            $table->index('publication_status');
+        $this->addPublicationWorkflowColumns('projects');
+        $this->addPublicationWorkflowColumns('workshops');
+
+        $this->backfillPublicationWorkflow('projects');
+        $this->backfillPublicationWorkflow('workshops');
+    }
+
+    private function addPublicationWorkflowColumns(string $table): void
+    {
+        if (! Schema::hasTable($table)) {
+            return;
+        }
+
+        $hasPublicationStatus = Schema::hasColumn($table, 'publication_status');
+        $hasRejectionNote = Schema::hasColumn($table, 'rejection_note');
+        $hasReviewedBy = Schema::hasColumn($table, 'reviewed_by');
+        $hasSubmittedAt = Schema::hasColumn($table, 'submitted_at');
+        $hasReviewedAt = Schema::hasColumn($table, 'reviewed_at');
+
+        if ($hasPublicationStatus && $hasRejectionNote && $hasReviewedBy && $hasSubmittedAt && $hasReviewedAt) {
+            return;
+        }
+
+        Schema::table($table, function (Blueprint $blueprint) use ($hasPublicationStatus, $hasRejectionNote, $hasReviewedBy, $hasSubmittedAt, $hasReviewedAt): void {
+            if (! $hasPublicationStatus) {
+                $blueprint->string('publication_status', 32)->nullable();
+                $blueprint->index('publication_status');
+            }
+
+            if (! $hasRejectionNote) {
+                $blueprint->text('rejection_note')->nullable();
+            }
+
+            if (! $hasReviewedBy) {
+                $blueprint->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
+            }
+
+            if (! $hasSubmittedAt) {
+                $blueprint->timestamp('submitted_at')->nullable();
+            }
+
+            if (! $hasReviewedAt) {
+                $blueprint->timestamp('reviewed_at')->nullable();
+            }
         });
+    }
 
-        Schema::table('workshops', function (Blueprint $table) {
-            $table->string('publication_status', 32)->nullable();
-            $table->text('rejection_note')->nullable();
-            $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamp('submitted_at')->nullable();
-            $table->timestamp('reviewed_at')->nullable();
-            $table->index('publication_status');
-        });
+    private function backfillPublicationWorkflow(string $table): void
+    {
+        if (! Schema::hasTable($table) || ! Schema::hasColumn($table, 'is_published')) {
+            return;
+        }
 
-        DB::table('projects')->update([
-            'publication_status' => DB::raw("CASE WHEN is_published = 1 THEN '" . PublicationStatus::PUBLISHED->value . "' ELSE '" . PublicationStatus::DRAFT->value . "' END"),
-            'submitted_at' => DB::raw("CASE WHEN is_published = 1 THEN COALESCE(submitted_at, created_at) ELSE submitted_at END"),
-            'reviewed_at' => DB::raw("CASE WHEN is_published = 1 THEN COALESCE(reviewed_at, created_at) ELSE reviewed_at END"),
-        ]);
+        $updates = [];
 
-        DB::table('workshops')->update([
-            'publication_status' => DB::raw("CASE WHEN is_published = 1 THEN '" . PublicationStatus::PUBLISHED->value . "' ELSE '" . PublicationStatus::DRAFT->value . "' END"),
-            'submitted_at' => DB::raw("CASE WHEN is_published = 1 THEN COALESCE(submitted_at, created_at) ELSE submitted_at END"),
-            'reviewed_at' => DB::raw("CASE WHEN is_published = 1 THEN COALESCE(reviewed_at, created_at) ELSE reviewed_at END"),
-        ]);
+        if (Schema::hasColumn($table, 'publication_status')) {
+            $updates['publication_status'] = DB::raw("CASE WHEN is_published = 1 THEN '" . PublicationStatus::PUBLISHED->value . "' ELSE '" . PublicationStatus::DRAFT->value . "' END");
+        }
+
+        if (Schema::hasColumn($table, 'submitted_at')) {
+            $updates['submitted_at'] = DB::raw("CASE WHEN is_published = 1 THEN COALESCE(submitted_at, created_at) ELSE submitted_at END");
+        }
+
+        if (Schema::hasColumn($table, 'reviewed_at')) {
+            $updates['reviewed_at'] = DB::raw("CASE WHEN is_published = 1 THEN COALESCE(reviewed_at, created_at) ELSE reviewed_at END");
+        }
+
+        if ($updates === []) {
+            return;
+        }
+
+        DB::table($table)->update($updates);
     }
 
     /**
@@ -81,22 +124,38 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->dropIndex(['publication_status']);
-            $table->dropConstrainedForeignId('reviewed_by');
-            $table->dropColumn('reviewed_at');
-            $table->dropColumn('submitted_at');
-            $table->dropColumn('rejection_note');
-            $table->dropColumn('publication_status');
-        });
+        $this->dropPublicationWorkflowColumns('projects');
+        $this->dropPublicationWorkflowColumns('workshops');
+    }
 
-        Schema::table('workshops', function (Blueprint $table) {
-            $table->dropIndex(['publication_status']);
-            $table->dropConstrainedForeignId('reviewed_by');
-            $table->dropColumn('reviewed_at');
-            $table->dropColumn('submitted_at');
-            $table->dropColumn('rejection_note');
-            $table->dropColumn('publication_status');
+    private function dropPublicationWorkflowColumns(string $table): void
+    {
+        if (! Schema::hasTable($table)) {
+            return;
+        }
+
+        if (Schema::hasColumn($table, 'reviewed_by')) {
+            Schema::table($table, function (Blueprint $blueprint): void {
+                $blueprint->dropConstrainedForeignId('reviewed_by');
+            });
+        }
+
+        Schema::table($table, function (Blueprint $blueprint) use ($table): void {
+            if (Schema::hasColumn($table, 'reviewed_at')) {
+                $blueprint->dropColumn('reviewed_at');
+            }
+
+            if (Schema::hasColumn($table, 'submitted_at')) {
+                $blueprint->dropColumn('submitted_at');
+            }
+
+            if (Schema::hasColumn($table, 'rejection_note')) {
+                $blueprint->dropColumn('rejection_note');
+            }
+
+            if (Schema::hasColumn($table, 'publication_status')) {
+                $blueprint->dropColumn('publication_status');
+            }
         });
     }
 };

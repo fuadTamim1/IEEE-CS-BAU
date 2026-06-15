@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Support\AdminRoles;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,11 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('filament.admin.pages.dashboard', absolute: false));
+            $redirectRoute = $request->user()->hasAnyRole(AdminRoles::adminAccessRoles())
+                ? 'filament.admin.pages.dashboard'
+                : 'home';
+
+            return redirect()->intended(route($redirectRoute, absolute: false));
         }
 
         $request->user()->sendEmailVerificationNotification();
